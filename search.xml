@@ -19,28 +19,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(3) Hexo-基礎Hexo指令</title>
-    <url>/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
-<h2 id="基礎Hexo指令"><a href="#基礎Hexo指令" class="headerlink" title="基礎Hexo指令"></a>基礎Hexo指令</h2><ul>
-<li><code>hexo new &#39;新文章&#39;</code>  新增文章</li>
-<li><code>hexo generate</code> 產生編譯後的靜態檔案</li>
-<li><code>hexo server</code> 開啟一個本地端伺服器</li>
-<li><code>hexo clean</code> 清除暫存檔案</li>
-<li><code>hexo deploy</code> 部屬靜態檔案</li>
-</ul>
-<h2 id="產生新文章"><a href="#產生新文章" class="headerlink" title="產生新文章"></a>產生新文章</h2><p>要產生一篇新的文章，可以用 <code>hexo new &#39;新文章</code> 指令，產生後的文章會放在 <code>source</code> 資料夾的 <code>_posts</code>裡</p>
-<h2 id="產生編譯後的檔案"><a href="#產生編譯後的檔案" class="headerlink" title="產生編譯後的檔案"></a>產生編譯後的檔案</h2><p>當文章寫完後，需要將md檔案進行編譯，此時可以用 <code>hexo generate</code> 指令，編譯完後會產生一個 <code>public</code> 資料夾，作為之後部屬使用。<br>此指令的簡寫為 <code>hexo g</code></p>
-<h2 id="開啟一個本地端伺服器"><a href="#開啟一個本地端伺服器" class="headerlink" title="開啟一個本地端伺服器"></a>開啟一個本地端伺服器</h2><p>當靜態檔案編譯完後，可以用 <code>hexo server</code> 指令開啟一個本地端的模擬伺服器，用來即時瀏覽我的寫完的文章，此指令的簡寫為 <code>hexo s</code></p>
-<h2 id="清除暫存檔案"><a href="#清除暫存檔案" class="headerlink" title="清除暫存檔案"></a>清除暫存檔案</h2><p><code>hexo clean</code> 指令主要用來清除一些奇怪的暫存檔案，通常部屬前會先清理一遍。</p>
-<h2 id="部屬靜態檔案"><a href="#部屬靜態檔案" class="headerlink" title="部屬靜態檔案"></a>部屬靜態檔案</h2><p><code>hexo deploy</code> 將我們的靜態網站部屬到雲端使用的指令，詳細用流程在之後部屬的章節會提到。<br>此指令的簡寫為 <code>hexo d</code></p>
-<p>這就是今天 hexo 指令的介紹囉。</p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(1) Hexo 部落格安裝</title>
     <url>/2022/06/07/2022-6-7-Hexo-%E9%83%A8%E8%90%BD%E6%A0%BC%E5%AE%89%E8%A3%9D%E8%88%87%E9%83%A8%E5%B1%AC/</url>
     <content><![CDATA[<h2 id="什麼是-Hexo？"><a href="#什麼是-Hexo？" class="headerlink" title="什麼是 Hexo？"></a>什麼是 Hexo？</h2><p>Hexo 是一個快速、簡單且強大的網誌框架。Hexo 使用 Markdown（或其他標記語言）解析您的文章，並在幾秒鐘內，透過漂亮的主題產生靜態檔案。</p>
@@ -72,27 +50,48 @@
       </tags>
   </entry>
   <entry>
-    <title>(4) Hexo-部屬部落格</title>
-    <url>/2022/06/08/2022-6-8-Hexo-%E9%83%A8%E5%B1%AC%E9%83%A8%E8%90%BD%E6%A0%BC/</url>
-    <content><![CDATA[<h2 id="Gihub-Pages"><a href="#Gihub-Pages" class="headerlink" title="Gihub Pages"></a>Gihub Pages</h2><p>本文會使用 Github Pages ，來部屬我們的部落格。</p>
-<h2 id="創建repository"><a href="#創建repository" class="headerlink" title="創建repository"></a>創建repository</h2><p>首先來到Gihub創建一個新的 repository， 這個repository會用來放我們的部落格</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060805.png?alt=media&token=78b7c432-452d-4595-9c87-e8492d3a445d" alt="repository"></p>
-<p>點選 create new repository來創建我們的儲存庫，這邊要先說明每個Github帳號都有一個主儲存庫，網址會呈現如下圖 new 的網址，由你的 <code>github名稱 + github.io</code> 組成。<br>每個Github帳號的主儲存庫只有一個，通常會用來放最重要的內容，這邊就用來放我們的部落格</p>
-<p>在創建時儲存庫時，可以將主儲存庫的網址填入</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060806.png?alt=media&token=329c82e8-b023-429d-a0f4-0e1efddbda06" alt="repository-name"></p>
-<p>建立好後來到這個畫面</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060807.png?alt=media&token=a7adcd93-9818-4df2-8a1d-c6285c2b5c1a" alt="建立儲存庫"></p>
-<p>此時回到Vscode，開啟一個新的專案，並輸入以下指令，將git專案建立好後推到github上</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin https://github.com/tim8076/test.git</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
-<p>專案推上 github 後，開啟專案底下的 <code>_config.yml</code> 檔案，找到deploy項目，並將內容修改如下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/tim8076/tim8076.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
+    <title>(8) Hexo-第三方服務</title>
+    <url>/2022/06/10/2022-6-10-2-Hexo-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8B%99/</url>
+    <content><![CDATA[<h2 id="新增第三方服務"><a href="#新增第三方服務" class="headerlink" title="新增第三方服務"></a>新增第三方服務</h2><p>當我打開 <code>_config.next.yml</code> ，會發現NextT也整合了一些第三方服務進來，大多都只需要申請帳號並填入 ID 就可以使用。<br>以下就介紹幾個好用的服務。</p>
+<h2 id="Disqus"><a href="#Disqus" class="headerlink" title="Disqus"></a>Disqus</h2><p>Disqus 是一個留言板服務，安裝流程如下</p>
+<ol>
+<li><p>到 <a href="https://disqus.com/">Disqus</a> 官網註冊一個帳號並登入。按下 <code>GET STARTED</code>按鈕，並選擇 <code> I want to install Disqus on my site</code>選項，就會來到 <code>Create a new site</code> 頁面。</p>
+</li>
+<li><p>輸入你的 <code>Website Name</code>，並按下 <code>Create Site </code>。</p>
+</li>
+<li><p>這邊就建立好你的 disqus帳號了</p>
+</li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061102.png?alt=media&token=518dfa72-a8fe-4c81-bead-89bc3a59e874" alt="disqus"></p>
+<ol start="4">
+<li>回到 <code>_config.next.yml</code>，將 disqus 選項改為true，並在shortname填入剛才在disqus設定的 <code>Website Name</code></li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061103.png?alt=media&token=3a8584ce-3749-4640-99c0-c8ecd574faa7" alt="disqus-setting"></p>
+<ol start="5">
+<li>以上就完成了留言板設置囉</li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061104.png?alt=media&token=dc77ed95-13ce-4a34-9769-1297dc7c1bda" alt="comments"></p>
+<h2 id="圖片顯示"><a href="#圖片顯示" class="headerlink" title="圖片顯示"></a>圖片顯示</h2><p>NextT 內建有兩種圖片顯示的方式，分別是 fancybox 和 mediumzoom，只要到 <code>_config.next.yml</code>，將選項改為true即可。但記得不要同時開啟 fancybox 和 mediumzoom。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061101.png?alt=media&token=c62c2900-a1e0-4d60-9a0a-bf13dc66d7a3" alt="image"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>(5) Hexo-新增頁面</title>
+    <url>/2022/06/09/2022-6-9-1-Hexo-%E6%96%B0%E5%A2%9E%E9%A0%81%E9%9D%A2/</url>
+    <content><![CDATA[<h2 id="新增頁面"><a href="#新增頁面" class="headerlink" title="新增頁面"></a>新增頁面</h2><p>與新增文章不同，我們也可以在hexo 裡新增一些頁面，用來放作者介紹等資訊。</p>
+<p>建立頁面的指令格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;頁面名稱（網址用）&quot;</span><br></pre></td></tr></table></figure>
 
-<p>這邊type選用git，repo則貼上你的儲存庫的網址，branch選擇 main</p>
-<h2 id="部屬部落格"><a href="#部屬部落格" class="headerlink" title="部屬部落格"></a>部屬部落格</h2><p>當完成以上步驟後，要先安裝 hexo 自動部屬的套件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>新增好的頁面會在放在source資料夾底下</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/202206009.png?alt=media&token=4e8aaa96-e6ea-4a18-9bb1-37d18acec1b7" alt="about-page"></p>
+<p>頁面預設只有 title 以及 date， 而頁面預設是可以留言的，如果不開放留言則可以新增 comments 設定為false。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600902.png?alt=media&token=6fbb9f83-991a-4e9b-b2dc-9291231e6dfb" alt="comment"></p>
+<h2 id="新增分類與標籤頁"><a href="#新增分類與標籤頁" class="headerlink" title="新增分類與標籤頁"></a>新增分類與標籤頁</h2><p>我們也可在hexo裡增加分類頁面與標籤頁面</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page tags  // 建立標籤頁</span><br><span class="line">hexo new page categories // 建立分類頁</span><br></pre></td></tr></table></figure>
 
-<p>安裝完後，先使用<code>hexo clean</code> 清除暫存檔，再用 <code>hexo g</code> 來編譯靜態檔，最後用 <code>hexo d</code>來將網站部署上github</p>
-<p>部屬完後輸入你的 githubpages網址，如 <a href="https://tim8076.github.io/">https://tim8076.github.io/</a>，就可以看到部屬好的部落格了。</p>
+<p>頁面一樣會新增在source資料夾底下，進入 <code>source/tags</code>，會看到<code>index.md</code>檔，<br>將裡面內容再加入以下這行即可 <code>type: &quot;tags&quot;</code>。</p>
+<p>最後找到主題 (theme) 設置文件 (_config.yml)，這邊以 NexT 為例，將 tags 及 categories 前的#字號移除即可。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600903.png?alt=media&token=f53ac521-d777-4cc9-b6e0-c34b04da5458" alt="theme"></p>
 ]]></content>
       <tags>
         <tag>Hexo</tag>
@@ -115,22 +114,22 @@
       </tags>
   </entry>
   <entry>
-    <title>(5) Hexo-新增頁面</title>
-    <url>/2022/06/09/2022-6-9-1-Hexo-%E6%96%B0%E5%A2%9E%E9%A0%81%E9%9D%A2/</url>
-    <content><![CDATA[<h2 id="新增頁面"><a href="#新增頁面" class="headerlink" title="新增頁面"></a>新增頁面</h2><p>與新增文章不同，我們也可以在hexo 裡新增一些頁面，用來放作者介紹等資訊。</p>
-<p>建立頁面的指令格式如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;頁面名稱（網址用）&quot;</span><br></pre></td></tr></table></figure>
-
-<p>新增好的頁面會在放在source資料夾底下</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/202206009.png?alt=media&token=4e8aaa96-e6ea-4a18-9bb1-37d18acec1b7" alt="about-page"></p>
-<p>頁面預設只有 title 以及 date， 而頁面預設是可以留言的，如果不開放留言則可以新增 comments 設定為false。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600902.png?alt=media&token=6fbb9f83-991a-4e9b-b2dc-9291231e6dfb" alt="comment"></p>
-<h2 id="新增分類與標籤頁"><a href="#新增分類與標籤頁" class="headerlink" title="新增分類與標籤頁"></a>新增分類與標籤頁</h2><p>我們也可在hexo裡增加分類頁面與標籤頁面</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page tags  // 建立標籤頁</span><br><span class="line">hexo new page categories // 建立分類頁</span><br></pre></td></tr></table></figure>
-
-<p>頁面一樣會新增在source資料夾底下，進入 <code>source/tags</code>，會看到<code>index.md</code>檔，<br>將裡面內容再加入以下這行即可 <code>type: &quot;tags&quot;</code>。</p>
-<p>最後找到主題 (theme) 設置文件 (_config.yml)，這邊以 NexT 為例，將 tags 及 categories 前的#字號移除即可。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600903.png?alt=media&token=f53ac521-d777-4cc9-b6e0-c34b04da5458" alt="theme"></p>
+    <title>(3) Hexo-基礎Hexo指令</title>
+    <url>/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
+<h2 id="基礎Hexo指令"><a href="#基礎Hexo指令" class="headerlink" title="基礎Hexo指令"></a>基礎Hexo指令</h2><ul>
+<li><code>hexo new &#39;新文章&#39;</code>  新增文章</li>
+<li><code>hexo generate</code> 產生編譯後的靜態檔案</li>
+<li><code>hexo server</code> 開啟一個本地端伺服器</li>
+<li><code>hexo clean</code> 清除暫存檔案</li>
+<li><code>hexo deploy</code> 部屬靜態檔案</li>
+</ul>
+<h2 id="產生新文章"><a href="#產生新文章" class="headerlink" title="產生新文章"></a>產生新文章</h2><p>要產生一篇新的文章，可以用 <code>hexo new &#39;新文章</code> 指令，產生後的文章會放在 <code>source</code> 資料夾的 <code>_posts</code>裡</p>
+<h2 id="產生編譯後的檔案"><a href="#產生編譯後的檔案" class="headerlink" title="產生編譯後的檔案"></a>產生編譯後的檔案</h2><p>當文章寫完後，需要將md檔案進行編譯，此時可以用 <code>hexo generate</code> 指令，編譯完後會產生一個 <code>public</code> 資料夾，作為之後部屬使用。<br>此指令的簡寫為 <code>hexo g</code></p>
+<h2 id="開啟一個本地端伺服器"><a href="#開啟一個本地端伺服器" class="headerlink" title="開啟一個本地端伺服器"></a>開啟一個本地端伺服器</h2><p>當靜態檔案編譯完後，可以用 <code>hexo server</code> 指令開啟一個本地端的模擬伺服器，用來即時瀏覽我的寫完的文章，此指令的簡寫為 <code>hexo s</code></p>
+<h2 id="清除暫存檔案"><a href="#清除暫存檔案" class="headerlink" title="清除暫存檔案"></a>清除暫存檔案</h2><p><code>hexo clean</code> 指令主要用來清除一些奇怪的暫存檔案，通常部屬前會先清理一遍。</p>
+<h2 id="部屬靜態檔案"><a href="#部屬靜態檔案" class="headerlink" title="部屬靜態檔案"></a>部屬靜態檔案</h2><p><code>hexo deploy</code> 將我們的靜態網站部屬到雲端使用的指令，詳細用流程在之後部屬的章節會提到。<br>此指令的簡寫為 <code>hexo d</code></p>
+<p>這就是今天 hexo 指令的介紹囉。</p>
 ]]></content>
       <tags>
         <tag>Hexo</tag>
@@ -163,6 +162,33 @@
 <p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060907.png?alt=media&token=c97c2e01-2382-4dec-abee-f64b3e5cb980" alt="darkmode"></p>
 <p>以上都設定好後，就可發現我們的部落格套用了nextT主題囉</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060908.png?alt=media&token=7b16821f-7ef1-4b28-b075-5be943ebfd76" alt="theme"></p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(4) Hexo-部屬部落格</title>
+    <url>/2022/06/08/2022-6-8-Hexo-%E9%83%A8%E5%B1%AC%E9%83%A8%E8%90%BD%E6%A0%BC/</url>
+    <content><![CDATA[<h2 id="Gihub-Pages"><a href="#Gihub-Pages" class="headerlink" title="Gihub Pages"></a>Gihub Pages</h2><p>本文會使用 Github Pages ，來部屬我們的部落格。</p>
+<h2 id="創建repository"><a href="#創建repository" class="headerlink" title="創建repository"></a>創建repository</h2><p>首先來到Gihub創建一個新的 repository， 這個repository會用來放我們的部落格</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060805.png?alt=media&token=78b7c432-452d-4595-9c87-e8492d3a445d" alt="repository"></p>
+<p>點選 create new repository來創建我們的儲存庫，這邊要先說明每個Github帳號都有一個主儲存庫，網址會呈現如下圖 new 的網址，由你的 <code>github名稱 + github.io</code> 組成。<br>每個Github帳號的主儲存庫只有一個，通常會用來放最重要的內容，這邊就用來放我們的部落格</p>
+<p>在創建時儲存庫時，可以將主儲存庫的網址填入</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060806.png?alt=media&token=329c82e8-b023-429d-a0f4-0e1efddbda06" alt="repository-name"></p>
+<p>建立好後來到這個畫面</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060807.png?alt=media&token=a7adcd93-9818-4df2-8a1d-c6285c2b5c1a" alt="建立儲存庫"></p>
+<p>此時回到Vscode，開啟一個新的專案，並輸入以下指令，將git專案建立好後推到github上</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin https://github.com/tim8076/test.git</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
+<p>專案推上 github 後，開啟專案底下的 <code>_config.yml</code> 檔案，找到deploy項目，並將內容修改如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/tim8076/tim8076.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
+
+<p>這邊type選用git，repo則貼上你的儲存庫的網址，branch選擇 main</p>
+<h2 id="部屬部落格"><a href="#部屬部落格" class="headerlink" title="部屬部落格"></a>部屬部落格</h2><p>當完成以上步驟後，要先安裝 hexo 自動部屬的套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>安裝完後，先使用<code>hexo clean</code> 清除暫存檔，再用 <code>hexo g</code> 來編譯靜態檔，最後用 <code>hexo d</code>來將網站部署上github</p>
+<p>部屬完後輸入你的 githubpages網址，如 <a href="https://tim8076.github.io/">https://tim8076.github.io/</a>，就可以看到部屬好的部落格了。</p>
 ]]></content>
       <tags>
         <tag>Hexo</tag>
