@@ -153,13 +153,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -194,6 +199,92 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/06/14/2022-6-14-1-JS30-Drum-Kit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Tim Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim的前端日誌">
+      <meta itemprop="description" content="Zero to Hero">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Tim的前端日誌">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/06/14/2022-6-14-1-JS30-Drum-Kit/" class="post-title-link" itemprop="url">(1) JS30實作系列 Drum-Kit</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+      
+
+      <time title="創建時間：2022-06-14 20:35:43 / 修改時間：21:17:50" itemprop="dateCreated datePublished" datetime="2022-06-14T20:35:43+08:00">2022-06-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>js30實作系列，在網頁上打鼓</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/06/14/2022-6-14-1-JS30-Drum-Kit/">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -239,7 +330,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-06-11 21:42:23" itemprop="dateModified" datetime="2022-06-11T21:42:23+08:00">2022-06-11</time>
+      <time title="修改時間：2022-06-11 21:56:34" itemprop="dateModified" datetime="2022-06-11T21:56:34+08:00">2022-06-11</time>
     </span>
 
   
@@ -252,28 +343,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="新增第三方服務"><a href="#新增第三方服務" class="headerlink" title="新增第三方服務"></a>新增第三方服務</h2><p>當我打開 <code>_config.next.yml</code> ，會發現NextT也整合了一些第三方服務進來，大多都只需要申請帳號並填入 ID 就可以使用。<br>以下就介紹幾個好用的服務。</p>
-<h2 id="Disqus"><a href="#Disqus" class="headerlink" title="Disqus"></a>Disqus</h2><p>Disqus 是一個留言板服務，安裝流程如下</p>
-<ol>
-<li><p>到 <a target="_blank" rel="noopener" href="https://disqus.com/">Disqus</a> 官網註冊一個帳號並登入。按下 <code>GET STARTED</code>按鈕，並選擇 <code> I want to install Disqus on my site</code>選項，就會來到 <code>Create a new site</code> 頁面。</p>
-</li>
-<li><p>輸入你的 <code>Website Name</code>，並按下 <code>Create Site </code>。</p>
-</li>
-<li><p>這邊就建立好你的 disqus帳號了</p>
-</li>
-</ol>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061102.png?alt=media&token=518dfa72-a8fe-4c81-bead-89bc3a59e874" alt="disqus"></p>
-<ol start="4">
-<li>回到 <code>_config.next.yml</code>，將 disqus 選項改為true，並在shortname填入剛才在disqus設定的 <code>Website Name</code></li>
-</ol>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061103.png?alt=media&token=3a8584ce-3749-4640-99c0-c8ecd574faa7" alt="disqus-setting"></p>
-<ol start="5">
-<li>以上就完成了留言板設置囉</li>
-</ol>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061104.png?alt=media&token=dc77ed95-13ce-4a34-9769-1297dc7c1bda" alt="comments"></p>
-<h2 id="圖片顯示"><a href="#圖片顯示" class="headerlink" title="圖片顯示"></a>圖片顯示</h2><p>NextT 內建有兩種圖片顯示的方式，分別是 fancybox 和 mediumzoom，只要到 <code>_config.next.yml</code>，將選項改為true即可。但記得不要同時開啟 fancybox 和 mediumzoom。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061101.png?alt=media&token=c62c2900-a1e0-4d60-9a0a-bf13dc66d7a3" alt="image"></p>
-
+          <p>NextT也整合了一些第三方服務進來，大多都只需要申請帳號並填入 ID 就可以使用。 以下就介紹幾個好用的服務。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/06/10/2022-6-10-2-Hexo-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8B%99/">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -327,9 +405,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
-      
 
-      <time title="創建時間：2022-06-10 20:35:20 / 修改時間：21:23:22" itemprop="dateCreated datePublished" datetime="2022-06-10T20:35:20+08:00">2022-06-10</time>
+      <time title="創建時間：2022-06-10 20:35:20" itemprop="dateCreated datePublished" datetime="2022-06-10T20:35:20+08:00">2022-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-06-11 21:57:42" itemprop="dateModified" datetime="2022-06-11T21:57:42+08:00">2022-06-11</time>
     </span>
 
   
@@ -342,17 +426,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="新增套件"><a href="#新增套件" class="headerlink" title="新增套件"></a>新增套件</h2><p>這章節會介紹一些NextT主題可以用的套件。</p>
-<h2 id="hexo-generator-searchdb"><a href="#hexo-generator-searchdb" class="headerlink" title="hexo-generator-searchdb"></a>hexo-generator-searchdb</h2><p>這個套件可以讓你的部落格具有本地搜尋的功能，一樣先用NPM安裝。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
-
-<p>安裝完後只要到你根目錄的 <code>_config.next.yml</code> 檔案裡，將 local search 改為true即可產生搜尋功能囉。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601001.png?alt=media&token=a25eac63-0114-4674-9c02-7f7723f027e1" alt="search-option"></p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601002.png?alt=media&token=9b0afc38-cc99-4aef-abdc-68d318bc1c7e" alt="search-image"></p>
-<h2 id="Reading-progress-bar-閱讀進度條"><a href="#Reading-progress-bar-閱讀進度條" class="headerlink" title="Reading progress bar 閱讀進度條"></a>Reading progress bar 閱讀進度條</h2><p>這個套件已經內建在NextT裡了，只要到  <code>_config.next.yml</code> 找到 reading_progress 選項，將enable改為true即可。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601003.png?alt=media&token=61c1206c-5339-4a97-ae55-565d1d249f73" alt="reading-progress"></p>
-<p>以上就是推薦可以安裝的套件囉</p>
-
+          <p>這章節會介紹一些NextT主題可以用的套件。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/06/10/2022-6-10-1-Hexo-%E6%96%B0%E5%A2%9E%E5%A5%97%E4%BB%B6/">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -414,7 +496,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-06-10 20:30:46" itemprop="dateModified" datetime="2022-06-10T20:30:46+08:00">2022-06-10</time>
+      <time title="修改時間：2022-06-11 21:57:55" itemprop="dateModified" datetime="2022-06-11T21:57:55+08:00">2022-06-11</time>
     </span>
 
   
@@ -427,31 +509,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="挑選佈景主題"><a href="#挑選佈景主題" class="headerlink" title="挑選佈景主題"></a>挑選佈景主題</h2><p>除了Hexo預設的版型外，也可以新增不同的佈景主題上去。<br>可以先來到 <a target="_blank" rel="noopener" href="https://hexo.io/themes/">Hexo 官網</a>的主題區挑選你喜歡的主題</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060904.png?alt=media&token=9deec5ff-8e70-433d-810c-412773e6566d" alt="theme-page"></p>
-<p>本文以 <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT</a> 主題為例，點選後來到NextT官網。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060905.png?alt=media&token=ae056e59-0cfc-4958-8d21-e18bfa158b6d" alt="NEXTT"></p>
-<p>點選左上角doc可以進入教學文件。</p>
-<h2 id="下載NextT主題"><a href="#下載NextT主題" class="headerlink" title="下載NextT主題"></a>下載NextT主題</h2><p>這邊使用NPM來下載主題，在你的Vscode的終端機輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd hexo-site</span><br><span class="line">$ npm install hexo-theme-next</span><br></pre></td></tr></table></figure>
-
-<h2 id="主題設定檔"><a href="#主題設定檔" class="headerlink" title="主題設定檔"></a>主題設定檔</h2><p>下載好後會發現我們現在有兩個 <code>_config.yml</code>設定檔</p>
-<ol>
-<li>第一個在我們專案的根目錄，也就是一開始hexo的設定檔</li>
-<li>第二個在我們主題的目錄下，(e.g. <code>thems/next/_config.yml</code> or <code>node_modules/hexo-theme-next/_config.yml</code>)</li>
-</ol>
-<p>以下稱第一個為hexo設定檔，第二個為NextT設定檔。</p>
-<h2 id="hexo設定檔"><a href="#hexo設定檔" class="headerlink" title="hexo設定檔"></a>hexo設定檔</h2><p>當我們下載完NextT主題後，到hexo設定檔裡，找到theme選項，並將值改為 next</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
-
-<h2 id="NextT設定檔"><a href="#NextT設定檔" class="headerlink" title="NextT設定檔"></a>NextT設定檔</h2><p>官網不建議我們直接修改NextT設定檔，所以我們可以在專案根目錄新增一個 <code>/_config.next.yml</code>檔案。<br>我們可以複製所有NextT設定檔裡的資料到我們新增的 _config.next.yml 檔案裡。</p>
-<p>NextT有提供四種不同風格的版型，可以在此挑選你喜愛的版型，只要將 # 取消或勾選即可</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060906.png?alt=media&token=cacc04e2-a6d7-4992-b096-37bb1a2bb206" alt="scheme"></p>
-<p>Next 也提供dark mode可以選擇，只要將dark mode改為true即可</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060907.png?alt=media&token=c97c2e01-2382-4dec-abee-f64b3e5cb980" alt="darkmode"></p>
-<p>以上都設定好後，就可發現我們的部落格套用了nextT主題囉</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060908.png?alt=media&token=7b16821f-7ef1-4b28-b075-5be943ebfd76" alt="theme"></p>
-
+          <p>除了Hexo預設的版型外，也可以新增不同的佈景主題上去。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/06/09/2022-6-9-2-Hexo-%E6%96%B0%E5%A2%9E%E4%BD%88%E6%99%AF%E4%B8%BB%E9%A1%8C/">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -505,9 +571,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
-      
 
-      <time title="創建時間：2022-06-09 20:44:58 / 修改時間：21:17:51" itemprop="dateCreated datePublished" datetime="2022-06-09T20:44:58+08:00">2022-06-09</time>
+      <time title="創建時間：2022-06-09 20:44:58" itemprop="dateCreated datePublished" datetime="2022-06-09T20:44:58+08:00">2022-06-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-06-11 21:58:26" itemprop="dateModified" datetime="2022-06-11T21:58:26+08:00">2022-06-11</time>
     </span>
 
   
@@ -520,21 +592,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="新增頁面"><a href="#新增頁面" class="headerlink" title="新增頁面"></a>新增頁面</h2><p>與新增文章不同，我們也可以在hexo 裡新增一些頁面，用來放作者介紹等資訊。</p>
-<p>建立頁面的指令格式如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page &quot;頁面名稱（網址用）&quot;</span><br></pre></td></tr></table></figure>
-
-<p>新增好的頁面會在放在source資料夾底下</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/202206009.png?alt=media&token=4e8aaa96-e6ea-4a18-9bb1-37d18acec1b7" alt="about-page"></p>
-<p>頁面預設只有 title 以及 date， 而頁面預設是可以留言的，如果不開放留言則可以新增 comments 設定為false。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600902.png?alt=media&token=6fbb9f83-991a-4e9b-b2dc-9291231e6dfb" alt="comment"></p>
-<h2 id="新增分類與標籤頁"><a href="#新增分類與標籤頁" class="headerlink" title="新增分類與標籤頁"></a>新增分類與標籤頁</h2><p>我們也可在hexo裡增加分類頁面與標籤頁面</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo new page tags  // 建立標籤頁</span><br><span class="line">hexo new page categories // 建立分類頁</span><br></pre></td></tr></table></figure>
-
-<p>頁面一樣會新增在source資料夾底下，進入 <code>source/tags</code>，會看到<code>index.md</code>檔，<br>將裡面內容再加入以下這行即可 <code>type: &quot;tags&quot;</code>。</p>
-<p>最後找到主題 (theme) 設置文件 (_config.yml)，這邊以 NexT 為例，將 tags 及 categories 前的#字號移除即可。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600903.png?alt=media&token=f53ac521-d777-4cc9-b6e0-c34b04da5458" alt="theme"></p>
-
+          <p>與新增文章不同，我們也可以在hexo 裡新增一些頁面，用來放作者介紹等資訊。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/06/09/2022-6-9-1-Hexo-%E6%96%B0%E5%A2%9E%E9%A0%81%E9%9D%A2/">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -588,9 +654,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
-      
 
-      <time title="創建時間：2022-06-08 15:16:49 / 修改時間：15:50:33" itemprop="dateCreated datePublished" datetime="2022-06-08T15:16:49+08:00">2022-06-08</time>
+      <time title="創建時間：2022-06-08 15:16:49" itemprop="dateCreated datePublished" datetime="2022-06-08T15:16:49+08:00">2022-06-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-06-11 21:59:37" itemprop="dateModified" datetime="2022-06-11T21:59:37+08:00">2022-06-11</time>
     </span>
 
   
@@ -603,26 +675,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="Gihub-Pages"><a href="#Gihub-Pages" class="headerlink" title="Gihub Pages"></a>Gihub Pages</h2><p>本文會使用 Github Pages ，來部屬我們的部落格。</p>
-<h2 id="創建repository"><a href="#創建repository" class="headerlink" title="創建repository"></a>創建repository</h2><p>首先來到Gihub創建一個新的 repository， 這個repository會用來放我們的部落格</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060805.png?alt=media&token=78b7c432-452d-4595-9c87-e8492d3a445d" alt="repository"></p>
-<p>點選 create new repository來創建我們的儲存庫，這邊要先說明每個Github帳號都有一個主儲存庫，網址會呈現如下圖 new 的網址，由你的 <code>github名稱 + github.io</code> 組成。<br>每個Github帳號的主儲存庫只有一個，通常會用來放最重要的內容，這邊就用來放我們的部落格</p>
-<p>在創建時儲存庫時，可以將主儲存庫的網址填入</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060806.png?alt=media&token=329c82e8-b023-429d-a0f4-0e1efddbda06" alt="repository-name"></p>
-<p>建立好後來到這個畫面</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060807.png?alt=media&token=a7adcd93-9818-4df2-8a1d-c6285c2b5c1a" alt="建立儲存庫"></p>
-<p>此時回到Vscode，開啟一個新的專案，並輸入以下指令，將git專案建立好後推到github上</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin https://github.com/tim8076/test.git</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
-<p>專案推上 github 後，開啟專案底下的 <code>_config.yml</code> 檔案，找到deploy項目，並將內容修改如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/tim8076/tim8076.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
-
-<p>這邊type選用git，repo則貼上你的儲存庫的網址，branch選擇 main</p>
-<h2 id="部屬部落格"><a href="#部屬部落格" class="headerlink" title="部屬部落格"></a>部屬部落格</h2><p>當完成以上步驟後，要先安裝 hexo 自動部屬的套件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>安裝完後，先使用<code>hexo clean</code> 清除暫存檔，再用 <code>hexo g</code> 來編譯靜態檔，最後用 <code>hexo d</code>來將網站部署上github</p>
-<p>部屬完後輸入你的 githubpages網址，如 <a href="https://tim8076.github.io/">https://tim8076.github.io/</a>，就可以看到部屬好的部落格了。</p>
-
+          <p>來部屬你的部落格吧</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/06/08/2022-6-8-Hexo-%E9%83%A8%E5%B1%AC%E9%83%A8%E8%90%BD%E6%A0%BC/">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -676,9 +737,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
-      
 
-      <time title="創建時間：2022-06-08 14:39:57 / 修改時間：15:02:12" itemprop="dateCreated datePublished" datetime="2022-06-08T14:39:57+08:00">2022-06-08</time>
+      <time title="創建時間：2022-06-08 14:39:57" itemprop="dateCreated datePublished" datetime="2022-06-08T14:39:57+08:00">2022-06-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-06-11 21:59:52" itemprop="dateModified" datetime="2022-06-11T21:59:52+08:00">2022-06-11</time>
     </span>
 
   
@@ -691,21 +758,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
-<h2 id="基礎Hexo指令"><a href="#基礎Hexo指令" class="headerlink" title="基礎Hexo指令"></a>基礎Hexo指令</h2><ul>
-<li><code>hexo new &#39;新文章&#39;</code>  新增文章</li>
-<li><code>hexo generate</code> 產生編譯後的靜態檔案</li>
-<li><code>hexo server</code> 開啟一個本地端伺服器</li>
-<li><code>hexo clean</code> 清除暫存檔案</li>
-<li><code>hexo deploy</code> 部屬靜態檔案</li>
-</ul>
-<h2 id="產生新文章"><a href="#產生新文章" class="headerlink" title="產生新文章"></a>產生新文章</h2><p>要產生一篇新的文章，可以用 <code>hexo new &#39;新文章</code> 指令，產生後的文章會放在 <code>source</code> 資料夾的 <code>_posts</code>裡</p>
-<h2 id="產生編譯後的檔案"><a href="#產生編譯後的檔案" class="headerlink" title="產生編譯後的檔案"></a>產生編譯後的檔案</h2><p>當文章寫完後，需要將md檔案進行編譯，此時可以用 <code>hexo generate</code> 指令，編譯完後會產生一個 <code>public</code> 資料夾，作為之後部屬使用。<br>此指令的簡寫為 <code>hexo g</code></p>
-<h2 id="開啟一個本地端伺服器"><a href="#開啟一個本地端伺服器" class="headerlink" title="開啟一個本地端伺服器"></a>開啟一個本地端伺服器</h2><p>當靜態檔案編譯完後，可以用 <code>hexo server</code> 指令開啟一個本地端的模擬伺服器，用來即時瀏覽我的寫完的文章，此指令的簡寫為 <code>hexo s</code></p>
-<h2 id="清除暫存檔案"><a href="#清除暫存檔案" class="headerlink" title="清除暫存檔案"></a>清除暫存檔案</h2><p><code>hexo clean</code> 指令主要用來清除一些奇怪的暫存檔案，通常部屬前會先清理一遍。</p>
-<h2 id="部屬靜態檔案"><a href="#部屬靜態檔案" class="headerlink" title="部屬靜態檔案"></a>部屬靜態檔案</h2><p><code>hexo deploy</code> 將我們的靜態網站部屬到雲端使用的指令，詳細用流程在之後部屬的章節會提到。<br>此指令的簡寫為 <code>hexo d</code></p>
-<p>這就是今天 hexo 指令的介紹囉。</p>
-
+          <p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -759,9 +820,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
-      
 
-      <time title="創建時間：2022-06-08 12:28:30 / 修改時間：14:38:06" itemprop="dateCreated datePublished" datetime="2022-06-08T12:28:30+08:00">2022-06-08</time>
+      <time title="創建時間：2022-06-08 12:28:30" itemprop="dateCreated datePublished" datetime="2022-06-08T12:28:30+08:00">2022-06-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-06-11 21:58:58" itemprop="dateModified" datetime="2022-06-11T21:58:58+08:00">2022-06-11</time>
     </span>
 
   
@@ -774,15 +841,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="建立你的第一篇文章"><a href="#建立你的第一篇文章" class="headerlink" title="建立你的第一篇文章"></a>建立你的第一篇文章</h2><p>我們可以在Vscode 中，開啟上個章節所建立的專案</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060802.png?alt=media&token=cba3f60e-8fba-4f61-83b4-9668e01bd2e7" alt="專案圖片"></p>
-<p>在Vscode中用快捷鍵 Control + ESC，開啟終端機 </p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060803.png?alt=media&token=e185edcc-77fc-4d1e-8499-b6c467085d8b" alt="終端機"></p>
-<p>然後下方終端機輸入 <code>hexo new &#39;我的第一篇部落格文章&#39;</code> 輸入完後會顯示 <code>INFO  Generated: 2022/06/07/2022-6-7-Hexo-部落格安裝與部屬/index.html</code> 代表文章被順利建立在source資料夾裡的 <code>_posts</code>底下。</p>
-<h2 id="MD-內容"><a href="#MD-內容" class="headerlink" title="MD 內容"></a>MD 內容</h2><p>在md檔案裡，最上面會有可以填寫 標題等欄位<br><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060804.png?alt=media&token=27df0ccb-a65b-434b-aece-6c7af864d641" alt="標題"></p>
-<p>文章撰寫則以Markdown格式為主，若不了解Markdown格式，可以參考 <a target="_blank" rel="noopener" href="https://markdown.tw/">markdown</a></p>
-<p>以上就是撰寫文章的方法囉</p>
-
+          <p>聊聊如何建立你的第一篇Hexo文章</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/06/08/2022-6-8-Hexo-%E6%92%B0%E5%AF%AB%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -844,7 +911,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-06-08 12:50:37" itemprop="dateModified" datetime="2022-06-08T12:50:37+08:00">2022-06-08</time>
+      <time title="修改時間：2022-06-12 10:52:59" itemprop="dateModified" datetime="2022-06-12T10:52:59+08:00">2022-06-12</time>
     </span>
 
   
@@ -857,30 +924,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="什麼是-Hexo？"><a href="#什麼是-Hexo？" class="headerlink" title="什麼是 Hexo？"></a>什麼是 Hexo？</h2><p>Hexo 是一個快速、簡單且強大的網誌框架。Hexo 使用 Markdown（或其他標記語言）解析您的文章，並在幾秒鐘內，透過漂亮的主題產生靜態檔案。</p>
-<h2 id="安裝需求"><a href="#安裝需求" class="headerlink" title="安裝需求"></a>安裝需求</h2><ul>
-<li><a target="_blank" rel="noopener" href="http://nodejs.org/">Node.js</a> (Node.js 版本需不低於8.10，建議使用 Node.js 10.0 及以上版本)</li>
-<li><a target="_blank" rel="noopener" href="http://git-scm.com/">Git</a></li>
-</ul>
-<p>若您的電腦已經安裝上述的必備軟體，那麼恭喜您！只需要透過 npm 即可完成 Hexo 的安裝。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<p>一旦 Hexo 完成後，請執行下列指令，Hexo 會在指定資料夾中建立所有您需要的檔案。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-
-<p>建立完成後，專案資料夾會有下列檔案：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
-
-<h2 id="資料夾配置說明"><a href="#資料夾配置說明" class="headerlink" title="資料夾配置說明"></a>資料夾配置說明</h2><p>以下說明不同資料夾功能</p>
-<h3 id="scaffolds"><a href="#scaffolds" class="headerlink" title="scaffolds"></a>scaffolds</h3><p>scaffolds 資料夾裡放的是md範例檔案，當我們要寫新聞章時，可以將範例檔另存到source資料夾裡，來開始撰寫。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060702.png?alt=media&token=3ee586a3-0af2-4191-8cac-1d299028f03b" alt="scaffolds圖片範例"></p>
-<h3 id="source"><a href="#source" class="headerlink" title="source"></a>source</h3><p>source 資料夾是放置文章的地方。所有的檔案或是資料夾通常都會在這邊，開頭會加上 _(底線) 來命名，讓這些資料夾或是檔案也成為隱藏檔案而被忽略，除了 _posts 資料夾以外。Markdown 和 HTML 檔案會被發布並存放到 public 資料夾，而其他檔案沒有以底線命名的就會被拷貝過去。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060701.png?alt=media&token=a71a827f-ea1c-4ad8-b570-0ce5372488b6" alt="source資料夾"></p>
-<h3 id="themes"><a href="#themes" class="headerlink" title="themes"></a>themes</h3><p>themes 資料夾放的是hexo的主題樣式，後續更換主題也是將檔案載到這個地方。</p>
-<h3 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h3><p>_config.yml 是網站的配置檔案（如下圖），網站的各種配置設定都在這邊，例如：網頁標題、網站描述、網站的網址、路徑等等，詳細內容可以參考： <a target="_blank" rel="noopener" href="https://hexo.io/zh-tw/docs/configuration">https://hexo.io/zh-tw/docs/configuration</a></p>
-<p>大家可以自行修改看看，如下圖</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060801.png?alt=media&token=a28a52df-edb2-4848-a690-9fe3f5807343" alt="config修改"></p>
-
+          <p>介紹如何安裝與使用 Hexo</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/06/07/2022-6-7-Hexo-%E9%83%A8%E8%90%BD%E6%A0%BC%E5%AE%89%E8%A3%9D%E8%88%87%E9%83%A8%E5%B1%AC/">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

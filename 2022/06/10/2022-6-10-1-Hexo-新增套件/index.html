@@ -21,18 +21,18 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"tim8076.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="新增套件這章節會介紹一些NextT主題可以用的套件。 hexo-generator-searchdb這個套件可以讓你的部落格具有本地搜尋的功能，一樣先用NPM安裝。 1$ npm install hexo-generator-searchdb --save  安裝完後只要到你根目錄的 _config.next.yml 檔案裡，將 local search 改為true即可產生搜尋功能囉。   Re">
+    <meta name="description" content="這章節會介紹一些NextT主題可以用的套件。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="(7) Hexo-新增套件">
 <meta property="og:url" content="https://tim8076.github.io/2022/06/10/2022-6-10-1-Hexo-%E6%96%B0%E5%A2%9E%E5%A5%97%E4%BB%B6/index.html">
 <meta property="og:site_name" content="Tim的前端日誌">
-<meta property="og:description" content="新增套件這章節會介紹一些NextT主題可以用的套件。 hexo-generator-searchdb這個套件可以讓你的部落格具有本地搜尋的功能，一樣先用NPM安裝。 1$ npm install hexo-generator-searchdb --save  安裝完後只要到你根目錄的 _config.next.yml 檔案裡，將 local search 改為true即可產生搜尋功能囉。   Re">
+<meta property="og:description" content="這章節會介紹一些NextT主題可以用的套件。">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601001.png?alt=media&token=a25eac63-0114-4674-9c02-7f7723f027e1">
 <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601002.png?alt=media&token=9b0afc38-cc99-4aef-abdc-68d318bc1c7e">
 <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601003.png?alt=media&token=61c1206c-5339-4a97-ae55-565d1d249f73">
 <meta property="article:published_time" content="2022-06-10T12:35:20.000Z">
-<meta property="article:modified_time" content="2022-06-10T13:23:22.922Z">
+<meta property="article:modified_time" content="2022-06-11T13:57:42.988Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
@@ -161,13 +161,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -226,7 +231,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="(7) Hexo-新增套件 | Tim的前端日誌">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="這章節會介紹一些NextT主題可以用的套件。">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -240,14 +245,21 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
-      
 
-      <time title="創建時間：2022-06-10 20:35:20 / 修改時間：21:23:22" itemprop="dateCreated datePublished" datetime="2022-06-10T20:35:20+08:00">2022-06-10</time>
+      <time title="創建時間：2022-06-10 20:35:20" itemprop="dateCreated datePublished" datetime="2022-06-10T20:35:20+08:00">2022-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-06-11 21:57:42" itemprop="dateModified" datetime="2022-06-11T21:57:42+08:00">2022-06-11</time>
     </span>
 
   
 </div>
 
+            <div class="post-description">這章節會介紹一些NextT主題可以用的套件。</div>
         </div>
       </header>
 

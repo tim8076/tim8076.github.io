@@ -21,32 +21,31 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"tim8076.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="介紹如何安裝與使用 Hexo">
+    <meta name="description" content="js30實作系列，在網頁上打鼓">
 <meta property="og:type" content="article">
-<meta property="og:title" content="(1) Hexo 部落格安裝">
-<meta property="og:url" content="https://tim8076.github.io/2022/06/07/2022-6-7-Hexo-%E9%83%A8%E8%90%BD%E6%A0%BC%E5%AE%89%E8%A3%9D%E8%88%87%E9%83%A8%E5%B1%AC/index.html">
+<meta property="og:title" content="(1) JS30實作系列 Drum-Kit">
+<meta property="og:url" content="https://tim8076.github.io/2022/06/14/2022-6-14-1-JS30-Drum-Kit/index.html">
 <meta property="og:site_name" content="Tim的前端日誌">
-<meta property="og:description" content="介紹如何安裝與使用 Hexo">
+<meta property="og:description" content="js30實作系列，在網頁上打鼓">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060702.png?alt=media&token=3ee586a3-0af2-4191-8cac-1d299028f03b">
-<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060701.png?alt=media&token=a71a827f-ea1c-4ad8-b570-0ce5372488b6">
-<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060801.png?alt=media&token=a28a52df-edb2-4848-a690-9fe3f5807343">
-<meta property="article:published_time" content="2022-06-07T13:44:06.000Z">
-<meta property="article:modified_time" content="2022-06-12T02:52:59.419Z">
+<meta property="og:image" content="https://miro.medium.com/max/1400/1*wUokqgRhKPwqMbffW1lZeA.png">
+<meta property="article:published_time" content="2022-06-14T12:35:43.000Z">
+<meta property="article:modified_time" content="2022-06-14T13:17:50.175Z">
 <meta property="article:author" content="Tim Chou">
-<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="JS30">
+<meta property="article:tag" content="Javascript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060702.png?alt=media&token=3ee586a3-0af2-4191-8cac-1d299028f03b">
+<meta name="twitter:image" content="https://miro.medium.com/max/1400/1*wUokqgRhKPwqMbffW1lZeA.png">
 
 
-<link rel="canonical" href="https://tim8076.github.io/2022/06/07/2022-6-7-Hexo-%E9%83%A8%E8%90%BD%E6%A0%BC%E5%AE%89%E8%A3%9D%E8%88%87%E9%83%A8%E5%B1%AC/">
+<link rel="canonical" href="https://tim8076.github.io/2022/06/14/2022-6-14-1-JS30-Drum-Kit/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://tim8076.github.io/2022/06/07/2022-6-7-Hexo-%E9%83%A8%E8%90%BD%E6%A0%BC%E5%AE%89%E8%A3%9D%E8%88%87%E9%83%A8%E5%B1%AC/","path":"2022/06/07/2022-6-7-Hexo-部落格安裝與部屬/","title":"(1) Hexo 部落格安裝"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://tim8076.github.io/2022/06/14/2022-6-14-1-JS30-Drum-Kit/","path":"2022/06/14/2022-6-14-1-JS30-Drum-Kit/","title":"(1) JS30實作系列 Drum-Kit"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>(1) Hexo 部落格安裝 | Tim的前端日誌</title>
+<title>(1) JS30實作系列 Drum-Kit | Tim的前端日誌</title>
   
 
 
@@ -148,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-Hexo%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什麼是 Hexo？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E9%9C%80%E6%B1%82"><span class="nav-number">2.</span> <span class="nav-text">安裝需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E5%A4%BE%E9%85%8D%E7%BD%AE%E8%AA%AA%E6%98%8E"><span class="nav-number">3.</span> <span class="nav-text">資料夾配置說明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scaffolds"><span class="nav-number">3.1.</span> <span class="nav-text">scaffolds</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#source"><span class="nav-number">3.2.</span> <span class="nav-text">source</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#themes"><span class="nav-number">3.3.</span> <span class="nav-text">themes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#config-yml"><span class="nav-number">3.4.</span> <span class="nav-text">_config.yml</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keycode%E7%B6%81%E5%AE%9A"><span class="nav-number">2.</span> <span class="nav-text">keycode綁定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%9B%A3%E8%81%BD"><span class="nav-number">3.</span> <span class="nav-text">事件監聽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8B%95%E7%95%AB%E7%B5%90%E6%9D%9F%E6%99%82%EF%BC%8C%E6%8B%BF%E6%8E%89%E6%A8%A3%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">動畫結束時，拿掉樣式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%8D%E5%A4%96%E8%A3%9C%E5%85%85"><span class="nav-number">5.</span> <span class="nav-text">額外補充</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -217,7 +216,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/06/07/2022-6-7-Hexo-%E9%83%A8%E8%90%BD%E6%A0%BC%E5%AE%89%E8%A3%9D%E8%88%87%E9%83%A8%E5%B1%AC/">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/06/14/2022-6-14-1-JS30-Drum-Kit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -230,12 +229,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="(1) Hexo 部落格安裝 | Tim的前端日誌">
-      <meta itemprop="description" content="介紹如何安裝與使用 Hexo">
+      <meta itemprop="name" content="(1) JS30實作系列 Drum-Kit | Tim的前端日誌">
+      <meta itemprop="description" content="js30實作系列，在網頁上打鼓">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          (1) Hexo 部落格安裝
+          (1) JS30實作系列 Drum-Kit
         </h1>
 
         <div class="post-meta-container">
@@ -245,21 +244,24 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
+      
 
-      <time title="創建時間：2022-06-07 21:44:06" itemprop="dateCreated datePublished" datetime="2022-06-07T21:44:06+08:00">2022-06-07</time>
+      <time title="創建時間：2022-06-14 20:35:43 / 修改時間：21:17:50" itemprop="dateCreated datePublished" datetime="2022-06-14T20:35:43+08:00">2022-06-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
+        <i class="far fa-folder"></i>
       </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-06-12 10:52:59" itemprop="dateModified" datetime="2022-06-12T10:52:59+08:00">2022-06-12</time>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
+        </span>
     </span>
 
   
 </div>
 
-            <div class="post-description">介紹如何安裝與使用 Hexo</div>
+            <div class="post-description">js30實作系列，在網頁上打鼓</div>
         </div>
       </header>
 
@@ -267,29 +269,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="什麼是-Hexo？"><a href="#什麼是-Hexo？" class="headerlink" title="什麼是 Hexo？"></a>什麼是 Hexo？</h2><p>Hexo 是一個快速、簡單且強大的網誌框架。Hexo 使用 Markdown（或其他標記語言）解析您的文章，並在幾秒鐘內，透過漂亮的主題產生靜態檔案。</p>
-<h2 id="安裝需求"><a href="#安裝需求" class="headerlink" title="安裝需求"></a>安裝需求</h2><ul>
-<li><a target="_blank" rel="noopener" href="http://nodejs.org/">Node.js</a> (Node.js 版本需不低於8.10，建議使用 Node.js 10.0 及以上版本)</li>
-<li><a target="_blank" rel="noopener" href="http://git-scm.com/">Git</a></li>
-</ul>
-<p>若您的電腦已經安裝上述的必備軟體，那麼恭喜您！只需要透過 npm 即可完成 Hexo 的安裝。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS30，是由加拿大工程師Wes Bos所建立一系列課程。透過課程內容可以實際學到Javascript的實際應用。<br>本系列文章會實做一些JS30的範例，從中熟練JS的觀念。</p>
+<p>本文從第一個範例開始 Drum-Kit <a target="_blank" rel="noopener" href="https://codepen.io/tim-chou/pen/oNEmjKR">範例程式碼</a></p>
+<p><img src="https://miro.medium.com/max/1400/1*wUokqgRhKPwqMbffW1lZeA.png" alt="piano"></p>
+<h2 id="keycode綁定"><a href="#keycode綁定" class="headerlink" title="keycode綁定"></a>keycode綁定</h2><p>在這次挑戰中，要完成的是按下琴鍵後，播放指定音樂，和改變樣式。</p>
+<p>所以第一步要做的是，選出指定的dom元素和音檔，</p>
+<p>在 html 結構中，用 data-key分別對div 跟 audio 元素綁定對應按鍵的 keycode。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">data-key</span>=<span class="string">&quot;65&quot;</span> <span class="attr">class</span>=<span class="string">&quot;key&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">data-key</span>=<span class="string">&quot;65&quot;</span> <span class="attr">src</span>=<span class="string">&quot;sounds/clap.wav&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>一旦 Hexo 完成後，請執行下列指令，Hexo 會在指定資料夾中建立所有您需要的檔案。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+<h2 id="事件監聽"><a href="#事件監聽" class="headerlink" title="事件監聽"></a>事件監聽</h2><p>要讓使用者能彈出聲音，要在window建立 keydown事件的監聽，當使用者按下鍵盤時，觸發對應函式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>,playHandeler,<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">playHandeler</span>(<span class="params">e</span>)&#123;</span><br><span class="line">  <span class="comment">//播音樂</span></span><br><span class="line">  <span class="keyword">const</span> audio = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`audio[data-key=&quot;<span class="subst">$&#123;e.keyCode&#125;</span>&quot;]`</span>);</span><br><span class="line">  <span class="keyword">if</span>(audio)&#123;</span><br><span class="line">    audio.<span class="property">currentTime</span> = <span class="number">0</span>;<span class="comment">//若要連續撥放 要設為0</span></span><br><span class="line">    audio.<span class="title function_">play</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//改樣式</span></span><br><span class="line">  <span class="keyword">const</span> dom = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`div[data-key=&quot;<span class="subst">$&#123;e.keyCode&#125;</span>&quot;]`</span>);</span><br><span class="line">  <span class="keyword">if</span>(dom)&#123;</span><br><span class="line">    dom.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;playing&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>建立完成後，專案資料夾會有下列檔案：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
+<p>在函式中，用 ES6 的選取方法，用 <code>audio[data-key=”$&#123;e.keyCode&#125;”]</code>直接選到 HTML 中的 [data-key]。<br>在利用 if 判斷式，判斷當使用者按到指定的按鍵時，也就是audio為true時，執行播放音檔，audio.play();<br>dom 為true時，執行classList.add()，彈奏時增加樣式。</p>
+<h2 id="動畫結束時，拿掉樣式"><a href="#動畫結束時，拿掉樣式" class="headerlink" title="動畫結束時，拿掉樣式"></a>動畫結束時，拿掉樣式</h2><p>利用foreach，對每一個.key建立監聽，監聽事件為 transitionend 。這個事件是在css的 transition結束時觸發，也就是每一個drum kit撥放完時觸發。<br>要注意，若執行的transition屬性有很多種，如 transform、color、border-color，transitionend 會重複的觸發。<br>今天我們希望的是，在transform動畫結束時拿掉樣式，所以要加上判斷propertyName為 transform時，再執行 classList.remove拿掉樣式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.key&#x27;</span>).<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">item</span>)&#123;</span><br><span class="line">  item.<span class="title function_">addEventListener</span>(<span class="string">&#x27;transitionend&#x27;</span>, transitionendHandler)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">transitionendHandler</span>(<span class="params">e</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span>(e.<span class="property">propertyName</span> === <span class="string">&#x27;transform&#x27;</span>)&#123;</span><br><span class="line">    e.<span class="property">currentTarget</span>.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;playing&#x27;</span>);</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="資料夾配置說明"><a href="#資料夾配置說明" class="headerlink" title="資料夾配置說明"></a>資料夾配置說明</h2><p>以下說明不同資料夾功能</p>
-<h3 id="scaffolds"><a href="#scaffolds" class="headerlink" title="scaffolds"></a>scaffolds</h3><p>scaffolds 資料夾裡放的是md範例檔案，當我們要寫新聞章時，可以將範例檔另存到source資料夾裡，來開始撰寫。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060702.png?alt=media&token=3ee586a3-0af2-4191-8cac-1d299028f03b" alt="scaffolds圖片範例"></p>
-<h3 id="source"><a href="#source" class="headerlink" title="source"></a>source</h3><p>source 資料夾是放置文章的地方。所有的檔案或是資料夾通常都會在這邊，開頭會加上 _(底線) 來命名，讓這些資料夾或是檔案也成為隱藏檔案而被忽略，除了 _posts 資料夾以外。Markdown 和 HTML 檔案會被發布並存放到 public 資料夾，而其他檔案沒有以底線命名的就會被拷貝過去。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060701.png?alt=media&token=a71a827f-ea1c-4ad8-b570-0ce5372488b6" alt="source資料夾"></p>
-<h3 id="themes"><a href="#themes" class="headerlink" title="themes"></a>themes</h3><p>themes 資料夾放的是hexo的主題樣式，後續更換主題也是將檔案載到這個地方。</p>
-<h3 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h3><p>_config.yml 是網站的配置檔案（如下圖），網站的各種配置設定都在這邊，例如：網頁標題、網站描述、網站的網址、路徑等等，詳細內容可以參考： <a target="_blank" rel="noopener" href="https://hexo.io/zh-tw/docs/configuration">https://hexo.io/zh-tw/docs/configuration</a></p>
-<p>大家可以自行修改看看，如下圖</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060801.png?alt=media&token=a28a52df-edb2-4848-a690-9fe3f5807343" alt="config修改"></p>
+<h2 id="額外補充"><a href="#額外補充" class="headerlink" title="額外補充"></a>額外補充</h2><p>若要在html 顯示 鍵盤按鍵 可以用 <code>&lt;kbd&gt;&lt;/kbd&gt;</code> 元素。</p>
 
     </div>
 
@@ -299,18 +294,19 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/JS30/" rel="tag"># JS30</a>
+              <a href="/tags/Javascript/" rel="tag"># Javascript</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2022/06/10/2022-6-10-2-Hexo-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8B%99/" rel="prev" title="(8) Hexo-第三方服務">
+                  <i class="fa fa-chevron-left"></i> (8) Hexo-第三方服務
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/06/08/2022-6-8-Hexo-%E6%92%B0%E5%AF%AB%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" rel="next" title="(2) Hexo 撰寫第一篇文章">
-                  (2) Hexo 撰寫第一篇文章 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
