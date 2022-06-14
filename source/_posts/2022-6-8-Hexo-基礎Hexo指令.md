@@ -2,6 +2,7 @@
 title: (3) Hexo-基礎Hexo指令
 date: 2022-06-08 14:39:57
 tags: Hexo
+description: '本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。'
 ---
 
 ## 前言
