@@ -1,6 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>(1) JS30實作系列 Drum-Kit</title>
+    <url>/2022/06/14/2022-6-14-1-JS30-Drum-Kit/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS30，是由加拿大工程師Wes Bos所建立一系列課程。透過課程內容可以實際學到Javascript的實際應用。<br>本系列文章會實做一些JS30的範例，從中熟練JS的觀念。</p>
+<p>本文從第一個範例開始 Drum-Kit <a href="https://codepen.io/tim-chou/pen/oNEmjKR">範例程式碼</a></p>
+<p><img src="https://miro.medium.com/max/1400/1*wUokqgRhKPwqMbffW1lZeA.png" alt="piano"></p>
+<h2 id="keycode綁定"><a href="#keycode綁定" class="headerlink" title="keycode綁定"></a>keycode綁定</h2><p>在這次挑戰中，要完成的是按下琴鍵後，播放指定音樂，和改變樣式。</p>
+<p>所以第一步要做的是，選出指定的dom元素和音檔，</p>
+<p>在 html 結構中，用 data-key分別對div 跟 audio 元素綁定對應按鍵的 keycode。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">data-key</span>=<span class="string">&quot;65&quot;</span> <span class="attr">class</span>=<span class="string">&quot;key&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">data-key</span>=<span class="string">&quot;65&quot;</span> <span class="attr">src</span>=<span class="string">&quot;sounds/clap.wav&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="事件監聽"><a href="#事件監聽" class="headerlink" title="事件監聽"></a>事件監聽</h2><p>要讓使用者能彈出聲音，要在window建立 keydown事件的監聽，當使用者按下鍵盤時，觸發對應函式。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>,playHandeler,<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">playHandeler</span>(<span class="params">e</span>)&#123;</span><br><span class="line">  <span class="comment">//播音樂</span></span><br><span class="line">  <span class="keyword">const</span> audio = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`audio[data-key=&quot;<span class="subst">$&#123;e.keyCode&#125;</span>&quot;]`</span>);</span><br><span class="line">  <span class="keyword">if</span>(audio)&#123;</span><br><span class="line">    audio.<span class="property">currentTime</span> = <span class="number">0</span>;<span class="comment">//若要連續撥放 要設為0</span></span><br><span class="line">    audio.<span class="title function_">play</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//改樣式</span></span><br><span class="line">  <span class="keyword">const</span> dom = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`div[data-key=&quot;<span class="subst">$&#123;e.keyCode&#125;</span>&quot;]`</span>);</span><br><span class="line">  <span class="keyword">if</span>(dom)&#123;</span><br><span class="line">    dom.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;playing&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在函式中，用 ES6 的選取方法，用 <code>audio[data-key=”$&#123;e.keyCode&#125;”]</code>直接選到 HTML 中的 [data-key]。<br>在利用 if 判斷式，判斷當使用者按到指定的按鍵時，也就是audio為true時，執行播放音檔，audio.play();<br>dom 為true時，執行classList.add()，彈奏時增加樣式。</p>
+<h2 id="動畫結束時，拿掉樣式"><a href="#動畫結束時，拿掉樣式" class="headerlink" title="動畫結束時，拿掉樣式"></a>動畫結束時，拿掉樣式</h2><p>利用foreach，對每一個.key建立監聽，監聽事件為 transitionend 。這個事件是在css的 transition結束時觸發，也就是每一個drum kit撥放完時觸發。<br>要注意，若執行的transition屬性有很多種，如 transform、color、border-color，transitionend 會重複的觸發。<br>今天我們希望的是，在transform動畫結束時拿掉樣式，所以要加上判斷propertyName為 transform時，再執行 classList.remove拿掉樣式。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.key&#x27;</span>).<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">item</span>)&#123;</span><br><span class="line">  item.<span class="title function_">addEventListener</span>(<span class="string">&#x27;transitionend&#x27;</span>, transitionendHandler)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">transitionendHandler</span>(<span class="params">e</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span>(e.<span class="property">propertyName</span> === <span class="string">&#x27;transform&#x27;</span>)&#123;</span><br><span class="line">    e.<span class="property">currentTarget</span>.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;playing&#x27;</span>);</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="額外補充"><a href="#額外補充" class="headerlink" title="額外補充"></a>額外補充</h2><p>若要在html 顯示 鍵盤按鍵 可以用 <code>&lt;kbd&gt;&lt;/kbd&gt;</code> 元素。</p>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>JS30</tag>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(7) Hexo-新增套件</title>
+    <url>/2022/06/10/2022-6-10-1-Hexo-%E6%96%B0%E5%A2%9E%E5%A5%97%E4%BB%B6/</url>
+    <content><![CDATA[<h2 id="新增套件"><a href="#新增套件" class="headerlink" title="新增套件"></a>新增套件</h2><p>這章節會介紹一些NextT主題可以用的套件。</p>
+<h2 id="hexo-generator-searchdb"><a href="#hexo-generator-searchdb" class="headerlink" title="hexo-generator-searchdb"></a>hexo-generator-searchdb</h2><p>這個套件可以讓你的部落格具有本地搜尋的功能，一樣先用NPM安裝。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<p>安裝完後只要到你根目錄的 <code>_config.next.yml</code> 檔案裡，將 local search 改為true即可產生搜尋功能囉。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601001.png?alt=media&token=a25eac63-0114-4674-9c02-7f7723f027e1" alt="search-option"></p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601002.png?alt=media&token=9b0afc38-cc99-4aef-abdc-68d318bc1c7e" alt="search-image"></p>
+<h2 id="Reading-progress-bar-閱讀進度條"><a href="#Reading-progress-bar-閱讀進度條" class="headerlink" title="Reading progress bar 閱讀進度條"></a>Reading progress bar 閱讀進度條</h2><p>這個套件已經內建在NextT裡了，只要到  <code>_config.next.yml</code> 找到 reading_progress 選項，將enable改為true即可。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601003.png?alt=media&token=61c1206c-5339-4a97-ae55-565d1d249f73" alt="reading-progress"></p>
+<p>以上就是推薦可以安裝的套件囉</p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(2) JS30實作系列 時鐘</title>
+    <url>/2022/06/15/2022-6-15-1-JS30-clock/</url>
+    <content><![CDATA[<p><img src="https://miro.medium.com/max/1400/1*JH-e_9OQS1lBH7hqb7lMXQ.png" alt="clock"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這次要在網頁實作一個時鐘，本次的 <a href="https://codepen.io/tim-chou/pen/RwReNQx">範例code</a></p>
+<p>首先在 HTML 中新增 三組 DIV 分別為時、分、秒針</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clock&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clock-face&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand second-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand min-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand hour-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>時、分、秒針都設定為寬高是鐘面100%的正方形，並利用偽元素的方式，將指針加在正方形上，所以我們之後實際旋轉的是正方形。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.hand</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1040/1*hxPjvHGmPHvKxnY7ZZFuUg.png" alt="hand"></p>
+<h2 id="js部分"><a href="#js部分" class="headerlink" title="js部分"></a>js部分</h2><p>在js中，首先選取 時、分、秒針</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> second = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.second-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> min = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.min-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> hour = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.hour-hand&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在setClock函式中，利用 建立 new Date() 取得時間，再用getSeconds、getMinutes、getHours取得秒、時、分。<br>並分別乘上 6 度 (每秒鐘在鐘面佔的角度 )、30度(每小時在鐘面佔的角度)，並利用 .style.transform &#x3D; <code>rotate($&#123;minDeg&#125;deg)</code>的方式指定角度。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">function</span> <span class="title function_">setClock</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">let</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> secondDeg = date.<span class="title function_">getSeconds</span>() * <span class="number">6</span> <span class="comment">// (360/60)每分鐘所佔的角度</span></span><br><span class="line">  <span class="keyword">let</span> minDeg = date.<span class="title function_">getMinutes</span>() * <span class="number">6</span> + date.<span class="title function_">getSeconds</span>()* <span class="number">30</span> / <span class="number">60</span> <span class="comment">// (360/60)每秒所佔的角度</span></span><br><span class="line">  <span class="keyword">let</span> hourDeg = date.<span class="title function_">getHours</span>() * <span class="number">30</span> + date.<span class="title function_">getMinutes</span>()* <span class="number">30</span> / <span class="number">60</span><span class="comment">// (360/12)每小時時針所佔的角度 </span></span><br><span class="line"></span><br><span class="line">  second.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;secondDeg&#125;</span>deg)`</span></span><br><span class="line">  min.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;minDeg&#125;</span>deg)`</span></span><br><span class="line">  hour.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;hourDeg&#125;</span>deg)`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最後用 setInterval 每過一秒就執行一次 setClock 函式，就完成拉。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(setClock,<span class="number">1000</span>); <span class="comment">//設定間隔，持續執行</span></span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>JS30</tag>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(1) Gulp-介紹與安裝</title>
+    <url>/2022/06/15/2022-6-15-2-Gulp-%E4%BB%8B%E7%B4%B9%E8%88%87%E5%AE%89%E8%A3%9D/</url>
+    <content><![CDATA[<h2 id="Gulp-是什麼"><a href="#Gulp-是什麼" class="headerlink" title="Gulp 是什麼"></a>Gulp 是什麼</h2><p>在以前做網頁開發時，可能只需要處理html、css、js檔案就可以了。但現在前端開發工具越來越多，像css有scss的預處理器、html可以用pug來寫等等。此時就須要一個工具來將這些scss、pug檔案編譯成css跟html。<br>Gulp 就可以用來編譯 Sass、編譯 JavaScript 語法至相容性較高的 ES5、圖片優化壓縮、打包程式碼等等的事情，讓開發者可以專注於開發。</p>
+<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><h3 id="安裝node-js與npm"><a href="#安裝node-js與npm" class="headerlink" title="安裝node.js與npm"></a>安裝node.js與npm</h3><p>首先我們需要要先安裝 <a href="https://nodejs.org/en/">nodejs</a>，我們選擇穩定版(LTS)來安裝，安裝過程就不再贅述。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061501.png?alt=media&token=3db09d20-f796-4c7b-8c12-0e894845871f" alt="nodejs"></p>
+<p>安裝好後，到vscode編輯器，輸入下列指令來確認是否安裝完成。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm -v   </span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+<p>若有正確安裝，會顯示版本號。</p>
+<h2 id="安裝全域的-Gulp"><a href="#安裝全域的-Gulp" class="headerlink" title="安裝全域的 Gulp"></a>安裝全域的 Gulp</h2><p>在commend line輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp -g  //windows系統</span><br><span class="line">sudo npm install gulp -g //Mac系統</span><br></pre></td></tr></table></figure>
+<p>npm安裝套件分為全域與專案安裝，全域安裝只需安裝一次即可。</p>
+<h2 id="安裝專案的Gulp"><a href="#安裝專案的Gulp" class="headerlink" title="安裝專案的Gulp"></a>安裝專案的Gulp</h2><p>我們先用vscode開一個新的資料夾作為這次專案使用。</p>
+<p>先在commend line 輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+<p>輸入完後，會新增一個package.json檔案，這個檔案會用來管理這個專案的套件。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061502.png?alt=media&token=b12ce94d-b001-4fa8-b8b2-2912c6dca318" alt="package.json"></p>
+<p>之後輸入下面指令來安裝專案內的gulp</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp --save</span><br></pre></td></tr></table></figure>
+
+<p>安裝完成後輸入下面指令檢查一下，有正確安裝會顯示版本。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gulp -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>到這邊就完成專案內gulp的安裝，下一堂課會帶大家新增一個gulp file，做一些好玩的功能囉。</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(1) Hexo 部落格安裝</title>
     <url>/2022/06/07/2022-6-7-Hexo-%E9%83%A8%E8%90%BD%E6%A0%BC%E5%AE%89%E8%A3%9D%E8%88%87%E9%83%A8%E5%B1%AC/</url>
     <content><![CDATA[<h2 id="什麼是-Hexo？"><a href="#什麼是-Hexo？" class="headerlink" title="什麼是 Hexo？"></a>什麼是 Hexo？</h2><p>Hexo 是一個快速、簡單且強大的網誌框架。Hexo 使用 Markdown（或其他標記語言）解析您的文章，並在幾秒鐘內，透過漂亮的主題產生靜態檔案。</p>
@@ -61,74 +172,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(1) JS30實作系列 Drum-Kit</title>
-    <url>/2022/06/14/2022-6-14-1-JS30-Drum-Kit/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS30，是由加拿大工程師Wes Bos所建立一系列課程。透過課程內容可以實際學到Javascript的實際應用。<br>本系列文章會實做一些JS30的範例，從中熟練JS的觀念。</p>
-<p>本文從第一個範例開始 Drum-Kit <a href="https://codepen.io/tim-chou/pen/oNEmjKR">範例程式碼</a></p>
-<p><img src="https://miro.medium.com/max/1400/1*wUokqgRhKPwqMbffW1lZeA.png" alt="piano"></p>
-<h2 id="keycode綁定"><a href="#keycode綁定" class="headerlink" title="keycode綁定"></a>keycode綁定</h2><p>在這次挑戰中，要完成的是按下琴鍵後，播放指定音樂，和改變樣式。</p>
-<p>所以第一步要做的是，選出指定的dom元素和音檔，</p>
-<p>在 html 結構中，用 data-key分別對div 跟 audio 元素綁定對應按鍵的 keycode。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">data-key</span>=<span class="string">&quot;65&quot;</span> <span class="attr">class</span>=<span class="string">&quot;key&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">data-key</span>=<span class="string">&quot;65&quot;</span> <span class="attr">src</span>=<span class="string">&quot;sounds/clap.wav&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="事件監聽"><a href="#事件監聽" class="headerlink" title="事件監聽"></a>事件監聽</h2><p>要讓使用者能彈出聲音，要在window建立 keydown事件的監聽，當使用者按下鍵盤時，觸發對應函式。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>,playHandeler,<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">playHandeler</span>(<span class="params">e</span>)&#123;</span><br><span class="line">  <span class="comment">//播音樂</span></span><br><span class="line">  <span class="keyword">const</span> audio = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`audio[data-key=&quot;<span class="subst">$&#123;e.keyCode&#125;</span>&quot;]`</span>);</span><br><span class="line">  <span class="keyword">if</span>(audio)&#123;</span><br><span class="line">    audio.<span class="property">currentTime</span> = <span class="number">0</span>;<span class="comment">//若要連續撥放 要設為0</span></span><br><span class="line">    audio.<span class="title function_">play</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//改樣式</span></span><br><span class="line">  <span class="keyword">const</span> dom = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`div[data-key=&quot;<span class="subst">$&#123;e.keyCode&#125;</span>&quot;]`</span>);</span><br><span class="line">  <span class="keyword">if</span>(dom)&#123;</span><br><span class="line">    dom.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;playing&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在函式中，用 ES6 的選取方法，用 <code>audio[data-key=”$&#123;e.keyCode&#125;”]</code>直接選到 HTML 中的 [data-key]。<br>在利用 if 判斷式，判斷當使用者按到指定的按鍵時，也就是audio為true時，執行播放音檔，audio.play();<br>dom 為true時，執行classList.add()，彈奏時增加樣式。</p>
-<h2 id="動畫結束時，拿掉樣式"><a href="#動畫結束時，拿掉樣式" class="headerlink" title="動畫結束時，拿掉樣式"></a>動畫結束時，拿掉樣式</h2><p>利用foreach，對每一個.key建立監聽，監聽事件為 transitionend 。這個事件是在css的 transition結束時觸發，也就是每一個drum kit撥放完時觸發。<br>要注意，若執行的transition屬性有很多種，如 transform、color、border-color，transitionend 會重複的觸發。<br>今天我們希望的是，在transform動畫結束時拿掉樣式，所以要加上判斷propertyName為 transform時，再執行 classList.remove拿掉樣式。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.key&#x27;</span>).<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">item</span>)&#123;</span><br><span class="line">  item.<span class="title function_">addEventListener</span>(<span class="string">&#x27;transitionend&#x27;</span>, transitionendHandler)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">transitionendHandler</span>(<span class="params">e</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span>(e.<span class="property">propertyName</span> === <span class="string">&#x27;transform&#x27;</span>)&#123;</span><br><span class="line">    e.<span class="property">currentTarget</span>.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;playing&#x27;</span>);</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="額外補充"><a href="#額外補充" class="headerlink" title="額外補充"></a>額外補充</h2><p>若要在html 顯示 鍵盤按鍵 可以用 <code>&lt;kbd&gt;&lt;/kbd&gt;</code> 元素。</p>
-]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>JS30</tag>
-        <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(3) Hexo-基礎Hexo指令</title>
-    <url>/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
-<h2 id="基礎Hexo指令"><a href="#基礎Hexo指令" class="headerlink" title="基礎Hexo指令"></a>基礎Hexo指令</h2><ul>
-<li><code>hexo new &#39;新文章&#39;</code>  新增文章</li>
-<li><code>hexo generate</code> 產生編譯後的靜態檔案</li>
-<li><code>hexo server</code> 開啟一個本地端伺服器</li>
-<li><code>hexo clean</code> 清除暫存檔案</li>
-<li><code>hexo deploy</code> 部屬靜態檔案</li>
-</ul>
-<h2 id="產生新文章"><a href="#產生新文章" class="headerlink" title="產生新文章"></a>產生新文章</h2><p>要產生一篇新的文章，可以用 <code>hexo new &#39;新文章</code> 指令，產生後的文章會放在 <code>source</code> 資料夾的 <code>_posts</code>裡</p>
-<h2 id="產生編譯後的檔案"><a href="#產生編譯後的檔案" class="headerlink" title="產生編譯後的檔案"></a>產生編譯後的檔案</h2><p>當文章寫完後，需要將md檔案進行編譯，此時可以用 <code>hexo generate</code> 指令，編譯完後會產生一個 <code>public</code> 資料夾，作為之後部屬使用。<br>此指令的簡寫為 <code>hexo g</code></p>
-<h2 id="開啟一個本地端伺服器"><a href="#開啟一個本地端伺服器" class="headerlink" title="開啟一個本地端伺服器"></a>開啟一個本地端伺服器</h2><p>當靜態檔案編譯完後，可以用 <code>hexo server</code> 指令開啟一個本地端的模擬伺服器，用來即時瀏覽我的寫完的文章，此指令的簡寫為 <code>hexo s</code></p>
-<h2 id="清除暫存檔案"><a href="#清除暫存檔案" class="headerlink" title="清除暫存檔案"></a>清除暫存檔案</h2><p><code>hexo clean</code> 指令主要用來清除一些奇怪的暫存檔案，通常部屬前會先清理一遍。</p>
-<h2 id="部屬靜態檔案"><a href="#部屬靜態檔案" class="headerlink" title="部屬靜態檔案"></a>部屬靜態檔案</h2><p><code>hexo deploy</code> 將我們的靜態網站部屬到雲端使用的指令，詳細用流程在之後部屬的章節會提到。<br>此指令的簡寫為 <code>hexo d</code></p>
-<p>這就是今天 hexo 指令的介紹囉。</p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(7) Hexo-新增套件</title>
-    <url>/2022/06/10/2022-6-10-1-Hexo-%E6%96%B0%E5%A2%9E%E5%A5%97%E4%BB%B6/</url>
-    <content><![CDATA[<h2 id="新增套件"><a href="#新增套件" class="headerlink" title="新增套件"></a>新增套件</h2><p>這章節會介紹一些NextT主題可以用的套件。</p>
-<h2 id="hexo-generator-searchdb"><a href="#hexo-generator-searchdb" class="headerlink" title="hexo-generator-searchdb"></a>hexo-generator-searchdb</h2><p>這個套件可以讓你的部落格具有本地搜尋的功能，一樣先用NPM安裝。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
-
-<p>安裝完後只要到你根目錄的 <code>_config.next.yml</code> 檔案裡，將 local search 改為true即可產生搜尋功能囉。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601001.png?alt=media&token=a25eac63-0114-4674-9c02-7f7723f027e1" alt="search-option"></p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601002.png?alt=media&token=9b0afc38-cc99-4aef-abdc-68d318bc1c7e" alt="search-image"></p>
-<h2 id="Reading-progress-bar-閱讀進度條"><a href="#Reading-progress-bar-閱讀進度條" class="headerlink" title="Reading progress bar 閱讀進度條"></a>Reading progress bar 閱讀進度條</h2><p>這個套件已經內建在NextT裡了，只要到  <code>_config.next.yml</code> 找到 reading_progress 選項，將enable改為true即可。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601003.png?alt=media&token=61c1206c-5339-4a97-ae55-565d1d249f73" alt="reading-progress"></p>
-<p>以上就是推薦可以安裝的套件囉</p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(4) Hexo-部屬部落格</title>
     <url>/2022/06/08/2022-6-8-Hexo-%E9%83%A8%E5%B1%AC%E9%83%A8%E8%90%BD%E6%A0%BC/</url>
     <content><![CDATA[<h2 id="Gihub-Pages"><a href="#Gihub-Pages" class="headerlink" title="Gihub Pages"></a>Gihub Pages</h2><p>本文會使用 Github Pages ，來部屬我們的部落格。</p>
@@ -156,22 +199,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(2) Hexo 撰寫第一篇文章</title>
-    <url>/2022/06/08/2022-6-8-Hexo-%E6%92%B0%E5%AF%AB%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<h2 id="建立你的第一篇文章"><a href="#建立你的第一篇文章" class="headerlink" title="建立你的第一篇文章"></a>建立你的第一篇文章</h2><p>我們可以在Vscode 中，開啟上個章節所建立的專案</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060802.png?alt=media&token=cba3f60e-8fba-4f61-83b4-9668e01bd2e7" alt="專案圖片"></p>
-<p>在Vscode中用快捷鍵 Control + ESC，開啟終端機 </p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060803.png?alt=media&token=e185edcc-77fc-4d1e-8499-b6c467085d8b" alt="終端機"></p>
-<p>然後下方終端機輸入 <code>hexo new &#39;我的第一篇部落格文章&#39;</code> 輸入完後會顯示 <code>INFO  Generated: 2022/06/07/2022-6-7-Hexo-部落格安裝與部屬/index.html</code> 代表文章被順利建立在source資料夾裡的 <code>_posts</code>底下。</p>
-<h2 id="MD-內容"><a href="#MD-內容" class="headerlink" title="MD 內容"></a>MD 內容</h2><p>在md檔案裡，最上面會有可以填寫 標題等欄位<br><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060804.png?alt=media&token=27df0ccb-a65b-434b-aece-6c7af864d641" alt="標題"></p>
-<p>文章撰寫則以Markdown格式為主，若不了解Markdown格式，可以參考 <a href="https://markdown.tw/">markdown</a></p>
-<p>以上就是撰寫文章的方法囉</p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(5) Hexo-新增頁面</title>
     <url>/2022/06/09/2022-6-9-1-Hexo-%E6%96%B0%E5%A2%9E%E9%A0%81%E9%9D%A2/</url>
     <content><![CDATA[<h2 id="新增頁面"><a href="#新增頁面" class="headerlink" title="新增頁面"></a>新增頁面</h2><p>與新增文章不同，我們也可以在hexo 裡新增一些頁面，用來放作者介紹等資訊。</p>
@@ -188,6 +215,44 @@
 <p>頁面一樣會新增在source資料夾底下，進入 <code>source/tags</code>，會看到<code>index.md</code>檔，<br>將裡面內容再加入以下這行即可 <code>type: &quot;tags&quot;</code>。</p>
 <p>最後找到主題 (theme) 設置文件 (_config.yml)，這邊以 NexT 為例，將 tags 及 categories 前的#字號移除即可。</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600903.png?alt=media&token=f53ac521-d777-4cc9-b6e0-c34b04da5458" alt="theme"></p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(2) Hexo 撰寫第一篇文章</title>
+    <url>/2022/06/08/2022-6-8-Hexo-%E6%92%B0%E5%AF%AB%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<h2 id="建立你的第一篇文章"><a href="#建立你的第一篇文章" class="headerlink" title="建立你的第一篇文章"></a>建立你的第一篇文章</h2><p>我們可以在Vscode 中，開啟上個章節所建立的專案</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060802.png?alt=media&token=cba3f60e-8fba-4f61-83b4-9668e01bd2e7" alt="專案圖片"></p>
+<p>在Vscode中用快捷鍵 Control + ESC，開啟終端機 </p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060803.png?alt=media&token=e185edcc-77fc-4d1e-8499-b6c467085d8b" alt="終端機"></p>
+<p>然後下方終端機輸入 <code>hexo new &#39;我的第一篇部落格文章&#39;</code> 輸入完後會顯示 <code>INFO  Generated: 2022/06/07/2022-6-7-Hexo-部落格安裝與部屬/index.html</code> 代表文章被順利建立在source資料夾裡的 <code>_posts</code>底下。</p>
+<h2 id="MD-內容"><a href="#MD-內容" class="headerlink" title="MD 內容"></a>MD 內容</h2><p>在md檔案裡，最上面會有可以填寫 標題等欄位<br><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060804.png?alt=media&token=27df0ccb-a65b-434b-aece-6c7af864d641" alt="標題"></p>
+<p>文章撰寫則以Markdown格式為主，若不了解Markdown格式，可以參考 <a href="https://markdown.tw/">markdown</a></p>
+<p>以上就是撰寫文章的方法囉</p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(3) Hexo-基礎Hexo指令</title>
+    <url>/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
+<h2 id="基礎Hexo指令"><a href="#基礎Hexo指令" class="headerlink" title="基礎Hexo指令"></a>基礎Hexo指令</h2><ul>
+<li><code>hexo new &#39;新文章&#39;</code>  新增文章</li>
+<li><code>hexo generate</code> 產生編譯後的靜態檔案</li>
+<li><code>hexo server</code> 開啟一個本地端伺服器</li>
+<li><code>hexo clean</code> 清除暫存檔案</li>
+<li><code>hexo deploy</code> 部屬靜態檔案</li>
+</ul>
+<h2 id="產生新文章"><a href="#產生新文章" class="headerlink" title="產生新文章"></a>產生新文章</h2><p>要產生一篇新的文章，可以用 <code>hexo new &#39;新文章</code> 指令，產生後的文章會放在 <code>source</code> 資料夾的 <code>_posts</code>裡</p>
+<h2 id="產生編譯後的檔案"><a href="#產生編譯後的檔案" class="headerlink" title="產生編譯後的檔案"></a>產生編譯後的檔案</h2><p>當文章寫完後，需要將md檔案進行編譯，此時可以用 <code>hexo generate</code> 指令，編譯完後會產生一個 <code>public</code> 資料夾，作為之後部屬使用。<br>此指令的簡寫為 <code>hexo g</code></p>
+<h2 id="開啟一個本地端伺服器"><a href="#開啟一個本地端伺服器" class="headerlink" title="開啟一個本地端伺服器"></a>開啟一個本地端伺服器</h2><p>當靜態檔案編譯完後，可以用 <code>hexo server</code> 指令開啟一個本地端的模擬伺服器，用來即時瀏覽我的寫完的文章，此指令的簡寫為 <code>hexo s</code></p>
+<h2 id="清除暫存檔案"><a href="#清除暫存檔案" class="headerlink" title="清除暫存檔案"></a>清除暫存檔案</h2><p><code>hexo clean</code> 指令主要用來清除一些奇怪的暫存檔案，通常部屬前會先清理一遍。</p>
+<h2 id="部屬靜態檔案"><a href="#部屬靜態檔案" class="headerlink" title="部屬靜態檔案"></a>部屬靜態檔案</h2><p><code>hexo deploy</code> 將我們的靜態網站部屬到雲端使用的指令，詳細用流程在之後部屬的章節會提到。<br>此指令的簡寫為 <code>hexo d</code></p>
+<p>這就是今天 hexo 指令的介紹囉。</p>
 ]]></content>
       <tags>
         <tag>Hexo</tag>
