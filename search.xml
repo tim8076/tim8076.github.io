@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>(8) Hexo-第三方服務</title>
+    <url>/2022/06/10/2022-6-10-2-Hexo-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8B%99/</url>
+    <content><![CDATA[<h2 id="新增第三方服務"><a href="#新增第三方服務" class="headerlink" title="新增第三方服務"></a>新增第三方服務</h2><p>當我打開 <code>_config.next.yml</code> ，會發現NextT也整合了一些第三方服務進來，大多都只需要申請帳號並填入 ID 就可以使用。<br>以下就介紹幾個好用的服務。</p>
+<h2 id="Disqus"><a href="#Disqus" class="headerlink" title="Disqus"></a>Disqus</h2><p>Disqus 是一個留言板服務，安裝流程如下</p>
+<ol>
+<li><p>到 <a href="https://disqus.com/">Disqus</a> 官網註冊一個帳號並登入。按下 <code>GET STARTED</code>按鈕，並選擇 <code> I want to install Disqus on my site</code>選項，就會來到 <code>Create a new site</code> 頁面。</p>
+</li>
+<li><p>輸入你的 <code>Website Name</code>，並按下 <code>Create Site </code>。</p>
+</li>
+<li><p>這邊就建立好你的 disqus帳號了</p>
+</li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061102.png?alt=media&token=518dfa72-a8fe-4c81-bead-89bc3a59e874" alt="disqus"></p>
+<ol start="4">
+<li>回到 <code>_config.next.yml</code>，將 disqus 選項改為true，並在shortname填入剛才在disqus設定的 <code>Website Name</code></li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061103.png?alt=media&token=3a8584ce-3749-4640-99c0-c8ecd574faa7" alt="disqus-setting"></p>
+<ol start="5">
+<li>以上就完成了留言板設置囉</li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061104.png?alt=media&token=dc77ed95-13ce-4a34-9769-1297dc7c1bda" alt="comments"></p>
+<h2 id="圖片顯示"><a href="#圖片顯示" class="headerlink" title="圖片顯示"></a>圖片顯示</h2><p>NextT 內建有兩種圖片顯示的方式，分別是 fancybox 和 mediumzoom，只要到 <code>_config.next.yml</code>，將選項改為true即可。但記得不要同時開啟 fancybox 和 mediumzoom。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061101.png?alt=media&token=c62c2900-a1e0-4d60-9a0a-bf13dc66d7a3" alt="image"></p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(7) Hexo-新增套件</title>
+    <url>/2022/06/10/2022-6-10-1-Hexo-%E6%96%B0%E5%A2%9E%E5%A5%97%E4%BB%B6/</url>
+    <content><![CDATA[<h2 id="新增套件"><a href="#新增套件" class="headerlink" title="新增套件"></a>新增套件</h2><p>這章節會介紹一些NextT主題可以用的套件。</p>
+<h2 id="hexo-generator-searchdb"><a href="#hexo-generator-searchdb" class="headerlink" title="hexo-generator-searchdb"></a>hexo-generator-searchdb</h2><p>這個套件可以讓你的部落格具有本地搜尋的功能，一樣先用NPM安裝。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<p>安裝完後只要到你根目錄的 <code>_config.next.yml</code> 檔案裡，將 local search 改為true即可產生搜尋功能囉。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601001.png?alt=media&token=a25eac63-0114-4674-9c02-7f7723f027e1" alt="search-option"></p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601002.png?alt=media&token=9b0afc38-cc99-4aef-abdc-68d318bc1c7e" alt="search-image"></p>
+<h2 id="Reading-progress-bar-閱讀進度條"><a href="#Reading-progress-bar-閱讀進度條" class="headerlink" title="Reading progress bar 閱讀進度條"></a>Reading progress bar 閱讀進度條</h2><p>這個套件已經內建在NextT裡了，只要到  <code>_config.next.yml</code> 找到 reading_progress 選項，將enable改為true即可。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601003.png?alt=media&token=61c1206c-5339-4a97-ae55-565d1d249f73" alt="reading-progress"></p>
+<p>以上就是推薦可以安裝的套件囉</p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(1) JS30實作系列 Drum-Kit</title>
     <url>/2022/06/14/2022-6-14-1-JS30-Drum-Kit/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS30，是由加拿大工程師Wes Bos所建立一系列課程。透過課程內容可以實際學到Javascript的實際應用。<br>本系列文章會實做一些JS30的範例，從中熟練JS的觀念。</p>
@@ -26,24 +73,6 @@
       <tags>
         <tag>JS30</tag>
         <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(7) Hexo-新增套件</title>
-    <url>/2022/06/10/2022-6-10-1-Hexo-%E6%96%B0%E5%A2%9E%E5%A5%97%E4%BB%B6/</url>
-    <content><![CDATA[<h2 id="新增套件"><a href="#新增套件" class="headerlink" title="新增套件"></a>新增套件</h2><p>這章節會介紹一些NextT主題可以用的套件。</p>
-<h2 id="hexo-generator-searchdb"><a href="#hexo-generator-searchdb" class="headerlink" title="hexo-generator-searchdb"></a>hexo-generator-searchdb</h2><p>這個套件可以讓你的部落格具有本地搜尋的功能，一樣先用NPM安裝。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
-
-<p>安裝完後只要到你根目錄的 <code>_config.next.yml</code> 檔案裡，將 local search 改為true即可產生搜尋功能囉。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601001.png?alt=media&token=a25eac63-0114-4674-9c02-7f7723f027e1" alt="search-option"></p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601002.png?alt=media&token=9b0afc38-cc99-4aef-abdc-68d318bc1c7e" alt="search-image"></p>
-<h2 id="Reading-progress-bar-閱讀進度條"><a href="#Reading-progress-bar-閱讀進度條" class="headerlink" title="Reading progress bar 閱讀進度條"></a>Reading progress bar 閱讀進度條</h2><p>這個套件已經內建在NextT裡了，只要到  <code>_config.next.yml</code> 找到 reading_progress 選項，將enable改為true即可。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220601003.png?alt=media&token=61c1206c-5339-4a97-ae55-565d1d249f73" alt="reading-progress"></p>
-<p>以上就是推薦可以安裝的套件囉</p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -76,6 +105,59 @@
       <tags>
         <tag>JS30</tag>
         <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(3) Gulp-撰寫gulp file</title>
+    <url>/2022/06/16/2022-6-15-3-Gulp-%E5%9F%BA%E7%A4%8E%E7%AF%87/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前面已經將專案的環境與gulp都安裝好了，這節會開始介紹如何撰寫你的第一支 gulp file</p>
+<h2 id="開始撰寫-gulp-file"><a href="#開始撰寫-gulp-file" class="headerlink" title="開始撰寫 gulp file"></a>開始撰寫 gulp file</h2><p>一開始先在專案的根目錄新增一個檔案 <code>gulpfile.js</code>檔案</p>
+<p>然後在根目錄 新增一個 <code>source</code> 資料夾<br>並在source資料夾內新增一個 style.css</p>
+<p><img src="https://i.imgur.com/GsAJaOF.png" alt="img"></p>
+<p>在gulpfile.js 最上面先引入 GULP</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> gulp = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>然後我們可以新增一個簡單的gulp任務</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">funciton <span class="title function_">copyFile</span>(<span class="params"></span>) &#123;</span><br><span class="line">   gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/**/*/.css&#x27;</span>)</span><br><span class="line">     .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面這段程式中，我們用了 <code>gulp.src()</code> 來指定來源檔案的位置，<br>並用 <code>gulp.dest()</code> 將檔案輸出到指定的public資料夾。</p>
+<p>然後可以開啟 commend line 輸入指令 </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">gulp copyFile</span><br></pre></td></tr></table></figure>
+
+<p>就會發現檔案已經被輸出到 public 資料夾囉。</p>
+<p>下堂課會開始介紹 其他的各種gulp任務喔。</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(4) Gulp-編譯scss</title>
+    <url>/2022/06/16/2022-6-15-4-Gulp-%E7%B7%A8%E8%AD%AFsass/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇來介紹如何在 gulp 中，進行scss的編譯吧。</p>
+<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><p>首先來安裝 gulp-sass 套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install sass gulp-sass --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>在gulpfile.js裡，依照文件貼上相關設定</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sass = <span class="built_in">require</span>(<span class="string">&#x27;gulp-sass&#x27;</span>)(<span class="built_in">require</span>(<span class="string">&#x27;sass&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">buildStyles</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上面為編譯scss的gulp任務，用 src 指定 scss 所在的資料夾後，最後在用gulp.dest() 指定編譯後的 css 輸出的位置。</p>
+<p>之後在scss資料夾裡，新增一個all.scss檔案。</p>
+<p>並輸入一些東西</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$color</span>: <span class="number">#00cc99</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="variable">$color</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在commend line 輸入 gulp buildStyles 就可以發現scss被編譯成css檔案，並輸出到public資料夾囉。</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
       </tags>
   </entry>
   <entry>
@@ -112,6 +194,28 @@
       </tags>
   </entry>
   <entry>
+    <title>(3) Hexo-基礎Hexo指令</title>
+    <url>/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
+<h2 id="基礎Hexo指令"><a href="#基礎Hexo指令" class="headerlink" title="基礎Hexo指令"></a>基礎Hexo指令</h2><ul>
+<li><code>hexo new &#39;新文章&#39;</code>  新增文章</li>
+<li><code>hexo generate</code> 產生編譯後的靜態檔案</li>
+<li><code>hexo server</code> 開啟一個本地端伺服器</li>
+<li><code>hexo clean</code> 清除暫存檔案</li>
+<li><code>hexo deploy</code> 部屬靜態檔案</li>
+</ul>
+<h2 id="產生新文章"><a href="#產生新文章" class="headerlink" title="產生新文章"></a>產生新文章</h2><p>要產生一篇新的文章，可以用 <code>hexo new &#39;新文章</code> 指令，產生後的文章會放在 <code>source</code> 資料夾的 <code>_posts</code>裡</p>
+<h2 id="產生編譯後的檔案"><a href="#產生編譯後的檔案" class="headerlink" title="產生編譯後的檔案"></a>產生編譯後的檔案</h2><p>當文章寫完後，需要將md檔案進行編譯，此時可以用 <code>hexo generate</code> 指令，編譯完後會產生一個 <code>public</code> 資料夾，作為之後部屬使用。<br>此指令的簡寫為 <code>hexo g</code></p>
+<h2 id="開啟一個本地端伺服器"><a href="#開啟一個本地端伺服器" class="headerlink" title="開啟一個本地端伺服器"></a>開啟一個本地端伺服器</h2><p>當靜態檔案編譯完後，可以用 <code>hexo server</code> 指令開啟一個本地端的模擬伺服器，用來即時瀏覽我的寫完的文章，此指令的簡寫為 <code>hexo s</code></p>
+<h2 id="清除暫存檔案"><a href="#清除暫存檔案" class="headerlink" title="清除暫存檔案"></a>清除暫存檔案</h2><p><code>hexo clean</code> 指令主要用來清除一些奇怪的暫存檔案，通常部屬前會先清理一遍。</p>
+<h2 id="部屬靜態檔案"><a href="#部屬靜態檔案" class="headerlink" title="部屬靜態檔案"></a>部屬靜態檔案</h2><p><code>hexo deploy</code> 將我們的靜態網站部屬到雲端使用的指令，詳細用流程在之後部屬的章節會提到。<br>此指令的簡寫為 <code>hexo d</code></p>
+<p>這就是今天 hexo 指令的介紹囉。</p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(1) Hexo 部落格安裝</title>
     <url>/2022/06/07/2022-6-7-Hexo-%E9%83%A8%E8%90%BD%E6%A0%BC%E5%AE%89%E8%A3%9D%E8%88%87%E9%83%A8%E5%B1%AC/</url>
     <content><![CDATA[<h2 id="什麼是-Hexo？"><a href="#什麼是-Hexo？" class="headerlink" title="什麼是 Hexo？"></a>什麼是 Hexo？</h2><p>Hexo 是一個快速、簡單且強大的網誌框架。Hexo 使用 Markdown（或其他標記語言）解析您的文章，並在幾秒鐘內，透過漂亮的主題產生靜態檔案。</p>
@@ -143,32 +247,27 @@
       </tags>
   </entry>
   <entry>
-    <title>(8) Hexo-第三方服務</title>
-    <url>/2022/06/10/2022-6-10-2-Hexo-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8B%99/</url>
-    <content><![CDATA[<h2 id="新增第三方服務"><a href="#新增第三方服務" class="headerlink" title="新增第三方服務"></a>新增第三方服務</h2><p>當我打開 <code>_config.next.yml</code> ，會發現NextT也整合了一些第三方服務進來，大多都只需要申請帳號並填入 ID 就可以使用。<br>以下就介紹幾個好用的服務。</p>
-<h2 id="Disqus"><a href="#Disqus" class="headerlink" title="Disqus"></a>Disqus</h2><p>Disqus 是一個留言板服務，安裝流程如下</p>
+    <title>(2) Gulp-運作原理介紹</title>
+    <url>/2022/06/16/2022-6-15-5-Gulp-%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/1200/0*_uAjbnaZaXs1ca6x.png" alt="img"></p>
+<h2 id="運作原理"><a href="#運作原理" class="headerlink" title="運作原理"></a>運作原理</h2><p>Gulp運作的方式就是將每個任務像水管一樣串接下去</p>
+<h2 id="簡單範例"><a href="#簡單範例" class="headerlink" title="簡單範例"></a>簡單範例</h2><p><img src="https://cdn-images-1.medium.com/max/1200/1*uBz4qK1ZMgkS6fNfP8u-NA.png" alt="gulp"></p>
+<p>上圖是一個copy html檔案的簡單範例，主要如下:</p>
 <ol>
-<li><p>到 <a href="https://disqus.com/">Disqus</a> 官網註冊一個帳號並登入。按下 <code>GET STARTED</code>按鈕，並選擇 <code> I want to install Disqus on my site</code>選項，就會來到 <code>Create a new site</code> 頁面。</p>
-</li>
-<li><p>輸入你的 <code>Website Name</code>，並按下 <code>Create Site </code>。</p>
-</li>
-<li><p>這邊就建立好你的 disqus帳號了</p>
-</li>
+<li>gulp.task(‘任務名稱’, function(){}): 指定一個gulp任務</li>
+<li>gulp.src: 指定資料來源</li>
+<li>gulp.pipe(): 指定事件，pipe就像水管，可以一個接一個</li>
 </ol>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061102.png?alt=media&token=518dfa72-a8fe-4c81-bead-89bc3a59e874" alt="disqus"></p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*FWZTmYZm1Sbg5FIO0ZDycg.png" alt="pipe"></p>
 <ol start="4">
-<li>回到 <code>_config.next.yml</code>，將 disqus 選項改為true，並在shortname填入剛才在disqus設定的 <code>Website Name</code></li>
+<li>gulp.dest(): 輸出任務的結果</li>
 </ol>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061103.png?alt=media&token=3a8584ce-3749-4640-99c0-c8ecd574faa7" alt="disqus-setting"></p>
-<ol start="5">
-<li>以上就完成了留言板設置囉</li>
-</ol>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061104.png?alt=media&token=dc77ed95-13ce-4a34-9769-1297dc7c1bda" alt="comments"></p>
-<h2 id="圖片顯示"><a href="#圖片顯示" class="headerlink" title="圖片顯示"></a>圖片顯示</h2><p>NextT 內建有兩種圖片顯示的方式，分別是 fancybox 和 mediumzoom，只要到 <code>_config.next.yml</code>，將選項改為true即可。但記得不要同時開啟 fancybox 和 mediumzoom。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061101.png?alt=media&token=c62c2900-a1e0-4d60-9a0a-bf13dc66d7a3" alt="image"></p>
 ]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
       <tags>
-        <tag>Hexo</tag>
+        <tag>Gulp</tag>
       </tags>
   </entry>
   <entry>
@@ -199,28 +298,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(5) Hexo-新增頁面</title>
-    <url>/2022/06/09/2022-6-9-1-Hexo-%E6%96%B0%E5%A2%9E%E9%A0%81%E9%9D%A2/</url>
-    <content><![CDATA[<h2 id="新增頁面"><a href="#新增頁面" class="headerlink" title="新增頁面"></a>新增頁面</h2><p>與新增文章不同，我們也可以在hexo 裡新增一些頁面，用來放作者介紹等資訊。</p>
-<p>建立頁面的指令格式如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;頁面名稱（網址用）&quot;</span><br></pre></td></tr></table></figure>
-
-<p>新增好的頁面會在放在source資料夾底下</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/202206009.png?alt=media&token=4e8aaa96-e6ea-4a18-9bb1-37d18acec1b7" alt="about-page"></p>
-<p>頁面預設只有 title 以及 date， 而頁面預設是可以留言的，如果不開放留言則可以新增 comments 設定為false。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600902.png?alt=media&token=6fbb9f83-991a-4e9b-b2dc-9291231e6dfb" alt="comment"></p>
-<h2 id="新增分類與標籤頁"><a href="#新增分類與標籤頁" class="headerlink" title="新增分類與標籤頁"></a>新增分類與標籤頁</h2><p>我們也可在hexo裡增加分類頁面與標籤頁面</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page tags  // 建立標籤頁</span><br><span class="line">hexo new page categories // 建立分類頁</span><br></pre></td></tr></table></figure>
-
-<p>頁面一樣會新增在source資料夾底下，進入 <code>source/tags</code>，會看到<code>index.md</code>檔，<br>將裡面內容再加入以下這行即可 <code>type: &quot;tags&quot;</code>。</p>
-<p>最後找到主題 (theme) 設置文件 (_config.yml)，這邊以 NexT 為例，將 tags 及 categories 前的#字號移除即可。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600903.png?alt=media&token=f53ac521-d777-4cc9-b6e0-c34b04da5458" alt="theme"></p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(2) Hexo 撰寫第一篇文章</title>
     <url>/2022/06/08/2022-6-8-Hexo-%E6%92%B0%E5%AF%AB%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
     <content><![CDATA[<h2 id="建立你的第一篇文章"><a href="#建立你的第一篇文章" class="headerlink" title="建立你的第一篇文章"></a>建立你的第一篇文章</h2><p>我們可以在Vscode 中，開啟上個章節所建立的專案</p>
@@ -237,22 +314,22 @@
       </tags>
   </entry>
   <entry>
-    <title>(3) Hexo-基礎Hexo指令</title>
-    <url>/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
-<h2 id="基礎Hexo指令"><a href="#基礎Hexo指令" class="headerlink" title="基礎Hexo指令"></a>基礎Hexo指令</h2><ul>
-<li><code>hexo new &#39;新文章&#39;</code>  新增文章</li>
-<li><code>hexo generate</code> 產生編譯後的靜態檔案</li>
-<li><code>hexo server</code> 開啟一個本地端伺服器</li>
-<li><code>hexo clean</code> 清除暫存檔案</li>
-<li><code>hexo deploy</code> 部屬靜態檔案</li>
-</ul>
-<h2 id="產生新文章"><a href="#產生新文章" class="headerlink" title="產生新文章"></a>產生新文章</h2><p>要產生一篇新的文章，可以用 <code>hexo new &#39;新文章</code> 指令，產生後的文章會放在 <code>source</code> 資料夾的 <code>_posts</code>裡</p>
-<h2 id="產生編譯後的檔案"><a href="#產生編譯後的檔案" class="headerlink" title="產生編譯後的檔案"></a>產生編譯後的檔案</h2><p>當文章寫完後，需要將md檔案進行編譯，此時可以用 <code>hexo generate</code> 指令，編譯完後會產生一個 <code>public</code> 資料夾，作為之後部屬使用。<br>此指令的簡寫為 <code>hexo g</code></p>
-<h2 id="開啟一個本地端伺服器"><a href="#開啟一個本地端伺服器" class="headerlink" title="開啟一個本地端伺服器"></a>開啟一個本地端伺服器</h2><p>當靜態檔案編譯完後，可以用 <code>hexo server</code> 指令開啟一個本地端的模擬伺服器，用來即時瀏覽我的寫完的文章，此指令的簡寫為 <code>hexo s</code></p>
-<h2 id="清除暫存檔案"><a href="#清除暫存檔案" class="headerlink" title="清除暫存檔案"></a>清除暫存檔案</h2><p><code>hexo clean</code> 指令主要用來清除一些奇怪的暫存檔案，通常部屬前會先清理一遍。</p>
-<h2 id="部屬靜態檔案"><a href="#部屬靜態檔案" class="headerlink" title="部屬靜態檔案"></a>部屬靜態檔案</h2><p><code>hexo deploy</code> 將我們的靜態網站部屬到雲端使用的指令，詳細用流程在之後部屬的章節會提到。<br>此指令的簡寫為 <code>hexo d</code></p>
-<p>這就是今天 hexo 指令的介紹囉。</p>
+    <title>(5) Hexo-新增頁面</title>
+    <url>/2022/06/09/2022-6-9-1-Hexo-%E6%96%B0%E5%A2%9E%E9%A0%81%E9%9D%A2/</url>
+    <content><![CDATA[<h2 id="新增頁面"><a href="#新增頁面" class="headerlink" title="新增頁面"></a>新增頁面</h2><p>與新增文章不同，我們也可以在hexo 裡新增一些頁面，用來放作者介紹等資訊。</p>
+<p>建立頁面的指令格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;頁面名稱（網址用）&quot;</span><br></pre></td></tr></table></figure>
+
+<p>新增好的頁面會在放在source資料夾底下</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/202206009.png?alt=media&token=4e8aaa96-e6ea-4a18-9bb1-37d18acec1b7" alt="about-page"></p>
+<p>頁面預設只有 title 以及 date， 而頁面預設是可以留言的，如果不開放留言則可以新增 comments 設定為false。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600902.png?alt=media&token=6fbb9f83-991a-4e9b-b2dc-9291231e6dfb" alt="comment"></p>
+<h2 id="新增分類與標籤頁"><a href="#新增分類與標籤頁" class="headerlink" title="新增分類與標籤頁"></a>新增分類與標籤頁</h2><p>我們也可在hexo裡增加分類頁面與標籤頁面</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page tags  // 建立標籤頁</span><br><span class="line">hexo new page categories // 建立分類頁</span><br></pre></td></tr></table></figure>
+
+<p>頁面一樣會新增在source資料夾底下，進入 <code>source/tags</code>，會看到<code>index.md</code>檔，<br>將裡面內容再加入以下這行即可 <code>type: &quot;tags&quot;</code>。</p>
+<p>最後找到主題 (theme) 設置文件 (_config.yml)，這邊以 NexT 為例，將 tags 及 categories 前的#字號移除即可。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600903.png?alt=media&token=f53ac521-d777-4cc9-b6e0-c34b04da5458" alt="theme"></p>
 ]]></content>
       <tags>
         <tag>Hexo</tag>

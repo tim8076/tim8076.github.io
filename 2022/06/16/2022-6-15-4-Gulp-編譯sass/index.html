@@ -21,34 +21,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"tim8076.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="除了Hexo預設的版型外，也可以新增不同的佈景主題上去。">
+    <meta name="description" content="Gulp前端自動化工具介紹">
 <meta property="og:type" content="article">
-<meta property="og:title" content="(6) Hexo-新增佈景主題">
-<meta property="og:url" content="https://tim8076.github.io/2022/06/09/2022-6-9-2-Hexo-%E6%96%B0%E5%A2%9E%E4%BD%88%E6%99%AF%E4%B8%BB%E9%A1%8C/index.html">
+<meta property="og:title" content="(4) Gulp-編譯scss">
+<meta property="og:url" content="https://tim8076.github.io/2022/06/16/2022-6-15-4-Gulp-%E7%B7%A8%E8%AD%AFsass/index.html">
 <meta property="og:site_name" content="Tim的前端日誌">
-<meta property="og:description" content="除了Hexo預設的版型外，也可以新增不同的佈景主題上去。">
+<meta property="og:description" content="Gulp前端自動化工具介紹">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060904.png?alt=media&token=9deec5ff-8e70-433d-810c-412773e6566d">
-<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060905.png?alt=media&token=ae056e59-0cfc-4958-8d21-e18bfa158b6d">
-<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060906.png?alt=media&token=cacc04e2-a6d7-4992-b096-37bb1a2bb206">
-<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060907.png?alt=media&token=c97c2e01-2382-4dec-abee-f64b3e5cb980">
-<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060908.png?alt=media&token=7b16821f-7ef1-4b28-b075-5be943ebfd76">
-<meta property="article:published_time" content="2022-06-09T13:36:54.000Z">
-<meta property="article:modified_time" content="2022-06-11T13:57:55.342Z">
+<meta property="article:published_time" content="2022-06-16T08:31:23.000Z">
+<meta property="article:modified_time" content="2022-06-15T17:59:28.000Z">
 <meta property="article:author" content="Tim Chou">
-<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Gulp">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060904.png?alt=media&token=9deec5ff-8e70-433d-810c-412773e6566d">
 
 
-<link rel="canonical" href="https://tim8076.github.io/2022/06/09/2022-6-9-2-Hexo-%E6%96%B0%E5%A2%9E%E4%BD%88%E6%99%AF%E4%B8%BB%E9%A1%8C/">
+<link rel="canonical" href="https://tim8076.github.io/2022/06/16/2022-6-15-4-Gulp-%E7%B7%A8%E8%AD%AFsass/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://tim8076.github.io/2022/06/09/2022-6-9-2-Hexo-%E6%96%B0%E5%A2%9E%E4%BD%88%E6%99%AF%E4%B8%BB%E9%A1%8C/","path":"2022/06/09/2022-6-9-2-Hexo-新增佈景主題/","title":"(6) Hexo-新增佈景主題"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://tim8076.github.io/2022/06/16/2022-6-15-4-Gulp-%E7%B7%A8%E8%AD%AFsass/","path":"2022/06/16/2022-6-15-4-Gulp-編譯sass/","title":"(4) Gulp-編譯scss"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>(6) Hexo-新增佈景主題 | Tim的前端日誌</title>
+<title>(4) Gulp-編譯scss | Tim的前端日誌</title>
   
 
 
@@ -150,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%91%E9%81%B8%E4%BD%88%E6%99%AF%E4%B8%BB%E9%A1%8C"><span class="nav-number">1.</span> <span class="nav-text">挑選佈景主題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BC%89NextT%E4%B8%BB%E9%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">下載NextT主題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E9%A1%8C%E8%A8%AD%E5%AE%9A%E6%AA%94"><span class="nav-number">3.</span> <span class="nav-text">主題設定檔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo%E8%A8%AD%E5%AE%9A%E6%AA%94"><span class="nav-number">4.</span> <span class="nav-text">hexo設定檔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NextT%E8%A8%AD%E5%AE%9A%E6%AA%94"><span class="nav-number">5.</span> <span class="nav-text">NextT設定檔</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E5%A5%97%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">安裝套件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BC%89%E5%85%A5%E8%A8%AD%E5%AE%9A"><span class="nav-number">3.</span> <span class="nav-text">載入設定</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,7 +213,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/06/09/2022-6-9-2-Hexo-%E6%96%B0%E5%A2%9E%E4%BD%88%E6%99%AF%E4%B8%BB%E9%A1%8C/">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/06/16/2022-6-15-4-Gulp-%E7%B7%A8%E8%AD%AFsass/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -232,12 +226,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="(6) Hexo-新增佈景主題 | Tim的前端日誌">
-      <meta itemprop="description" content="除了Hexo預設的版型外，也可以新增不同的佈景主題上去。">
+      <meta itemprop="name" content="(4) Gulp-編譯scss | Tim的前端日誌">
+      <meta itemprop="description" content="Gulp前端自動化工具介紹">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          (6) Hexo-新增佈景主題
+          (4) Gulp-編譯scss
         </h1>
 
         <div class="post-meta-container">
@@ -247,21 +241,24 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
+      
 
-      <time title="創建時間：2022-06-09 21:36:54" itemprop="dateCreated datePublished" datetime="2022-06-09T21:36:54+08:00">2022-06-09</time>
+      <time title="創建時間：2022-06-16 16:31:23 / 修改時間：01:59:28" itemprop="dateCreated datePublished" datetime="2022-06-16T16:31:23+08:00">2022-06-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
+        <i class="far fa-folder"></i>
       </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-06-11 21:57:55" itemprop="dateModified" datetime="2022-06-11T21:57:55+08:00">2022-06-11</time>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Gulp/" itemprop="url" rel="index"><span itemprop="name">Gulp</span></a>
+        </span>
     </span>
 
   
 </div>
 
-            <div class="post-description">除了Hexo預設的版型外，也可以新增不同的佈景主題上去。</div>
+            <div class="post-description">Gulp前端自動化工具介紹</div>
         </div>
       </header>
 
@@ -269,30 +266,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="挑選佈景主題"><a href="#挑選佈景主題" class="headerlink" title="挑選佈景主題"></a>挑選佈景主題</h2><p>除了Hexo預設的版型外，也可以新增不同的佈景主題上去。<br>可以先來到 <a target="_blank" rel="noopener" href="https://hexo.io/themes/">Hexo 官網</a>的主題區挑選你喜歡的主題</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060904.png?alt=media&token=9deec5ff-8e70-433d-810c-412773e6566d" alt="theme-page"></p>
-<p>本文以 <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT</a> 主題為例，點選後來到NextT官網。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060905.png?alt=media&token=ae056e59-0cfc-4958-8d21-e18bfa158b6d" alt="NEXTT"></p>
-<p>點選左上角doc可以進入教學文件。</p>
-<h2 id="下載NextT主題"><a href="#下載NextT主題" class="headerlink" title="下載NextT主題"></a>下載NextT主題</h2><p>這邊使用NPM來下載主題，在你的Vscode的終端機輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd hexo-site</span><br><span class="line">$ npm install hexo-theme-next</span><br></pre></td></tr></table></figure>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇來介紹如何在 gulp 中，進行scss的編譯吧。</p>
+<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><p>首先來安裝 gulp-sass 套件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install sass gulp-sass --save</span><br></pre></td></tr></table></figure>
 
-<h2 id="主題設定檔"><a href="#主題設定檔" class="headerlink" title="主題設定檔"></a>主題設定檔</h2><p>下載好後會發現我們現在有兩個 <code>_config.yml</code>設定檔</p>
-<ol>
-<li>第一個在我們專案的根目錄，也就是一開始hexo的設定檔</li>
-<li>第二個在我們主題的目錄下，(e.g. <code>thems/next/_config.yml</code> or <code>node_modules/hexo-theme-next/_config.yml</code>)</li>
-</ol>
-<p>以下稱第一個為hexo設定檔，第二個為NextT設定檔。</p>
-<h2 id="hexo設定檔"><a href="#hexo設定檔" class="headerlink" title="hexo設定檔"></a>hexo設定檔</h2><p>當我們下載完NextT主題後，到hexo設定檔裡，找到theme選項，並將值改為 next</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>在gulpfile.js裡，依照文件貼上相關設定</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sass = <span class="built_in">require</span>(<span class="string">&#x27;gulp-sass&#x27;</span>)(<span class="built_in">require</span>(<span class="string">&#x27;sass&#x27;</span>));</span><br></pre></td></tr></table></figure>
 
-<h2 id="NextT設定檔"><a href="#NextT設定檔" class="headerlink" title="NextT設定檔"></a>NextT設定檔</h2><p>官網不建議我們直接修改NextT設定檔，所以我們可以在專案根目錄新增一個 <code>/_config.next.yml</code>檔案。<br>我們可以複製所有NextT設定檔裡的資料到我們新增的 _config.next.yml 檔案裡。</p>
-<p>NextT有提供四種不同風格的版型，可以在此挑選你喜愛的版型，只要將 # 取消或勾選即可</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060906.png?alt=media&token=cacc04e2-a6d7-4992-b096-37bb1a2bb206" alt="scheme"></p>
-<p>Next 也提供dark mode可以選擇，只要將dark mode改為true即可</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060907.png?alt=media&token=c97c2e01-2382-4dec-abee-f64b3e5cb980" alt="darkmode"></p>
-<p>以上都設定好後，就可發現我們的部落格套用了nextT主題囉</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060908.png?alt=media&token=7b16821f-7ef1-4b28-b075-5be943ebfd76" alt="theme"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">buildStyles</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上面為編譯scss的gulp任務，用 src 指定 scss 所在的資料夾後，最後在用gulp.dest() 指定編譯後的 css 輸出的位置。</p>
+<p>之後在scss資料夾裡，新增一個all.scss檔案。</p>
+<p>並輸入一些東西</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$color</span>: <span class="number">#00cc99</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="variable">$color</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在commend line 輸入 gulp buildStyles 就可以發現scss被編譯成css檔案，並輸出到public資料夾囉。</p>
 
     </div>
 
@@ -302,21 +290,18 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/Gulp/" rel="tag"># Gulp</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/06/09/2022-6-9-1-Hexo-%E6%96%B0%E5%A2%9E%E9%A0%81%E9%9D%A2/" rel="prev" title="(5) Hexo-新增頁面">
-                  <i class="fa fa-chevron-left"></i> (5) Hexo-新增頁面
+                <a href="/2022/06/16/2022-6-15-3-Gulp-%E5%9F%BA%E7%A4%8E%E7%AF%87/" rel="prev" title="(3) Gulp-撰寫gulp file">
+                  <i class="fa fa-chevron-left"></i> (3) Gulp-撰寫gulp file
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/06/10/2022-6-10-1-Hexo-%E6%96%B0%E5%A2%9E%E5%A5%97%E4%BB%B6/" rel="next" title="(7) Hexo-新增套件">
-                  (7) Hexo-新增套件 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
