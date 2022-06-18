@@ -1,10 +1,10 @@
 ---
-title: (11) Gulp 釋出開發成品
+title: (10) Gulp 釋出開發成品
 date: 2022-06-18 13:58:17
 categories: Gulp
 tags: 
 - Gulp
-description: '釋出開發成品'
+description: '使用gulp serires 釋出開發成品'
 ---
 
 ## 安裝 gulp clean

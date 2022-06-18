@@ -1,5 +1,5 @@
 ---
-title: (8) Gulp-browserSync
+title: (7) Gulp-browserSync
 date: 2022-06-17 14:58:42
 categories: Gulp
 tags: 
