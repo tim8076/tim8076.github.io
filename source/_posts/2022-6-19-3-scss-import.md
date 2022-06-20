@@ -21,7 +21,47 @@ description: '模組化你的scss檔案'
 
 ## 引入順序
 
-引入檔案時順序是有影響的，先引入的檔案內容才能被之後的檔案讀取。所以如果有變數、function等這些所有檔案都須用到的模組，要先載入，之後的scss檔才讀取的到這些變數與funciton。
+通常我們會有一個 all.scss ，裡面放其他要載入的SCSS檔。
+
+這個檔案就會有一堆 @import，編譯出來的CSS檔案就會依照@import的前後排列來依序產生CSS碼。
+
+1. @import最前面的檔案裏面一定都會先放全域變數、mixin、function等，這樣後面的檔案 才吃的到變數的設定。
+
+2. 再來是 reset、base等全站共用的樣式。
+
+3. layout可以網頁版型的共通設計，如表頭、表尾。
+
+4. 再來就index首頁、page內頁，再來就看你的單元數量視情況來切割。
+
+引入參考順序
+
+``` scss
+// variables
+@import './abstract/functions';
+@import './abstract/variables';
+@import './abstract/media-query';
+
+// base classes
+@import './base/reset';
+@import './base/base';
+@import './base/typography';
+
+// utils
+@import './utils/utils';
+
+//layout
+@import './layout/grid';
+
+//pages
+@import './pages/index';
+
+//components
+@import './components/button';
+```
+
+
+
+
 
 
 
