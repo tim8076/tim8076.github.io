@@ -108,6 +108,63 @@
       </tags>
   </entry>
   <entry>
+    <title>(2) Gulp-運作原理介紹</title>
+    <url>/2022/06/16/2022-6-15-5-Gulp-%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/1200/0*_uAjbnaZaXs1ca6x.png" alt="img"></p>
+<h2 id="運作原理"><a href="#運作原理" class="headerlink" title="運作原理"></a>運作原理</h2><p>Gulp運作的方式就是將每個任務像水管一樣串接下去</p>
+<h2 id="簡單範例"><a href="#簡單範例" class="headerlink" title="簡單範例"></a>簡單範例</h2><p><img src="https://cdn-images-1.medium.com/max/1200/1*uBz4qK1ZMgkS6fNfP8u-NA.png" alt="gulp"></p>
+<p>上圖是一個copy html檔案的簡單範例，主要如下:</p>
+<ol>
+<li>gulp.task(‘任務名稱’, function(){}): 指定一個gulp任務</li>
+<li>gulp.src: 指定資料來源</li>
+<li>gulp.pipe(): 指定事件，pipe就像水管，可以一個接一個</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*FWZTmYZm1Sbg5FIO0ZDycg.png" alt="pipe"></p>
+<ol start="4">
+<li>gulp.dest(): 輸出任務的結果</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(1) Gulp-介紹與安裝</title>
+    <url>/2022/06/15/2022-6-15-2-Gulp-%E4%BB%8B%E7%B4%B9%E8%88%87%E5%AE%89%E8%A3%9D/</url>
+    <content><![CDATA[<h2 id="Gulp-是什麼"><a href="#Gulp-是什麼" class="headerlink" title="Gulp 是什麼"></a>Gulp 是什麼</h2><p>在以前做網頁開發時，可能只需要處理html、css、js檔案就可以了。但現在前端開發工具越來越多，像css有scss的預處理器、html可以用pug來寫等等。此時就須要一個工具來將這些scss、pug檔案編譯成css跟html。<br>Gulp 就可以用來編譯 Sass、編譯 JavaScript 語法至相容性較高的 ES5、圖片優化壓縮、打包程式碼等等的事情，讓開發者可以專注於開發。</p>
+<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><h3 id="安裝node-js與npm"><a href="#安裝node-js與npm" class="headerlink" title="安裝node.js與npm"></a>安裝node.js與npm</h3><p>首先我們需要要先安裝 <a href="https://nodejs.org/en/">nodejs</a>，我們選擇穩定版(LTS)來安裝，安裝過程就不再贅述。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061501.png?alt=media&token=3db09d20-f796-4c7b-8c12-0e894845871f" alt="nodejs"></p>
+<p>安裝好後，到vscode編輯器，輸入下列指令來確認是否安裝完成。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm -v   </span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+<p>若有正確安裝，會顯示版本號。</p>
+<h2 id="安裝全域的-Gulp"><a href="#安裝全域的-Gulp" class="headerlink" title="安裝全域的 Gulp"></a>安裝全域的 Gulp</h2><p>在commend line輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp -g  //windows系統</span><br><span class="line">sudo npm install gulp -g //Mac系統</span><br></pre></td></tr></table></figure>
+<p>npm安裝套件分為全域與專案安裝，全域安裝只需安裝一次即可。</p>
+<h2 id="安裝專案的Gulp"><a href="#安裝專案的Gulp" class="headerlink" title="安裝專案的Gulp"></a>安裝專案的Gulp</h2><p>我們先用vscode開一個新的資料夾作為這次專案使用。</p>
+<p>先在commend line 輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+<p>輸入完後，會新增一個package.json檔案，這個檔案會用來管理這個專案的套件。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061502.png?alt=media&token=b12ce94d-b001-4fa8-b8b2-2912c6dca318" alt="package.json"></p>
+<p>之後輸入下面指令來安裝專案內的gulp</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp --save</span><br></pre></td></tr></table></figure>
+
+<p>安裝完成後輸入下面指令檢查一下，有正確安裝會顯示版本。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gulp -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>到這邊就完成專案內gulp的安裝，下一堂課會帶大家新增一個gulp file，做一些好玩的功能囉。</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(3) Gulp-撰寫gulp file</title>
     <url>/2022/06/16/2022-6-15-3-Gulp-%E5%9F%BA%E7%A4%8E%E7%AF%87/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前面已經將專案的環境與gulp都安裝好了，這節會開始介紹如何撰寫你的第一支 gulp file</p>
@@ -161,36 +218,475 @@
       </tags>
   </entry>
   <entry>
-    <title>(1) Gulp-介紹與安裝</title>
-    <url>/2022/06/15/2022-6-15-2-Gulp-%E4%BB%8B%E7%B4%B9%E8%88%87%E5%AE%89%E8%A3%9D/</url>
-    <content><![CDATA[<h2 id="Gulp-是什麼"><a href="#Gulp-是什麼" class="headerlink" title="Gulp 是什麼"></a>Gulp 是什麼</h2><p>在以前做網頁開發時，可能只需要處理html、css、js檔案就可以了。但現在前端開發工具越來越多，像css有scss的預處理器、html可以用pug來寫等等。此時就須要一個工具來將這些scss、pug檔案編譯成css跟html。<br>Gulp 就可以用來編譯 Sass、編譯 JavaScript 語法至相容性較高的 ES5、圖片優化壓縮、打包程式碼等等的事情，讓開發者可以專注於開發。</p>
-<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><h3 id="安裝node-js與npm"><a href="#安裝node-js與npm" class="headerlink" title="安裝node.js與npm"></a>安裝node.js與npm</h3><p>首先我們需要要先安裝 <a href="https://nodejs.org/en/">nodejs</a>，我們選擇穩定版(LTS)來安裝，安裝過程就不再贅述。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061501.png?alt=media&token=3db09d20-f796-4c7b-8c12-0e894845871f" alt="nodejs"></p>
-<p>安裝好後，到vscode編輯器，輸入下列指令來確認是否安裝完成。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm -v   </span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
+    <title>(5) Gulp-postcss</title>
+    <url>/2022/06/17/2022-6-17-1-Gulp-postcss/</url>
+    <content><![CDATA[<h2 id="PostCSS-是什麼"><a href="#PostCSS-是什麼" class="headerlink" title="PostCSS 是什麼 ?"></a>PostCSS 是什麼 ?</h2><p>PostCSS 是一個使用JavaScript 轉換CSS 的工具。<br>以前在撰寫css時，因為有些新的語法舊的瀏覽器不支援，所以需要加上前贅詞</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*0gGNaqjQjKhcOhyBck5Bhw.png" alt="img"></p>
+<p>但這步驟如果用人工判斷很費時，此時可以用post css搭配 autoprfixer 套件，來自動加入這些前贅詞。</p>
+<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><p>先安裝套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install postcss gulp-postcss autoprfixer --save</span><br></pre></td></tr></table></figure>
 
-<p>若有正確安裝，會顯示版本號。</p>
-<h2 id="安裝全域的-Gulp"><a href="#安裝全域的-Gulp" class="headerlink" title="安裝全域的 Gulp"></a>安裝全域的 Gulp</h2><p>在commend line輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp -g  //windows系統</span><br><span class="line">sudo npm install gulp -g //Mac系統</span><br></pre></td></tr></table></figure>
-<p>npm安裝套件分為全域與專案安裝，全域安裝只需安裝一次即可。</p>
-<h2 id="安裝專案的Gulp"><a href="#安裝專案的Gulp" class="headerlink" title="安裝專案的Gulp"></a>安裝專案的Gulp</h2><p>我們先用vscode開一個新的資料夾作為這次專案使用。</p>
-<p>先在commend line 輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
-<p>輸入完後，會新增一個package.json檔案，這個檔案會用來管理這個專案的套件。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061502.png?alt=media&token=b12ce94d-b001-4fa8-b8b2-2912c6dca318" alt="package.json"></p>
-<p>之後輸入下面指令來安裝專案內的gulp</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp --save</span><br></pre></td></tr></table></figure>
+<p>然後在 <code>gulpfile.js</code> 中載入套件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> autoprefixer = <span class="built_in">require</span>(<span class="string">&#x27;autoprefixer&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> postcss = <span class="built_in">require</span>(<span class="string">&#x27;gulp-postcss&#x27;</span>);</span><br></pre></td></tr></table></figure>
 
-<p>安裝完成後輸入下面指令檢查一下，有正確安裝會顯示版本。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gulp -v</span><br></pre></td></tr></table></figure>
+<p>在我們編譯sass的任務中，加入postcss功能</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sassTask</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> plugins = [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">postcss</span>(plugins))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>到這邊就完成專案內gulp的安裝，下一堂課會帶大家新增一個gulp file，做一些好玩的功能囉。</p>
+<p>上面我們先新增一個 plugins 的變數，並在編譯成css後，加入 <code>postcss(plugins)</code></p>
+<p>此時可能會遇到這個錯誤</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*r49hPlucU_l7u-wYZtzGBg.png" alt="error"></p>
+<p>這個錯誤是要我們在根目錄增加一個 .browserslistrc 的檔案，裡面放需要支援的瀏覽器版本條件，如下圖:</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*RiUzC2vYWqZEFgT0nCa7lA.png" alt="browser"></p>
+<p>之後如果要調整 CSS 支援版本就只需要調整 .browserslistrc 中的 last X version X 即可，關於支援版本設定，可參考<a href="https://github.com/browserslist/browserslist">這裡</a>。</p>
+<p>以上就完成gulp-postcss的的設定囉</p>
 ]]></content>
       <categories>
         <category>Gulp</category>
       </categories>
       <tags>
         <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(6) Gulp-babel</title>
+    <url>/2022/06/17/2022-6-17-2-Gulp-babel/</url>
+    <content><![CDATA[<h2 id="什麼是-babel"><a href="#什麼是-babel" class="headerlink" title="什麼是 babel"></a>什麼是 babel</h2><p>使用babel套件，可以將 一些新的js語法，如箭頭函式、let、const，編譯為舊版瀏覽器看得懂的語法。</p>
+<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install --save-dev gulp-babel @babel/core @babel/preset-env</span><br><span class="line">npm install --save gulp-sourcemaps  //壓縮後，可標記原始碼位置</span><br><span class="line">npm install --save gulp-concat  //合併程式碼用</span><br></pre></td></tr></table></figure>
+
+<p>在 gulpfile.js 中引入任務</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/js/**/*.js&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/js&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函式中，我們指定source資料夾裡的 js檔案進行用babel編譯，<br>並用concat套件將多支js檔案在輸出時合併成一支，最後用dest輸出到public資料夾。</p>
+<h2 id="sourcemap套件"><a href="#sourcemap套件" class="headerlink" title="sourcemap套件"></a>sourcemap套件</h2><p>因為多支js檔案，最後會被編譯成同一支js。為了在最終編譯的js中，查找原先程式碼的位置，可以使用 sourcemap套件。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/js/**/*.js&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/js&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*ZT2zdCDxGvinb_v13KRccQ.png" alt="sourcemaps"></p>
+<p>sourcemap 除了js檔案以外，也可以用在如scss檔案</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*nQzF8npRYhWcAaXJAzGgDw.png" alt="scss-source"></p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+        <tag>gulp-babel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(7) Gulp-browserSync</title>
+    <url>/2022/06/17/2022-6-17-3-Gulp-browser-sync/</url>
+    <content><![CDATA[<h2 id="什麼是-broswer-sync"><a href="#什麼是-broswer-sync" class="headerlink" title="什麼是 broswer sync"></a>什麼是 broswer sync</h2><p>browserSync 能建立起一個暫時性的開發用伺服器。搭配 gulp 使用，就能達成檔案修改時，browserSnyc 會自動重整畫面，讓開發者能在瀏覽器上即時看到修改後的畫面。</p>
+<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><p>網址: <a href="https://browsersync.io/docs/gulp">https://browsersync.io/docs/gulp</a></p>
+<p>安裝套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install browser-sync gulp --save</span><br></pre></td></tr></table></figure>
+
+<p>在gulpfile.js中引入</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> browserSync = <span class="built_in">require</span>(<span class="string">&#x27;browser-sync&#x27;</span>).<span class="title function_">create</span>();</span><br></pre></td></tr></table></figure>
+
+<p>建立任務，指定伺服器位置為最後輸出的public資料夾</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">browser</span>(<span class="params"></span>)&#123;</span><br><span class="line">  browserSync.<span class="title function_">init</span>(&#123;</span><br><span class="line">    <span class="attr">server</span>: &#123; <span class="attr">baseDir</span>: <span class="string">&quot;./public&quot;</span> &#125;,</span><br><span class="line">    <span class="attr">reloadDebounce</span>: <span class="number">2000</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在其他gulp任務輸出的最後加上 <code>.pipe(browserSync.stream())</code></p>
+<p>如在babel任務加上，就會在babel更新後，自動同步到瀏覽器。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(path.<span class="property">js</span>.<span class="property">src</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">if</span>(options.<span class="property">env</span> === <span class="string">&#x27;prod&#x27;</span>, $.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(path.<span class="property">js</span>.<span class="property">des</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(8) Gulp-檔案壓縮</title>
+    <url>/2022/06/17/2022-6-17-4-Gulp-compress/</url>
+    <content><![CDATA[<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><ol>
+<li>壓縮 css套件: <a href="https://www.npmjs.com/package/gulp-clean-css">gulp-clean-css</a></li>
+<li>壓縮 js套件: <a href="https://www.npmjs.com/package/gulp-uglify">gulp-uglify</a></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp-clean-css gulp-uglify --save</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>壓縮css的部分，可以在編譯完scss後，進行壓縮</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sassTask</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> plugins = [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>(&#123;</span><br><span class="line">      <span class="attr">includePaths</span>: [<span class="string">&#x27;./node_modules/bootstrap/scss&#x27;</span>]</span><br><span class="line">    &#125;).<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">postcss</span>(plugins))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">cleanCss</span>(&#123; <span class="attr">compatibility</span>: <span class="string">&#x27;ie8&#x27;</span> &#125;)))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*mpisvD3qy987427Pd2n-kg.png" alt="壓縮css程式碼"></p>
+<p>壓縮js的部分，可在babel編譯完後並且合併後( concat ) 進行壓縮</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/js/**/*.js&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*1anhKo-vPFyBKX4scALEZw.png" alt="壓縮js"></p>
+<h2 id="壓縮成果"><a href="#壓縮成果" class="headerlink" title="壓縮成果"></a>壓縮成果</h2><ol>
+<li>css被壓成一行</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*tweaZBqP0_OJL3SnSgi-fQ.png" alt="css"></p>
+<ol start="2">
+<li>js被壓成一行</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*O3lohBob7h6KxqHGfVvong.png" alt="js"></p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(10) Gulp 釋出開發成品</title>
+    <url>/2022/06/18/2022-6-18-2-Gulp-result/</url>
+    <content><![CDATA[<h2 id="安裝-gulp-clean"><a href="#安裝-gulp-clean" class="headerlink" title="安裝 gulp clean"></a>安裝 gulp clean</h2><p>在gulp專案中，有時我們可能在source資料夾裡有一些test檔案，是不該被編譯到public資料夾內的。但無法記得到底哪些test已經被編譯，那些沒有。此時就可以用 gulp clean、gulp-sequence來清理最終的public資料夾。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp-clean --save</span><br></pre></td></tr></table></figure>
+
+<p>建立一個 clean 任務</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">clean</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>([<span class="string">&#x27;./public&#x27;</span>], &#123; <span class="attr">read</span>: <span class="literal">false</span>, <span class="attr">allowEmpty</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">clean</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>利用 clean 任務，刪除如 .tmp(暫存資料夾)、public資料夾，目的是將資料夾刪除後，重新編譯。</p>
+<h2 id="gulp-parallel、series"><a href="#gulp-parallel、series" class="headerlink" title="gulp parallel、series"></a>gulp parallel、series</h2><p>在 gulp4.0 中新增了 parallel、series兩個方法</p>
+<ol>
+<li>parallel : 任務同時執行</li>
+<li>series : 任務依序執行</li>
+</ol>
+<p>我們可以用這兩個方法，讓我們之前建立的各種gulp任務，依序或同時執行。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">exports</span>.<span class="property">build</span> = gulp.<span class="title function_">series</span>(clean, ejs, sassTask, babel, vendorsJs)</span><br><span class="line"></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">default</span> = gulp.<span class="title function_">series</span>(clean, ejs, sassTask, babel, vendorsJs, gulp.<span class="title function_">parallel</span>(watch, browser))</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>gulpfile.js</code> 的最後，分別輸出build跟default指令。 </p>
+<ul>
+<li>default: 為預設指令，在commend line上輸入 gulp 即可執行。</li>
+<li>build: 用來產出成品，在commend line上輸入 gulp build 即可執行。</li>
+</ul>
+<p>在 gulp.series() 中我們依序執行 clean、ejs、sass等任務，但要注意，在 export.default是開發時使用，所以加上了watch， browser等監聽的任務，若在build成品，則不需加入。</p>
+<h2 id="完成程式碼參考"><a href="#完成程式碼參考" class="headerlink" title="完成程式碼參考"></a>完成程式碼參考</h2><p><a href="https://github.com/tim8076/gulp-project/blob/main/gulpfile.js">參考範例</a></p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(9) Gulp-if</title>
+    <url>/2022/06/18/2022-6-18-1-Gulp-if/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>通常在開發項目時，我們會分所謂的 development(開發環境) 與 production(生產環境)，在開發環境時，我們不會壓縮檔案，直到生產環境時，才會做檔案壓縮。此時，可以用 Minimist 命令行參數解析工具區分 Gulp 套件在 development 與 production 環境下的使用。</p>
+<h2 id="Minimist-套件安裝"><a href="#Minimist-套件安裝" class="headerlink" title="Minimist 套件安裝"></a>Minimist 套件安裝</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install minimist   </span><br><span class="line">$ npm install gulp-if</span><br></pre></td></tr></table></figure>
+
+<p>在gulpfile.js 中，載入 minimist</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> minimist= <span class="built_in">require</span>(<span class="string">&#x27;minimist&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="設定環境參數"><a href="#設定環境參數" class="headerlink" title="設定環境參數"></a>設定環境參數</h2><p>並設定envOption環境參數，以下面範例來說，預設是帶入字串，並且是develop這個環境。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> envOption = &#123;</span><br><span class="line">  <span class="attr">string</span>: <span class="string">&#x27;env&#x27;</span>,</span><br><span class="line">  <span class="attr">default</span>: &#123; <span class="attr">env</span>: <span class="string">&#x27;dev&#x27;</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用minimist將環境參數讀入，並在後方帶入 envOption環境選項。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> options = <span class="title function_">minimist</span>(process.<span class="property">argv</span>.<span class="title function_">slice</span>(<span class="number">2</span>), envOption)</span><br></pre></td></tr></table></figure>
+
+<p>process.argv.slice(2) 這行意思是跳過前兩個 – 字元直接讀取 env 這個字串。<br>此時用console.log(options)，可以看到options目前環境參數是 develop</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*b1cLVsVXiWwj834lXdwTYA.png" alt="console"></p>
+<p>若要更改參數，則可用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gulp --env 參數名稱</span><br></pre></td></tr></table></figure>
+
+<p>例如我在commend line 上輸入 <code>gulp --env prod</code> 就可將環境參數從dev改成prod。</p>
+<h2 id="使用gulp-if套件搭配環境參數"><a href="#使用gulp-if套件搭配環境參數" class="headerlink" title="使用gulp-if套件搭配環境參數"></a>使用gulp-if套件搭配環境參數</h2><p>環境參數設定好後，就可用gulp-if套件來判斷當前環境是 開發環境(dev) 還是 生產環境 (prod)。<br>讓我們能判斷如果是生產環境，則壓縮檔案，如果不是則不壓縮檔案。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(path.<span class="property">js</span>.<span class="property">src</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">if</span>(options.<span class="property">env</span> === <span class="string">&#x27;prod&#x27;</span>, $.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(path.<span class="property">js</span>.<span class="property">des</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面我們用了 gulp-if 來判斷當前環境變數是不是 prod，是的話則執行 uglify來壓縮。</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(12) Gulp-ejs</title>
+    <url>/2022/06/18/2022-6-18-4-Gulp-ejs/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>當我們在開發一個多頁式網站時，常常會有許多重複的區塊，例如表頭與表尾，可以將這些重複的區塊抽離出來，作為layout。此時就需要用到樣板語言來達成，來替 HTML 語言加入條件判斷、for 迴圈、元件化、套用模板等等功能。<br>本篇會介紹如何在gulp中，加入ejs樣板語言，幫助我們將重複的區塊抽離。</p>
+<h2 id="套件安裝"><a href="#套件安裝" class="headerlink" title="套件安裝"></a>套件安裝</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install ejs --save   //安裝ejs</span><br><span class="line">npm install gulp-front-matter --save  // 幫每頁 HTML 個別設定變數</span><br><span class="line">npm install gulp-layout --save  // 以先接收 front-matter 傳來的值，然後傳到 EJS 模板接收變數，再轉成 HTML</span><br></pre></td></tr></table></figure>
+
+<h2 id="ejs-任務建立"><a href="#ejs-任務建立" class="headerlink" title="ejs 任務建立"></a>ejs 任務建立</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">ejs</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(path.<span class="property">html</span>.<span class="property">src</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">frontMatter</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(</span><br><span class="line">      $.<span class="title function_">layout</span>(<span class="function">(<span class="params">file</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> file.<span class="property">frontMatter</span>;</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">if</span>(options.<span class="property">env</span> === <span class="string">&#x27;prod&#x27;</span>, $.<span class="title function_">htmlmin</span>(&#123; <span class="attr">collapseWhitespace</span>: <span class="literal">true</span> &#125;)))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="資料夾結構"><a href="#資料夾結構" class="headerlink" title="資料夾結構"></a>資料夾結構</h2><p><img src="https://cdn-images-1.medium.com/max/1320/1*3cxas_T2MN-W3YIgg9v5aQ.png" alt="folder"></p>
+<p>在source裡建立一個layout.ejs檔案，裡頭可放表頭表尾等每一頁都會出現的區塊。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*XO6XwQGH-rn7AG2R3g9OsA.png" alt="layout"></p>
+<p>在html裡，因為每個頁面會想客製化設定一些資訊，所以會在每個有使用到 EJS 模板的 HTML 檔的上方放上 front-matter。以首頁為例，front-matter 有著這些資訊：</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*Oo079oe6jMdMI5VqfJyrTg.png" alt="front-matter"></p>
+<p>因此，ejs就可以取用 title變數取得首頁的值，並用layout變數指定layout的ejs檔。<br>整個運作過程大概是這樣：</p>
+<ol>
+<li>目錄下有具有 front-matter 的html檔、還有ejs 模板的 EJS 檔案</li>
+<li>gulp-front-matter 套件會解析檔案中的 front-matter 部份，並轉成 JS object</li>
+<li>gulp-layout 接收 JS object，把它跟 ejs 模板摻摻在一起，產出瀏覽器看得懂的 HTML 檔</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+        <tag>ejs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(1) SCSS練功坊-基礎介紹</title>
+    <url>/2022/06/18/2022-6-18-5-scss-intro/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>scss屬於css的預處理器，他加入了程式語言所用的變數、迴圈、模組化等概念，讓我們更方便管理css。<br>現今較為主流的 CSS 預處理器有三種，分別是 Sass&#x2F;SCSS、Less、Stylus，其中的 Sass&#x2F;SCSS 是目前較多人使用的選擇。</p>
+<h2 id="scss-語法介紹"><a href="#scss-語法介紹" class="headerlink" title="scss 語法介紹"></a>scss 語法介紹</h2><h3 id="巢狀寫法（Nesting）"><a href="#巢狀寫法（Nesting）" class="headerlink" title="巢狀寫法（Nesting）"></a>巢狀寫法（Nesting）</h3><p>以往寫css時，為了選取到某個元素底下的標籤，我們可能會重複選取該元素許多次，例如:</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面程式碼中，我們重複寫了 .card 3次。</p>
+<p>在scss中我們可以用巢狀的寫法來減少重複的code，並且當父元素的class更改時，也只需要改一次即可:</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="selector-tag">ul</span> &#123;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>scss的功能除了上述介紹的巢狀語法以外，還有許多如變數、函式、mixin、模組化等概念會在之後等章節來介紹喔。</p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(11) Gulp-git</title>
+    <url>/2022/06/18/2022-6-18-3-Gulp-git/</url>
+    <content><![CDATA[<h2 id="初始化git"><a href="#初始化git" class="headerlink" title="初始化git"></a>初始化git</h2><p>這章節，我們來幫gulp專案加入 git 版本控制，若電腦還沒安裝git的話，可以先到<a href="https://git-scm.com/">git官網</a>下載git並安裝。</p>
+<p>安裝好git後，在commend line輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init // 建立本地儲存庫</span><br><span class="line">git add . // 加入所有檔案到目錄</span><br><span class="line">git commit -m &quot;first commit&quot;  // 提交本次紀錄</span><br></pre></td></tr></table></figure>
+
+<h2 id="新增-gitignore-檔案"><a href="#新增-gitignore-檔案" class="headerlink" title="新增 gitignore 檔案"></a>新增 gitignore 檔案</h2><p>因為有一些檔案是不需要加入版本控制的，如 public資料夾、.temp資料夾、node_modules資料夾，此時可以開一個 .gitignore 檔案，將不須控制的檔案忽略。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*6er_v_0LzoqbD_Pl0lTEgw.png" alt="gitignore"></p>
+<p>在用 git status 去檢查未加入目錄的檔案時，就會發現有加入.gitignore的檔案都消失了，代表這些檔案不用被git做控制。</p>
+<h2 id="快速發佈到-github-pages"><a href="#快速發佈到-github-pages" class="headerlink" title="快速發佈到 github pages"></a>快速發佈到 github pages</h2><p>在完成我們的gulp專案後，可以發佈到 github pages上。</p>
+<p>先下載 <code>gulp-gh-pages</code>  套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install - save-dev gulp-gh-pages</span><br></pre></td></tr></table></figure>
+
+<p>在gulpfile.js中加入deploy任務，因為有使用gulp-load-plugins這個套件，只要在ghPages()前方加入$即可。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">deploy</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./public/**/*&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">ghPages</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>輸入 gulp deploy後，會在github上新開一個 gh-pages 的分支，自動將public資料夾裡的內容上傳到github。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*5FV7yd4cKZ0mp4dL-Y1-Dw.png" alt="github"></p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+        <tag>git</tag>
+        <tag>github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(2) SCSS練功坊-變數variable</title>
+    <url>/2022/06/19/2022-6-19-1-scss-variable/</url>
+    <content><![CDATA[<h2 id="以往css遇到的問題"><a href="#以往css遇到的問題" class="headerlink" title="以往css遇到的問題"></a>以往css遇到的問題</h2><p>以往在寫css時，可能我們會直接將顏色的值寫死，例如:</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f0a</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f0a</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f00</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣做的問題是，當今天客戶想將某個顏色替換時，我們必須手動一個一個更改，假如網站有300個地方用到該顏色，就需要手動改300次。</p>
+<p>在 SCSS裡，我們可以使用變數來管理重複的值，例如 我們可以將色碼設定為變數，當後續需要調整顏色時，只要調整變數，就改完全站的設定。</p>
+<h2 id="變數設定方式"><a href="#變數設定方式" class="headerlink" title="變數設定方式"></a>變數設定方式</h2><p>首先先在程式碼最上面打個『$』字號，後面則是自己命名的變數，之後在填上變數的值。</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$color-primary</span>: <span class="number">#fa0</span>;</span><br><span class="line"><span class="variable">$color-gray</span>: <span class="number">#aaa</span>;</span><br></pre></td></tr></table></figure>
+
+<p>之後需要設定顏色樣式時，就可以引入變數。</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="variable">$color-primary</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>變數除了支援色碼外還支援「字串」、「數字」等等。</p>
+<p>雙引號的字串也可用 #{ }取出來:</p>
+<p><img src="https://miro.medium.com/max/1004/1*jvZyuT0ob0GIxXyu3fdjoQ.png" alt="va"></p>
+<p><img src="https://miro.medium.com/max/1048/1*ZgC18gRiXbzEUl_FiZrwuQ.png" alt="編譯後"></p>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>學會使用變數以後，就不用辛苦的一個一個修改css了，全站的設定統一由變數管理，讓之後的修改與維護更輕鬆。</p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(3) SCSS練功坊-計算功能</title>
+    <url>/2022/06/19/2022-6-19-2-scss-calc/</url>
+    <content><![CDATA[<h2 id="計算功能"><a href="#計算功能" class="headerlink" title="計算功能"></a>計算功能</h2><p>在 SCSS裡，我們可以用變數來做加減乘除等運算，如下我設定了 $font-size: 16px，之後再利用這個變數做運算，計算出其他font-size大小。但要注意計算時單位必須一樣。</p>
+<p><img src="https://miro.medium.com/max/1028/1*n0VDI1urUorAt3oPPs4YXA.png" alt="font-size"></p>
+<p>計算單位 除了px單位外，em與%數也可以，但假使你用px+em與%單位的話，會跳錯誤，因為單位不同。</p>
+<h2 id="範例-計算container-寬度"><a href="#範例-計算container-寬度" class="headerlink" title="範例: 計算container 寬度"></a>範例: 計算container 寬度</h2><p>有一個 container 寬度為 $width :920px；裡面有6個子元素box，利用 width &#x2F; 6 ，直接算出每個box寬度。</p>
+<p><img src="https://miro.medium.com/max/842/1*EzxbD-ztoCWUm-wqE3OVLA.png" alt="container"></p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(4) SCSS練功坊-import</title>
+    <url>/2022/06/19/2022-6-19-3-scss-import/</url>
+    <content><![CDATA[<h2 id="模組化管理"><a href="#模組化管理" class="headerlink" title="模組化管理"></a>模組化管理</h2><p>以往寫css時，所有的code都寫在同一份css檔案裡，當code越來越多，就越難維護與管理你的css。<br>在scss裡，我們可以將檔案進行模組化管理，方法如下:</p>
+<p>我們會有一個主要的scss檔案，在這個 scss 檔裡我們會import其他模組的scss檔進來，只有這個主要的scss檔案最後會被編譯成css。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061901.png?alt=media&token=baae5c4a-b4de-4b55-a04f-9681653bf7d1" alt="all.scss"></p>
+<p>至於其他被引入的scss，我們會在檔案名稱前加上 「 _ 」 ，如「_reset.scss」， 加了 _ 的檔案就不會被編譯成 css。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061902.png?alt=media&token=61fab007-d152-47c8-ae03-ce4a073e3391" alt="module"></p>
+<h2 id="引入順序"><a href="#引入順序" class="headerlink" title="引入順序"></a>引入順序</h2><p>通常我們會有一個 all.scss ，裡面放其他要載入的SCSS檔。</p>
+<p>這個檔案就會有一堆 @import，編譯出來的CSS檔案就會依照@import的前後排列來依序產生CSS碼。</p>
+<ol>
+<li><p>@import最前面的檔案裏面一定都會先放全域變數、mixin、function等，這樣後面的檔案 才吃的到變數的設定。</p>
+</li>
+<li><p>再來是 reset、base等全站共用的樣式。</p>
+</li>
+<li><p>layout可以網頁版型的共通設計，如表頭、表尾。</p>
+</li>
+<li><p>再來就index首頁、page內頁，再來就看你的單元數量視情況來切割。</p>
+</li>
+</ol>
+<p>引入參考順序</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="comment">// variables</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;./abstract/functions&#x27;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;./abstract/variables&#x27;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;./abstract/media-query&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// base classes</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;./base/reset&#x27;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;./base/base&#x27;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;./base/typography&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// utils</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;./utils/utils&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//layout</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;./layout/grid&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//pages</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;./pages/index&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//components</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;./components/button&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(6) SCSS練功坊-extend</title>
+    <url>/2022/06/19/2022-6-19-5-scss-extend/</url>
+    <content><![CDATA[<h2 id="合併樣式"><a href="#合併樣式" class="headerlink" title="合併樣式"></a>合併樣式</h2><p>當我們有一段樣式常常用到，可以用@extend來將樣式合併在一起。</p>
+<p>使用 % +class 撰寫要合併之樣式，並用@extend 來載入樣式。</p>
+<p><img src="https://miro.medium.com/max/1220/1*E5-ebZ9tVXeHmwf4i4uN2w.png" alt="extend"></p>
+<p><img src="https://miro.medium.com/max/1134/1*gUgESgMLa1DmyLz94Rp9Rw.png" alt="編譯後"></p>
+<h2 id="Mixin與extend的使用時機"><a href="#Mixin與extend的使用時機" class="headerlink" title="Mixin與extend的使用時機"></a>Mixin與extend的使用時機</h2><p>基本上來說，<br>@mixin是將程式碼帶入到對應的class去，同時可帶入變數。<br>@extend則是藉由class合併，並吃到共通樣式，但沒辦法帶入變數。</p>
+<p>所以如果你的樣式都固定不變的，不會需要用參數帶進去改變樣式的話，<br>那就用@extend，程式碼會比較少些。</p>
+<p>但如果你的程式碼需要帶入多個變數進行運算時，<br>那用@mixin則較適合。</p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(5) SCSS練功坊-mixin</title>
+    <url>/2022/06/19/2022-6-19-4-scss-mixin/</url>
+    <content><![CDATA[<h2 id="使用-mixin-管理重複的樣式"><a href="#使用-mixin-管理重複的樣式" class="headerlink" title="使用 mixin 管理重複的樣式"></a>使用 mixin 管理重複的樣式</h2><p>當我們有一段樣式，會被重複用到，裡頭樣式數值又會有不同時，可以用mixin做管理。<br>撰寫mixin方法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@mixin + mixin名稱(參數) &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1266/1*M5IXbD8WVeMwgzfadFHNrQ.png" alt="circle"></p>
+<p>上圖中， circle 裡可以帶入 $size，$bg-color等不同參數，如此在不同地方，我們可以依照不同需求，傳入不同參數，做出不同的圓形。</p>
+<p>引入 mixin時，用 @include + mixin名稱</p>
+<p><img src="https://miro.medium.com/max/1140/1*Yn5snpWqUCxsEJ1eA646zQ.png" alt="編譯後結果"></p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(9) SCSS練功坊-7+1資料夾規劃</title>
+    <url>/2022/06/20/2022-6-20-3-scss-7-1/</url>
+    <content><![CDATA[<h2 id="7-1-資料夾規劃"><a href="#7-1-資料夾規劃" class="headerlink" title="7 + 1 資料夾規劃"></a>7 + 1 資料夾規劃</h2><p>當我們有許多SCSS檔案要規劃時，可以使用7+1歸納法，也就是7個資料夾搭配 1個 all.scss檔案</p>
+<p><img src="https://miro.medium.com/max/1128/1*jmb4MvIeinaRy7etvwvhZw.png" alt="img"></p>
+<h3 id="abstract-資料夾"><a href="#abstract-資料夾" class="headerlink" title="abstract 資料夾"></a>abstract 資料夾</h3><p>放 variables、mixin、funtion等不會真正產出 css 的 scss 檔案</p>
+<h3 id="base-資料夾"><a href="#base-資料夾" class="headerlink" title="base 資料夾"></a>base 資料夾</h3><p>放 base.scss 、 reset.scss、Typography等全域設定的scss</p>
+<h3 id="components-資料夾"><a href="#components-資料夾" class="headerlink" title="components 資料夾"></a>components 資料夾</h3><p>放全站都會用到的元件，如 button 、 label、nav等等</p>
+<h3 id="layout-資料夾"><a href="#layout-資料夾" class="headerlink" title="layout 資料夾"></a>layout 資料夾</h3><p>放全站共用的layout區塊，如 grid 、header、footer等等</p>
+<h3 id="pages-資料夾"><a href="#pages-資料夾" class="headerlink" title="pages 資料夾"></a>pages 資料夾</h3><p>放 每頁不同的scss</p>
+<h3 id="themes資料夾"><a href="#themes資料夾" class="headerlink" title="themes資料夾"></a>themes資料夾</h3><p>如果你的網站有主題樣式，可以放這裡</p>
+<h3 id="vendor-資料夾"><a href="#vendor-資料夾" class="headerlink" title="vendor 資料夾"></a>vendor 資料夾</h3><p>放外部資源的scss檔，如bootstrap.scss</p>
+<p>另外可參考<a href="https://gist.github.com/rveitch/84cea9650092119527bc">此網站配置</a></p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(7) SCSS練功坊-顏色函數</title>
+    <url>/2022/06/20/2022-6-20-1-scss-color/</url>
+    <content><![CDATA[<h2 id="顏色函數"><a href="#顏色函數" class="headerlink" title="顏色函數"></a>顏色函數</h2><p><img src="https://miro.medium.com/max/1400/1*SFb0wzFGrTw4byZVEbn_8g.png" alt="color"></p>
+<p>在SCSS中 ，可以利用一些內建的函數，來調整顏色。</p>
+<p>如: darken(#fff, 20%) &#x2F;&#x2F;將白色調暗10%；</p>
+<p>lighten(#000,30% ) &#x2F;&#x2F;將黑色調亮10%;</p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(8) SCSS練功坊-Each loops</title>
+    <url>/2022/06/20/2022-6-20-2-scss-loop/</url>
+    <content><![CDATA[<h2 id="建立陣列"><a href="#建立陣列" class="headerlink" title="建立陣列"></a>建立陣列</h2><p>在scss中，可以使用each loop快速產生樣式。</p>
+<p>首先，可以建立一個陣列如下:</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$theme-colors</span>: (</span><br><span class="line">  <span class="string">&#x27;primary&#x27;</span>:   <span class="number">#326dee</span>,</span><br><span class="line">  <span class="string">&#x27;secondary&#x27;</span>: <span class="number">#1ac886</span>,</span><br><span class="line">  <span class="string">&#x27;danger&#x27;</span>:    <span class="number">#d32752</span>,</span><br><span class="line">  <span class="string">&#x27;light&#x27;</span>:     <span class="number">#c2c2c2</span>,</span><br><span class="line">  <span class="string">&#x27;dark&#x27;</span>:      <span class="number">#000</span>,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>陣列中會有key跟value，利用 @each 迴圈的方式產生樣式</p>
+<p><img src="https://miro.medium.com/max/846/1*3n3L745sBINDgCmWKUQMmw.png" alt="loop"></p>
+<p>其中 $name 跟 $color 分別代表 陣列裡的key跟value，利用 # { }將參數$name一一帶入後，就可以產生各個樣式。</p>
+<h2 id="陣列寫法注意事項"><a href="#陣列寫法注意事項" class="headerlink" title="陣列寫法注意事項"></a>陣列寫法注意事項</h2><p><img src="https://miro.medium.com/max/810/1*4Jkss8qZjal6t_qG1s2qFw.png" alt="loop"></p>
+<ol>
+<li>key如果是string要加上 ‘ ‘</li>
+<li>每個key和value都是獨立一行</li>
+<li>最後一行，也建議加上 , 方便閱讀</li>
+</ol>
+<h2 id="陣列多個值"><a href="#陣列多個值" class="headerlink" title="陣列多個值"></a>陣列多個值</h2><p>一個scss陣列也可以有多組值</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$heading-list</span>: (</span><br><span class="line">  h1   <span class="number">50px</span>   <span class="number">300</span>,</span><br><span class="line">  h2   <span class="number">42px</span>   <span class="number">300</span>,</span><br><span class="line">  h3   <span class="number">34px</span>   <span class="number">400</span>,</span><br><span class="line">  h4   <span class="number">26px</span>   <span class="number">400</span>,</span><br><span class="line">  h5   <span class="number">20px</span>   <span class="number">600</span>,</span><br><span class="line">  h6   <span class="number">16px</span>   <span class="number">600</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">@each</span> <span class="variable">$value</span> in <span class="variable">$heading-list</span> &#123;</span><br><span class="line">  #&#123;<span class="built_in">nth</span>($value, <span class="number">1</span>)&#125;,</span><br><span class="line">  <span class="selector-class">.txt-</span>#&#123;<span class="built_in">nth</span>($value, <span class="number">1</span>)&#125; &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: nth(<span class="variable">$value</span>, <span class="number">2</span>);</span><br><span class="line">    <span class="attribute">font-weight</span>: nth(<span class="variable">$value</span>, <span class="number">3</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以產生如下的css</p>
+<p><img src="https://miro.medium.com/max/920/1*TsqyJQQt3ZDwIrzVK0MWTQ.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(1) CSS 響應式設計-文字大小</title>
+    <url>/2022/06/20/2022-6-20-4-rwd-text/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>當我們設計一個響應式的網站時，除了版面隨著裝置大小不同，文字大小也會不同。例如手機板的文字應該就要比桌機版的文字來的小。這章節就介紹一些設定響應式文字的方法。</p>
+<h2 id="Media-query"><a href="#Media-query" class="headerlink" title="Media-query"></a>Media-query</h2><p>使用media-query來設定不同裝置的文字大小，算是最常用的手法。<br>本系列範例皆以 scss 的寫法呈現。</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1rem</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">@media</span> (<span class="attribute">min-width</span>: <span class="number">768px</span>) &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">2rem</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">@media</span> (<span class="attribute">min-width</span>: <span class="number">960px</span>) &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">3rem</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="VW"><a href="#VW" class="headerlink" title="VW"></a>VW</h2><p>使用vw這個單位來設計，會隨著網頁縮放而改變尺寸，每1vw代表螢幕寬度的 1%。</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h2</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: calc(<span class="number">16px</span> + <span class="number">2vw</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面我們用了 calc 語法，將16px + 2vw 作為文字大小。這樣做確保我們的文字最小是 16px，並且隨著螢幕越大，2vw的值也會越大，讓文字能隨螢幕縮放。</p>
+<h2 id="clamp"><a href="#clamp" class="headerlink" title="clamp"></a>clamp</h2><p>使用 clamp 語法來設計，clamp可以傳入三個值，讓我們設定最大和最小的值。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">clamp(最小的值，我們希望的值，最大的值)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h2</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: clamp(<span class="number">1.375rem</span>, <span class="number">0.875rem</span> + <span class="number">2vw</span>, <span class="number">2.25rem</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://youtu.be/jfMHA8SqUL4?t=7595">參考教學影片</a></p>
+<h2 id="響應式文字的單位"><a href="#響應式文字的單位" class="headerlink" title="響應式文字的單位"></a>響應式文字的單位</h2><p>關於響應式文字的單位，盡量使用相對單位 rem 來設計。如果使用px這種絕對單位設計，會讓使用者無法在瀏覽器的設定中調整文字大小。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022062001.png?alt=media&token=c30147dd-d0b8-486b-be92-d972de794d77" alt="瀏覽器設定文字大小"></p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+        <tag>RWD</tag>
       </tags>
   </entry>
   <entry>
@@ -247,27 +743,19 @@
       </tags>
   </entry>
   <entry>
-    <title>(2) Gulp-運作原理介紹</title>
-    <url>/2022/06/16/2022-6-15-5-Gulp-%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/1200/0*_uAjbnaZaXs1ca6x.png" alt="img"></p>
-<h2 id="運作原理"><a href="#運作原理" class="headerlink" title="運作原理"></a>運作原理</h2><p>Gulp運作的方式就是將每個任務像水管一樣串接下去</p>
-<h2 id="簡單範例"><a href="#簡單範例" class="headerlink" title="簡單範例"></a>簡單範例</h2><p><img src="https://cdn-images-1.medium.com/max/1200/1*uBz4qK1ZMgkS6fNfP8u-NA.png" alt="gulp"></p>
-<p>上圖是一個copy html檔案的簡單範例，主要如下:</p>
-<ol>
-<li>gulp.task(‘任務名稱’, function(){}): 指定一個gulp任務</li>
-<li>gulp.src: 指定資料來源</li>
-<li>gulp.pipe(): 指定事件，pipe就像水管，可以一個接一個</li>
-</ol>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*FWZTmYZm1Sbg5FIO0ZDycg.png" alt="pipe"></p>
-<ol start="4">
-<li>gulp.dest(): 輸出任務的結果</li>
-</ol>
+    <title>(2) Hexo 撰寫第一篇文章</title>
+    <url>/2022/06/08/2022-6-8-Hexo-%E6%92%B0%E5%AF%AB%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<h2 id="建立你的第一篇文章"><a href="#建立你的第一篇文章" class="headerlink" title="建立你的第一篇文章"></a>建立你的第一篇文章</h2><p>我們可以在Vscode 中，開啟上個章節所建立的專案</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060802.png?alt=media&token=cba3f60e-8fba-4f61-83b4-9668e01bd2e7" alt="專案圖片"></p>
+<p>在Vscode中用快捷鍵 Control + ESC，開啟終端機 </p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060803.png?alt=media&token=e185edcc-77fc-4d1e-8499-b6c467085d8b" alt="終端機"></p>
+<p>然後下方終端機輸入 <code>hexo new &#39;我的第一篇部落格文章&#39;</code> 輸入完後會顯示 <code>INFO  Generated: 2022/06/07/2022-6-7-Hexo-部落格安裝與部屬/index.html</code> 代表文章被順利建立在source資料夾裡的 <code>_posts</code>底下。</p>
+<h2 id="MD-內容"><a href="#MD-內容" class="headerlink" title="MD 內容"></a>MD 內容</h2><p>在md檔案裡，最上面會有可以填寫 標題等欄位<br><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060804.png?alt=media&token=27df0ccb-a65b-434b-aece-6c7af864d641" alt="標題"></p>
+<p>文章撰寫則以Markdown格式為主，若不了解Markdown格式，可以參考 <a href="https://markdown.tw/">markdown</a></p>
+<p>以上就是撰寫文章的方法囉</p>
 ]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
       <tags>
-        <tag>Gulp</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -292,44 +780,6 @@
 
 <p>安裝完後，先使用<code>hexo clean</code> 清除暫存檔，再用 <code>hexo g</code> 來編譯靜態檔，最後用 <code>hexo d</code>來將網站部署上github</p>
 <p>部屬完後輸入你的 githubpages網址，如 <a href="https://tim8076.github.io/">https://tim8076.github.io/</a>，就可以看到部屬好的部落格了。</p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(2) Hexo 撰寫第一篇文章</title>
-    <url>/2022/06/08/2022-6-8-Hexo-%E6%92%B0%E5%AF%AB%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<h2 id="建立你的第一篇文章"><a href="#建立你的第一篇文章" class="headerlink" title="建立你的第一篇文章"></a>建立你的第一篇文章</h2><p>我們可以在Vscode 中，開啟上個章節所建立的專案</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060802.png?alt=media&token=cba3f60e-8fba-4f61-83b4-9668e01bd2e7" alt="專案圖片"></p>
-<p>在Vscode中用快捷鍵 Control + ESC，開啟終端機 </p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060803.png?alt=media&token=e185edcc-77fc-4d1e-8499-b6c467085d8b" alt="終端機"></p>
-<p>然後下方終端機輸入 <code>hexo new &#39;我的第一篇部落格文章&#39;</code> 輸入完後會顯示 <code>INFO  Generated: 2022/06/07/2022-6-7-Hexo-部落格安裝與部屬/index.html</code> 代表文章被順利建立在source資料夾裡的 <code>_posts</code>底下。</p>
-<h2 id="MD-內容"><a href="#MD-內容" class="headerlink" title="MD 內容"></a>MD 內容</h2><p>在md檔案裡，最上面會有可以填寫 標題等欄位<br><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060804.png?alt=media&token=27df0ccb-a65b-434b-aece-6c7af864d641" alt="標題"></p>
-<p>文章撰寫則以Markdown格式為主，若不了解Markdown格式，可以參考 <a href="https://markdown.tw/">markdown</a></p>
-<p>以上就是撰寫文章的方法囉</p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(5) Hexo-新增頁面</title>
-    <url>/2022/06/09/2022-6-9-1-Hexo-%E6%96%B0%E5%A2%9E%E9%A0%81%E9%9D%A2/</url>
-    <content><![CDATA[<h2 id="新增頁面"><a href="#新增頁面" class="headerlink" title="新增頁面"></a>新增頁面</h2><p>與新增文章不同，我們也可以在hexo 裡新增一些頁面，用來放作者介紹等資訊。</p>
-<p>建立頁面的指令格式如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;頁面名稱（網址用）&quot;</span><br></pre></td></tr></table></figure>
-
-<p>新增好的頁面會在放在source資料夾底下</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/202206009.png?alt=media&token=4e8aaa96-e6ea-4a18-9bb1-37d18acec1b7" alt="about-page"></p>
-<p>頁面預設只有 title 以及 date， 而頁面預設是可以留言的，如果不開放留言則可以新增 comments 設定為false。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600902.png?alt=media&token=6fbb9f83-991a-4e9b-b2dc-9291231e6dfb" alt="comment"></p>
-<h2 id="新增分類與標籤頁"><a href="#新增分類與標籤頁" class="headerlink" title="新增分類與標籤頁"></a>新增分類與標籤頁</h2><p>我們也可在hexo裡增加分類頁面與標籤頁面</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page tags  // 建立標籤頁</span><br><span class="line">hexo new page categories // 建立分類頁</span><br></pre></td></tr></table></figure>
-
-<p>頁面一樣會新增在source資料夾底下，進入 <code>source/tags</code>，會看到<code>index.md</code>檔，<br>將裡面內容再加入以下這行即可 <code>type: &quot;tags&quot;</code>。</p>
-<p>最後找到主題 (theme) 設置文件 (_config.yml)，這邊以 NexT 為例，將 tags 及 categories 前的#字號移除即可。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600903.png?alt=media&token=f53ac521-d777-4cc9-b6e0-c34b04da5458" alt="theme"></p>
 ]]></content>
       <tags>
         <tag>Hexo</tag>
@@ -362,6 +812,28 @@
 <p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060907.png?alt=media&token=c97c2e01-2382-4dec-abee-f64b3e5cb980" alt="darkmode"></p>
 <p>以上都設定好後，就可發現我們的部落格套用了nextT主題囉</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060908.png?alt=media&token=7b16821f-7ef1-4b28-b075-5be943ebfd76" alt="theme"></p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(5) Hexo-新增頁面</title>
+    <url>/2022/06/09/2022-6-9-1-Hexo-%E6%96%B0%E5%A2%9E%E9%A0%81%E9%9D%A2/</url>
+    <content><![CDATA[<h2 id="新增頁面"><a href="#新增頁面" class="headerlink" title="新增頁面"></a>新增頁面</h2><p>與新增文章不同，我們也可以在hexo 裡新增一些頁面，用來放作者介紹等資訊。</p>
+<p>建立頁面的指令格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;頁面名稱（網址用）&quot;</span><br></pre></td></tr></table></figure>
+
+<p>新增好的頁面會在放在source資料夾底下</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/202206009.png?alt=media&token=4e8aaa96-e6ea-4a18-9bb1-37d18acec1b7" alt="about-page"></p>
+<p>頁面預設只有 title 以及 date， 而頁面預設是可以留言的，如果不開放留言則可以新增 comments 設定為false。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600902.png?alt=media&token=6fbb9f83-991a-4e9b-b2dc-9291231e6dfb" alt="comment"></p>
+<h2 id="新增分類與標籤頁"><a href="#新增分類與標籤頁" class="headerlink" title="新增分類與標籤頁"></a>新增分類與標籤頁</h2><p>我們也可在hexo裡增加分類頁面與標籤頁面</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page tags  // 建立標籤頁</span><br><span class="line">hexo new page categories // 建立分類頁</span><br></pre></td></tr></table></figure>
+
+<p>頁面一樣會新增在source資料夾底下，進入 <code>source/tags</code>，會看到<code>index.md</code>檔，<br>將裡面內容再加入以下這行即可 <code>type: &quot;tags&quot;</code>。</p>
+<p>最後找到主題 (theme) 設置文件 (_config.yml)，這邊以 NexT 為例，將 tags 及 categories 前的#字號移除即可。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600903.png?alt=media&token=f53ac521-d777-4cc9-b6e0-c34b04da5458" alt="theme"></p>
 ]]></content>
       <tags>
         <tag>Hexo</tag>
