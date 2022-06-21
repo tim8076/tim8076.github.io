@@ -1,5 +1,5 @@
 ---
-title: (2) Git 練功坊-紀錄修改與提交
+title: (3) Git 練功坊-紀錄修改與提交
 date: 2022-06-21 15:52:38
 categories: Git
 tags: 
@@ -7,14 +7,18 @@ tags:
 description: '提交修改紀錄'
 ---
 
+![git流程](https://miro.medium.com/max/1400/0*adRfjDwIz9wuzSTb)
+
 ## 新增資料並加入索引
 
 上一章節已經將專案的數據庫建立好了，那我們先在專案內新增一些資料，我先建立一個 「sample.txt」的文字檔案，並在裡面打一些內容。
 
 此時我們可以將新增的資料加入索引，加入索引的檔案之後才能被commit 提交，方法如下:
 
-- git add .   將所有更新的檔案加入索引。
-- git add 檔案名稱  將特定檔案加入索引。
+```
+git add .    // 將所有更新的檔案加入索引。
+git add 檔案名稱  // 將特定檔案加入索引。
+```
 
 ## 查詢檔案狀況
 
@@ -29,8 +33,8 @@ git status  // 查詢目前檔案狀況
 若要取消加入索引，可用
 
 ```
-git reset HEAD : 取消已加入索引的全部檔案，此時檔案會呈現未追蹤狀態。
-git reset HEAD 檔案名稱: 取消已加入索引的單個檔案，呈現未追蹤狀態。
+git reset HEAD   // 取消已加入索引的全部檔案，此時檔案會呈現未追蹤狀態。
+git reset HEAD 檔案名稱   // 取消已加入索引的單個檔案，呈現未追蹤狀態。
 ```
 
 ## 提交檔案
@@ -46,6 +50,13 @@ git commit -m "更新內容"
 
 ![commit](https://miro.medium.com/max/1400/1*rM-6FClWTQvcFPXmYmq8JQ.png)
 
+## 查詢紀錄
+
+```
+git log  // 查詢過去commit 的紀錄
+```
+
+![git log](https://miro.medium.com/max/1400/1*qNvdGY6XePWNMA3h4a--LQ.png)
 
 
 
