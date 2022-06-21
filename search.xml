@@ -1,35 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>(8) Hexo-第三方服務</title>
-    <url>/2022/06/10/2022-6-10-2-Hexo-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8B%99/</url>
-    <content><![CDATA[<h2 id="新增第三方服務"><a href="#新增第三方服務" class="headerlink" title="新增第三方服務"></a>新增第三方服務</h2><p>當我打開 <code>_config.next.yml</code> ，會發現NextT也整合了一些第三方服務進來，大多都只需要申請帳號並填入 ID 就可以使用。<br>以下就介紹幾個好用的服務。</p>
-<h2 id="Disqus"><a href="#Disqus" class="headerlink" title="Disqus"></a>Disqus</h2><p>Disqus 是一個留言板服務，安裝流程如下</p>
-<ol>
-<li><p>到 <a href="https://disqus.com/">Disqus</a> 官網註冊一個帳號並登入。按下 <code>GET STARTED</code>按鈕，並選擇 <code> I want to install Disqus on my site</code>選項，就會來到 <code>Create a new site</code> 頁面。</p>
-</li>
-<li><p>輸入你的 <code>Website Name</code>，並按下 <code>Create Site </code>。</p>
-</li>
-<li><p>這邊就建立好你的 disqus帳號了</p>
-</li>
-</ol>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061102.png?alt=media&token=518dfa72-a8fe-4c81-bead-89bc3a59e874" alt="disqus"></p>
-<ol start="4">
-<li>回到 <code>_config.next.yml</code>，將 disqus 選項改為true，並在shortname填入剛才在disqus設定的 <code>Website Name</code></li>
-</ol>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061103.png?alt=media&token=3a8584ce-3749-4640-99c0-c8ecd574faa7" alt="disqus-setting"></p>
-<ol start="5">
-<li>以上就完成了留言板設置囉</li>
-</ol>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061104.png?alt=media&token=dc77ed95-13ce-4a34-9769-1297dc7c1bda" alt="comments"></p>
-<h2 id="圖片顯示"><a href="#圖片顯示" class="headerlink" title="圖片顯示"></a>圖片顯示</h2><p>NextT 內建有兩種圖片顯示的方式，分別是 fancybox 和 mediumzoom，只要到 <code>_config.next.yml</code>，將選項改為true即可。但記得不要同時開啟 fancybox 和 mediumzoom。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061101.png?alt=media&token=c62c2900-a1e0-4d60-9a0a-bf13dc66d7a3" alt="image"></p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(7) Hexo-新增套件</title>
     <url>/2022/06/10/2022-6-10-1-Hexo-%E6%96%B0%E5%A2%9E%E5%A5%97%E4%BB%B6/</url>
     <content><![CDATA[<h2 id="新增套件"><a href="#新增套件" class="headerlink" title="新增套件"></a>新增套件</h2><p>這章節會介紹一些NextT主題可以用的套件。</p>
@@ -76,62 +47,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(2) JS30實作系列 時鐘</title>
-    <url>/2022/06/15/2022-6-15-1-JS30-clock/</url>
-    <content><![CDATA[<p><img src="https://miro.medium.com/max/1400/1*JH-e_9OQS1lBH7hqb7lMXQ.png" alt="clock"></p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這次要在網頁實作一個時鐘，本次的 <a href="https://codepen.io/tim-chou/pen/RwReNQx">範例code</a></p>
-<p>首先在 HTML 中新增 三組 DIV 分別為時、分、秒針</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clock&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clock-face&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand second-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand min-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand hour-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>時、分、秒針都設定為寬高是鐘面100%的正方形，並利用偽元素的方式，將指針加在正方形上，所以我們之後實際旋轉的是正方形。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.hand</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/1040/1*hxPjvHGmPHvKxnY7ZZFuUg.png" alt="hand"></p>
-<h2 id="js部分"><a href="#js部分" class="headerlink" title="js部分"></a>js部分</h2><p>在js中，首先選取 時、分、秒針</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> second = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.second-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> min = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.min-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> hour = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.hour-hand&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>在setClock函式中，利用 建立 new Date() 取得時間，再用getSeconds、getMinutes、getHours取得秒、時、分。<br>並分別乘上 6 度 (每秒鐘在鐘面佔的角度 )、30度(每小時在鐘面佔的角度)，並利用 .style.transform &#x3D; <code>rotate($&#123;minDeg&#125;deg)</code>的方式指定角度。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">function</span> <span class="title function_">setClock</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">let</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> secondDeg = date.<span class="title function_">getSeconds</span>() * <span class="number">6</span> <span class="comment">// (360/60)每分鐘所佔的角度</span></span><br><span class="line">  <span class="keyword">let</span> minDeg = date.<span class="title function_">getMinutes</span>() * <span class="number">6</span> + date.<span class="title function_">getSeconds</span>()* <span class="number">30</span> / <span class="number">60</span> <span class="comment">// (360/60)每秒所佔的角度</span></span><br><span class="line">  <span class="keyword">let</span> hourDeg = date.<span class="title function_">getHours</span>() * <span class="number">30</span> + date.<span class="title function_">getMinutes</span>()* <span class="number">30</span> / <span class="number">60</span><span class="comment">// (360/12)每小時時針所佔的角度 </span></span><br><span class="line"></span><br><span class="line">  second.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;secondDeg&#125;</span>deg)`</span></span><br><span class="line">  min.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;minDeg&#125;</span>deg)`</span></span><br><span class="line">  hour.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;hourDeg&#125;</span>deg)`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最後用 setInterval 每過一秒就執行一次 setClock 函式，就完成拉。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(setClock,<span class="number">1000</span>); <span class="comment">//設定間隔，持續執行</span></span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>JS30</tag>
-        <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(2) Gulp-運作原理介紹</title>
-    <url>/2022/06/16/2022-6-15-5-Gulp-%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/1200/0*_uAjbnaZaXs1ca6x.png" alt="img"></p>
-<h2 id="運作原理"><a href="#運作原理" class="headerlink" title="運作原理"></a>運作原理</h2><p>Gulp運作的方式就是將每個任務像水管一樣串接下去</p>
-<h2 id="簡單範例"><a href="#簡單範例" class="headerlink" title="簡單範例"></a>簡單範例</h2><p><img src="https://cdn-images-1.medium.com/max/1200/1*uBz4qK1ZMgkS6fNfP8u-NA.png" alt="gulp"></p>
-<p>上圖是一個copy html檔案的簡單範例，主要如下:</p>
-<ol>
-<li>gulp.task(‘任務名稱’, function(){}): 指定一個gulp任務</li>
-<li>gulp.src: 指定資料來源</li>
-<li>gulp.pipe(): 指定事件，pipe就像水管，可以一個接一個</li>
-</ol>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*FWZTmYZm1Sbg5FIO0ZDycg.png" alt="pipe"></p>
-<ol start="4">
-<li>gulp.dest(): 輸出任務的結果</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(1) Gulp-介紹與安裝</title>
     <url>/2022/06/15/2022-6-15-2-Gulp-%E4%BB%8B%E7%B4%B9%E8%88%87%E5%AE%89%E8%A3%9D/</url>
     <content><![CDATA[<h2 id="Gulp-是什麼"><a href="#Gulp-是什麼" class="headerlink" title="Gulp 是什麼"></a>Gulp 是什麼</h2><p>在以前做網頁開發時，可能只需要處理html、css、js檔案就可以了。但現在前端開發工具越來越多，像css有scss的預處理器、html可以用pug來寫等等。此時就須要一個工具來將這些scss、pug檔案編譯成css跟html。<br>Gulp 就可以用來編譯 Sass、編譯 JavaScript 語法至相容性較高的 ES5、圖片優化壓縮、打包程式碼等等的事情，讓開發者可以專注於開發。</p>
@@ -165,6 +80,67 @@
       </tags>
   </entry>
   <entry>
+    <title>(8) Hexo-第三方服務</title>
+    <url>/2022/06/10/2022-6-10-2-Hexo-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8B%99/</url>
+    <content><![CDATA[<h2 id="新增第三方服務"><a href="#新增第三方服務" class="headerlink" title="新增第三方服務"></a>新增第三方服務</h2><p>當我打開 <code>_config.next.yml</code> ，會發現NextT也整合了一些第三方服務進來，大多都只需要申請帳號並填入 ID 就可以使用。<br>以下就介紹幾個好用的服務。</p>
+<h2 id="Disqus"><a href="#Disqus" class="headerlink" title="Disqus"></a>Disqus</h2><p>Disqus 是一個留言板服務，安裝流程如下</p>
+<ol>
+<li><p>到 <a href="https://disqus.com/">Disqus</a> 官網註冊一個帳號並登入。按下 <code>GET STARTED</code>按鈕，並選擇 <code> I want to install Disqus on my site</code>選項，就會來到 <code>Create a new site</code> 頁面。</p>
+</li>
+<li><p>輸入你的 <code>Website Name</code>，並按下 <code>Create Site </code>。</p>
+</li>
+<li><p>這邊就建立好你的 disqus帳號了</p>
+</li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061102.png?alt=media&token=518dfa72-a8fe-4c81-bead-89bc3a59e874" alt="disqus"></p>
+<ol start="4">
+<li>回到 <code>_config.next.yml</code>，將 disqus 選項改為true，並在shortname填入剛才在disqus設定的 <code>Website Name</code></li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061103.png?alt=media&token=3a8584ce-3749-4640-99c0-c8ecd574faa7" alt="disqus-setting"></p>
+<ol start="5">
+<li>以上就完成了留言板設置囉</li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061104.png?alt=media&token=dc77ed95-13ce-4a34-9769-1297dc7c1bda" alt="comments"></p>
+<h2 id="圖片顯示"><a href="#圖片顯示" class="headerlink" title="圖片顯示"></a>圖片顯示</h2><p>NextT 內建有兩種圖片顯示的方式，分別是 fancybox 和 mediumzoom，只要到 <code>_config.next.yml</code>，將選項改為true即可。但記得不要同時開啟 fancybox 和 mediumzoom。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061101.png?alt=media&token=c62c2900-a1e0-4d60-9a0a-bf13dc66d7a3" alt="image"></p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(2) JS30實作系列 時鐘</title>
+    <url>/2022/06/15/2022-6-15-1-JS30-clock/</url>
+    <content><![CDATA[<p><img src="https://miro.medium.com/max/1400/1*JH-e_9OQS1lBH7hqb7lMXQ.png" alt="clock"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這次要在網頁實作一個時鐘，本次的 <a href="https://codepen.io/tim-chou/pen/RwReNQx">範例code</a></p>
+<p>首先在 HTML 中新增 三組 DIV 分別為時、分、秒針</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clock&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clock-face&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand second-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand min-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand hour-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>時、分、秒針都設定為寬高是鐘面100%的正方形，並利用偽元素的方式，將指針加在正方形上，所以我們之後實際旋轉的是正方形。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.hand</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1040/1*hxPjvHGmPHvKxnY7ZZFuUg.png" alt="hand"></p>
+<h2 id="js部分"><a href="#js部分" class="headerlink" title="js部分"></a>js部分</h2><p>在js中，首先選取 時、分、秒針</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> second = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.second-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> min = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.min-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> hour = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.hour-hand&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在setClock函式中，利用 建立 new Date() 取得時間，再用getSeconds、getMinutes、getHours取得秒、時、分。<br>並分別乘上 6 度 (每秒鐘在鐘面佔的角度 )、30度(每小時在鐘面佔的角度)，並利用 .style.transform &#x3D; <code>rotate($&#123;minDeg&#125;deg)</code>的方式指定角度。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">function</span> <span class="title function_">setClock</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">let</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> secondDeg = date.<span class="title function_">getSeconds</span>() * <span class="number">6</span> <span class="comment">// (360/60)每分鐘所佔的角度</span></span><br><span class="line">  <span class="keyword">let</span> minDeg = date.<span class="title function_">getMinutes</span>() * <span class="number">6</span> + date.<span class="title function_">getSeconds</span>()* <span class="number">30</span> / <span class="number">60</span> <span class="comment">// (360/60)每秒所佔的角度</span></span><br><span class="line">  <span class="keyword">let</span> hourDeg = date.<span class="title function_">getHours</span>() * <span class="number">30</span> + date.<span class="title function_">getMinutes</span>()* <span class="number">30</span> / <span class="number">60</span><span class="comment">// (360/12)每小時時針所佔的角度 </span></span><br><span class="line"></span><br><span class="line">  second.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;secondDeg&#125;</span>deg)`</span></span><br><span class="line">  min.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;minDeg&#125;</span>deg)`</span></span><br><span class="line">  hour.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;hourDeg&#125;</span>deg)`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最後用 setInterval 每過一秒就執行一次 setClock 函式，就完成拉。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(setClock,<span class="number">1000</span>); <span class="comment">//設定間隔，持續執行</span></span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>JS30</tag>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(3) Gulp-撰寫gulp file</title>
     <url>/2022/06/16/2022-6-15-3-Gulp-%E5%9F%BA%E7%A4%8E%E7%AF%87/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前面已經將專案的環境與gulp都安裝好了，這節會開始介紹如何撰寫你的第一支 gulp file</p>
@@ -183,32 +159,6 @@
 
 <p>就會發現檔案已經被輸出到 public 資料夾囉。</p>
 <p>下堂課會開始介紹 其他的各種gulp任務喔。</p>
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(4) Gulp-編譯scss</title>
-    <url>/2022/06/16/2022-6-15-4-Gulp-%E7%B7%A8%E8%AD%AFsass/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇來介紹如何在 gulp 中，進行scss的編譯吧。</p>
-<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><p>首先來安裝 gulp-sass 套件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install sass gulp-sass --save</span><br></pre></td></tr></table></figure>
-
-<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>在gulpfile.js裡，依照文件貼上相關設定</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sass = <span class="built_in">require</span>(<span class="string">&#x27;gulp-sass&#x27;</span>)(<span class="built_in">require</span>(<span class="string">&#x27;sass&#x27;</span>));</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">buildStyles</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>上面為編譯scss的gulp任務，用 src 指定 scss 所在的資料夾後，最後在用gulp.dest() 指定編譯後的 css 輸出的位置。</p>
-<p>之後在scss資料夾裡，新增一個all.scss檔案。</p>
-<p>並輸入一些東西</p>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$color</span>: <span class="number">#00cc99</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="variable">$color</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在commend line 輸入 gulp buildStyles 就可以發現scss被編譯成css檔案，並輸出到public資料夾囉。</p>
 ]]></content>
       <categories>
         <category>Gulp</category>
@@ -239,6 +189,56 @@
 <p><img src="https://cdn-images-1.medium.com/max/1200/1*RiUzC2vYWqZEFgT0nCa7lA.png" alt="browser"></p>
 <p>之後如果要調整 CSS 支援版本就只需要調整 .browserslistrc 中的 last X version X 即可，關於支援版本設定，可參考<a href="https://github.com/browserslist/browserslist">這裡</a>。</p>
 <p>以上就完成gulp-postcss的的設定囉</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(2) Gulp-運作原理介紹</title>
+    <url>/2022/06/16/2022-6-15-5-Gulp-%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/1200/0*_uAjbnaZaXs1ca6x.png" alt="img"></p>
+<h2 id="運作原理"><a href="#運作原理" class="headerlink" title="運作原理"></a>運作原理</h2><p>Gulp運作的方式就是將每個任務像水管一樣串接下去</p>
+<h2 id="簡單範例"><a href="#簡單範例" class="headerlink" title="簡單範例"></a>簡單範例</h2><p><img src="https://cdn-images-1.medium.com/max/1200/1*uBz4qK1ZMgkS6fNfP8u-NA.png" alt="gulp"></p>
+<p>上圖是一個copy html檔案的簡單範例，主要如下:</p>
+<ol>
+<li>gulp.task(‘任務名稱’, function(){}): 指定一個gulp任務</li>
+<li>gulp.src: 指定資料來源</li>
+<li>gulp.pipe(): 指定事件，pipe就像水管，可以一個接一個</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*FWZTmYZm1Sbg5FIO0ZDycg.png" alt="pipe"></p>
+<ol start="4">
+<li>gulp.dest(): 輸出任務的結果</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(4) Gulp-編譯scss</title>
+    <url>/2022/06/16/2022-6-15-4-Gulp-%E7%B7%A8%E8%AD%AFsass/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇來介紹如何在 gulp 中，進行scss的編譯吧。</p>
+<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><p>首先來安裝 gulp-sass 套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install sass gulp-sass --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>在gulpfile.js裡，依照文件貼上相關設定</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sass = <span class="built_in">require</span>(<span class="string">&#x27;gulp-sass&#x27;</span>)(<span class="built_in">require</span>(<span class="string">&#x27;sass&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">buildStyles</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上面為編譯scss的gulp任務，用 src 指定 scss 所在的資料夾後，最後在用gulp.dest() 指定編譯後的 css 輸出的位置。</p>
+<p>之後在scss資料夾裡，新增一個all.scss檔案。</p>
+<p>並輸入一些東西</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$color</span>: <span class="number">#00cc99</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="variable">$color</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在commend line 輸入 gulp buildStyles 就可以發現scss被編譯成css檔案，並輸出到public資料夾囉。</p>
 ]]></content>
       <categories>
         <category>Gulp</category>
@@ -303,28 +303,29 @@
       </tags>
   </entry>
   <entry>
-    <title>(8) Gulp-檔案壓縮</title>
-    <url>/2022/06/17/2022-6-17-4-Gulp-compress/</url>
-    <content><![CDATA[<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><ol>
-<li>壓縮 css套件: <a href="https://www.npmjs.com/package/gulp-clean-css">gulp-clean-css</a></li>
-<li>壓縮 js套件: <a href="https://www.npmjs.com/package/gulp-uglify">gulp-uglify</a></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp-clean-css gulp-uglify --save</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>壓縮css的部分，可以在編譯完scss後，進行壓縮</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sassTask</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> plugins = [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>(&#123;</span><br><span class="line">      <span class="attr">includePaths</span>: [<span class="string">&#x27;./node_modules/bootstrap/scss&#x27;</span>]</span><br><span class="line">    &#125;).<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">postcss</span>(plugins))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">cleanCss</span>(&#123; <span class="attr">compatibility</span>: <span class="string">&#x27;ie8&#x27;</span> &#125;)))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*mpisvD3qy987427Pd2n-kg.png" alt="壓縮css程式碼"></p>
-<p>壓縮js的部分，可在babel編譯完後並且合併後( concat ) 進行壓縮</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/js/**/*.js&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>(9) Gulp-if</title>
+    <url>/2022/06/18/2022-6-18-1-Gulp-if/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>通常在開發項目時，我們會分所謂的 development(開發環境) 與 production(生產環境)，在開發環境時，我們不會壓縮檔案，直到生產環境時，才會做檔案壓縮。此時，可以用 Minimist 命令行參數解析工具區分 Gulp 套件在 development 與 production 環境下的使用。</p>
+<h2 id="Minimist-套件安裝"><a href="#Minimist-套件安裝" class="headerlink" title="Minimist 套件安裝"></a>Minimist 套件安裝</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install minimist   </span><br><span class="line">$ npm install gulp-if</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*1anhKo-vPFyBKX4scALEZw.png" alt="壓縮js"></p>
-<h2 id="壓縮成果"><a href="#壓縮成果" class="headerlink" title="壓縮成果"></a>壓縮成果</h2><ol>
-<li>css被壓成一行</li>
-</ol>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*tweaZBqP0_OJL3SnSgi-fQ.png" alt="css"></p>
-<ol start="2">
-<li>js被壓成一行</li>
-</ol>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*O3lohBob7h6KxqHGfVvong.png" alt="js"></p>
+<p>在gulpfile.js 中，載入 minimist</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> minimist= <span class="built_in">require</span>(<span class="string">&#x27;minimist&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="設定環境參數"><a href="#設定環境參數" class="headerlink" title="設定環境參數"></a>設定環境參數</h2><p>並設定envOption環境參數，以下面範例來說，預設是帶入字串，並且是develop這個環境。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> envOption = &#123;</span><br><span class="line">  <span class="attr">string</span>: <span class="string">&#x27;env&#x27;</span>,</span><br><span class="line">  <span class="attr">default</span>: &#123; <span class="attr">env</span>: <span class="string">&#x27;dev&#x27;</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用minimist將環境參數讀入，並在後方帶入 envOption環境選項。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> options = <span class="title function_">minimist</span>(process.<span class="property">argv</span>.<span class="title function_">slice</span>(<span class="number">2</span>), envOption)</span><br></pre></td></tr></table></figure>
+
+<p>process.argv.slice(2) 這行意思是跳過前兩個 – 字元直接讀取 env 這個字串。<br>此時用console.log(options)，可以看到options目前環境參數是 develop</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*b1cLVsVXiWwj834lXdwTYA.png" alt="console"></p>
+<p>若要更改參數，則可用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gulp --env 參數名稱</span><br></pre></td></tr></table></figure>
+
+<p>例如我在commend line 上輸入 <code>gulp --env prod</code> 就可將環境參數從dev改成prod。</p>
+<h2 id="使用gulp-if套件搭配環境參數"><a href="#使用gulp-if套件搭配環境參數" class="headerlink" title="使用gulp-if套件搭配環境參數"></a>使用gulp-if套件搭配環境參數</h2><p>環境參數設定好後，就可用gulp-if套件來判斷當前環境是 開發環境(dev) 還是 生產環境 (prod)。<br>讓我們能判斷如果是生產環境，則壓縮檔案，如果不是則不壓縮檔案。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(path.<span class="property">js</span>.<span class="property">src</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">if</span>(options.<span class="property">env</span> === <span class="string">&#x27;prod&#x27;</span>, $.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(path.<span class="property">js</span>.<span class="property">des</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面我們用了 gulp-if 來判斷當前環境變數是不是 prod，是的話則執行 uglify來壓縮。</p>
 ]]></content>
       <categories>
         <category>Gulp</category>
@@ -366,29 +367,28 @@
       </tags>
   </entry>
   <entry>
-    <title>(9) Gulp-if</title>
-    <url>/2022/06/18/2022-6-18-1-Gulp-if/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>通常在開發項目時，我們會分所謂的 development(開發環境) 與 production(生產環境)，在開發環境時，我們不會壓縮檔案，直到生產環境時，才會做檔案壓縮。此時，可以用 Minimist 命令行參數解析工具區分 Gulp 套件在 development 與 production 環境下的使用。</p>
-<h2 id="Minimist-套件安裝"><a href="#Minimist-套件安裝" class="headerlink" title="Minimist 套件安裝"></a>Minimist 套件安裝</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install minimist   </span><br><span class="line">$ npm install gulp-if</span><br></pre></td></tr></table></figure>
+    <title>(8) Gulp-檔案壓縮</title>
+    <url>/2022/06/17/2022-6-17-4-Gulp-compress/</url>
+    <content><![CDATA[<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><ol>
+<li>壓縮 css套件: <a href="https://www.npmjs.com/package/gulp-clean-css">gulp-clean-css</a></li>
+<li>壓縮 js套件: <a href="https://www.npmjs.com/package/gulp-uglify">gulp-uglify</a></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp-clean-css gulp-uglify --save</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>壓縮css的部分，可以在編譯完scss後，進行壓縮</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sassTask</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> plugins = [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>(&#123;</span><br><span class="line">      <span class="attr">includePaths</span>: [<span class="string">&#x27;./node_modules/bootstrap/scss&#x27;</span>]</span><br><span class="line">    &#125;).<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">postcss</span>(plugins))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">cleanCss</span>(&#123; <span class="attr">compatibility</span>: <span class="string">&#x27;ie8&#x27;</span> &#125;)))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*mpisvD3qy987427Pd2n-kg.png" alt="壓縮css程式碼"></p>
+<p>壓縮js的部分，可在babel編譯完後並且合併後( concat ) 進行壓縮</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/js/**/*.js&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在gulpfile.js 中，載入 minimist</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> minimist= <span class="built_in">require</span>(<span class="string">&#x27;minimist&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="設定環境參數"><a href="#設定環境參數" class="headerlink" title="設定環境參數"></a>設定環境參數</h2><p>並設定envOption環境參數，以下面範例來說，預設是帶入字串，並且是develop這個環境。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> envOption = &#123;</span><br><span class="line">  <span class="attr">string</span>: <span class="string">&#x27;env&#x27;</span>,</span><br><span class="line">  <span class="attr">default</span>: &#123; <span class="attr">env</span>: <span class="string">&#x27;dev&#x27;</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>用minimist將環境參數讀入，並在後方帶入 envOption環境選項。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> options = <span class="title function_">minimist</span>(process.<span class="property">argv</span>.<span class="title function_">slice</span>(<span class="number">2</span>), envOption)</span><br></pre></td></tr></table></figure>
-
-<p>process.argv.slice(2) 這行意思是跳過前兩個 – 字元直接讀取 env 這個字串。<br>此時用console.log(options)，可以看到options目前環境參數是 develop</p>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*b1cLVsVXiWwj834lXdwTYA.png" alt="console"></p>
-<p>若要更改參數，則可用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gulp --env 參數名稱</span><br></pre></td></tr></table></figure>
-
-<p>例如我在commend line 上輸入 <code>gulp --env prod</code> 就可將環境參數從dev改成prod。</p>
-<h2 id="使用gulp-if套件搭配環境參數"><a href="#使用gulp-if套件搭配環境參數" class="headerlink" title="使用gulp-if套件搭配環境參數"></a>使用gulp-if套件搭配環境參數</h2><p>環境參數設定好後，就可用gulp-if套件來判斷當前環境是 開發環境(dev) 還是 生產環境 (prod)。<br>讓我們能判斷如果是生產環境，則壓縮檔案，如果不是則不壓縮檔案。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(path.<span class="property">js</span>.<span class="property">src</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">if</span>(options.<span class="property">env</span> === <span class="string">&#x27;prod&#x27;</span>, $.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(path.<span class="property">js</span>.<span class="property">des</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面我們用了 gulp-if 來判斷當前環境變數是不是 prod，是的話則執行 uglify來壓縮。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*1anhKo-vPFyBKX4scALEZw.png" alt="壓縮js"></p>
+<h2 id="壓縮成果"><a href="#壓縮成果" class="headerlink" title="壓縮成果"></a>壓縮成果</h2><ol>
+<li>css被壓成一行</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*tweaZBqP0_OJL3SnSgi-fQ.png" alt="css"></p>
+<ol start="2">
+<li>js被壓成一行</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*O3lohBob7h6KxqHGfVvong.png" alt="js"></p>
 ]]></content>
       <categories>
         <category>Gulp</category>
@@ -426,26 +426,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(1) SCSS練功坊-基礎介紹</title>
-    <url>/2022/06/18/2022-6-18-5-scss-intro/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>scss屬於css的預處理器，他加入了程式語言所用的變數、迴圈、模組化等概念，讓我們更方便管理css。<br>現今較為主流的 CSS 預處理器有三種，分別是 Sass&#x2F;SCSS、Less、Stylus，其中的 Sass&#x2F;SCSS 是目前較多人使用的選擇。</p>
-<h2 id="scss-語法介紹"><a href="#scss-語法介紹" class="headerlink" title="scss 語法介紹"></a>scss 語法介紹</h2><h3 id="巢狀寫法（Nesting）"><a href="#巢狀寫法（Nesting）" class="headerlink" title="巢狀寫法（Nesting）"></a>巢狀寫法（Nesting）</h3><p>以往寫css時，為了選取到某個元素底下的標籤，我們可能會重複選取該元素許多次，例如:</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面程式碼中，我們重複寫了 .card 3次。</p>
-<p>在scss中我們可以用巢狀的寫法來減少重複的code，並且當父元素的class更改時，也只需要改一次即可:</p>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="selector-tag">ul</span> &#123;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>scss的功能除了上述介紹的巢狀語法以外，還有許多如變數、函式、mixin、模組化等概念會在之後等章節來介紹喔。</p>
-]]></content>
-      <categories>
-        <category>scss</category>
-      </categories>
-      <tags>
-        <tag>scss</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(11) Gulp-git</title>
     <url>/2022/06/18/2022-6-18-3-Gulp-git/</url>
     <content><![CDATA[<h2 id="初始化git"><a href="#初始化git" class="headerlink" title="初始化git"></a>初始化git</h2><p>這章節，我們來幫gulp專案加入 git 版本控制，若電腦還沒安裝git的話，可以先到<a href="https://git-scm.com/">git官網</a>下載git並安裝。</p>
@@ -475,6 +455,42 @@
       </tags>
   </entry>
   <entry>
+    <title>(3) SCSS練功坊-計算功能</title>
+    <url>/2022/06/19/2022-6-19-2-scss-calc/</url>
+    <content><![CDATA[<h2 id="計算功能"><a href="#計算功能" class="headerlink" title="計算功能"></a>計算功能</h2><p>在 SCSS裡，我們可以用變數來做加減乘除等運算，如下我設定了 $font-size: 16px，之後再利用這個變數做運算，計算出其他font-size大小。但要注意計算時單位必須一樣。</p>
+<p><img src="https://miro.medium.com/max/1028/1*n0VDI1urUorAt3oPPs4YXA.png" alt="font-size"></p>
+<p>計算單位 除了px單位外，em與%數也可以，但假使你用px+em與%單位的話，會跳錯誤，因為單位不同。</p>
+<h2 id="範例-計算container-寬度"><a href="#範例-計算container-寬度" class="headerlink" title="範例: 計算container 寬度"></a>範例: 計算container 寬度</h2><p>有一個 container 寬度為 $width :920px；裡面有6個子元素box，利用 width &#x2F; 6 ，直接算出每個box寬度。</p>
+<p><img src="https://miro.medium.com/max/842/1*EzxbD-ztoCWUm-wqE3OVLA.png" alt="container"></p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(1) SCSS練功坊-基礎介紹</title>
+    <url>/2022/06/18/2022-6-18-5-scss-intro/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>scss屬於css的預處理器，他加入了程式語言所用的變數、迴圈、模組化等概念，讓我們更方便管理css。<br>現今較為主流的 CSS 預處理器有三種，分別是 Sass&#x2F;SCSS、Less、Stylus，其中的 Sass&#x2F;SCSS 是目前較多人使用的選擇。</p>
+<h2 id="scss-語法介紹"><a href="#scss-語法介紹" class="headerlink" title="scss 語法介紹"></a>scss 語法介紹</h2><h3 id="巢狀寫法（Nesting）"><a href="#巢狀寫法（Nesting）" class="headerlink" title="巢狀寫法（Nesting）"></a>巢狀寫法（Nesting）</h3><p>以往寫css時，為了選取到某個元素底下的標籤，我們可能會重複選取該元素許多次，例如:</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面程式碼中，我們重複寫了 .card 3次。</p>
+<p>在scss中我們可以用巢狀的寫法來減少重複的code，並且當父元素的class更改時，也只需要改一次即可:</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="selector-tag">ul</span> &#123;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>scss的功能除了上述介紹的巢狀語法以外，還有許多如變數、函式、mixin、模組化等概念會在之後等章節來介紹喔。</p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(2) SCSS練功坊-變數variable</title>
     <url>/2022/06/19/2022-6-19-1-scss-variable/</url>
     <content><![CDATA[<h2 id="以往css遇到的問題"><a href="#以往css遇到的問題" class="headerlink" title="以往css遇到的問題"></a>以往css遇到的問題</h2><p>以往在寫css時，可能我們會直接將顏色的值寫死，例如:</p>
@@ -493,22 +509,6 @@
 <p><img src="https://miro.medium.com/max/1004/1*jvZyuT0ob0GIxXyu3fdjoQ.png" alt="va"></p>
 <p><img src="https://miro.medium.com/max/1048/1*ZgC18gRiXbzEUl_FiZrwuQ.png" alt="編譯後"></p>
 <h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>學會使用變數以後，就不用辛苦的一個一個修改css了，全站的設定統一由變數管理，讓之後的修改與維護更輕鬆。</p>
-]]></content>
-      <categories>
-        <category>scss</category>
-      </categories>
-      <tags>
-        <tag>scss</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(3) SCSS練功坊-計算功能</title>
-    <url>/2022/06/19/2022-6-19-2-scss-calc/</url>
-    <content><![CDATA[<h2 id="計算功能"><a href="#計算功能" class="headerlink" title="計算功能"></a>計算功能</h2><p>在 SCSS裡，我們可以用變數來做加減乘除等運算，如下我設定了 $font-size: 16px，之後再利用這個變數做運算，計算出其他font-size大小。但要注意計算時單位必須一樣。</p>
-<p><img src="https://miro.medium.com/max/1028/1*n0VDI1urUorAt3oPPs4YXA.png" alt="font-size"></p>
-<p>計算單位 除了px單位外，em與%數也可以，但假使你用px+em與%單位的話，會跳錯誤，因為單位不同。</p>
-<h2 id="範例-計算container-寬度"><a href="#範例-計算container-寬度" class="headerlink" title="範例: 計算container 寬度"></a>範例: 計算container 寬度</h2><p>有一個 container 寬度為 $width :920px；裡面有6個子元素box，利用 width &#x2F; 6 ，直接算出每個box寬度。</p>
-<p><img src="https://miro.medium.com/max/842/1*EzxbD-ztoCWUm-wqE3OVLA.png" alt="container"></p>
 ]]></content>
       <categories>
         <category>scss</category>
@@ -561,24 +561,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(6) SCSS練功坊-extend</title>
-    <url>/2022/06/19/2022-6-19-5-scss-extend/</url>
-    <content><![CDATA[<h2 id="合併樣式"><a href="#合併樣式" class="headerlink" title="合併樣式"></a>合併樣式</h2><p>當我們有一段樣式常常用到，可以用@extend來將樣式合併在一起。</p>
-<p>使用 % +class 撰寫要合併之樣式，並用@extend 來載入樣式。</p>
-<p><img src="https://miro.medium.com/max/1220/1*E5-ebZ9tVXeHmwf4i4uN2w.png" alt="extend"></p>
-<p><img src="https://miro.medium.com/max/1134/1*gUgESgMLa1DmyLz94Rp9Rw.png" alt="編譯後"></p>
-<h2 id="Mixin與extend的使用時機"><a href="#Mixin與extend的使用時機" class="headerlink" title="Mixin與extend的使用時機"></a>Mixin與extend的使用時機</h2><p>基本上來說，<br>@mixin是將程式碼帶入到對應的class去，同時可帶入變數。<br>@extend則是藉由class合併，並吃到共通樣式，但沒辦法帶入變數。</p>
-<p>所以如果你的樣式都固定不變的，不會需要用參數帶進去改變樣式的話，<br>那就用@extend，程式碼會比較少些。</p>
-<p>但如果你的程式碼需要帶入多個變數進行運算時，<br>那用@mixin則較適合。</p>
-]]></content>
-      <categories>
-        <category>scss</category>
-      </categories>
-      <tags>
-        <tag>scss</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(5) SCSS練功坊-mixin</title>
     <url>/2022/06/19/2022-6-19-4-scss-mixin/</url>
     <content><![CDATA[<h2 id="使用-mixin-管理重複的樣式"><a href="#使用-mixin-管理重複的樣式" class="headerlink" title="使用 mixin 管理重複的樣式"></a>使用 mixin 管理重複的樣式</h2><p>當我們有一段樣式，會被重複用到，裡頭樣式數值又會有不同時，可以用mixin做管理。<br>撰寫mixin方法</p>
@@ -597,18 +579,12 @@
       </tags>
   </entry>
   <entry>
-    <title>(9) SCSS練功坊-7+1資料夾規劃</title>
-    <url>/2022/06/20/2022-6-20-3-scss-7-1/</url>
-    <content><![CDATA[<h2 id="7-1-資料夾規劃"><a href="#7-1-資料夾規劃" class="headerlink" title="7 + 1 資料夾規劃"></a>7 + 1 資料夾規劃</h2><p>當我們有許多SCSS檔案要規劃時，可以使用7+1歸納法，也就是7個資料夾搭配 1個 all.scss檔案</p>
-<p><img src="https://miro.medium.com/max/1128/1*jmb4MvIeinaRy7etvwvhZw.png" alt="img"></p>
-<h3 id="abstract-資料夾"><a href="#abstract-資料夾" class="headerlink" title="abstract 資料夾"></a>abstract 資料夾</h3><p>放 variables、mixin、funtion等不會真正產出 css 的 scss 檔案</p>
-<h3 id="base-資料夾"><a href="#base-資料夾" class="headerlink" title="base 資料夾"></a>base 資料夾</h3><p>放 base.scss 、 reset.scss、Typography等全域設定的scss</p>
-<h3 id="components-資料夾"><a href="#components-資料夾" class="headerlink" title="components 資料夾"></a>components 資料夾</h3><p>放全站都會用到的元件，如 button 、 label、nav等等</p>
-<h3 id="layout-資料夾"><a href="#layout-資料夾" class="headerlink" title="layout 資料夾"></a>layout 資料夾</h3><p>放全站共用的layout區塊，如 grid 、header、footer等等</p>
-<h3 id="pages-資料夾"><a href="#pages-資料夾" class="headerlink" title="pages 資料夾"></a>pages 資料夾</h3><p>放 每頁不同的scss</p>
-<h3 id="themes資料夾"><a href="#themes資料夾" class="headerlink" title="themes資料夾"></a>themes資料夾</h3><p>如果你的網站有主題樣式，可以放這裡</p>
-<h3 id="vendor-資料夾"><a href="#vendor-資料夾" class="headerlink" title="vendor 資料夾"></a>vendor 資料夾</h3><p>放外部資源的scss檔，如bootstrap.scss</p>
-<p>另外可參考<a href="https://gist.github.com/rveitch/84cea9650092119527bc">此網站配置</a></p>
+    <title>(7) SCSS練功坊-顏色函數</title>
+    <url>/2022/06/20/2022-6-20-1-scss-color/</url>
+    <content><![CDATA[<h2 id="顏色函數"><a href="#顏色函數" class="headerlink" title="顏色函數"></a>顏色函數</h2><p><img src="https://miro.medium.com/max/1400/1*SFb0wzFGrTw4byZVEbn_8g.png" alt="color"></p>
+<p>在SCSS中 ，可以利用一些內建的函數，來調整顏色。</p>
+<p>如: darken(#fff, 20%) &#x2F;&#x2F;將白色調暗10%；</p>
+<p>lighten(#000,30% ) &#x2F;&#x2F;將黑色調亮10%;</p>
 ]]></content>
       <categories>
         <category>scss</category>
@@ -618,12 +594,15 @@
       </tags>
   </entry>
   <entry>
-    <title>(7) SCSS練功坊-顏色函數</title>
-    <url>/2022/06/20/2022-6-20-1-scss-color/</url>
-    <content><![CDATA[<h2 id="顏色函數"><a href="#顏色函數" class="headerlink" title="顏色函數"></a>顏色函數</h2><p><img src="https://miro.medium.com/max/1400/1*SFb0wzFGrTw4byZVEbn_8g.png" alt="color"></p>
-<p>在SCSS中 ，可以利用一些內建的函數，來調整顏色。</p>
-<p>如: darken(#fff, 20%) &#x2F;&#x2F;將白色調暗10%；</p>
-<p>lighten(#000,30% ) &#x2F;&#x2F;將黑色調亮10%;</p>
+    <title>(6) SCSS練功坊-extend</title>
+    <url>/2022/06/19/2022-6-19-5-scss-extend/</url>
+    <content><![CDATA[<h2 id="合併樣式"><a href="#合併樣式" class="headerlink" title="合併樣式"></a>合併樣式</h2><p>當我們有一段樣式常常用到，可以用@extend來將樣式合併在一起。</p>
+<p>使用 % +class 撰寫要合併之樣式，並用@extend 來載入樣式。</p>
+<p><img src="https://miro.medium.com/max/1220/1*E5-ebZ9tVXeHmwf4i4uN2w.png" alt="extend"></p>
+<p><img src="https://miro.medium.com/max/1134/1*gUgESgMLa1DmyLz94Rp9Rw.png" alt="編譯後"></p>
+<h2 id="Mixin與extend的使用時機"><a href="#Mixin與extend的使用時機" class="headerlink" title="Mixin與extend的使用時機"></a>Mixin與extend的使用時機</h2><p>基本上來說，<br>@mixin是將程式碼帶入到對應的class去，同時可帶入變數。<br>@extend則是藉由class合併，並吃到共通樣式，但沒辦法帶入變數。</p>
+<p>所以如果你的樣式都固定不變的，不會需要用參數帶進去改變樣式的話，<br>那就用@extend，程式碼會比較少些。</p>
+<p>但如果你的程式碼需要帶入多個變數進行運算時，<br>那用@mixin則較適合。</p>
 ]]></content>
       <categories>
         <category>scss</category>
@@ -662,6 +641,87 @@
       </tags>
   </entry>
   <entry>
+    <title>(9) SCSS練功坊-7+1資料夾規劃</title>
+    <url>/2022/06/20/2022-6-20-3-scss-7-1/</url>
+    <content><![CDATA[<h2 id="7-1-資料夾規劃"><a href="#7-1-資料夾規劃" class="headerlink" title="7 + 1 資料夾規劃"></a>7 + 1 資料夾規劃</h2><p>當我們有許多SCSS檔案要規劃時，可以使用7+1歸納法，也就是7個資料夾搭配 1個 all.scss檔案</p>
+<p><img src="https://miro.medium.com/max/1128/1*jmb4MvIeinaRy7etvwvhZw.png" alt="img"></p>
+<h3 id="abstract-資料夾"><a href="#abstract-資料夾" class="headerlink" title="abstract 資料夾"></a>abstract 資料夾</h3><p>放 variables、mixin、funtion等不會真正產出 css 的 scss 檔案</p>
+<h3 id="base-資料夾"><a href="#base-資料夾" class="headerlink" title="base 資料夾"></a>base 資料夾</h3><p>放 base.scss 、 reset.scss、Typography等全域設定的scss</p>
+<h3 id="components-資料夾"><a href="#components-資料夾" class="headerlink" title="components 資料夾"></a>components 資料夾</h3><p>放全站都會用到的元件，如 button 、 label、nav等等</p>
+<h3 id="layout-資料夾"><a href="#layout-資料夾" class="headerlink" title="layout 資料夾"></a>layout 資料夾</h3><p>放全站共用的layout區塊，如 grid 、header、footer等等</p>
+<h3 id="pages-資料夾"><a href="#pages-資料夾" class="headerlink" title="pages 資料夾"></a>pages 資料夾</h3><p>放 每頁不同的scss</p>
+<h3 id="themes資料夾"><a href="#themes資料夾" class="headerlink" title="themes資料夾"></a>themes資料夾</h3><p>如果你的網站有主題樣式，可以放這裡</p>
+<h3 id="vendor-資料夾"><a href="#vendor-資料夾" class="headerlink" title="vendor 資料夾"></a>vendor 資料夾</h3><p>放外部資源的scss檔，如bootstrap.scss</p>
+<p>另外可參考<a href="https://gist.github.com/rveitch/84cea9650092119527bc">此網站配置</a></p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(2) CSS 基礎篇-background-image</title>
+    <url>/2022/06/21/2022-6-21-2-css-bg/</url>
+    <content><![CDATA[<h2 id="background-image"><a href="#background-image" class="headerlink" title="background-image"></a>background-image</h2><p>background-image 可以設定一張或多張的圖片，寫法如下:</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;tim.png&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>背景圖片的設定，在不控制大小的情況下，預設就是原始圖片大小，且圖片僅會顯示在區塊的範圍內，也就是說當圖片太大張的時候，圖片將會發生裁切的情形。另外，當同時設定了background-color與background-image的時候，background-image將會蓋住background-color。</p>
+<p>background-image支援的值有以下幾種</p>
+<ul>
+<li>url( )</li>
+<li>linear-gradient( )</li>
+<li>radial-gradient( )</li>
+<li>repeating-linear-gradient( )</li>
+<li>repeating-radial-gradient()</li>
+<li>Inital</li>
+<li>Inherit</li>
+</ul>
+<h2 id="url-設定"><a href="#url-設定" class="headerlink" title="url() 設定"></a>url() 設定</h2><p>url所要撰寫的是圖片檔案所在的位置，可使用</p>
+<ul>
+<li><p>相對路徑: (“..&#x2F;pic&#x2F;01.jpg”);</p>
+</li>
+<li><p>絕對路徑: (“<a href="https://medium.com/&quot;">https://medium.com/&quot;</a>);</p>
+</li>
+</ul>
+<h2 id="多重背景功能"><a href="#多重背景功能" class="headerlink" title="多重背景功能"></a>多重背景功能</h2><p><img src="https://miro.medium.com/max/1336/1*hj-Xjk2RizivLb7zWblx3Q.png" alt="多重背景"></p>
+<p>可以寫入多張背景圖的url，並在每個url之間使用了逗號做區隔，要注意</p>
+<ol>
+<li>背景圖片的堆疊是按照順序的，先寫的則顯示在前，後寫的顯示在後，依序堆疊</li>
+<li>背景圖片設定不要重複(background-repeat: no-repeat;)</li>
+<li>背景圖片的位置設定要錯開(position)</li>
+</ol>
+<h2 id="漸層背景設定"><a href="#漸層背景設定" class="headerlink" title="漸層背景設定"></a>漸層背景設定</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">background-image: linear-gradient(起始色彩, 結束色彩);</span><br></pre></td></tr></table></figure>
+
+<p>指定方向漸層</p>
+<p><img src="https://miro.medium.com/max/1374/1*yBOyNTlobUkGFw_qt1a4Yg.png" alt="漸層設定"></p>
+<ul>
+<li>to top (下方漸層到上方)</li>
+<li>to right (左方漸層到右方)</li>
+<li>to bottom (上方漸層到下方)</li>
+<li>to left (右方漸層到左方)</li>
+<li>to top left (右下漸層到左上)</li>
+<li>to top right (左下漸層到右上)</li>
+<li>to bottom right (左上漸層到右下)</li>
+<li>to bottom left (右上漸層到左下)</li>
+</ul>
+<p><img src="https://miro.medium.com/max/1114/1*qsdu8QDqQ-SRelX0DySwLw.png" alt="漸層設定"></p>
+<p>或直接寫(60deg,起始顏色，結束顏色)</p>
+<h2 id="背景重複設定"><a href="#背景重複設定" class="headerlink" title="背景重複設定"></a>背景重複設定</h2><ol>
+<li>background-repeat: no-repeat</li>
+<li>background-repeat: repeat-x (水平方向位移)</li>
+<li>background-repeat: repeat-y(垂直方向位移)</li>
+</ol>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS基礎篇</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(1) CSS 響應式設計-文字大小</title>
     <url>/2022/06/20/2022-6-20-4-rwd-text/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>當我們設計一個響應式的網站時，除了版面隨著裝置大小不同，文字大小也會不同。例如手機板的文字應該就要比桌機版的文字來的小。這章節就介紹一些設定響應式文字的方法。</p>
@@ -690,25 +750,180 @@
       </tags>
   </entry>
   <entry>
-    <title>(3) Hexo-基礎Hexo指令</title>
-    <url>/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
-<h2 id="基礎Hexo指令"><a href="#基礎Hexo指令" class="headerlink" title="基礎Hexo指令"></a>基礎Hexo指令</h2><ul>
-<li><code>hexo new &#39;新文章&#39;</code>  新增文章</li>
-<li><code>hexo generate</code> 產生編譯後的靜態檔案</li>
-<li><code>hexo server</code> 開啟一個本地端伺服器</li>
-<li><code>hexo clean</code> 清除暫存檔案</li>
-<li><code>hexo deploy</code> 部屬靜態檔案</li>
-</ul>
-<h2 id="產生新文章"><a href="#產生新文章" class="headerlink" title="產生新文章"></a>產生新文章</h2><p>要產生一篇新的文章，可以用 <code>hexo new &#39;新文章</code> 指令，產生後的文章會放在 <code>source</code> 資料夾的 <code>_posts</code>裡</p>
-<h2 id="產生編譯後的檔案"><a href="#產生編譯後的檔案" class="headerlink" title="產生編譯後的檔案"></a>產生編譯後的檔案</h2><p>當文章寫完後，需要將md檔案進行編譯，此時可以用 <code>hexo generate</code> 指令，編譯完後會產生一個 <code>public</code> 資料夾，作為之後部屬使用。<br>此指令的簡寫為 <code>hexo g</code></p>
-<h2 id="開啟一個本地端伺服器"><a href="#開啟一個本地端伺服器" class="headerlink" title="開啟一個本地端伺服器"></a>開啟一個本地端伺服器</h2><p>當靜態檔案編譯完後，可以用 <code>hexo server</code> 指令開啟一個本地端的模擬伺服器，用來即時瀏覽我的寫完的文章，此指令的簡寫為 <code>hexo s</code></p>
-<h2 id="清除暫存檔案"><a href="#清除暫存檔案" class="headerlink" title="清除暫存檔案"></a>清除暫存檔案</h2><p><code>hexo clean</code> 指令主要用來清除一些奇怪的暫存檔案，通常部屬前會先清理一遍。</p>
-<h2 id="部屬靜態檔案"><a href="#部屬靜態檔案" class="headerlink" title="部屬靜態檔案"></a>部屬靜態檔案</h2><p><code>hexo deploy</code> 將我們的靜態網站部屬到雲端使用的指令，詳細用流程在之後部屬的章節會提到。<br>此指令的簡寫為 <code>hexo d</code></p>
-<p>這就是今天 hexo 指令的介紹囉。</p>
+    <title>(1) Git 練功坊-安裝教學</title>
+    <url>/2022/06/21/2022-6-21-3-git-install/</url>
+    <content><![CDATA[<h2 id="什麼是git"><a href="#什麼是git" class="headerlink" title="什麼是git"></a>什麼是git</h2><p>以往在做檔案版本的管理時，最簡單的方法就是複製編輯前的檔案並在檔案名稱加上日期，但是，每次編輯檔案都要複製非常的麻煩，也很容易出錯。</p>
+<p>Git為分散式版本控制系統，可以把檔案的狀態作為更新歷史記錄保存起來。因此可以把編輯過的檔案復原到以前的狀態，也可以顯示編輯過內容的差異。</p>
+<p>本系列文章為參考 <a href="https://courses.hexschool.com/p/git-github">六角學院git課程</a> 紀錄。</p>
+<h2 id="安裝git"><a href="#安裝git" class="headerlink" title="安裝git"></a>安裝git</h2><p><img src="https://miro.medium.com/max/1400/1*9tfhhWJLGL5HM7V99xkKXw.png" alt="git官網"></p>
+<p>先到 <a href="https://git-scm.com/">git官網</a> 下載git</p>
+<h2 id="確認git版本"><a href="#確認git版本" class="headerlink" title="確認git版本"></a>確認git版本</h2><p>在VScode編輯器裡，按 ctrl + ~ 開啟終端機畫面。<br>輸入 <code>git version</code> 確認下載的git版本，若有出現版本號，就安裝成功囉。</p>
+<p><img src="https://miro.medium.com/max/1138/1*Q48Ug1afDJ2JzugYH_fslA.png" alt="git版本"></p>
 ]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
       <tags>
-        <tag>Hexo</tag>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(1) CSS 基礎篇-Position</title>
+    <url>/2022/06/21/2022-6-21-1-css-posotion/</url>
+    <content><![CDATA[<h2 id="Position-屬性介紹"><a href="#Position-屬性介紹" class="headerlink" title="Position 屬性介紹"></a>Position 屬性介紹</h2><p>在網頁中 position 的用途是設定「物件定位時所要的參考對像」，預設狀態下物件的位置是依據資料流來做排列，也就是跟隨資料做排列，如果對物件添加了不同的 position 之後，就能改變物件所參考的空間對像，進而改變物件的位置。</p>
+<p>以下分別介紹各種position 屬性</p>
+<h2 id="static-靜態定位"><a href="#static-靜態定位" class="headerlink" title="static 靜態定位"></a>static 靜態定位</h2><p>是元素的預設值，不會被特別定位」在頁面上特定位置，而是照著瀏覽器預設的配置自動排版在頁面上</p>
+<h2 id="relative-相對定位"><a href="#relative-相對定位" class="headerlink" title="relative 相對定位"></a>relative 相對定位</h2><p>在一個設定為 position: relative 的元素內設定 top 、 right 、 bottom 和 left 屬性，會使其元素「相對地」調整其原本該出現的所在位置，而不管這些「相對定位」過的元素如何在頁面上移動位置或增加了多少空間，都不會影響到原本其他元素所在的位置。可以稱為【偏移顯示】</p>
+<p>不過通常不會對position relative設定top 、 right 等位移，因為會讓元素脫離預設的排版，讓我們很難去設定周圍元素的樣式。</p>
+<p><a href="https://youtu.be/jx5jmI0UlXU?t=166">參考影片</a></p>
+<h2 id="abosulute-絕對定位"><a href="#abosulute-絕對定位" class="headerlink" title="abosulute 絕對定位"></a>abosulute 絕對定位</h2><p>會將元素從預設排版中抽離，就像不存在於html結構中一樣。<br>元素設定 Position abosulute 後會去尋找父層中，有定位的元素做定位，如最常用的 position:relative、或fixed、absolute；<br>若父層都沒有定位元素，就會跟瀏覽器做定位。</p>
+<p>position absolute可以搭配top 、bottom 、right、left 來設定定位位置，如下面範例將元素定位在左上角。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: position;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="absolute搭配-width-height技巧"><a href="#absolute搭配-width-height技巧" class="headerlink" title="absolute搭配 width height技巧"></a>absolute搭配 width height技巧</h3><p>width、height、margin: auto 跟top 、bottom等一起用，可以控制元素的大小與位置，<a href="https://www.youtube.com/watch?v=QGKO0PGzFXQ&t=16s">教學影片</a></p>
+<p><img src="https://miro.medium.com/max/826/1*ThNCveqMOYrXF4nVoTBWkw.png" alt="position"></p>
+<p><img src="https://miro.medium.com/max/1400/1*PIKeD9RV4TGRvLhT3w5ylA.png" alt="position"></p>
+<h2 id="fixed-固定定位"><a href="#fixed-固定定位" class="headerlink" title="fixed 固定定位"></a>fixed 固定定位</h2><p>固定定位（position: fixed）的元素會相對於瀏覽器視窗來定位，這意味著即便頁面捲動，它還是會固定在相同的位置。和 relative 一樣，我們會使用 top 、 right 、 bottom 和 left 屬性來定位。</p>
+<p>固定定位元素不會保留它原本在頁面應有的空間，不會跟其他元素的配置互相干擾。</p>
+<h2 id="sticky-黏著定位"><a href="#sticky-黏著定位" class="headerlink" title="sticky 黏著定位"></a>sticky 黏著定位</h2><p>結合了 position : relative，跟 position: fixed，當使用者沒滑動卷軸時，就跟relative元素一樣，當使用者滑動卷軸時，則跟position: fixed 會固定在視窗上。</p>
+<p><a href="https://codepen.io/tim-chou/pen/NWbvMQL">範例</a></p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS基礎篇</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(3) Git 練功坊-紀錄修改與提交</title>
+    <url>/2022/06/21/2022-6-21-5-git-commit/</url>
+    <content><![CDATA[<p><img src="https://miro.medium.com/max/1400/0*adRfjDwIz9wuzSTb" alt="git流程"></p>
+<h2 id="新增資料並加入索引"><a href="#新增資料並加入索引" class="headerlink" title="新增資料並加入索引"></a>新增資料並加入索引</h2><p>上一章節已經將專案的數據庫建立好了，那我們先在專案內新增一些資料，我先建立一個 「sample.txt」的文字檔案，並在裡面打一些內容。</p>
+<p>此時我們可以將新增的資料加入索引，加入索引的檔案之後才能被commit 提交，方法如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add .    // 將所有更新的檔案加入索引。</span><br><span class="line">git add 檔案名稱  // 將特定檔案加入索引。</span><br></pre></td></tr></table></figure>
+
+<h2 id="查詢檔案狀況"><a href="#查詢檔案狀況" class="headerlink" title="查詢檔案狀況"></a>查詢檔案狀況</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git status  // 查詢目前檔案狀況</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1268/1*0-Hunc2dByNVE3AeTQPTyQ.png" alt="git status"></p>
+<p>上圖中綠色是已加入索引，紅色是未加入。</p>
+<p>若要取消加入索引，可用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git reset HEAD   // 取消已加入索引的全部檔案，此時檔案會呈現未追蹤狀態。</span><br><span class="line">git reset HEAD 檔案名稱   // 取消已加入索引的單個檔案，呈現未追蹤狀態。</span><br></pre></td></tr></table></figure>
+
+<h2 id="提交檔案"><a href="#提交檔案" class="headerlink" title="提交檔案"></a>提交檔案</h2><p>若確認檔案都加入索引後，可以將索引內的檔案提交到數據庫</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git commit -m &quot;更新內容&quot;</span><br></pre></td></tr></table></figure>
+
+<p>我們使用 git commit 將本次的更新提交到數據庫，-m 可以輸入更新的內容重點。<br>通常我們會在專案開發完某個功能後，做一次commit。例如完成首頁輪播功能，或切完首頁版型等等，方便之後做版本切換。</p>
+<p><img src="https://miro.medium.com/max/1400/1*rM-6FClWTQvcFPXmYmq8JQ.png" alt="commit"></p>
+<h2 id="查詢紀錄"><a href="#查詢紀錄" class="headerlink" title="查詢紀錄"></a>查詢紀錄</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git log  // 查詢過去commit 的紀錄</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1400/1*qNvdGY6XePWNMA3h4a--LQ.png" alt="git log"></p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(2) Git 練功坊-數據庫</title>
+    <url>/2022/06/21/2022-6-21-4-git-basic/</url>
+    <content><![CDATA[<h2 id="使用數據庫管理歷史記錄"><a href="#使用數據庫管理歷史記錄" class="headerlink" title="使用數據庫管理歷史記錄"></a>使用數據庫管理歷史記錄</h2><p>數據庫 (Repository) 是git用來記錄檔案或目錄狀態的地方，儲存內容的修改歷史記錄。數據庫可分為兩種</p>
+<ul>
+<li>遠端數據庫 : 配有專用的伺服器，為了讓多人共享而建立的數據庫。</li>
+<li>本地端數據庫 : 在本機專案上建立的數據庫。</li>
+</ul>
+<p>在本地端更新好檔案後，我們可以用push等方法將本地端的資料上傳到遠端數據庫。<br>遠端數據庫的資料有更新時，也可下載更新到本地端。</p>
+<h2 id="初始化git"><a href="#初始化git" class="headerlink" title="初始化git"></a>初始化git</h2><p>如果是第一次用git，需要先輸入姓名和電子信箱的資料</p>
+<p>在終端機輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config — global user.email “ 電子信箱“</span><br><span class="line"></span><br><span class="line">git config — global user.name ”名字”</span><br></pre></td></tr></table></figure>
+
+<p>方便之後再做版本控制時，可以知道是誰修改檔案。</p>
+<h2 id="建立本地端數據庫"><a href="#建立本地端數據庫" class="headerlink" title="建立本地端數據庫"></a>建立本地端數據庫</h2><p>先新開一個專案資料夾並移動進去，先新增一個本地端數據庫<br>在終端機輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init  // 新增本地數據庫</span><br></pre></td></tr></table></figure>
+
+<p>新增完成後，會出現master字樣，代表新增成功囉。</p>
+<p><img src="https://miro.medium.com/max/1354/1*e-Nug4-xJBAoymsYYN91TQ.png" alt="git數據庫"></p>
+<p>數據庫建立好後，下一章節會介紹git基礎語法喔。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(4) Git 練功坊-遠端數據庫</title>
+    <url>/2022/06/21/2022-6-21-6-git-remote/</url>
+    <content><![CDATA[<h2 id="遠端數據庫"><a href="#遠端數據庫" class="headerlink" title="遠端數據庫"></a>遠端數據庫</h2><p>之前介紹過如何再本地端提交更新，今天要教大家將本地端的更新提交到遠端數據庫(Github)。</p>
+<h2 id="註冊Github"><a href="#註冊Github" class="headerlink" title="註冊Github"></a>註冊Github</h2><p>我們要先去 <a href="https://github.com/">GitHub</a> 註冊會員。</p>
+<p><img src="https://ithelp.ithome.com.tw/upload/images/20190908/20119923T2oDPSuQK3.png" alt="github"></p>
+<h2 id="新建一個-repository"><a href="#新建一個-repository" class="headerlink" title="新建一個 repository"></a>新建一個 repository</h2><p>註冊好帳號後，可以在github上新建一個 repository 數據庫</p>
+<p><img src="https://miro.medium.com/max/1400/1*7xMLMI0zZ87X4s9Hi4EIHg.png" alt="repository"></p>
+<p>這邊填寫數據庫名稱</p>
+<p><img src="https://miro.medium.com/max/1400/1*PdIfUXuiD4hS1HDjNyhU7w.png" alt="repo-name"></p>
+<h2 id="複製遠端數據庫到本地端"><a href="#複製遠端數據庫到本地端" class="headerlink" title="複製遠端數據庫到本地端"></a>複製遠端數據庫到本地端</h2><p>新開一個專案資料夾並移動進去</p>
+<p>輸入:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone 遠端數據庫網址</span><br></pre></td></tr></table></figure>
+
+<p>輸入完後，會將遠端新增的repository複製到本地資料夾內。</p>
+<p><img src="https://miro.medium.com/max/1400/1*TRv6Lzld1DosUcNDlJWErQ.png" alt="git-clone"></p>
+<h2 id="推送資料到遠端數據庫"><a href="#推送資料到遠端數據庫" class="headerlink" title="推送資料到遠端數據庫"></a>推送資料到遠端數據庫</h2><p>再本地端新增資料，並照上個章節的做法 commit完以後，就可以將 commit 上傳到遠端資料夾內囉。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git push  // 將資料推到遠端</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1400/1*7mwBekzTKtNV_DHCBs_txg.png" alt="上傳成功"></p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(1) Js觀念篇 - let、const、var的區別</title>
+    <url>/2022/06/21/2022-6-21-7-js-variables/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在es6以前，我們會用 var 來宣告一個變數。而在es6推出後，新增了 let 與 const的變數宣告方法，改善了使用 var 宣告變數的一些缺點，以下用講解 var 與 let const 宣告的差異。</p>
+<h2 id="區塊與函式作用域"><a href="#區塊與函式作用域" class="headerlink" title="區塊與函式作用域"></a>區塊與函式作用域</h2><p>var是函式作用域的設計，在函式內宣告的變數，函式外讀取不到。<br>但在一些使用了區塊語句(用花括號的語句)的像if, else, for, while等等區塊語句中，在這裡面用var宣告的變數仍然是會曝露到全域之中可被存取，例如:</p>
+<p><img src="https://miro.medium.com/max/1178/1*iO1BqGOT_318PIkF8jjxJQ.png" alt="函式作用域"></p>
+<p>let或const來宣告是區塊作用域，就是以區塊語句 { } 為分界的作用域:</p>
+<p>不管是在函式內宣告的變數，或是 在 if, else, for, while等等區塊語句{ }中宣告的變數，都不會在全域中被讀取到。</p>
+<p><img src="https://miro.medium.com/max/964/1*1IltRn_k3xANnY6fWcZW1A.png" alt="區塊作用域"></p>
+<h2 id="重複宣告的問題"><a href="#重複宣告的問題" class="headerlink" title="重複宣告的問題"></a>重複宣告的問題</h2><p>以往用 var 宣告變數，是可以進行重複宣告的: </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>這樣可能會不小心複寫了變數的值，導致專案出錯。</p>
+<p>用 const let 告的變數，在同一個作用域下，則無法重新再被宣告。</p>
+<p><img src="https://miro.medium.com/max/440/1*06HErRPc-Jcyhazl3fuj7w.png" alt="const let"></p>
+<p><img src="https://miro.medium.com/max/1286/1*zsSWcfXZBnj3Ap1D5JE7Pg.png" alt="error"></p>
+<h2 id="常數"><a href="#常數" class="headerlink" title="常數"></a>常數</h2><p>const 針對是常數的定義，常數在一宣告時就必定要指定給值，不然會產生錯誤。而對於常數在ES6的定義是: 不可再指定。</p>
+<p><img src="https://miro.medium.com/max/1278/1*lpOInYC-ccAVD_dBcv5csg.png" alt="const"></p>
+<p>上面因為再次賦予 a &#x3D; 20 而出現錯誤。</p>
+<p>如果你宣告的常數是一個物件或陣列類型，像這種參照類型的值，裡面的值是可以作改變的，如下:</p>
+<p><img src="https://miro.medium.com/max/336/1*IP1XW0OtYFB_Am976yXjNA.png" alt="array"></p>
+<p>所以對於物件、陣列、函式來說，使用 const 常數來宣告就可以，除非你有需要再指定這個陣列或物件的參照。</p>
+<h2 id="Hoisting-向上提升特性"><a href="#Hoisting-向上提升特性" class="headerlink" title="Hoisting 向上提升特性"></a>Hoisting 向上提升特性</h2><p>var 跟 function 都有向上提升特性，在宣告後會自動提升到 js 最上面 ，縱使還沒賦予值，還是先建立好記憶體位置。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> a =<span class="number">3</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<p>如上面程式，我們在第 2 行宣告了 a 變數等於3，但在第一行就讀取a變數，此時並不會報錯，因為 a 已經有記憶體位置了，只是還沒給予值，所以會是 undefined。 在第3行讀取a變數就可以正確讀到 3 的值。</p>
+<p>let 跟 const 沒有向上提升， 必須先宣告、後使用。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b);  <span class="comment">// b is not defined</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">3</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b);  <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>Js觀念篇</tag>
       </tags>
   </entry>
   <entry>
@@ -743,22 +958,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(2) Hexo 撰寫第一篇文章</title>
-    <url>/2022/06/08/2022-6-8-Hexo-%E6%92%B0%E5%AF%AB%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<h2 id="建立你的第一篇文章"><a href="#建立你的第一篇文章" class="headerlink" title="建立你的第一篇文章"></a>建立你的第一篇文章</h2><p>我們可以在Vscode 中，開啟上個章節所建立的專案</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060802.png?alt=media&token=cba3f60e-8fba-4f61-83b4-9668e01bd2e7" alt="專案圖片"></p>
-<p>在Vscode中用快捷鍵 Control + ESC，開啟終端機 </p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060803.png?alt=media&token=e185edcc-77fc-4d1e-8499-b6c467085d8b" alt="終端機"></p>
-<p>然後下方終端機輸入 <code>hexo new &#39;我的第一篇部落格文章&#39;</code> 輸入完後會顯示 <code>INFO  Generated: 2022/06/07/2022-6-7-Hexo-部落格安裝與部屬/index.html</code> 代表文章被順利建立在source資料夾裡的 <code>_posts</code>底下。</p>
-<h2 id="MD-內容"><a href="#MD-內容" class="headerlink" title="MD 內容"></a>MD 內容</h2><p>在md檔案裡，最上面會有可以填寫 標題等欄位<br><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060804.png?alt=media&token=27df0ccb-a65b-434b-aece-6c7af864d641" alt="標題"></p>
-<p>文章撰寫則以Markdown格式為主，若不了解Markdown格式，可以參考 <a href="https://markdown.tw/">markdown</a></p>
-<p>以上就是撰寫文章的方法囉</p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(4) Hexo-部屬部落格</title>
     <url>/2022/06/08/2022-6-8-Hexo-%E9%83%A8%E5%B1%AC%E9%83%A8%E8%90%BD%E6%A0%BC/</url>
     <content><![CDATA[<h2 id="Gihub-Pages"><a href="#Gihub-Pages" class="headerlink" title="Gihub Pages"></a>Gihub Pages</h2><p>本文會使用 Github Pages ，來部屬我們的部落格。</p>
@@ -780,6 +979,28 @@
 
 <p>安裝完後，先使用<code>hexo clean</code> 清除暫存檔，再用 <code>hexo g</code> 來編譯靜態檔，最後用 <code>hexo d</code>來將網站部署上github</p>
 <p>部屬完後輸入你的 githubpages網址，如 <a href="https://tim8076.github.io/">https://tim8076.github.io/</a>，就可以看到部屬好的部落格了。</p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(3) Hexo-基礎Hexo指令</title>
+    <url>/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
+<h2 id="基礎Hexo指令"><a href="#基礎Hexo指令" class="headerlink" title="基礎Hexo指令"></a>基礎Hexo指令</h2><ul>
+<li><code>hexo new &#39;新文章&#39;</code>  新增文章</li>
+<li><code>hexo generate</code> 產生編譯後的靜態檔案</li>
+<li><code>hexo server</code> 開啟一個本地端伺服器</li>
+<li><code>hexo clean</code> 清除暫存檔案</li>
+<li><code>hexo deploy</code> 部屬靜態檔案</li>
+</ul>
+<h2 id="產生新文章"><a href="#產生新文章" class="headerlink" title="產生新文章"></a>產生新文章</h2><p>要產生一篇新的文章，可以用 <code>hexo new &#39;新文章</code> 指令，產生後的文章會放在 <code>source</code> 資料夾的 <code>_posts</code>裡</p>
+<h2 id="產生編譯後的檔案"><a href="#產生編譯後的檔案" class="headerlink" title="產生編譯後的檔案"></a>產生編譯後的檔案</h2><p>當文章寫完後，需要將md檔案進行編譯，此時可以用 <code>hexo generate</code> 指令，編譯完後會產生一個 <code>public</code> 資料夾，作為之後部屬使用。<br>此指令的簡寫為 <code>hexo g</code></p>
+<h2 id="開啟一個本地端伺服器"><a href="#開啟一個本地端伺服器" class="headerlink" title="開啟一個本地端伺服器"></a>開啟一個本地端伺服器</h2><p>當靜態檔案編譯完後，可以用 <code>hexo server</code> 指令開啟一個本地端的模擬伺服器，用來即時瀏覽我的寫完的文章，此指令的簡寫為 <code>hexo s</code></p>
+<h2 id="清除暫存檔案"><a href="#清除暫存檔案" class="headerlink" title="清除暫存檔案"></a>清除暫存檔案</h2><p><code>hexo clean</code> 指令主要用來清除一些奇怪的暫存檔案，通常部屬前會先清理一遍。</p>
+<h2 id="部屬靜態檔案"><a href="#部屬靜態檔案" class="headerlink" title="部屬靜態檔案"></a>部屬靜態檔案</h2><p><code>hexo deploy</code> 將我們的靜態網站部屬到雲端使用的指令，詳細用流程在之後部屬的章節會提到。<br>此指令的簡寫為 <code>hexo d</code></p>
+<p>這就是今天 hexo 指令的介紹囉。</p>
 ]]></content>
       <tags>
         <tag>Hexo</tag>
@@ -812,6 +1033,22 @@
 <p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060907.png?alt=media&token=c97c2e01-2382-4dec-abee-f64b3e5cb980" alt="darkmode"></p>
 <p>以上都設定好後，就可發現我們的部落格套用了nextT主題囉</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060908.png?alt=media&token=7b16821f-7ef1-4b28-b075-5be943ebfd76" alt="theme"></p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(2) Hexo 撰寫第一篇文章</title>
+    <url>/2022/06/08/2022-6-8-Hexo-%E6%92%B0%E5%AF%AB%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<h2 id="建立你的第一篇文章"><a href="#建立你的第一篇文章" class="headerlink" title="建立你的第一篇文章"></a>建立你的第一篇文章</h2><p>我們可以在Vscode 中，開啟上個章節所建立的專案</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060802.png?alt=media&token=cba3f60e-8fba-4f61-83b4-9668e01bd2e7" alt="專案圖片"></p>
+<p>在Vscode中用快捷鍵 Control + ESC，開啟終端機 </p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060803.png?alt=media&token=e185edcc-77fc-4d1e-8499-b6c467085d8b" alt="終端機"></p>
+<p>然後下方終端機輸入 <code>hexo new &#39;我的第一篇部落格文章&#39;</code> 輸入完後會顯示 <code>INFO  Generated: 2022/06/07/2022-6-7-Hexo-部落格安裝與部屬/index.html</code> 代表文章被順利建立在source資料夾裡的 <code>_posts</code>底下。</p>
+<h2 id="MD-內容"><a href="#MD-內容" class="headerlink" title="MD 內容"></a>MD 內容</h2><p>在md檔案裡，最上面會有可以填寫 標題等欄位<br><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060804.png?alt=media&token=27df0ccb-a65b-434b-aece-6c7af864d641" alt="標題"></p>
+<p>文章撰寫則以Markdown格式為主，若不了解Markdown格式，可以參考 <a href="https://markdown.tw/">markdown</a></p>
+<p>以上就是撰寫文章的方法囉</p>
 ]]></content>
       <tags>
         <tag>Hexo</tag>
