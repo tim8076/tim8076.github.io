@@ -80,35 +80,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(8) Hexo-第三方服務</title>
-    <url>/2022/06/10/2022-6-10-2-Hexo-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8B%99/</url>
-    <content><![CDATA[<h2 id="新增第三方服務"><a href="#新增第三方服務" class="headerlink" title="新增第三方服務"></a>新增第三方服務</h2><p>當我打開 <code>_config.next.yml</code> ，會發現NextT也整合了一些第三方服務進來，大多都只需要申請帳號並填入 ID 就可以使用。<br>以下就介紹幾個好用的服務。</p>
-<h2 id="Disqus"><a href="#Disqus" class="headerlink" title="Disqus"></a>Disqus</h2><p>Disqus 是一個留言板服務，安裝流程如下</p>
-<ol>
-<li><p>到 <a href="https://disqus.com/">Disqus</a> 官網註冊一個帳號並登入。按下 <code>GET STARTED</code>按鈕，並選擇 <code> I want to install Disqus on my site</code>選項，就會來到 <code>Create a new site</code> 頁面。</p>
-</li>
-<li><p>輸入你的 <code>Website Name</code>，並按下 <code>Create Site </code>。</p>
-</li>
-<li><p>這邊就建立好你的 disqus帳號了</p>
-</li>
-</ol>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061102.png?alt=media&token=518dfa72-a8fe-4c81-bead-89bc3a59e874" alt="disqus"></p>
-<ol start="4">
-<li>回到 <code>_config.next.yml</code>，將 disqus 選項改為true，並在shortname填入剛才在disqus設定的 <code>Website Name</code></li>
-</ol>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061103.png?alt=media&token=3a8584ce-3749-4640-99c0-c8ecd574faa7" alt="disqus-setting"></p>
-<ol start="5">
-<li>以上就完成了留言板設置囉</li>
-</ol>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061104.png?alt=media&token=dc77ed95-13ce-4a34-9769-1297dc7c1bda" alt="comments"></p>
-<h2 id="圖片顯示"><a href="#圖片顯示" class="headerlink" title="圖片顯示"></a>圖片顯示</h2><p>NextT 內建有兩種圖片顯示的方式，分別是 fancybox 和 mediumzoom，只要到 <code>_config.next.yml</code>，將選項改為true即可。但記得不要同時開啟 fancybox 和 mediumzoom。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061101.png?alt=media&token=c62c2900-a1e0-4d60-9a0a-bf13dc66d7a3" alt="image"></p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(2) JS30實作系列 時鐘</title>
     <url>/2022/06/15/2022-6-15-1-JS30-clock/</url>
     <content><![CDATA[<p><img src="https://miro.medium.com/max/1400/1*JH-e_9OQS1lBH7hqb7lMXQ.png" alt="clock"></p>
@@ -141,6 +112,32 @@
       </tags>
   </entry>
   <entry>
+    <title>(4) Gulp-編譯scss</title>
+    <url>/2022/06/16/2022-6-15-4-Gulp-%E7%B7%A8%E8%AD%AFsass/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇來介紹如何在 gulp 中，進行scss的編譯吧。</p>
+<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><p>首先來安裝 gulp-sass 套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install sass gulp-sass --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>在gulpfile.js裡，依照文件貼上相關設定</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sass = <span class="built_in">require</span>(<span class="string">&#x27;gulp-sass&#x27;</span>)(<span class="built_in">require</span>(<span class="string">&#x27;sass&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">buildStyles</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上面為編譯scss的gulp任務，用 src 指定 scss 所在的資料夾後，最後在用gulp.dest() 指定編譯後的 css 輸出的位置。</p>
+<p>之後在scss資料夾裡，新增一個all.scss檔案。</p>
+<p>並輸入一些東西</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$color</span>: <span class="number">#00cc99</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="variable">$color</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在commend line 輸入 gulp buildStyles 就可以發現scss被編譯成css檔案，並輸出到public資料夾囉。</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(3) Gulp-撰寫gulp file</title>
     <url>/2022/06/16/2022-6-15-3-Gulp-%E5%9F%BA%E7%A4%8E%E7%AF%87/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前面已經將專案的環境與gulp都安裝好了，這節會開始介紹如何撰寫你的第一支 gulp file</p>
@@ -159,6 +156,30 @@
 
 <p>就會發現檔案已經被輸出到 public 資料夾囉。</p>
 <p>下堂課會開始介紹 其他的各種gulp任務喔。</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(2) Gulp-運作原理介紹</title>
+    <url>/2022/06/16/2022-6-15-5-Gulp-%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/1200/0*_uAjbnaZaXs1ca6x.png" alt="img"></p>
+<h2 id="運作原理"><a href="#運作原理" class="headerlink" title="運作原理"></a>運作原理</h2><p>Gulp運作的方式就是將每個任務像水管一樣串接下去</p>
+<h2 id="簡單範例"><a href="#簡單範例" class="headerlink" title="簡單範例"></a>簡單範例</h2><p><img src="https://cdn-images-1.medium.com/max/1200/1*uBz4qK1ZMgkS6fNfP8u-NA.png" alt="gulp"></p>
+<p>上圖是一個copy html檔案的簡單範例，主要如下:</p>
+<ol>
+<li>gulp.task(‘任務名稱’, function(){}): 指定一個gulp任務</li>
+<li>gulp.src: 指定資料來源</li>
+<li>gulp.pipe(): 指定事件，pipe就像水管，可以一個接一個</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*FWZTmYZm1Sbg5FIO0ZDycg.png" alt="pipe"></p>
+<ol start="4">
+<li>gulp.dest(): 輸出任務的結果</li>
+</ol>
 ]]></content>
       <categories>
         <category>Gulp</category>
@@ -198,53 +219,32 @@
       </tags>
   </entry>
   <entry>
-    <title>(2) Gulp-運作原理介紹</title>
-    <url>/2022/06/16/2022-6-15-5-Gulp-%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/1200/0*_uAjbnaZaXs1ca6x.png" alt="img"></p>
-<h2 id="運作原理"><a href="#運作原理" class="headerlink" title="運作原理"></a>運作原理</h2><p>Gulp運作的方式就是將每個任務像水管一樣串接下去</p>
-<h2 id="簡單範例"><a href="#簡單範例" class="headerlink" title="簡單範例"></a>簡單範例</h2><p><img src="https://cdn-images-1.medium.com/max/1200/1*uBz4qK1ZMgkS6fNfP8u-NA.png" alt="gulp"></p>
-<p>上圖是一個copy html檔案的簡單範例，主要如下:</p>
+    <title>(8) Hexo-第三方服務</title>
+    <url>/2022/06/10/2022-6-10-2-Hexo-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8B%99/</url>
+    <content><![CDATA[<h2 id="新增第三方服務"><a href="#新增第三方服務" class="headerlink" title="新增第三方服務"></a>新增第三方服務</h2><p>當我打開 <code>_config.next.yml</code> ，會發現NextT也整合了一些第三方服務進來，大多都只需要申請帳號並填入 ID 就可以使用。<br>以下就介紹幾個好用的服務。</p>
+<h2 id="Disqus"><a href="#Disqus" class="headerlink" title="Disqus"></a>Disqus</h2><p>Disqus 是一個留言板服務，安裝流程如下</p>
 <ol>
-<li>gulp.task(‘任務名稱’, function(){}): 指定一個gulp任務</li>
-<li>gulp.src: 指定資料來源</li>
-<li>gulp.pipe(): 指定事件，pipe就像水管，可以一個接一個</li>
+<li><p>到 <a href="https://disqus.com/">Disqus</a> 官網註冊一個帳號並登入。按下 <code>GET STARTED</code>按鈕，並選擇 <code> I want to install Disqus on my site</code>選項，就會來到 <code>Create a new site</code> 頁面。</p>
+</li>
+<li><p>輸入你的 <code>Website Name</code>，並按下 <code>Create Site </code>。</p>
+</li>
+<li><p>這邊就建立好你的 disqus帳號了</p>
+</li>
 </ol>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*FWZTmYZm1Sbg5FIO0ZDycg.png" alt="pipe"></p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061102.png?alt=media&token=518dfa72-a8fe-4c81-bead-89bc3a59e874" alt="disqus"></p>
 <ol start="4">
-<li>gulp.dest(): 輸出任務的結果</li>
+<li>回到 <code>_config.next.yml</code>，將 disqus 選項改為true，並在shortname填入剛才在disqus設定的 <code>Website Name</code></li>
 </ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061103.png?alt=media&token=3a8584ce-3749-4640-99c0-c8ecd574faa7" alt="disqus-setting"></p>
+<ol start="5">
+<li>以上就完成了留言板設置囉</li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061104.png?alt=media&token=dc77ed95-13ce-4a34-9769-1297dc7c1bda" alt="comments"></p>
+<h2 id="圖片顯示"><a href="#圖片顯示" class="headerlink" title="圖片顯示"></a>圖片顯示</h2><p>NextT 內建有兩種圖片顯示的方式，分別是 fancybox 和 mediumzoom，只要到 <code>_config.next.yml</code>，將選項改為true即可。但記得不要同時開啟 fancybox 和 mediumzoom。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061101.png?alt=media&token=c62c2900-a1e0-4d60-9a0a-bf13dc66d7a3" alt="image"></p>
 ]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
       <tags>
-        <tag>Gulp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(4) Gulp-編譯scss</title>
-    <url>/2022/06/16/2022-6-15-4-Gulp-%E7%B7%A8%E8%AD%AFsass/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇來介紹如何在 gulp 中，進行scss的編譯吧。</p>
-<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><p>首先來安裝 gulp-sass 套件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install sass gulp-sass --save</span><br></pre></td></tr></table></figure>
-
-<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>在gulpfile.js裡，依照文件貼上相關設定</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sass = <span class="built_in">require</span>(<span class="string">&#x27;gulp-sass&#x27;</span>)(<span class="built_in">require</span>(<span class="string">&#x27;sass&#x27;</span>));</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">buildStyles</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>上面為編譯scss的gulp任務，用 src 指定 scss 所在的資料夾後，最後在用gulp.dest() 指定編譯後的 css 輸出的位置。</p>
-<p>之後在scss資料夾裡，新增一個all.scss檔案。</p>
-<p>並輸入一些東西</p>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$color</span>: <span class="number">#00cc99</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="variable">$color</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在commend line 輸入 gulp buildStyles 就可以發現scss被編譯成css檔案，並輸出到public資料夾囉。</p>
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -273,6 +273,37 @@
       </tags>
   </entry>
   <entry>
+    <title>(8) Gulp-檔案壓縮</title>
+    <url>/2022/06/17/2022-6-17-4-Gulp-compress/</url>
+    <content><![CDATA[<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><ol>
+<li>壓縮 css套件: <a href="https://www.npmjs.com/package/gulp-clean-css">gulp-clean-css</a></li>
+<li>壓縮 js套件: <a href="https://www.npmjs.com/package/gulp-uglify">gulp-uglify</a></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp-clean-css gulp-uglify --save</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>壓縮css的部分，可以在編譯完scss後，進行壓縮</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sassTask</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> plugins = [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>(&#123;</span><br><span class="line">      <span class="attr">includePaths</span>: [<span class="string">&#x27;./node_modules/bootstrap/scss&#x27;</span>]</span><br><span class="line">    &#125;).<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">postcss</span>(plugins))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">cleanCss</span>(&#123; <span class="attr">compatibility</span>: <span class="string">&#x27;ie8&#x27;</span> &#125;)))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*mpisvD3qy987427Pd2n-kg.png" alt="壓縮css程式碼"></p>
+<p>壓縮js的部分，可在babel編譯完後並且合併後( concat ) 進行壓縮</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/js/**/*.js&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*1anhKo-vPFyBKX4scALEZw.png" alt="壓縮js"></p>
+<h2 id="壓縮成果"><a href="#壓縮成果" class="headerlink" title="壓縮成果"></a>壓縮成果</h2><ol>
+<li>css被壓成一行</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*tweaZBqP0_OJL3SnSgi-fQ.png" alt="css"></p>
+<ol start="2">
+<li>js被壓成一行</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*O3lohBob7h6KxqHGfVvong.png" alt="js"></p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(7) Gulp-browserSync</title>
     <url>/2022/06/17/2022-6-17-3-Gulp-browser-sync/</url>
     <content><![CDATA[<h2 id="什麼是-broswer-sync"><a href="#什麼是-broswer-sync" class="headerlink" title="什麼是 broswer sync"></a>什麼是 broswer sync</h2><p>browserSync 能建立起一個暫時性的開發用伺服器。搭配 gulp 使用，就能達成檔案修改時，browserSnyc 會自動重整畫面，讓開發者能在瀏覽器上即時看到修改後的畫面。</p>
@@ -294,38 +325,6 @@
 
 
 
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(9) Gulp-if</title>
-    <url>/2022/06/18/2022-6-18-1-Gulp-if/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>通常在開發項目時，我們會分所謂的 development(開發環境) 與 production(生產環境)，在開發環境時，我們不會壓縮檔案，直到生產環境時，才會做檔案壓縮。此時，可以用 Minimist 命令行參數解析工具區分 Gulp 套件在 development 與 production 環境下的使用。</p>
-<h2 id="Minimist-套件安裝"><a href="#Minimist-套件安裝" class="headerlink" title="Minimist 套件安裝"></a>Minimist 套件安裝</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install minimist   </span><br><span class="line">$ npm install gulp-if</span><br></pre></td></tr></table></figure>
-
-<p>在gulpfile.js 中，載入 minimist</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> minimist= <span class="built_in">require</span>(<span class="string">&#x27;minimist&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="設定環境參數"><a href="#設定環境參數" class="headerlink" title="設定環境參數"></a>設定環境參數</h2><p>並設定envOption環境參數，以下面範例來說，預設是帶入字串，並且是develop這個環境。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> envOption = &#123;</span><br><span class="line">  <span class="attr">string</span>: <span class="string">&#x27;env&#x27;</span>,</span><br><span class="line">  <span class="attr">default</span>: &#123; <span class="attr">env</span>: <span class="string">&#x27;dev&#x27;</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>用minimist將環境參數讀入，並在後方帶入 envOption環境選項。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> options = <span class="title function_">minimist</span>(process.<span class="property">argv</span>.<span class="title function_">slice</span>(<span class="number">2</span>), envOption)</span><br></pre></td></tr></table></figure>
-
-<p>process.argv.slice(2) 這行意思是跳過前兩個 – 字元直接讀取 env 這個字串。<br>此時用console.log(options)，可以看到options目前環境參數是 develop</p>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*b1cLVsVXiWwj834lXdwTYA.png" alt="console"></p>
-<p>若要更改參數，則可用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gulp --env 參數名稱</span><br></pre></td></tr></table></figure>
-
-<p>例如我在commend line 上輸入 <code>gulp --env prod</code> 就可將環境參數從dev改成prod。</p>
-<h2 id="使用gulp-if套件搭配環境參數"><a href="#使用gulp-if套件搭配環境參數" class="headerlink" title="使用gulp-if套件搭配環境參數"></a>使用gulp-if套件搭配環境參數</h2><p>環境參數設定好後，就可用gulp-if套件來判斷當前環境是 開發環境(dev) 還是 生產環境 (prod)。<br>讓我們能判斷如果是生產環境，則壓縮檔案，如果不是則不壓縮檔案。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(path.<span class="property">js</span>.<span class="property">src</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">if</span>(options.<span class="property">env</span> === <span class="string">&#x27;prod&#x27;</span>, $.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(path.<span class="property">js</span>.<span class="property">des</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面我們用了 gulp-if 來判斷當前環境變數是不是 prod，是的話則執行 uglify來壓縮。</p>
 ]]></content>
       <categories>
         <category>Gulp</category>
@@ -367,34 +366,32 @@
       </tags>
   </entry>
   <entry>
-    <title>(8) Gulp-檔案壓縮</title>
-    <url>/2022/06/17/2022-6-17-4-Gulp-compress/</url>
-    <content><![CDATA[<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><ol>
-<li>壓縮 css套件: <a href="https://www.npmjs.com/package/gulp-clean-css">gulp-clean-css</a></li>
-<li>壓縮 js套件: <a href="https://www.npmjs.com/package/gulp-uglify">gulp-uglify</a></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp-clean-css gulp-uglify --save</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>壓縮css的部分，可以在編譯完scss後，進行壓縮</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sassTask</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> plugins = [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>(&#123;</span><br><span class="line">      <span class="attr">includePaths</span>: [<span class="string">&#x27;./node_modules/bootstrap/scss&#x27;</span>]</span><br><span class="line">    &#125;).<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">postcss</span>(plugins))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">cleanCss</span>(&#123; <span class="attr">compatibility</span>: <span class="string">&#x27;ie8&#x27;</span> &#125;)))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*mpisvD3qy987427Pd2n-kg.png" alt="壓縮css程式碼"></p>
-<p>壓縮js的部分，可在babel編譯完後並且合併後( concat ) 進行壓縮</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/js/**/*.js&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>(11) Gulp-git</title>
+    <url>/2022/06/18/2022-6-18-3-Gulp-git/</url>
+    <content><![CDATA[<h2 id="初始化git"><a href="#初始化git" class="headerlink" title="初始化git"></a>初始化git</h2><p>這章節，我們來幫gulp專案加入 git 版本控制，若電腦還沒安裝git的話，可以先到<a href="https://git-scm.com/">git官網</a>下載git並安裝。</p>
+<p>安裝好git後，在commend line輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init // 建立本地儲存庫</span><br><span class="line">git add . // 加入所有檔案到目錄</span><br><span class="line">git commit -m &quot;first commit&quot;  // 提交本次紀錄</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*1anhKo-vPFyBKX4scALEZw.png" alt="壓縮js"></p>
-<h2 id="壓縮成果"><a href="#壓縮成果" class="headerlink" title="壓縮成果"></a>壓縮成果</h2><ol>
-<li>css被壓成一行</li>
-</ol>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*tweaZBqP0_OJL3SnSgi-fQ.png" alt="css"></p>
-<ol start="2">
-<li>js被壓成一行</li>
-</ol>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*O3lohBob7h6KxqHGfVvong.png" alt="js"></p>
+<h2 id="新增-gitignore-檔案"><a href="#新增-gitignore-檔案" class="headerlink" title="新增 gitignore 檔案"></a>新增 gitignore 檔案</h2><p>因為有一些檔案是不需要加入版本控制的，如 public資料夾、.temp資料夾、node_modules資料夾，此時可以開一個 .gitignore 檔案，將不須控制的檔案忽略。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*6er_v_0LzoqbD_Pl0lTEgw.png" alt="gitignore"></p>
+<p>在用 git status 去檢查未加入目錄的檔案時，就會發現有加入.gitignore的檔案都消失了，代表這些檔案不用被git做控制。</p>
+<h2 id="快速發佈到-github-pages"><a href="#快速發佈到-github-pages" class="headerlink" title="快速發佈到 github pages"></a>快速發佈到 github pages</h2><p>在完成我們的gulp專案後，可以發佈到 github pages上。</p>
+<p>先下載 <code>gulp-gh-pages</code>  套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install - save-dev gulp-gh-pages</span><br></pre></td></tr></table></figure>
+
+<p>在gulpfile.js中加入deploy任務，因為有使用gulp-load-plugins這個套件，只要在ghPages()前方加入$即可。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">deploy</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./public/**/*&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">ghPages</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>輸入 gulp deploy後，會在github上新開一個 gh-pages 的分支，自動將public資料夾裡的內容上傳到github。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*5FV7yd4cKZ0mp4dL-Y1-Dw.png" alt="github"></p>
 ]]></content>
       <categories>
         <category>Gulp</category>
       </categories>
       <tags>
         <tag>Gulp</tag>
+        <tag>git</tag>
+        <tag>github</tag>
       </tags>
   </entry>
   <entry>
@@ -423,35 +420,6 @@
       <tags>
         <tag>Gulp</tag>
         <tag>ejs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(11) Gulp-git</title>
-    <url>/2022/06/18/2022-6-18-3-Gulp-git/</url>
-    <content><![CDATA[<h2 id="初始化git"><a href="#初始化git" class="headerlink" title="初始化git"></a>初始化git</h2><p>這章節，我們來幫gulp專案加入 git 版本控制，若電腦還沒安裝git的話，可以先到<a href="https://git-scm.com/">git官網</a>下載git並安裝。</p>
-<p>安裝好git後，在commend line輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init // 建立本地儲存庫</span><br><span class="line">git add . // 加入所有檔案到目錄</span><br><span class="line">git commit -m &quot;first commit&quot;  // 提交本次紀錄</span><br></pre></td></tr></table></figure>
-
-<h2 id="新增-gitignore-檔案"><a href="#新增-gitignore-檔案" class="headerlink" title="新增 gitignore 檔案"></a>新增 gitignore 檔案</h2><p>因為有一些檔案是不需要加入版本控制的，如 public資料夾、.temp資料夾、node_modules資料夾，此時可以開一個 .gitignore 檔案，將不須控制的檔案忽略。</p>
-<p><img src="https://cdn-images-1.medium.com/max/1320/1*6er_v_0LzoqbD_Pl0lTEgw.png" alt="gitignore"></p>
-<p>在用 git status 去檢查未加入目錄的檔案時，就會發現有加入.gitignore的檔案都消失了，代表這些檔案不用被git做控制。</p>
-<h2 id="快速發佈到-github-pages"><a href="#快速發佈到-github-pages" class="headerlink" title="快速發佈到 github pages"></a>快速發佈到 github pages</h2><p>在完成我們的gulp專案後，可以發佈到 github pages上。</p>
-<p>先下載 <code>gulp-gh-pages</code>  套件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install - save-dev gulp-gh-pages</span><br></pre></td></tr></table></figure>
-
-<p>在gulpfile.js中加入deploy任務，因為有使用gulp-load-plugins這個套件，只要在ghPages()前方加入$即可。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">deploy</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./public/**/*&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">ghPages</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>輸入 gulp deploy後，會在github上新開一個 gh-pages 的分支，自動將public資料夾裡的內容上傳到github。</p>
-<p><img src="https://cdn-images-1.medium.com/max/1320/1*5FV7yd4cKZ0mp4dL-Y1-Dw.png" alt="github"></p>
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
-        <tag>git</tag>
-        <tag>github</tag>
       </tags>
   </entry>
   <entry>
@@ -491,6 +459,38 @@
       </tags>
   </entry>
   <entry>
+    <title>(9) Gulp-if</title>
+    <url>/2022/06/18/2022-6-18-1-Gulp-if/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>通常在開發項目時，我們會分所謂的 development(開發環境) 與 production(生產環境)，在開發環境時，我們不會壓縮檔案，直到生產環境時，才會做檔案壓縮。此時，可以用 Minimist 命令行參數解析工具區分 Gulp 套件在 development 與 production 環境下的使用。</p>
+<h2 id="Minimist-套件安裝"><a href="#Minimist-套件安裝" class="headerlink" title="Minimist 套件安裝"></a>Minimist 套件安裝</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install minimist   </span><br><span class="line">$ npm install gulp-if</span><br></pre></td></tr></table></figure>
+
+<p>在gulpfile.js 中，載入 minimist</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> minimist= <span class="built_in">require</span>(<span class="string">&#x27;minimist&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="設定環境參數"><a href="#設定環境參數" class="headerlink" title="設定環境參數"></a>設定環境參數</h2><p>並設定envOption環境參數，以下面範例來說，預設是帶入字串，並且是develop這個環境。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> envOption = &#123;</span><br><span class="line">  <span class="attr">string</span>: <span class="string">&#x27;env&#x27;</span>,</span><br><span class="line">  <span class="attr">default</span>: &#123; <span class="attr">env</span>: <span class="string">&#x27;dev&#x27;</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用minimist將環境參數讀入，並在後方帶入 envOption環境選項。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> options = <span class="title function_">minimist</span>(process.<span class="property">argv</span>.<span class="title function_">slice</span>(<span class="number">2</span>), envOption)</span><br></pre></td></tr></table></figure>
+
+<p>process.argv.slice(2) 這行意思是跳過前兩個 – 字元直接讀取 env 這個字串。<br>此時用console.log(options)，可以看到options目前環境參數是 develop</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*b1cLVsVXiWwj834lXdwTYA.png" alt="console"></p>
+<p>若要更改參數，則可用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gulp --env 參數名稱</span><br></pre></td></tr></table></figure>
+
+<p>例如我在commend line 上輸入 <code>gulp --env prod</code> 就可將環境參數從dev改成prod。</p>
+<h2 id="使用gulp-if套件搭配環境參數"><a href="#使用gulp-if套件搭配環境參數" class="headerlink" title="使用gulp-if套件搭配環境參數"></a>使用gulp-if套件搭配環境參數</h2><p>環境參數設定好後，就可用gulp-if套件來判斷當前環境是 開發環境(dev) 還是 生產環境 (prod)。<br>讓我們能判斷如果是生產環境，則壓縮檔案，如果不是則不壓縮檔案。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(path.<span class="property">js</span>.<span class="property">src</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">if</span>(options.<span class="property">env</span> === <span class="string">&#x27;prod&#x27;</span>, $.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(path.<span class="property">js</span>.<span class="property">des</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面我們用了 gulp-if 來判斷當前環境變數是不是 prod，是的話則執行 uglify來壓縮。</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(2) SCSS練功坊-變數variable</title>
     <url>/2022/06/19/2022-6-19-1-scss-variable/</url>
     <content><![CDATA[<h2 id="以往css遇到的問題"><a href="#以往css遇到的問題" class="headerlink" title="以往css遇到的問題"></a>以往css遇到的問題</h2><p>以往在寫css時，可能我們會直接將顏色的值寫死，例如:</p>
@@ -509,6 +509,57 @@
 <p><img src="https://miro.medium.com/max/1004/1*jvZyuT0ob0GIxXyu3fdjoQ.png" alt="va"></p>
 <p><img src="https://miro.medium.com/max/1048/1*ZgC18gRiXbzEUl_FiZrwuQ.png" alt="編譯後"></p>
 <h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>學會使用變數以後，就不用辛苦的一個一個修改css了，全站的設定統一由變數管理，讓之後的修改與維護更輕鬆。</p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(5) SCSS練功坊-mixin</title>
+    <url>/2022/06/19/2022-6-19-4-scss-mixin/</url>
+    <content><![CDATA[<h2 id="使用-mixin-管理重複的樣式"><a href="#使用-mixin-管理重複的樣式" class="headerlink" title="使用 mixin 管理重複的樣式"></a>使用 mixin 管理重複的樣式</h2><p>當我們有一段樣式，會被重複用到，裡頭樣式數值又會有不同時，可以用mixin做管理。<br>撰寫mixin方法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@mixin + mixin名稱(參數) &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1266/1*M5IXbD8WVeMwgzfadFHNrQ.png" alt="circle"></p>
+<p>上圖中， circle 裡可以帶入 $size，$bg-color等不同參數，如此在不同地方，我們可以依照不同需求，傳入不同參數，做出不同的圓形。</p>
+<p>引入 mixin時，用 @include + mixin名稱</p>
+<p><img src="https://miro.medium.com/max/1140/1*Yn5snpWqUCxsEJ1eA646zQ.png" alt="編譯後結果"></p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(6) SCSS練功坊-extend</title>
+    <url>/2022/06/19/2022-6-19-5-scss-extend/</url>
+    <content><![CDATA[<h2 id="合併樣式"><a href="#合併樣式" class="headerlink" title="合併樣式"></a>合併樣式</h2><p>當我們有一段樣式常常用到，可以用@extend來將樣式合併在一起。</p>
+<p>使用 % +class 撰寫要合併之樣式，並用@extend 來載入樣式。</p>
+<p><img src="https://miro.medium.com/max/1220/1*E5-ebZ9tVXeHmwf4i4uN2w.png" alt="extend"></p>
+<p><img src="https://miro.medium.com/max/1134/1*gUgESgMLa1DmyLz94Rp9Rw.png" alt="編譯後"></p>
+<h2 id="Mixin與extend的使用時機"><a href="#Mixin與extend的使用時機" class="headerlink" title="Mixin與extend的使用時機"></a>Mixin與extend的使用時機</h2><p>基本上來說，<br>@mixin是將程式碼帶入到對應的class去，同時可帶入變數。<br>@extend則是藉由class合併，並吃到共通樣式，但沒辦法帶入變數。</p>
+<p>所以如果你的樣式都固定不變的，不會需要用參數帶進去改變樣式的話，<br>那就用@extend，程式碼會比較少些。</p>
+<p>但如果你的程式碼需要帶入多個變數進行運算時，<br>那用@mixin則較適合。</p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(7) SCSS練功坊-顏色函數</title>
+    <url>/2022/06/20/2022-6-20-1-scss-color/</url>
+    <content><![CDATA[<h2 id="顏色函數"><a href="#顏色函數" class="headerlink" title="顏色函數"></a>顏色函數</h2><p><img src="https://miro.medium.com/max/1400/1*SFb0wzFGrTw4byZVEbn_8g.png" alt="color"></p>
+<p>在SCSS中 ，可以利用一些內建的函數，來調整顏色。</p>
+<p>如: darken(#fff, 20%) &#x2F;&#x2F;將白色調暗10%；</p>
+<p>lighten(#000,30% ) &#x2F;&#x2F;將黑色調亮10%;</p>
 ]]></content>
       <categories>
         <category>scss</category>
@@ -552,57 +603,6 @@
 
 
 
-]]></content>
-      <categories>
-        <category>scss</category>
-      </categories>
-      <tags>
-        <tag>scss</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(5) SCSS練功坊-mixin</title>
-    <url>/2022/06/19/2022-6-19-4-scss-mixin/</url>
-    <content><![CDATA[<h2 id="使用-mixin-管理重複的樣式"><a href="#使用-mixin-管理重複的樣式" class="headerlink" title="使用 mixin 管理重複的樣式"></a>使用 mixin 管理重複的樣式</h2><p>當我們有一段樣式，會被重複用到，裡頭樣式數值又會有不同時，可以用mixin做管理。<br>撰寫mixin方法</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@mixin + mixin名稱(參數) &#123; &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/1266/1*M5IXbD8WVeMwgzfadFHNrQ.png" alt="circle"></p>
-<p>上圖中， circle 裡可以帶入 $size，$bg-color等不同參數，如此在不同地方，我們可以依照不同需求，傳入不同參數，做出不同的圓形。</p>
-<p>引入 mixin時，用 @include + mixin名稱</p>
-<p><img src="https://miro.medium.com/max/1140/1*Yn5snpWqUCxsEJ1eA646zQ.png" alt="編譯後結果"></p>
-]]></content>
-      <categories>
-        <category>scss</category>
-      </categories>
-      <tags>
-        <tag>scss</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(7) SCSS練功坊-顏色函數</title>
-    <url>/2022/06/20/2022-6-20-1-scss-color/</url>
-    <content><![CDATA[<h2 id="顏色函數"><a href="#顏色函數" class="headerlink" title="顏色函數"></a>顏色函數</h2><p><img src="https://miro.medium.com/max/1400/1*SFb0wzFGrTw4byZVEbn_8g.png" alt="color"></p>
-<p>在SCSS中 ，可以利用一些內建的函數，來調整顏色。</p>
-<p>如: darken(#fff, 20%) &#x2F;&#x2F;將白色調暗10%；</p>
-<p>lighten(#000,30% ) &#x2F;&#x2F;將黑色調亮10%;</p>
-]]></content>
-      <categories>
-        <category>scss</category>
-      </categories>
-      <tags>
-        <tag>scss</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(6) SCSS練功坊-extend</title>
-    <url>/2022/06/19/2022-6-19-5-scss-extend/</url>
-    <content><![CDATA[<h2 id="合併樣式"><a href="#合併樣式" class="headerlink" title="合併樣式"></a>合併樣式</h2><p>當我們有一段樣式常常用到，可以用@extend來將樣式合併在一起。</p>
-<p>使用 % +class 撰寫要合併之樣式，並用@extend 來載入樣式。</p>
-<p><img src="https://miro.medium.com/max/1220/1*E5-ebZ9tVXeHmwf4i4uN2w.png" alt="extend"></p>
-<p><img src="https://miro.medium.com/max/1134/1*gUgESgMLa1DmyLz94Rp9Rw.png" alt="編譯後"></p>
-<h2 id="Mixin與extend的使用時機"><a href="#Mixin與extend的使用時機" class="headerlink" title="Mixin與extend的使用時機"></a>Mixin與extend的使用時機</h2><p>基本上來說，<br>@mixin是將程式碼帶入到對應的class去，同時可帶入變數。<br>@extend則是藉由class合併，並吃到共通樣式，但沒辦法帶入變數。</p>
-<p>所以如果你的樣式都固定不變的，不會需要用參數帶進去改變樣式的話，<br>那就用@extend，程式碼會比較少些。</p>
-<p>但如果你的程式碼需要帶入多個變數進行運算時，<br>那用@mixin則較適合。</p>
 ]]></content>
       <categories>
         <category>scss</category>
@@ -750,6 +750,34 @@
       </tags>
   </entry>
   <entry>
+    <title>(2) Git 練功坊-數據庫</title>
+    <url>/2022/06/21/2022-6-21-4-git-basic/</url>
+    <content><![CDATA[<h2 id="使用數據庫管理歷史記錄"><a href="#使用數據庫管理歷史記錄" class="headerlink" title="使用數據庫管理歷史記錄"></a>使用數據庫管理歷史記錄</h2><p>數據庫 (Repository) 是git用來記錄檔案或目錄狀態的地方，儲存內容的修改歷史記錄。數據庫可分為兩種</p>
+<ul>
+<li>遠端數據庫 : 配有專用的伺服器，為了讓多人共享而建立的數據庫。</li>
+<li>本地端數據庫 : 在本機專案上建立的數據庫。</li>
+</ul>
+<p>在本地端更新好檔案後，我們可以用push等方法將本地端的資料上傳到遠端數據庫。<br>遠端數據庫的資料有更新時，也可下載更新到本地端。</p>
+<h2 id="初始化git"><a href="#初始化git" class="headerlink" title="初始化git"></a>初始化git</h2><p>如果是第一次用git，需要先輸入姓名和電子信箱的資料</p>
+<p>在終端機輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config — global user.email “ 電子信箱“</span><br><span class="line"></span><br><span class="line">git config — global user.name ”名字”</span><br></pre></td></tr></table></figure>
+
+<p>方便之後再做版本控制時，可以知道是誰修改檔案。</p>
+<h2 id="建立本地端數據庫"><a href="#建立本地端數據庫" class="headerlink" title="建立本地端數據庫"></a>建立本地端數據庫</h2><p>先新開一個專案資料夾並移動進去，先新增一個本地端數據庫<br>在終端機輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init  // 新增本地數據庫</span><br></pre></td></tr></table></figure>
+
+<p>新增完成後，會出現master字樣，代表新增成功囉。</p>
+<p><img src="https://miro.medium.com/max/1354/1*e-Nug4-xJBAoymsYYN91TQ.png" alt="git數據庫"></p>
+<p>數據庫建立好後，下一章節會介紹git基礎語法喔。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(1) Git 練功坊-安裝教學</title>
     <url>/2022/06/21/2022-6-21-3-git-install/</url>
     <content><![CDATA[<h2 id="什麼是git"><a href="#什麼是git" class="headerlink" title="什麼是git"></a>什麼是git</h2><p>以往在做檔案版本的管理時，最簡單的方法就是複製編輯前的檔案並在檔案名稱加上日期，但是，每次編輯檔案都要複製非常的麻煩，也很容易出錯。</p>
@@ -795,6 +823,56 @@
       </tags>
   </entry>
   <entry>
+    <title>(4) Git 練功坊-遠端數據庫</title>
+    <url>/2022/06/21/2022-6-21-6-git-remote/</url>
+    <content><![CDATA[<h2 id="遠端數據庫"><a href="#遠端數據庫" class="headerlink" title="遠端數據庫"></a>遠端數據庫</h2><p>之前介紹過如何再本地端提交更新，今天要教大家將本地端的更新提交到遠端數據庫(Github)。</p>
+<h2 id="註冊Github"><a href="#註冊Github" class="headerlink" title="註冊Github"></a>註冊Github</h2><p>我們要先去 <a href="https://github.com/">GitHub</a> 註冊會員。</p>
+<p><img src="https://ithelp.ithome.com.tw/upload/images/20190908/20119923T2oDPSuQK3.png" alt="github"></p>
+<h2 id="新建一個-repository"><a href="#新建一個-repository" class="headerlink" title="新建一個 repository"></a>新建一個 repository</h2><p>註冊好帳號後，可以在github上新建一個 repository 數據庫</p>
+<p><img src="https://miro.medium.com/max/1400/1*7xMLMI0zZ87X4s9Hi4EIHg.png" alt="repository"></p>
+<p>這邊填寫數據庫名稱</p>
+<p><img src="https://miro.medium.com/max/1400/1*PdIfUXuiD4hS1HDjNyhU7w.png" alt="repo-name"></p>
+<h2 id="複製遠端數據庫到本地端"><a href="#複製遠端數據庫到本地端" class="headerlink" title="複製遠端數據庫到本地端"></a>複製遠端數據庫到本地端</h2><p>新開一個專案資料夾並移動進去</p>
+<p>輸入:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone 遠端數據庫網址</span><br></pre></td></tr></table></figure>
+
+<p>輸入完後，會將遠端新增的repository複製到本地資料夾內。</p>
+<p><img src="https://miro.medium.com/max/1400/1*TRv6Lzld1DosUcNDlJWErQ.png" alt="git-clone"></p>
+<h2 id="推送資料到遠端數據庫"><a href="#推送資料到遠端數據庫" class="headerlink" title="推送資料到遠端數據庫"></a>推送資料到遠端數據庫</h2><p>在本地端新增資料，並照上個章節的做法 commit完以後，就可以將 commit 上傳到遠端資料夾內囉。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git push  // 將資料推到遠端</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1400/1*7mwBekzTKtNV_DHCBs_txg.png" alt="上傳成功"></p>
+<h2 id="從遠端下載資料"><a href="#從遠端下載資料" class="headerlink" title="從遠端下載資料"></a>從遠端下載資料</h2><p>若遠端資料庫的資料有更新，比如說其他同事有push新的資料上去，那我們有兩種方式將資料下載下來。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git pull  // 從遠端拉取資料下來，並直接合併</span><br></pre></td></tr></table></figure>
+
+<p>執行 git pull 會將遠端更新的資料下載下來，並且會直接合併。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git fetch  // 從遠端拉取資料下來，但不合併</span><br></pre></td></tr></table></figure>
+
+<p>執行 git fetch 也會從遠端下載資料下來，但不會直接合併，而是以新的commit呈現。<br>等確認這些新的commit內容ok，可以再自行用 git merge 合併進專案。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(5) Git 練功坊-合併與衝突</title>
+    <url>/2022/06/23/2022-6-23-1-git-conflict/</url>
+    <content><![CDATA[<h2 id="合併與衝突"><a href="#合併與衝突" class="headerlink" title="合併與衝突"></a>合併與衝突</h2><p>上章節講過我們可以用 git pull 或 git fetch 來下載遠端更新的內容。<br>如果遠端數據庫和本地端數據庫的同一個地方都發生了修改的情況下（例：檔案中同一行的地方）。<br>這時，因為Git不能自動判斷要導入那一個修改內容於是就會發生錯誤。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是 Cat<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">=======</span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是 Dog<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; dog</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此時發生衝突的地方必須手動修改，如上例，VScode會提醒你產生衝突的地方，此時再決定要留 cat 還是 dog。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(3) Git 練功坊-紀錄修改與提交</title>
     <url>/2022/06/21/2022-6-21-5-git-commit/</url>
     <content><![CDATA[<p><img src="https://miro.medium.com/max/1400/0*adRfjDwIz9wuzSTb" alt="git流程"></p>
@@ -817,62 +895,6 @@
 <h2 id="查詢紀錄"><a href="#查詢紀錄" class="headerlink" title="查詢紀錄"></a>查詢紀錄</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git log  // 查詢過去commit 的紀錄</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://miro.medium.com/max/1400/1*qNvdGY6XePWNMA3h4a--LQ.png" alt="git log"></p>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(2) Git 練功坊-數據庫</title>
-    <url>/2022/06/21/2022-6-21-4-git-basic/</url>
-    <content><![CDATA[<h2 id="使用數據庫管理歷史記錄"><a href="#使用數據庫管理歷史記錄" class="headerlink" title="使用數據庫管理歷史記錄"></a>使用數據庫管理歷史記錄</h2><p>數據庫 (Repository) 是git用來記錄檔案或目錄狀態的地方，儲存內容的修改歷史記錄。數據庫可分為兩種</p>
-<ul>
-<li>遠端數據庫 : 配有專用的伺服器，為了讓多人共享而建立的數據庫。</li>
-<li>本地端數據庫 : 在本機專案上建立的數據庫。</li>
-</ul>
-<p>在本地端更新好檔案後，我們可以用push等方法將本地端的資料上傳到遠端數據庫。<br>遠端數據庫的資料有更新時，也可下載更新到本地端。</p>
-<h2 id="初始化git"><a href="#初始化git" class="headerlink" title="初始化git"></a>初始化git</h2><p>如果是第一次用git，需要先輸入姓名和電子信箱的資料</p>
-<p>在終端機輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config — global user.email “ 電子信箱“</span><br><span class="line"></span><br><span class="line">git config — global user.name ”名字”</span><br></pre></td></tr></table></figure>
-
-<p>方便之後再做版本控制時，可以知道是誰修改檔案。</p>
-<h2 id="建立本地端數據庫"><a href="#建立本地端數據庫" class="headerlink" title="建立本地端數據庫"></a>建立本地端數據庫</h2><p>先新開一個專案資料夾並移動進去，先新增一個本地端數據庫<br>在終端機輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init  // 新增本地數據庫</span><br></pre></td></tr></table></figure>
-
-<p>新增完成後，會出現master字樣，代表新增成功囉。</p>
-<p><img src="https://miro.medium.com/max/1354/1*e-Nug4-xJBAoymsYYN91TQ.png" alt="git數據庫"></p>
-<p>數據庫建立好後，下一章節會介紹git基礎語法喔。</p>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(4) Git 練功坊-遠端數據庫</title>
-    <url>/2022/06/21/2022-6-21-6-git-remote/</url>
-    <content><![CDATA[<h2 id="遠端數據庫"><a href="#遠端數據庫" class="headerlink" title="遠端數據庫"></a>遠端數據庫</h2><p>之前介紹過如何再本地端提交更新，今天要教大家將本地端的更新提交到遠端數據庫(Github)。</p>
-<h2 id="註冊Github"><a href="#註冊Github" class="headerlink" title="註冊Github"></a>註冊Github</h2><p>我們要先去 <a href="https://github.com/">GitHub</a> 註冊會員。</p>
-<p><img src="https://ithelp.ithome.com.tw/upload/images/20190908/20119923T2oDPSuQK3.png" alt="github"></p>
-<h2 id="新建一個-repository"><a href="#新建一個-repository" class="headerlink" title="新建一個 repository"></a>新建一個 repository</h2><p>註冊好帳號後，可以在github上新建一個 repository 數據庫</p>
-<p><img src="https://miro.medium.com/max/1400/1*7xMLMI0zZ87X4s9Hi4EIHg.png" alt="repository"></p>
-<p>這邊填寫數據庫名稱</p>
-<p><img src="https://miro.medium.com/max/1400/1*PdIfUXuiD4hS1HDjNyhU7w.png" alt="repo-name"></p>
-<h2 id="複製遠端數據庫到本地端"><a href="#複製遠端數據庫到本地端" class="headerlink" title="複製遠端數據庫到本地端"></a>複製遠端數據庫到本地端</h2><p>新開一個專案資料夾並移動進去</p>
-<p>輸入:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone 遠端數據庫網址</span><br></pre></td></tr></table></figure>
-
-<p>輸入完後，會將遠端新增的repository複製到本地資料夾內。</p>
-<p><img src="https://miro.medium.com/max/1400/1*TRv6Lzld1DosUcNDlJWErQ.png" alt="git-clone"></p>
-<h2 id="推送資料到遠端數據庫"><a href="#推送資料到遠端數據庫" class="headerlink" title="推送資料到遠端數據庫"></a>推送資料到遠端數據庫</h2><p>再本地端新增資料，並照上個章節的做法 commit完以後，就可以將 commit 上傳到遠端資料夾內囉。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git push  // 將資料推到遠端</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/1400/1*7mwBekzTKtNV_DHCBs_txg.png" alt="上傳成功"></p>
 ]]></content>
       <categories>
         <category>Git</category>
@@ -927,6 +949,137 @@
       </tags>
   </entry>
   <entry>
+    <title>(8) Git 練功坊-推送分支到遠端</title>
+    <url>/2022/06/23/2022-6-23-4-git-branch-remote/</url>
+    <content><![CDATA[<h2 id="推送分支上-github"><a href="#推送分支上-github" class="headerlink" title="推送分支上 github"></a>推送分支上 github</h2><p>本節會講解如何推送branch到github上。</p>
+<p>首先我們先開一個新的分支，並用git checkout 分支，移動到該分支上。</p>
+<p><img src="https://miro.medium.com/max/1400/1*gN684t4CgXrmbfitc8Ro2A.png" alt="add branch"></p>
+<p>再來新增一個commit 記錄到該分支</p>
+<p><img src="https://miro.medium.com/max/1400/1*9GKiKFBMWI50hjFgxLm7QA.png" alt="commit"></p>
+<p>這時如果用git push指令想將本地端的commit推到github上，可能會出現下面錯誤。</p>
+<p><img src="https://miro.medium.com/max/1400/1*050HdBhOzj3125XCFpOFzg.png" alt="error"></p>
+<p>原因是因為我們可能有許多遠端數據庫，有的是測試用的、有的是正式主機用的，git不知道你的分支要推到哪個數據庫。</p>
+<p>所以可用 git remote 指令來查詢本地端有多少遠端數據庫。</p>
+<p><img src="https://miro.medium.com/max/1208/1*ZV4Dyk2Rq2l36mbNiGNxWA.png" alt="remote"></p>
+<p>可以發現有一個 github 預設的 origin 數據庫。</p>
+<p>要將分支推上github 的話 ，可使用指令:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git push 遠端數據庫名稱 分支名稱</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1268/1*avTlKgGgw8qFA08F88x_Pg.png" alt="push"></p>
+<h2 id="更改遠端數據庫名稱"><a href="#更改遠端數據庫名稱" class="headerlink" title="更改遠端數據庫名稱"></a>更改遠端數據庫名稱</h2><p>如果不想用github預設的origin數據庫名稱，可輸入: </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote rename 更改前名稱 更改後名稱</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/930/1*wNOekbkp-5Gsu3iiFVHGvQ.png" alt="rename"></p>
+<p>在用 git remote來查詢， 會發現數據庫名稱從 origin 改成 github了。</p>
+<p><img src="https://miro.medium.com/max/1400/1*6DAh5wMtkOZ-ga1uvU__fw.png" alt="git-rename"></p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(7) Git 練功坊-分支合併與刪除</title>
+    <url>/2022/06/23/2022-6-23-3-git-merge/</url>
+    <content><![CDATA[<h2 id="分支合併-merge"><a href="#分支合併-merge" class="headerlink" title="分支合併 merge"></a>分支合併 merge</h2><p><img src="https://miro.medium.com/max/1080/1*fnd052WeDjGw8beojbdr9Q.png" alt="branch"></p>
+<p>如上圖，當我們在新的分支(feature)做開發，同事也確認分支的內容沒問題，就可以準備將分支合併到上線版本的master上。</p>
+<p>首先用 git chcekout master，將HEAD 切回 master分支上，輸入 git merge 分支名稱，將分支合併到master上。</p>
+<p><img src="https://miro.medium.com/max/820/1*feA1uszhAzBRENRGEAD2zQ.png" alt="branch"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git merge 分支名稱</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/616/1*AAb6Xi_rtOs_Tq4Gq6gAUw.png" alt="git merge"></p>
+<p><img src="https://miro.medium.com/max/968/1*Ov7_N-2e1vFkRriAJDLzcw.png" alt="git"></p>
+<p>此時就完成合併了。</p>
+<h2 id="分支合併-rebase"><a href="#分支合併-rebase" class="headerlink" title="分支合併 rebase"></a>分支合併 rebase</h2><p>除了使用merge合併外，也可用 rebase 合併</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*_pZko1Os8-4Jf-n769khKQ.png" alt="rebase"></p>
+<p>目前有 cat、dog 以及 master 這三個分支，並且切換至 cat 分支上。這時候如果下這個指令：git rebase dog<br>這個指令翻成白話文，大概就是「我，就是 cat 分支，我現在要重新定義我的參考基準，並且將使用 dog 分支當做我新的參考基準」的意思。<br>完成之後，cat 分支將會接到 dog 分支上，像這樣：</p>
+<ol>
+<li><p>「我先拿 c68537 這個 Commit 接到 053fb2 這個 Commit 上」，因為 c68537 原本的上一層 Commit 是 e12d8e，現在要接到 053fb2 上，所以需要重新計算這個 Commit 的 SHA-1 值，重新做出一顆新的 Commit 物件 35bc96。</p>
+</li>
+<li><p>「我再拿 b174a5 這個 Commit 接到剛剛那個新做出來的 Commit 物件 35bc96 上」，同理，因為 b174a5 這顆 Commit 要接到新的 Commit 的原因，所以它也會重新計算 SHA-1 值，得到一個新的 Commit 物件 28a76d。</p>
+</li>
+<li><p>最後，原本的 cat 是指向 b174a5 這個 Commit，現在要改指向最後做出來的那顆新的 Commit 物件 28a76d。<br>HEAD 還是繼續指向 cat 分支。</p>
+</li>
+</ol>
+<h3 id="rebase-衝突"><a href="#rebase-衝突" class="headerlink" title="rebase 衝突"></a>rebase 衝突</h3><p><img src="https://cdn-images-1.medium.com/max/1320/1*ZV1WbkVCN04Wz63k8tqH6g.png" alt="rebase-conflict"></p>
+<p>當rebase發生衝突時，要先手動解決衝突，如上圖選擇要保留的檔案。<br>處理完衝突後，輸入:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add .  //加入索引</span><br><span class="line">git rebase --continue  // 完成rebase流程</span><br></pre></td></tr></table></figure>
+
+<h2 id="刪除分支"><a href="#刪除分支" class="headerlink" title="刪除分支"></a>刪除分支</h2><p>既然feature分支的內容已經順利地合併到master分支了，現在我們可以將其刪除。</p>
+<p>欲刪除分支，請執行branch -d 命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名稱&gt;</span><br></pre></td></tr></table></figure>
+
+<p>執行 <code>git branch -d feature</code> 就可以將 feature 分支刪除囉。</p>
+<p>feature分支被刪除了，可以用”git branch”命令來確認分支是否已被刪除。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git branch</span><br><span class="line">* master</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(3) Hexo-基礎Hexo指令</title>
+    <url>/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
+<h2 id="基礎Hexo指令"><a href="#基礎Hexo指令" class="headerlink" title="基礎Hexo指令"></a>基礎Hexo指令</h2><ul>
+<li><code>hexo new &#39;新文章&#39;</code>  新增文章</li>
+<li><code>hexo generate</code> 產生編譯後的靜態檔案</li>
+<li><code>hexo server</code> 開啟一個本地端伺服器</li>
+<li><code>hexo clean</code> 清除暫存檔案</li>
+<li><code>hexo deploy</code> 部屬靜態檔案</li>
+</ul>
+<h2 id="產生新文章"><a href="#產生新文章" class="headerlink" title="產生新文章"></a>產生新文章</h2><p>要產生一篇新的文章，可以用 <code>hexo new &#39;新文章</code> 指令，產生後的文章會放在 <code>source</code> 資料夾的 <code>_posts</code>裡</p>
+<h2 id="產生編譯後的檔案"><a href="#產生編譯後的檔案" class="headerlink" title="產生編譯後的檔案"></a>產生編譯後的檔案</h2><p>當文章寫完後，需要將md檔案進行編譯，此時可以用 <code>hexo generate</code> 指令，編譯完後會產生一個 <code>public</code> 資料夾，作為之後部屬使用。<br>此指令的簡寫為 <code>hexo g</code></p>
+<h2 id="開啟一個本地端伺服器"><a href="#開啟一個本地端伺服器" class="headerlink" title="開啟一個本地端伺服器"></a>開啟一個本地端伺服器</h2><p>當靜態檔案編譯完後，可以用 <code>hexo server</code> 指令開啟一個本地端的模擬伺服器，用來即時瀏覽我的寫完的文章，此指令的簡寫為 <code>hexo s</code></p>
+<h2 id="清除暫存檔案"><a href="#清除暫存檔案" class="headerlink" title="清除暫存檔案"></a>清除暫存檔案</h2><p><code>hexo clean</code> 指令主要用來清除一些奇怪的暫存檔案，通常部屬前會先清理一遍。</p>
+<h2 id="部屬靜態檔案"><a href="#部屬靜態檔案" class="headerlink" title="部屬靜態檔案"></a>部屬靜態檔案</h2><p><code>hexo deploy</code> 將我們的靜態網站部屬到雲端使用的指令，詳細用流程在之後部屬的章節會提到。<br>此指令的簡寫為 <code>hexo d</code></p>
+<p>這就是今天 hexo 指令的介紹囉。</p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(1) Js進階 requestAnimationFrame</title>
+    <url>/2022/06/27/2022-6-24-1-js-requestAnimation/</url>
+    <content><![CDATA[<h2 id="製作動畫"><a href="#製作動畫" class="headerlink" title="製作動畫"></a>製作動畫</h2><p>在以前用Js中做動畫，可能會用 setInterval()或setTimeOut()，而現在有了更好用的API <code>requestAnimationFrame</code>。</p>
+<h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><p>requestAnimationFrame是依照瀏覽器更新的頻率(通常是 1 &#x2F;60 秒)來更新畫面。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> boxLeft = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params">currentTime</span>) &#123;</span><br><span class="line">  boxLeft += <span class="number">0.1</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(currentTime);</span><br><span class="line">  box.<span class="property">style</span>.<span class="title function_">setProperty</span>(<span class="string">&#x27;--left&#x27;</span>, boxLeft);</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(main);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(main);</span><br></pre></td></tr></table></figure>
+
+<p>requestAnimationFrame在約1&#x2F;60秒後呼叫傳給它的callback函式(main)，<br>並且將timestamp當做參數傳給這個callback函式。</p>
+<p>為了讓 requestAnimationFrame 能持續執行，我們在callback函式再執行一次 requestAnimationFrame。</p>
+<p>如果把 timestamp console.log 出來，會發現timesatmp是以每6豪秒持續累加。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022062701.png?alt=media&token=c961a215-9334-4ef0-a5e9-dd9408fb16a3" alt="timestamp"></p>
+<p><a href="https://codepen.io/tim-chou/pen/eYMOVGR">範例</a></p>
+<h2 id="控制更新頻率"><a href="#控制更新頻率" class="headerlink" title="控制更新頻率"></a>控制更新頻率</h2><p>每6毫秒更新一次函式可能太快了，假設我們希望每秒更新一次畫面就好，可如下設定</p>
+<h3 id="紀錄上次更新時間"><a href="#紀錄上次更新時間" class="headerlink" title="紀錄上次更新時間"></a>紀錄上次更新時間</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> lastRenderTime = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params">currentTime</span>) &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(main);</span><br><span class="line">  <span class="keyword">const</span> secondSinceLastRender = (currentTime - lastRenderTime) / <span class="number">1000</span>; <span class="comment">// 將milisecond 轉成 second</span></span><br><span class="line">  lastRenderTime = currentTime;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(currentTime);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以先設一個變數用來記錄上次更新畫面的時間(lastRenderTime)，然後在函式中用currentTime減掉lastRenderTime，就可以得到從上次更新到這次過了多久時間(毫秒)，可以將時間除 1000 轉換成過了幾秒。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022062702.png?alt=media&token=6ebc37f7-3bc4-4e9b-a951-4533190544ef" alt="second"></p>
+<p>可以發現每次更新的間隔時間約是 6 毫秒。</p>
+<h3 id="設定更新門檻"><a href="#設定更新門檻" class="headerlink" title="設定更新門檻"></a>設定更新門檻</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">SPEED</span> = <span class="number">2</span>; <span class="comment">// 每秒更新次數</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params">currentTime</span>) &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(main);</span><br><span class="line">  <span class="keyword">const</span> secondSinceLastRender = (currentTime - lastRenderTime) / <span class="number">1000</span>; <span class="comment">// 將milisecond 轉成 second</span></span><br><span class="line">  <span class="keyword">if</span> (secondSinceLastRender &lt; <span class="number">1</span> / <span class="variable constant_">SPEED</span>) <span class="keyword">return</span>;</span><br><span class="line">  lastRenderTime = currentTime;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;render&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(main);</span><br></pre></td></tr></table></figure>
+<p>先設定SPEED變數代表每秒更新次數，在main函式裡增加判斷</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (secondSinceLastRender &lt; <span class="number">1</span> / <span class="variable constant_">SPEED</span>) <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+<p>用 1 除以 SPEED 可以得到每零點幾秒才能更新，上例是0.5秒更新1次，也就是每秒更新2次。<br>當 secondSinceLastRender 小於更新頻律，就將函式 return 不執行。</p>
+<p>以上就完成控制更新頻律的方法了。</p>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>Js進階</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(1) Hexo 部落格安裝</title>
     <url>/2022/06/07/2022-6-7-Hexo-%E9%83%A8%E8%90%BD%E6%A0%BC%E5%AE%89%E8%A3%9D%E8%88%87%E9%83%A8%E5%B1%AC/</url>
     <content><![CDATA[<h2 id="什麼是-Hexo？"><a href="#什麼是-Hexo？" class="headerlink" title="什麼是 Hexo？"></a>什麼是 Hexo？</h2><p>Hexo 是一個快速、簡單且強大的網誌框架。Hexo 使用 Markdown（或其他標記語言）解析您的文章，並在幾秒鐘內，透過漂亮的主題產生靜態檔案。</p>
@@ -952,6 +1105,57 @@
 <h3 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h3><p>_config.yml 是網站的配置檔案（如下圖），網站的各種配置設定都在這邊，例如：網頁標題、網站描述、網站的網址、路徑等等，詳細內容可以參考： <a href="https://hexo.io/zh-tw/docs/configuration">https://hexo.io/zh-tw/docs/configuration</a></p>
 <p>大家可以自行修改看看，如下圖</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060801.png?alt=media&token=a28a52df-edb2-4848-a690-9fe3f5807343" alt="config修改"></p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(6) Git 練功坊-建立分支</title>
+    <url>/2022/06/23/2022-6-23-2-git-branch/</url>
+    <content><![CDATA[<h2 id="什麼是分支？"><a href="#什麼是分支？" class="headerlink" title="什麼是分支？"></a>什麼是分支？</h2><p>分支是為了將修改記錄的整體流程分開儲存，讓分開的分支不受其他分支的影響，所以在同一個數據庫裡可以同時進行多個不同的修改。</p>
+<p>當我們輸入完 git init 後，並完成第一次提交後(commit)會自動產生一個 main 分支，在建立其他分支前，所有紀錄都存在main分支上。</p>
+<h2 id="建立分支"><a href="#建立分支" class="headerlink" title="建立分支"></a>建立分支</h2><p>要建立一個新的分支，可以用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git branch 分支名稱</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1206/1*MM7zD5dXszOgNHn_UcqtOg.png" alt="branch"></p>
+<p>要查詢目前有的分支可以輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1134/1*8p-_J_x4kqDFcnO15JBRLQ.png" alt="brach"></p>
+<p>此時用git branch 去查詢，可以發現多了 feature1 分支，但目前所在分支還是master。</p>
+<h2 id="切換分支"><a href="#切換分支" class="headerlink" title="切換分支"></a>切換分支</h2><p>假設目前有 master 分支和 feature1分支，我現在在master分支上，想切換到 feature1分支，可用:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git checkout 分支名稱</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1218/1*Gzf7OBa_JANOziPgnxYaVQ.png" alt="checkout"></p>
+<h2 id="HEAD標籤"><a href="#HEAD標籤" class="headerlink" title="HEAD標籤"></a>HEAD標籤</h2><p>HEAD是目前所在位置的指標，會跟隨在最新的commit上面，如下圖:</p>
+<p><img src="https://miro.medium.com/max/680/1*vBHV9Vo4Ws2O4a_AfGPdig.png" alt="head"></p>
+<p>在git裡的每個commit都有自己的代碼，我們可以用 git log 查詢所有 commit 紀錄。</p>
+<p><img src="https://miro.medium.com/max/1272/1*fcmwOhm5NG9_XpjeoFhPxw.png" alt="commit"></p>
+<p>如果想看前一版本commit紀錄裡做了哪些事，可以透過指令將HEAD移動到該commit版本上，看完後再移動回最新的commit上。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git checkout commit前四碼</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/676/1*ItxAAKHhndN-_oToicuXnw.png" alt="checkout"></p>
+<p>分支的切換其實也就是將HEAD移動到不同分支標籤上而已。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(2) Hexo 撰寫第一篇文章</title>
+    <url>/2022/06/08/2022-6-8-Hexo-%E6%92%B0%E5%AF%AB%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<h2 id="建立你的第一篇文章"><a href="#建立你的第一篇文章" class="headerlink" title="建立你的第一篇文章"></a>建立你的第一篇文章</h2><p>我們可以在Vscode 中，開啟上個章節所建立的專案</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060802.png?alt=media&token=cba3f60e-8fba-4f61-83b4-9668e01bd2e7" alt="專案圖片"></p>
+<p>在Vscode中用快捷鍵 Control + ESC，開啟終端機 </p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060803.png?alt=media&token=e185edcc-77fc-4d1e-8499-b6c467085d8b" alt="終端機"></p>
+<p>然後下方終端機輸入 <code>hexo new &#39;我的第一篇部落格文章&#39;</code> 輸入完後會顯示 <code>INFO  Generated: 2022/06/07/2022-6-7-Hexo-部落格安裝與部屬/index.html</code> 代表文章被順利建立在source資料夾裡的 <code>_posts</code>底下。</p>
+<h2 id="MD-內容"><a href="#MD-內容" class="headerlink" title="MD 內容"></a>MD 內容</h2><p>在md檔案裡，最上面會有可以填寫 標題等欄位<br><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060804.png?alt=media&token=27df0ccb-a65b-434b-aece-6c7af864d641" alt="標題"></p>
+<p>文章撰寫則以Markdown格式為主，若不了解Markdown格式，可以參考 <a href="https://markdown.tw/">markdown</a></p>
+<p>以上就是撰寫文章的方法囉</p>
 ]]></content>
       <tags>
         <tag>Hexo</tag>
@@ -985,22 +1189,22 @@
       </tags>
   </entry>
   <entry>
-    <title>(3) Hexo-基礎Hexo指令</title>
-    <url>/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
-<h2 id="基礎Hexo指令"><a href="#基礎Hexo指令" class="headerlink" title="基礎Hexo指令"></a>基礎Hexo指令</h2><ul>
-<li><code>hexo new &#39;新文章&#39;</code>  新增文章</li>
-<li><code>hexo generate</code> 產生編譯後的靜態檔案</li>
-<li><code>hexo server</code> 開啟一個本地端伺服器</li>
-<li><code>hexo clean</code> 清除暫存檔案</li>
-<li><code>hexo deploy</code> 部屬靜態檔案</li>
-</ul>
-<h2 id="產生新文章"><a href="#產生新文章" class="headerlink" title="產生新文章"></a>產生新文章</h2><p>要產生一篇新的文章，可以用 <code>hexo new &#39;新文章</code> 指令，產生後的文章會放在 <code>source</code> 資料夾的 <code>_posts</code>裡</p>
-<h2 id="產生編譯後的檔案"><a href="#產生編譯後的檔案" class="headerlink" title="產生編譯後的檔案"></a>產生編譯後的檔案</h2><p>當文章寫完後，需要將md檔案進行編譯，此時可以用 <code>hexo generate</code> 指令，編譯完後會產生一個 <code>public</code> 資料夾，作為之後部屬使用。<br>此指令的簡寫為 <code>hexo g</code></p>
-<h2 id="開啟一個本地端伺服器"><a href="#開啟一個本地端伺服器" class="headerlink" title="開啟一個本地端伺服器"></a>開啟一個本地端伺服器</h2><p>當靜態檔案編譯完後，可以用 <code>hexo server</code> 指令開啟一個本地端的模擬伺服器，用來即時瀏覽我的寫完的文章，此指令的簡寫為 <code>hexo s</code></p>
-<h2 id="清除暫存檔案"><a href="#清除暫存檔案" class="headerlink" title="清除暫存檔案"></a>清除暫存檔案</h2><p><code>hexo clean</code> 指令主要用來清除一些奇怪的暫存檔案，通常部屬前會先清理一遍。</p>
-<h2 id="部屬靜態檔案"><a href="#部屬靜態檔案" class="headerlink" title="部屬靜態檔案"></a>部屬靜態檔案</h2><p><code>hexo deploy</code> 將我們的靜態網站部屬到雲端使用的指令，詳細用流程在之後部屬的章節會提到。<br>此指令的簡寫為 <code>hexo d</code></p>
-<p>這就是今天 hexo 指令的介紹囉。</p>
+    <title>(5) Hexo-新增頁面</title>
+    <url>/2022/06/09/2022-6-9-1-Hexo-%E6%96%B0%E5%A2%9E%E9%A0%81%E9%9D%A2/</url>
+    <content><![CDATA[<h2 id="新增頁面"><a href="#新增頁面" class="headerlink" title="新增頁面"></a>新增頁面</h2><p>與新增文章不同，我們也可以在hexo 裡新增一些頁面，用來放作者介紹等資訊。</p>
+<p>建立頁面的指令格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;頁面名稱（網址用）&quot;</span><br></pre></td></tr></table></figure>
+
+<p>新增好的頁面會在放在source資料夾底下</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/202206009.png?alt=media&token=4e8aaa96-e6ea-4a18-9bb1-37d18acec1b7" alt="about-page"></p>
+<p>頁面預設只有 title 以及 date， 而頁面預設是可以留言的，如果不開放留言則可以新增 comments 設定為false。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600902.png?alt=media&token=6fbb9f83-991a-4e9b-b2dc-9291231e6dfb" alt="comment"></p>
+<h2 id="新增分類與標籤頁"><a href="#新增分類與標籤頁" class="headerlink" title="新增分類與標籤頁"></a>新增分類與標籤頁</h2><p>我們也可在hexo裡增加分類頁面與標籤頁面</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page tags  // 建立標籤頁</span><br><span class="line">hexo new page categories // 建立分類頁</span><br></pre></td></tr></table></figure>
+
+<p>頁面一樣會新增在source資料夾底下，進入 <code>source/tags</code>，會看到<code>index.md</code>檔，<br>將裡面內容再加入以下這行即可 <code>type: &quot;tags&quot;</code>。</p>
+<p>最後找到主題 (theme) 設置文件 (_config.yml)，這邊以 NexT 為例，將 tags 及 categories 前的#字號移除即可。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600903.png?alt=media&token=f53ac521-d777-4cc9-b6e0-c34b04da5458" alt="theme"></p>
 ]]></content>
       <tags>
         <tag>Hexo</tag>
@@ -1033,44 +1237,6 @@
 <p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060907.png?alt=media&token=c97c2e01-2382-4dec-abee-f64b3e5cb980" alt="darkmode"></p>
 <p>以上都設定好後，就可發現我們的部落格套用了nextT主題囉</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060908.png?alt=media&token=7b16821f-7ef1-4b28-b075-5be943ebfd76" alt="theme"></p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(2) Hexo 撰寫第一篇文章</title>
-    <url>/2022/06/08/2022-6-8-Hexo-%E6%92%B0%E5%AF%AB%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<h2 id="建立你的第一篇文章"><a href="#建立你的第一篇文章" class="headerlink" title="建立你的第一篇文章"></a>建立你的第一篇文章</h2><p>我們可以在Vscode 中，開啟上個章節所建立的專案</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060802.png?alt=media&token=cba3f60e-8fba-4f61-83b4-9668e01bd2e7" alt="專案圖片"></p>
-<p>在Vscode中用快捷鍵 Control + ESC，開啟終端機 </p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060803.png?alt=media&token=e185edcc-77fc-4d1e-8499-b6c467085d8b" alt="終端機"></p>
-<p>然後下方終端機輸入 <code>hexo new &#39;我的第一篇部落格文章&#39;</code> 輸入完後會顯示 <code>INFO  Generated: 2022/06/07/2022-6-7-Hexo-部落格安裝與部屬/index.html</code> 代表文章被順利建立在source資料夾裡的 <code>_posts</code>底下。</p>
-<h2 id="MD-內容"><a href="#MD-內容" class="headerlink" title="MD 內容"></a>MD 內容</h2><p>在md檔案裡，最上面會有可以填寫 標題等欄位<br><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060804.png?alt=media&token=27df0ccb-a65b-434b-aece-6c7af864d641" alt="標題"></p>
-<p>文章撰寫則以Markdown格式為主，若不了解Markdown格式，可以參考 <a href="https://markdown.tw/">markdown</a></p>
-<p>以上就是撰寫文章的方法囉</p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(5) Hexo-新增頁面</title>
-    <url>/2022/06/09/2022-6-9-1-Hexo-%E6%96%B0%E5%A2%9E%E9%A0%81%E9%9D%A2/</url>
-    <content><![CDATA[<h2 id="新增頁面"><a href="#新增頁面" class="headerlink" title="新增頁面"></a>新增頁面</h2><p>與新增文章不同，我們也可以在hexo 裡新增一些頁面，用來放作者介紹等資訊。</p>
-<p>建立頁面的指令格式如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;頁面名稱（網址用）&quot;</span><br></pre></td></tr></table></figure>
-
-<p>新增好的頁面會在放在source資料夾底下</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/202206009.png?alt=media&token=4e8aaa96-e6ea-4a18-9bb1-37d18acec1b7" alt="about-page"></p>
-<p>頁面預設只有 title 以及 date， 而頁面預設是可以留言的，如果不開放留言則可以新增 comments 設定為false。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600902.png?alt=media&token=6fbb9f83-991a-4e9b-b2dc-9291231e6dfb" alt="comment"></p>
-<h2 id="新增分類與標籤頁"><a href="#新增分類與標籤頁" class="headerlink" title="新增分類與標籤頁"></a>新增分類與標籤頁</h2><p>我們也可在hexo裡增加分類頁面與標籤頁面</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page tags  // 建立標籤頁</span><br><span class="line">hexo new page categories // 建立分類頁</span><br></pre></td></tr></table></figure>
-
-<p>頁面一樣會新增在source資料夾底下，進入 <code>source/tags</code>，會看到<code>index.md</code>檔，<br>將裡面內容再加入以下這行即可 <code>type: &quot;tags&quot;</code>。</p>
-<p>最後找到主題 (theme) 設置文件 (_config.yml)，這邊以 NexT 為例，將 tags 及 categories 前的#字號移除即可。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/20220600903.png?alt=media&token=f53ac521-d777-4cc9-b6e0-c34b04da5458" alt="theme"></p>
 ]]></content>
       <tags>
         <tag>Hexo</tag>
