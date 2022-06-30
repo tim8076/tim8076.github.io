@@ -21,25 +21,34 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"tim8076.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Zero to Hero">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tim的前端日誌">
-<meta property="og:url" content="https://tim8076.github.io/archives/2022/06/page/5/index.html">
+    <meta name="description" content="取消在git中做的修改">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(9) Git 練功坊-取消修改">
+<meta property="og:url" content="https://tim8076.github.io/2022/06/30/2022-6-30-1-git-reset/index.html">
 <meta property="og:site_name" content="Tim的前端日誌">
-<meta property="og:description" content="Zero to Hero">
+<meta property="og:description" content="取消在git中做的修改">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://miro.medium.com/max/504/1*YExCjHyozE-SQLif6Egfhg.png">
+<meta property="og:image" content="https://miro.medium.com/max/674/1*zFOz7tr23cEQG2OTkffCjg.png">
+<meta property="og:image" content="https://miro.medium.com/max/290/1*iP8bv0VETpcpfPbl5xEnFA.png">
+<meta property="og:image" content="https://miro.medium.com/max/636/1*YzByXkMhsnyLdSpM6dQGjQ.png">
+<meta property="og:image" content="https://miro.medium.com/max/574/1*c_R6Jsz3I7bhynusCX2Hyg.png">
+<meta property="article:published_time" content="2022-06-30T09:36:27.000Z">
+<meta property="article:modified_time" content="2022-06-30T13:08:06.596Z">
 <meta property="article:author" content="Tim Chou">
+<meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://miro.medium.com/max/504/1*YExCjHyozE-SQLif6Egfhg.png">
 
 
-<link rel="canonical" href="https://tim8076.github.io/archives/2022/06/page/5/">
+<link rel="canonical" href="https://tim8076.github.io/2022/06/30/2022-6-30-1-git-reset/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-TW","comments":"","permalink":"","path":"archives/2022/06/page/5/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://tim8076.github.io/2022/06/30/2022-6-30-1-git-reset/","path":"2022/06/30/2022-6-30-1-git-reset/","title":"(9) Git 練功坊-取消修改"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>歸檔 | Tim的前端日誌</title>
+<title>(9) Git 練功坊-取消修改 | Tim的前端日誌</title>
   
 
 
@@ -69,7 +78,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Tim的前端日誌</h1>
+      <p class="site-title">Tim的前端日誌</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -128,7 +137,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目錄
@@ -141,6 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%96%E6%B6%88%E4%BF%AE%E6%94%B9"><span class="nav-number">1.</span> <span class="nav-text">取消修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-reset"><span class="nav-number">2.</span> <span class="nav-text">git reset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reset-%E2%80%93mixed"><span class="nav-number">2.1.</span> <span class="nav-text">reset –mixed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reset-%E2%80%93soft"><span class="nav-number">2.2.</span> <span class="nav-text">reset –soft</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reset-%E2%80%93hard"><span class="nav-number">2.3.</span> <span class="nav-text">reset –hard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E6%B6%88reset"><span class="nav-number">2.4.</span> <span class="nav-text">取消reset</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-revert"><span class="nav-number">3.</span> <span class="nav-text">git revert</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -198,174 +208,123 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/06/30/2022-6-30-1-git-reset/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Tim Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim的前端日誌">
+      <meta itemprop="description" content="Zero to Hero">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="(9) Git 練功坊-取消修改 | Tim的前端日誌">
+      <meta itemprop="description" content="取消在git中做的修改">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          (9) Git 練功坊-取消修改
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+      
+
+      <time title="創建時間：2022-06-30 17:36:27 / 修改時間：21:08:06" itemprop="dateCreated datePublished" datetime="2022-06-30T17:36:27+08:00">2022-06-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">取消在git中做的修改</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="取消修改"><a href="#取消修改" class="headerlink" title="取消修改"></a>取消修改</h2><p>在 git 裡主要用兩種方法來取消修改，一種是 git reset，另外一種是 git revert。</p>
+<h2 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h2><p>git reset 利用把分支的參考點退回到上一個 commit 來取消修改。你可以認為這是在”重寫歷史”。git reset 往回移動 branch，原來的 branch 所指向的 commit 好像從來沒有存在過一樣。</p>
+<p><img src="https://miro.medium.com/max/504/1*YExCjHyozE-SQLif6Egfhg.png" alt="reset"><br><img src="https://miro.medium.com/max/674/1*zFOz7tr23cEQG2OTkffCjg.png" alt="reset"></p>
+<p>git reset 可以分為 –hard、 –soft 、 –mixed 三種模式</p>
+<h3 id="reset-–mixed"><a href="#reset-–mixed" class="headerlink" title="reset –mixed"></a>reset –mixed</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --mixed HEAD~1   # 數字表示移動到 HEAD後面第幾個</span><br></pre></td></tr></table></figure>
+
+<p>–mixed 是預設的參數，如果沒有特別加參數，git reset 指令將會使用 –mixed 模式。這個模式會把暫存區的檔案丟掉，但不會動到工作目錄的檔案，也就是說 Commit 拆出來的檔案會留在工作目錄，但不會留在暫存區。</p>
+<h3 id="reset-–soft"><a href="#reset-–soft" class="headerlink" title="reset –soft"></a>reset –soft</h3><p>這個模式下的 reset，工作目錄跟暫存區的檔案都不會被丟掉，所以看起來就只有 HEAD 的移動而已。也因此，Commit 拆出來的檔案會直接放在暫存區。</p>
+<h3 id="reset-–hard"><a href="#reset-–hard" class="headerlink" title="reset –hard"></a>reset –hard</h3><p>hard模式下，不管是工作目錄以及暫存區的檔案都會丟掉。</p>
+<h3 id="取消reset"><a href="#取消reset" class="headerlink" title="取消reset"></a>取消reset</h3><p>如果你reset完後悔，輸入 git checkout + reset點的hash值，是可以回復的。</p>
+<p><img src="https://miro.medium.com/max/290/1*iP8bv0VETpcpfPbl5xEnFA.png" alt="hash"><br><img src="https://miro.medium.com/max/636/1*YzByXkMhsnyLdSpM6dQGjQ.png" alt="checkout"></p>
+<p>但如果有遠端備份(github)的話，不建議用git reset ，因為如果你將本機reset過的紀錄再push一次到遠端，你的同事又從本地端push一次到遠端，那你想reset不要的紀錄又回到遠端了。</p>
+<h2 id="git-revert"><a href="#git-revert" class="headerlink" title="git revert"></a>git revert</h2><p>為了將你想取消的紀錄分享給你的同事，可以用git revert，概念是再做一個新的 Commit，來取消你不要的 Commit，新的commit點上會有 ‘ 代表是revert 的點。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert + 要刪除的commit點</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/574/1*c_R6Jsz3I7bhynusCX2Hyg.png" alt="新增C2&#39; 來取消C2"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Git/" rel="tag"># Git</a>
+          </div>
+
         
-        <span class="collection-header">還行! 目前共有 47 篇文章。 繼續努力。</span>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-06-10T20:35:20+08:00"
-              content="2022-06-10">
-          06-10
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/06/10/2022-6-10-1-Hexo-%E6%96%B0%E5%A2%9E%E5%A5%97%E4%BB%B6/" itemprop="url">
-            <span itemprop="name">(7) Hexo-新增套件</span>
-          </a>
-      </div>
-
-      
-    </header>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/29/2022-6-29-1-css-flex/" rel="prev" title="(4) CSS基礎篇 Flex">
+                  <i class="fa fa-chevron-left"></i> (4) CSS基礎篇 Flex
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-06-09T21:36:54+08:00"
-              content="2022-06-09">
-          06-09
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/06/09/2022-6-9-2-Hexo-%E6%96%B0%E5%A2%9E%E4%BD%88%E6%99%AF%E4%B8%BB%E9%A1%8C/" itemprop="url">
-            <span itemprop="name">(6) Hexo-新增佈景主題</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-06-09T20:44:58+08:00"
-              content="2022-06-09">
-          06-09
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/06/09/2022-6-9-1-Hexo-%E6%96%B0%E5%A2%9E%E9%A0%81%E9%9D%A2/" itemprop="url">
-            <span itemprop="name">(5) Hexo-新增頁面</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-06-08T15:16:49+08:00"
-              content="2022-06-08">
-          06-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/06/08/2022-6-8-Hexo-%E9%83%A8%E5%B1%AC%E9%83%A8%E8%90%BD%E6%A0%BC/" itemprop="url">
-            <span itemprop="name">(4) Hexo-部屬部落格</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-06-08T14:39:57+08:00"
-              content="2022-06-08">
-          06-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/" itemprop="url">
-            <span itemprop="name">(3) Hexo-基礎Hexo指令</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-06-08T12:28:30+08:00"
-              content="2022-06-08">
-          06-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/06/08/2022-6-8-Hexo-%E6%92%B0%E5%AF%AB%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" itemprop="url">
-            <span itemprop="name">(2) Hexo 撰寫第一篇文章</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-06-07T21:44:06+08:00"
-              content="2022-06-07">
-          06-07
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/06/07/2022-6-7-Hexo-%E9%83%A8%E8%90%BD%E6%A0%BC%E5%AE%89%E8%A3%9D%E8%88%87%E9%83%A8%E5%B1%AC/" itemprop="url">
-            <span itemprop="name">(1) Hexo 部落格安裝</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
   </div>
   
-  
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2022/06/page/4/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/archives/2022/06/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2022/06/page/4/">4</a><span class="page-number current">5</span>
-  </nav>
-
 </div>
   </main>
 

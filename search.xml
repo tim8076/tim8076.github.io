@@ -19,6 +19,62 @@
       </tags>
   </entry>
   <entry>
+    <title>(8) Hexo-第三方服務</title>
+    <url>/2022/06/10/2022-6-10-2-Hexo-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8B%99/</url>
+    <content><![CDATA[<h2 id="新增第三方服務"><a href="#新增第三方服務" class="headerlink" title="新增第三方服務"></a>新增第三方服務</h2><p>當我打開 <code>_config.next.yml</code> ，會發現NextT也整合了一些第三方服務進來，大多都只需要申請帳號並填入 ID 就可以使用。<br>以下就介紹幾個好用的服務。</p>
+<h2 id="Disqus"><a href="#Disqus" class="headerlink" title="Disqus"></a>Disqus</h2><p>Disqus 是一個留言板服務，安裝流程如下</p>
+<ol>
+<li><p>到 <a href="https://disqus.com/">Disqus</a> 官網註冊一個帳號並登入。按下 <code>GET STARTED</code>按鈕，並選擇 <code> I want to install Disqus on my site</code>選項，就會來到 <code>Create a new site</code> 頁面。</p>
+</li>
+<li><p>輸入你的 <code>Website Name</code>，並按下 <code>Create Site </code>。</p>
+</li>
+<li><p>這邊就建立好你的 disqus帳號了</p>
+</li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061102.png?alt=media&token=518dfa72-a8fe-4c81-bead-89bc3a59e874" alt="disqus"></p>
+<ol start="4">
+<li>回到 <code>_config.next.yml</code>，將 disqus 選項改為true，並在shortname填入剛才在disqus設定的 <code>Website Name</code></li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061103.png?alt=media&token=3a8584ce-3749-4640-99c0-c8ecd574faa7" alt="disqus-setting"></p>
+<ol start="5">
+<li>以上就完成了留言板設置囉</li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061104.png?alt=media&token=dc77ed95-13ce-4a34-9769-1297dc7c1bda" alt="comments"></p>
+<h2 id="圖片顯示"><a href="#圖片顯示" class="headerlink" title="圖片顯示"></a>圖片顯示</h2><p>NextT 內建有兩種圖片顯示的方式，分別是 fancybox 和 mediumzoom，只要到 <code>_config.next.yml</code>，將選項改為true即可。但記得不要同時開啟 fancybox 和 mediumzoom。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061101.png?alt=media&token=c62c2900-a1e0-4d60-9a0a-bf13dc66d7a3" alt="image"></p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(3) Gulp-撰寫gulp file</title>
+    <url>/2022/06/16/2022-6-15-3-Gulp-%E5%9F%BA%E7%A4%8E%E7%AF%87/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前面已經將專案的環境與gulp都安裝好了，這節會開始介紹如何撰寫你的第一支 gulp file</p>
+<h2 id="開始撰寫-gulp-file"><a href="#開始撰寫-gulp-file" class="headerlink" title="開始撰寫 gulp file"></a>開始撰寫 gulp file</h2><p>一開始先在專案的根目錄新增一個檔案 <code>gulpfile.js</code>檔案</p>
+<p>然後在根目錄 新增一個 <code>source</code> 資料夾<br>並在source資料夾內新增一個 style.css</p>
+<p><img src="https://i.imgur.com/GsAJaOF.png" alt="img"></p>
+<p>在gulpfile.js 最上面先引入 GULP</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> gulp = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>然後我們可以新增一個簡單的gulp任務</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">funciton <span class="title function_">copyFile</span>(<span class="params"></span>) &#123;</span><br><span class="line">   gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/**/*/.css&#x27;</span>)</span><br><span class="line">     .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面這段程式中，我們用了 <code>gulp.src()</code> 來指定來源檔案的位置，<br>並用 <code>gulp.dest()</code> 將檔案輸出到指定的public資料夾。</p>
+<p>然後可以開啟 commend line 輸入指令 </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">gulp copyFile</span><br></pre></td></tr></table></figure>
+
+<p>就會發現檔案已經被輸出到 public 資料夾囉。</p>
+<p>下堂課會開始介紹 其他的各種gulp任務喔。</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(1) JS30實作系列 Drum-Kit</title>
     <url>/2022/06/14/2022-6-14-1-JS30-Drum-Kit/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS30，是由加拿大工程師Wes Bos所建立一系列課程。透過課程內容可以實際學到Javascript的實際應用。<br>本系列文章會實做一些JS30的範例，從中熟練JS的觀念。</p>
@@ -44,6 +100,62 @@
       <tags>
         <tag>JS30</tag>
         <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(5) Gulp-postcss</title>
+    <url>/2022/06/17/2022-6-17-1-Gulp-postcss/</url>
+    <content><![CDATA[<h2 id="PostCSS-是什麼"><a href="#PostCSS-是什麼" class="headerlink" title="PostCSS 是什麼 ?"></a>PostCSS 是什麼 ?</h2><p>PostCSS 是一個使用JavaScript 轉換CSS 的工具。<br>以前在撰寫css時，因為有些新的語法舊的瀏覽器不支援，所以需要加上前贅詞</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*0gGNaqjQjKhcOhyBck5Bhw.png" alt="img"></p>
+<p>但這步驟如果用人工判斷很費時，此時可以用post css搭配 autoprfixer 套件，來自動加入這些前贅詞。</p>
+<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><p>先安裝套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install postcss gulp-postcss autoprfixer --save</span><br></pre></td></tr></table></figure>
+
+<p>然後在 <code>gulpfile.js</code> 中載入套件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> autoprefixer = <span class="built_in">require</span>(<span class="string">&#x27;autoprefixer&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> postcss = <span class="built_in">require</span>(<span class="string">&#x27;gulp-postcss&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在我們編譯sass的任務中，加入postcss功能</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sassTask</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> plugins = [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">postcss</span>(plugins))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面我們先新增一個 plugins 的變數，並在編譯成css後，加入 <code>postcss(plugins)</code></p>
+<p>此時可能會遇到這個錯誤</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*r49hPlucU_l7u-wYZtzGBg.png" alt="error"></p>
+<p>這個錯誤是要我們在根目錄增加一個 .browserslistrc 的檔案，裡面放需要支援的瀏覽器版本條件，如下圖:</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*RiUzC2vYWqZEFgT0nCa7lA.png" alt="browser"></p>
+<p>之後如果要調整 CSS 支援版本就只需要調整 .browserslistrc 中的 last X version X 即可，關於支援版本設定，可參考<a href="https://github.com/browserslist/browserslist">這裡</a>。</p>
+<p>以上就完成gulp-postcss的的設定囉</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(4) Gulp-編譯scss</title>
+    <url>/2022/06/16/2022-6-15-4-Gulp-%E7%B7%A8%E8%AD%AFsass/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇來介紹如何在 gulp 中，進行scss的編譯吧。</p>
+<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><p>首先來安裝 gulp-sass 套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install sass gulp-sass --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>在gulpfile.js裡，依照文件貼上相關設定</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sass = <span class="built_in">require</span>(<span class="string">&#x27;gulp-sass&#x27;</span>)(<span class="built_in">require</span>(<span class="string">&#x27;sass&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">buildStyles</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上面為編譯scss的gulp任務，用 src 指定 scss 所在的資料夾後，最後在用gulp.dest() 指定編譯後的 css 輸出的位置。</p>
+<p>之後在scss資料夾裡，新增一個all.scss檔案。</p>
+<p>並輸入一些東西</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$color</span>: <span class="number">#00cc99</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="variable">$color</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在commend line 輸入 gulp buildStyles 就可以發現scss被編譯成css檔案，並輸出到public資料夾囉。</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
       </tags>
   </entry>
   <entry>
@@ -80,6 +192,55 @@
       </tags>
   </entry>
   <entry>
+    <title>(2) Gulp-運作原理介紹</title>
+    <url>/2022/06/16/2022-6-15-5-Gulp-%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/1200/0*_uAjbnaZaXs1ca6x.png" alt="img"></p>
+<h2 id="運作原理"><a href="#運作原理" class="headerlink" title="運作原理"></a>運作原理</h2><p>Gulp運作的方式就是將每個任務像水管一樣串接下去</p>
+<h2 id="簡單範例"><a href="#簡單範例" class="headerlink" title="簡單範例"></a>簡單範例</h2><p><img src="https://cdn-images-1.medium.com/max/1200/1*uBz4qK1ZMgkS6fNfP8u-NA.png" alt="gulp"></p>
+<p>上圖是一個copy html檔案的簡單範例，主要如下:</p>
+<ol>
+<li>gulp.task(‘任務名稱’, function(){}): 指定一個gulp任務</li>
+<li>gulp.src: 指定資料來源</li>
+<li>gulp.pipe(): 指定事件，pipe就像水管，可以一個接一個</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*FWZTmYZm1Sbg5FIO0ZDycg.png" alt="pipe"></p>
+<ol start="4">
+<li>gulp.dest(): 輸出任務的結果</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(6) Gulp-babel</title>
+    <url>/2022/06/17/2022-6-17-2-Gulp-babel/</url>
+    <content><![CDATA[<h2 id="什麼是-babel"><a href="#什麼是-babel" class="headerlink" title="什麼是 babel"></a>什麼是 babel</h2><p>使用babel套件，可以將 一些新的js語法，如箭頭函式、let、const，編譯為舊版瀏覽器看得懂的語法。</p>
+<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install --save-dev gulp-babel @babel/core @babel/preset-env</span><br><span class="line">npm install --save gulp-sourcemaps  //壓縮後，可標記原始碼位置</span><br><span class="line">npm install --save gulp-concat  //合併程式碼用</span><br></pre></td></tr></table></figure>
+
+<p>在 gulpfile.js 中引入任務</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/js/**/*.js&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/js&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函式中，我們指定source資料夾裡的 js檔案進行用babel編譯，<br>並用concat套件將多支js檔案在輸出時合併成一支，最後用dest輸出到public資料夾。</p>
+<h2 id="sourcemap套件"><a href="#sourcemap套件" class="headerlink" title="sourcemap套件"></a>sourcemap套件</h2><p>因為多支js檔案，最後會被編譯成同一支js。為了在最終編譯的js中，查找原先程式碼的位置，可以使用 sourcemap套件。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/js/**/*.js&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/js&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*ZT2zdCDxGvinb_v13KRccQ.png" alt="sourcemaps"></p>
+<p>sourcemap 除了js檔案以外，也可以用在如scss檔案</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*nQzF8npRYhWcAaXJAzGgDw.png" alt="scss-source"></p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+        <tag>gulp-babel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(2) JS30實作系列 時鐘</title>
     <url>/2022/06/15/2022-6-15-1-JS30-clock/</url>
     <content><![CDATA[<p><img src="https://miro.medium.com/max/1400/1*JH-e_9OQS1lBH7hqb7lMXQ.png" alt="clock"></p>
@@ -112,164 +273,33 @@
       </tags>
   </entry>
   <entry>
-    <title>(4) Gulp-編譯scss</title>
-    <url>/2022/06/16/2022-6-15-4-Gulp-%E7%B7%A8%E8%AD%AFsass/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇來介紹如何在 gulp 中，進行scss的編譯吧。</p>
-<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><p>首先來安裝 gulp-sass 套件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install sass gulp-sass --save</span><br></pre></td></tr></table></figure>
+    <title>(7) Gulp-browserSync</title>
+    <url>/2022/06/17/2022-6-17-3-Gulp-browser-sync/</url>
+    <content><![CDATA[<h2 id="什麼是-broswer-sync"><a href="#什麼是-broswer-sync" class="headerlink" title="什麼是 broswer sync"></a>什麼是 broswer sync</h2><p>browserSync 能建立起一個暫時性的開發用伺服器。搭配 gulp 使用，就能達成檔案修改時，browserSnyc 會自動重整畫面，讓開發者能在瀏覽器上即時看到修改後的畫面。</p>
+<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><p>網址: <a href="https://browsersync.io/docs/gulp">https://browsersync.io/docs/gulp</a></p>
+<p>安裝套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install browser-sync gulp --save</span><br></pre></td></tr></table></figure>
 
-<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>在gulpfile.js裡，依照文件貼上相關設定</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sass = <span class="built_in">require</span>(<span class="string">&#x27;gulp-sass&#x27;</span>)(<span class="built_in">require</span>(<span class="string">&#x27;sass&#x27;</span>));</span><br></pre></td></tr></table></figure>
+<p>在gulpfile.js中引入</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> browserSync = <span class="built_in">require</span>(<span class="string">&#x27;browser-sync&#x27;</span>).<span class="title function_">create</span>();</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">buildStyles</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>建立任務，指定伺服器位置為最後輸出的public資料夾</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">browser</span>(<span class="params"></span>)&#123;</span><br><span class="line">  browserSync.<span class="title function_">init</span>(&#123;</span><br><span class="line">    <span class="attr">server</span>: &#123; <span class="attr">baseDir</span>: <span class="string">&quot;./public&quot;</span> &#125;,</span><br><span class="line">    <span class="attr">reloadDebounce</span>: <span class="number">2000</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>上面為編譯scss的gulp任務，用 src 指定 scss 所在的資料夾後，最後在用gulp.dest() 指定編譯後的 css 輸出的位置。</p>
-<p>之後在scss資料夾裡，新增一個all.scss檔案。</p>
-<p>並輸入一些東西</p>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$color</span>: <span class="number">#00cc99</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="variable">$color</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在其他gulp任務輸出的最後加上 <code>.pipe(browserSync.stream())</code></p>
+<p>如在babel任務加上，就會在babel更新後，自動同步到瀏覽器。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(path.<span class="property">js</span>.<span class="property">src</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">if</span>(options.<span class="property">env</span> === <span class="string">&#x27;prod&#x27;</span>, $.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(path.<span class="property">js</span>.<span class="property">des</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在commend line 輸入 gulp buildStyles 就可以發現scss被編譯成css檔案，並輸出到public資料夾囉。</p>
+
+
+
+
 ]]></content>
       <categories>
         <category>Gulp</category>
       </categories>
       <tags>
         <tag>Gulp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(3) Gulp-撰寫gulp file</title>
-    <url>/2022/06/16/2022-6-15-3-Gulp-%E5%9F%BA%E7%A4%8E%E7%AF%87/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前面已經將專案的環境與gulp都安裝好了，這節會開始介紹如何撰寫你的第一支 gulp file</p>
-<h2 id="開始撰寫-gulp-file"><a href="#開始撰寫-gulp-file" class="headerlink" title="開始撰寫 gulp file"></a>開始撰寫 gulp file</h2><p>一開始先在專案的根目錄新增一個檔案 <code>gulpfile.js</code>檔案</p>
-<p>然後在根目錄 新增一個 <code>source</code> 資料夾<br>並在source資料夾內新增一個 style.css</p>
-<p><img src="https://i.imgur.com/GsAJaOF.png" alt="img"></p>
-<p>在gulpfile.js 最上面先引入 GULP</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> gulp = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>然後我們可以新增一個簡單的gulp任務</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">funciton <span class="title function_">copyFile</span>(<span class="params"></span>) &#123;</span><br><span class="line">   gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/**/*/.css&#x27;</span>)</span><br><span class="line">     .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面這段程式中，我們用了 <code>gulp.src()</code> 來指定來源檔案的位置，<br>並用 <code>gulp.dest()</code> 將檔案輸出到指定的public資料夾。</p>
-<p>然後可以開啟 commend line 輸入指令 </p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">gulp copyFile</span><br></pre></td></tr></table></figure>
-
-<p>就會發現檔案已經被輸出到 public 資料夾囉。</p>
-<p>下堂課會開始介紹 其他的各種gulp任務喔。</p>
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(2) Gulp-運作原理介紹</title>
-    <url>/2022/06/16/2022-6-15-5-Gulp-%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/1200/0*_uAjbnaZaXs1ca6x.png" alt="img"></p>
-<h2 id="運作原理"><a href="#運作原理" class="headerlink" title="運作原理"></a>運作原理</h2><p>Gulp運作的方式就是將每個任務像水管一樣串接下去</p>
-<h2 id="簡單範例"><a href="#簡單範例" class="headerlink" title="簡單範例"></a>簡單範例</h2><p><img src="https://cdn-images-1.medium.com/max/1200/1*uBz4qK1ZMgkS6fNfP8u-NA.png" alt="gulp"></p>
-<p>上圖是一個copy html檔案的簡單範例，主要如下:</p>
-<ol>
-<li>gulp.task(‘任務名稱’, function(){}): 指定一個gulp任務</li>
-<li>gulp.src: 指定資料來源</li>
-<li>gulp.pipe(): 指定事件，pipe就像水管，可以一個接一個</li>
-</ol>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*FWZTmYZm1Sbg5FIO0ZDycg.png" alt="pipe"></p>
-<ol start="4">
-<li>gulp.dest(): 輸出任務的結果</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(5) Gulp-postcss</title>
-    <url>/2022/06/17/2022-6-17-1-Gulp-postcss/</url>
-    <content><![CDATA[<h2 id="PostCSS-是什麼"><a href="#PostCSS-是什麼" class="headerlink" title="PostCSS 是什麼 ?"></a>PostCSS 是什麼 ?</h2><p>PostCSS 是一個使用JavaScript 轉換CSS 的工具。<br>以前在撰寫css時，因為有些新的語法舊的瀏覽器不支援，所以需要加上前贅詞</p>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*0gGNaqjQjKhcOhyBck5Bhw.png" alt="img"></p>
-<p>但這步驟如果用人工判斷很費時，此時可以用post css搭配 autoprfixer 套件，來自動加入這些前贅詞。</p>
-<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><p>先安裝套件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install postcss gulp-postcss autoprfixer --save</span><br></pre></td></tr></table></figure>
-
-<p>然後在 <code>gulpfile.js</code> 中載入套件</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> autoprefixer = <span class="built_in">require</span>(<span class="string">&#x27;autoprefixer&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> postcss = <span class="built_in">require</span>(<span class="string">&#x27;gulp-postcss&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>在我們編譯sass的任務中，加入postcss功能</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sassTask</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> plugins = [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">postcss</span>(plugins))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面我們先新增一個 plugins 的變數，並在編譯成css後，加入 <code>postcss(plugins)</code></p>
-<p>此時可能會遇到這個錯誤</p>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*r49hPlucU_l7u-wYZtzGBg.png" alt="error"></p>
-<p>這個錯誤是要我們在根目錄增加一個 .browserslistrc 的檔案，裡面放需要支援的瀏覽器版本條件，如下圖:</p>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*RiUzC2vYWqZEFgT0nCa7lA.png" alt="browser"></p>
-<p>之後如果要調整 CSS 支援版本就只需要調整 .browserslistrc 中的 last X version X 即可，關於支援版本設定，可參考<a href="https://github.com/browserslist/browserslist">這裡</a>。</p>
-<p>以上就完成gulp-postcss的的設定囉</p>
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(8) Hexo-第三方服務</title>
-    <url>/2022/06/10/2022-6-10-2-Hexo-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8B%99/</url>
-    <content><![CDATA[<h2 id="新增第三方服務"><a href="#新增第三方服務" class="headerlink" title="新增第三方服務"></a>新增第三方服務</h2><p>當我打開 <code>_config.next.yml</code> ，會發現NextT也整合了一些第三方服務進來，大多都只需要申請帳號並填入 ID 就可以使用。<br>以下就介紹幾個好用的服務。</p>
-<h2 id="Disqus"><a href="#Disqus" class="headerlink" title="Disqus"></a>Disqus</h2><p>Disqus 是一個留言板服務，安裝流程如下</p>
-<ol>
-<li><p>到 <a href="https://disqus.com/">Disqus</a> 官網註冊一個帳號並登入。按下 <code>GET STARTED</code>按鈕，並選擇 <code> I want to install Disqus on my site</code>選項，就會來到 <code>Create a new site</code> 頁面。</p>
-</li>
-<li><p>輸入你的 <code>Website Name</code>，並按下 <code>Create Site </code>。</p>
-</li>
-<li><p>這邊就建立好你的 disqus帳號了</p>
-</li>
-</ol>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061102.png?alt=media&token=518dfa72-a8fe-4c81-bead-89bc3a59e874" alt="disqus"></p>
-<ol start="4">
-<li>回到 <code>_config.next.yml</code>，將 disqus 選項改為true，並在shortname填入剛才在disqus設定的 <code>Website Name</code></li>
-</ol>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061103.png?alt=media&token=3a8584ce-3749-4640-99c0-c8ecd574faa7" alt="disqus-setting"></p>
-<ol start="5">
-<li>以上就完成了留言板設置囉</li>
-</ol>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061104.png?alt=media&token=dc77ed95-13ce-4a34-9769-1297dc7c1bda" alt="comments"></p>
-<h2 id="圖片顯示"><a href="#圖片顯示" class="headerlink" title="圖片顯示"></a>圖片顯示</h2><p>NextT 內建有兩種圖片顯示的方式，分別是 fancybox 和 mediumzoom，只要到 <code>_config.next.yml</code>，將選項改為true即可。但記得不要同時開啟 fancybox 和 mediumzoom。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061101.png?alt=media&token=c62c2900-a1e0-4d60-9a0a-bf13dc66d7a3" alt="image"></p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(6) Gulp-babel</title>
-    <url>/2022/06/17/2022-6-17-2-Gulp-babel/</url>
-    <content><![CDATA[<h2 id="什麼是-babel"><a href="#什麼是-babel" class="headerlink" title="什麼是 babel"></a>什麼是 babel</h2><p>使用babel套件，可以將 一些新的js語法，如箭頭函式、let、const，編譯為舊版瀏覽器看得懂的語法。</p>
-<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install --save-dev gulp-babel @babel/core @babel/preset-env</span><br><span class="line">npm install --save gulp-sourcemaps  //壓縮後，可標記原始碼位置</span><br><span class="line">npm install --save gulp-concat  //合併程式碼用</span><br></pre></td></tr></table></figure>
-
-<p>在 gulpfile.js 中引入任務</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/js/**/*.js&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/js&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>函式中，我們指定source資料夾裡的 js檔案進行用babel編譯，<br>並用concat套件將多支js檔案在輸出時合併成一支，最後用dest輸出到public資料夾。</p>
-<h2 id="sourcemap套件"><a href="#sourcemap套件" class="headerlink" title="sourcemap套件"></a>sourcemap套件</h2><p>因為多支js檔案，最後會被編譯成同一支js。為了在最終編譯的js中，查找原先程式碼的位置，可以使用 sourcemap套件。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/js/**/*.js&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/js&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*ZT2zdCDxGvinb_v13KRccQ.png" alt="sourcemaps"></p>
-<p>sourcemap 除了js檔案以外，也可以用在如scss檔案</p>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*nQzF8npRYhWcAaXJAzGgDw.png" alt="scss-source"></p>
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
-        <tag>gulp-babel</tag>
       </tags>
   </entry>
   <entry>
@@ -304,27 +334,58 @@
       </tags>
   </entry>
   <entry>
-    <title>(7) Gulp-browserSync</title>
-    <url>/2022/06/17/2022-6-17-3-Gulp-browser-sync/</url>
-    <content><![CDATA[<h2 id="什麼是-broswer-sync"><a href="#什麼是-broswer-sync" class="headerlink" title="什麼是 broswer sync"></a>什麼是 broswer sync</h2><p>browserSync 能建立起一個暫時性的開發用伺服器。搭配 gulp 使用，就能達成檔案修改時，browserSnyc 會自動重整畫面，讓開發者能在瀏覽器上即時看到修改後的畫面。</p>
-<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><p>網址: <a href="https://browsersync.io/docs/gulp">https://browsersync.io/docs/gulp</a></p>
-<p>安裝套件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install browser-sync gulp --save</span><br></pre></td></tr></table></figure>
+    <title>(11) Gulp-git</title>
+    <url>/2022/06/18/2022-6-18-3-Gulp-git/</url>
+    <content><![CDATA[<h2 id="初始化git"><a href="#初始化git" class="headerlink" title="初始化git"></a>初始化git</h2><p>這章節，我們來幫gulp專案加入 git 版本控制，若電腦還沒安裝git的話，可以先到<a href="https://git-scm.com/">git官網</a>下載git並安裝。</p>
+<p>安裝好git後，在commend line輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init // 建立本地儲存庫</span><br><span class="line">git add . // 加入所有檔案到目錄</span><br><span class="line">git commit -m &quot;first commit&quot;  // 提交本次紀錄</span><br></pre></td></tr></table></figure>
 
-<p>在gulpfile.js中引入</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> browserSync = <span class="built_in">require</span>(<span class="string">&#x27;browser-sync&#x27;</span>).<span class="title function_">create</span>();</span><br></pre></td></tr></table></figure>
+<h2 id="新增-gitignore-檔案"><a href="#新增-gitignore-檔案" class="headerlink" title="新增 gitignore 檔案"></a>新增 gitignore 檔案</h2><p>因為有一些檔案是不需要加入版本控制的，如 public資料夾、.temp資料夾、node_modules資料夾，此時可以開一個 .gitignore 檔案，將不須控制的檔案忽略。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*6er_v_0LzoqbD_Pl0lTEgw.png" alt="gitignore"></p>
+<p>在用 git status 去檢查未加入目錄的檔案時，就會發現有加入.gitignore的檔案都消失了，代表這些檔案不用被git做控制。</p>
+<h2 id="快速發佈到-github-pages"><a href="#快速發佈到-github-pages" class="headerlink" title="快速發佈到 github pages"></a>快速發佈到 github pages</h2><p>在完成我們的gulp專案後，可以發佈到 github pages上。</p>
+<p>先下載 <code>gulp-gh-pages</code>  套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install - save-dev gulp-gh-pages</span><br></pre></td></tr></table></figure>
 
-<p>建立任務，指定伺服器位置為最後輸出的public資料夾</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">browser</span>(<span class="params"></span>)&#123;</span><br><span class="line">  browserSync.<span class="title function_">init</span>(&#123;</span><br><span class="line">    <span class="attr">server</span>: &#123; <span class="attr">baseDir</span>: <span class="string">&quot;./public&quot;</span> &#125;,</span><br><span class="line">    <span class="attr">reloadDebounce</span>: <span class="number">2000</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在gulpfile.js中加入deploy任務，因為有使用gulp-load-plugins這個套件，只要在ghPages()前方加入$即可。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">deploy</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./public/**/*&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">ghPages</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在其他gulp任務輸出的最後加上 <code>.pipe(browserSync.stream())</code></p>
-<p>如在babel任務加上，就會在babel更新後，自動同步到瀏覽器。</p>
+<p>輸入 gulp deploy後，會在github上新開一個 gh-pages 的分支，自動將public資料夾裡的內容上傳到github。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*5FV7yd4cKZ0mp4dL-Y1-Dw.png" alt="github"></p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+        <tag>git</tag>
+        <tag>github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(9) Gulp-if</title>
+    <url>/2022/06/18/2022-6-18-1-Gulp-if/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>通常在開發項目時，我們會分所謂的 development(開發環境) 與 production(生產環境)，在開發環境時，我們不會壓縮檔案，直到生產環境時，才會做檔案壓縮。此時，可以用 Minimist 命令行參數解析工具區分 Gulp 套件在 development 與 production 環境下的使用。</p>
+<h2 id="Minimist-套件安裝"><a href="#Minimist-套件安裝" class="headerlink" title="Minimist 套件安裝"></a>Minimist 套件安裝</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install minimist   </span><br><span class="line">$ npm install gulp-if</span><br></pre></td></tr></table></figure>
+
+<p>在gulpfile.js 中，載入 minimist</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> minimist= <span class="built_in">require</span>(<span class="string">&#x27;minimist&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="設定環境參數"><a href="#設定環境參數" class="headerlink" title="設定環境參數"></a>設定環境參數</h2><p>並設定envOption環境參數，以下面範例來說，預設是帶入字串，並且是develop這個環境。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> envOption = &#123;</span><br><span class="line">  <span class="attr">string</span>: <span class="string">&#x27;env&#x27;</span>,</span><br><span class="line">  <span class="attr">default</span>: &#123; <span class="attr">env</span>: <span class="string">&#x27;dev&#x27;</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用minimist將環境參數讀入，並在後方帶入 envOption環境選項。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> options = <span class="title function_">minimist</span>(process.<span class="property">argv</span>.<span class="title function_">slice</span>(<span class="number">2</span>), envOption)</span><br></pre></td></tr></table></figure>
+
+<p>process.argv.slice(2) 這行意思是跳過前兩個 – 字元直接讀取 env 這個字串。<br>此時用console.log(options)，可以看到options目前環境參數是 develop</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*b1cLVsVXiWwj834lXdwTYA.png" alt="console"></p>
+<p>若要更改參數，則可用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gulp --env 參數名稱</span><br></pre></td></tr></table></figure>
+
+<p>例如我在commend line 上輸入 <code>gulp --env prod</code> 就可將環境參數從dev改成prod。</p>
+<h2 id="使用gulp-if套件搭配環境參數"><a href="#使用gulp-if套件搭配環境參數" class="headerlink" title="使用gulp-if套件搭配環境參數"></a>使用gulp-if套件搭配環境參數</h2><p>環境參數設定好後，就可用gulp-if套件來判斷當前環境是 開發環境(dev) 還是 生產環境 (prod)。<br>讓我們能判斷如果是生產環境，則壓縮檔案，如果不是則不壓縮檔案。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(path.<span class="property">js</span>.<span class="property">src</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">if</span>(options.<span class="property">env</span> === <span class="string">&#x27;prod&#x27;</span>, $.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(path.<span class="property">js</span>.<span class="property">des</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
+<p>上面我們用了 gulp-if 來判斷當前環境變數是不是 prod，是的話則執行 uglify來壓縮。</p>
 ]]></content>
       <categories>
         <category>Gulp</category>
@@ -366,32 +427,23 @@
       </tags>
   </entry>
   <entry>
-    <title>(11) Gulp-git</title>
-    <url>/2022/06/18/2022-6-18-3-Gulp-git/</url>
-    <content><![CDATA[<h2 id="初始化git"><a href="#初始化git" class="headerlink" title="初始化git"></a>初始化git</h2><p>這章節，我們來幫gulp專案加入 git 版本控制，若電腦還沒安裝git的話，可以先到<a href="https://git-scm.com/">git官網</a>下載git並安裝。</p>
-<p>安裝好git後，在commend line輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init // 建立本地儲存庫</span><br><span class="line">git add . // 加入所有檔案到目錄</span><br><span class="line">git commit -m &quot;first commit&quot;  // 提交本次紀錄</span><br></pre></td></tr></table></figure>
+    <title>(1) SCSS練功坊-基礎介紹</title>
+    <url>/2022/06/18/2022-6-18-5-scss-intro/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>scss屬於css的預處理器，他加入了程式語言所用的變數、迴圈、模組化等概念，讓我們更方便管理css。<br>現今較為主流的 CSS 預處理器有三種，分別是 Sass&#x2F;SCSS、Less、Stylus，其中的 Sass&#x2F;SCSS 是目前較多人使用的選擇。</p>
+<h2 id="scss-語法介紹"><a href="#scss-語法介紹" class="headerlink" title="scss 語法介紹"></a>scss 語法介紹</h2><h3 id="巢狀寫法（Nesting）"><a href="#巢狀寫法（Nesting）" class="headerlink" title="巢狀寫法（Nesting）"></a>巢狀寫法（Nesting）</h3><p>以往寫css時，為了選取到某個元素底下的標籤，我們可能會重複選取該元素許多次，例如:</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="新增-gitignore-檔案"><a href="#新增-gitignore-檔案" class="headerlink" title="新增 gitignore 檔案"></a>新增 gitignore 檔案</h2><p>因為有一些檔案是不需要加入版本控制的，如 public資料夾、.temp資料夾、node_modules資料夾，此時可以開一個 .gitignore 檔案，將不須控制的檔案忽略。</p>
-<p><img src="https://cdn-images-1.medium.com/max/1320/1*6er_v_0LzoqbD_Pl0lTEgw.png" alt="gitignore"></p>
-<p>在用 git status 去檢查未加入目錄的檔案時，就會發現有加入.gitignore的檔案都消失了，代表這些檔案不用被git做控制。</p>
-<h2 id="快速發佈到-github-pages"><a href="#快速發佈到-github-pages" class="headerlink" title="快速發佈到 github pages"></a>快速發佈到 github pages</h2><p>在完成我們的gulp專案後，可以發佈到 github pages上。</p>
-<p>先下載 <code>gulp-gh-pages</code>  套件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install - save-dev gulp-gh-pages</span><br></pre></td></tr></table></figure>
+<p>上面程式碼中，我們重複寫了 .card 3次。</p>
+<p>在scss中我們可以用巢狀的寫法來減少重複的code，並且當父元素的class更改時，也只需要改一次即可:</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="selector-tag">ul</span> &#123;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在gulpfile.js中加入deploy任務，因為有使用gulp-load-plugins這個套件，只要在ghPages()前方加入$即可。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">deploy</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./public/**/*&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">ghPages</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>輸入 gulp deploy後，會在github上新開一個 gh-pages 的分支，自動將public資料夾裡的內容上傳到github。</p>
-<p><img src="https://cdn-images-1.medium.com/max/1320/1*5FV7yd4cKZ0mp4dL-Y1-Dw.png" alt="github"></p>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>scss的功能除了上述介紹的巢狀語法以外，還有許多如變數、函式、mixin、模組化等概念會在之後等章節來介紹喔。</p>
 ]]></content>
       <categories>
-        <category>Gulp</category>
+        <category>scss</category>
       </categories>
       <tags>
-        <tag>Gulp</tag>
-        <tag>git</tag>
-        <tag>github</tag>
+        <tag>scss</tag>
       </tags>
   </entry>
   <entry>
@@ -423,74 +475,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(3) SCSS練功坊-計算功能</title>
-    <url>/2022/06/19/2022-6-19-2-scss-calc/</url>
-    <content><![CDATA[<h2 id="計算功能"><a href="#計算功能" class="headerlink" title="計算功能"></a>計算功能</h2><p>在 SCSS裡，我們可以用變數來做加減乘除等運算，如下我設定了 $font-size: 16px，之後再利用這個變數做運算，計算出其他font-size大小。但要注意計算時單位必須一樣。</p>
-<p><img src="https://miro.medium.com/max/1028/1*n0VDI1urUorAt3oPPs4YXA.png" alt="font-size"></p>
-<p>計算單位 除了px單位外，em與%數也可以，但假使你用px+em與%單位的話，會跳錯誤，因為單位不同。</p>
-<h2 id="範例-計算container-寬度"><a href="#範例-計算container-寬度" class="headerlink" title="範例: 計算container 寬度"></a>範例: 計算container 寬度</h2><p>有一個 container 寬度為 $width :920px；裡面有6個子元素box，利用 width &#x2F; 6 ，直接算出每個box寬度。</p>
-<p><img src="https://miro.medium.com/max/842/1*EzxbD-ztoCWUm-wqE3OVLA.png" alt="container"></p>
-]]></content>
-      <categories>
-        <category>scss</category>
-      </categories>
-      <tags>
-        <tag>scss</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(1) SCSS練功坊-基礎介紹</title>
-    <url>/2022/06/18/2022-6-18-5-scss-intro/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>scss屬於css的預處理器，他加入了程式語言所用的變數、迴圈、模組化等概念，讓我們更方便管理css。<br>現今較為主流的 CSS 預處理器有三種，分別是 Sass&#x2F;SCSS、Less、Stylus，其中的 Sass&#x2F;SCSS 是目前較多人使用的選擇。</p>
-<h2 id="scss-語法介紹"><a href="#scss-語法介紹" class="headerlink" title="scss 語法介紹"></a>scss 語法介紹</h2><h3 id="巢狀寫法（Nesting）"><a href="#巢狀寫法（Nesting）" class="headerlink" title="巢狀寫法（Nesting）"></a>巢狀寫法（Nesting）</h3><p>以往寫css時，為了選取到某個元素底下的標籤，我們可能會重複選取該元素許多次，例如:</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面程式碼中，我們重複寫了 .card 3次。</p>
-<p>在scss中我們可以用巢狀的寫法來減少重複的code，並且當父元素的class更改時，也只需要改一次即可:</p>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="selector-tag">ul</span> &#123;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>scss的功能除了上述介紹的巢狀語法以外，還有許多如變數、函式、mixin、模組化等概念會在之後等章節來介紹喔。</p>
-]]></content>
-      <categories>
-        <category>scss</category>
-      </categories>
-      <tags>
-        <tag>scss</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(9) Gulp-if</title>
-    <url>/2022/06/18/2022-6-18-1-Gulp-if/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>通常在開發項目時，我們會分所謂的 development(開發環境) 與 production(生產環境)，在開發環境時，我們不會壓縮檔案，直到生產環境時，才會做檔案壓縮。此時，可以用 Minimist 命令行參數解析工具區分 Gulp 套件在 development 與 production 環境下的使用。</p>
-<h2 id="Minimist-套件安裝"><a href="#Minimist-套件安裝" class="headerlink" title="Minimist 套件安裝"></a>Minimist 套件安裝</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install minimist   </span><br><span class="line">$ npm install gulp-if</span><br></pre></td></tr></table></figure>
-
-<p>在gulpfile.js 中，載入 minimist</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> minimist= <span class="built_in">require</span>(<span class="string">&#x27;minimist&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="設定環境參數"><a href="#設定環境參數" class="headerlink" title="設定環境參數"></a>設定環境參數</h2><p>並設定envOption環境參數，以下面範例來說，預設是帶入字串，並且是develop這個環境。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> envOption = &#123;</span><br><span class="line">  <span class="attr">string</span>: <span class="string">&#x27;env&#x27;</span>,</span><br><span class="line">  <span class="attr">default</span>: &#123; <span class="attr">env</span>: <span class="string">&#x27;dev&#x27;</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>用minimist將環境參數讀入，並在後方帶入 envOption環境選項。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> options = <span class="title function_">minimist</span>(process.<span class="property">argv</span>.<span class="title function_">slice</span>(<span class="number">2</span>), envOption)</span><br></pre></td></tr></table></figure>
-
-<p>process.argv.slice(2) 這行意思是跳過前兩個 – 字元直接讀取 env 這個字串。<br>此時用console.log(options)，可以看到options目前環境參數是 develop</p>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*b1cLVsVXiWwj834lXdwTYA.png" alt="console"></p>
-<p>若要更改參數，則可用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gulp --env 參數名稱</span><br></pre></td></tr></table></figure>
-
-<p>例如我在commend line 上輸入 <code>gulp --env prod</code> 就可將環境參數從dev改成prod。</p>
-<h2 id="使用gulp-if套件搭配環境參數"><a href="#使用gulp-if套件搭配環境參數" class="headerlink" title="使用gulp-if套件搭配環境參數"></a>使用gulp-if套件搭配環境參數</h2><p>環境參數設定好後，就可用gulp-if套件來判斷當前環境是 開發環境(dev) 還是 生產環境 (prod)。<br>讓我們能判斷如果是生產環境，則壓縮檔案，如果不是則不壓縮檔案。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(path.<span class="property">js</span>.<span class="property">src</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">if</span>(options.<span class="property">env</span> === <span class="string">&#x27;prod&#x27;</span>, $.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(path.<span class="property">js</span>.<span class="property">des</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面我們用了 gulp-if 來判斷當前環境變數是不是 prod，是的話則執行 uglify來壓縮。</p>
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(2) SCSS練功坊-變數variable</title>
     <url>/2022/06/19/2022-6-19-1-scss-variable/</url>
     <content><![CDATA[<h2 id="以往css遇到的問題"><a href="#以往css遇到的問題" class="headerlink" title="以往css遇到的問題"></a>以往css遇到的問題</h2><p>以往在寫css時，可能我們會直接將顏色的值寫死，例如:</p>
@@ -518,15 +502,28 @@
       </tags>
   </entry>
   <entry>
-    <title>(5) SCSS練功坊-mixin</title>
-    <url>/2022/06/19/2022-6-19-4-scss-mixin/</url>
-    <content><![CDATA[<h2 id="使用-mixin-管理重複的樣式"><a href="#使用-mixin-管理重複的樣式" class="headerlink" title="使用 mixin 管理重複的樣式"></a>使用 mixin 管理重複的樣式</h2><p>當我們有一段樣式，會被重複用到，裡頭樣式數值又會有不同時，可以用mixin做管理。<br>撰寫mixin方法</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@mixin + mixin名稱(參數) &#123; &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/1266/1*M5IXbD8WVeMwgzfadFHNrQ.png" alt="circle"></p>
-<p>上圖中， circle 裡可以帶入 $size，$bg-color等不同參數，如此在不同地方，我們可以依照不同需求，傳入不同參數，做出不同的圓形。</p>
-<p>引入 mixin時，用 @include + mixin名稱</p>
-<p><img src="https://miro.medium.com/max/1140/1*Yn5snpWqUCxsEJ1eA646zQ.png" alt="編譯後結果"></p>
+    <title>(3) SCSS練功坊-計算功能</title>
+    <url>/2022/06/19/2022-6-19-2-scss-calc/</url>
+    <content><![CDATA[<h2 id="計算功能"><a href="#計算功能" class="headerlink" title="計算功能"></a>計算功能</h2><p>在 SCSS裡，我們可以用變數來做加減乘除等運算，如下我設定了 $font-size: 16px，之後再利用這個變數做運算，計算出其他font-size大小。但要注意計算時單位必須一樣。</p>
+<p><img src="https://miro.medium.com/max/1028/1*n0VDI1urUorAt3oPPs4YXA.png" alt="font-size"></p>
+<p>計算單位 除了px單位外，em與%數也可以，但假使你用px+em與%單位的話，會跳錯誤，因為單位不同。</p>
+<h2 id="範例-計算container-寬度"><a href="#範例-計算container-寬度" class="headerlink" title="範例: 計算container 寬度"></a>範例: 計算container 寬度</h2><p>有一個 container 寬度為 $width :920px；裡面有6個子元素box，利用 width &#x2F; 6 ，直接算出每個box寬度。</p>
+<p><img src="https://miro.medium.com/max/842/1*EzxbD-ztoCWUm-wqE3OVLA.png" alt="container"></p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(7) SCSS練功坊-顏色函數</title>
+    <url>/2022/06/20/2022-6-20-1-scss-color/</url>
+    <content><![CDATA[<h2 id="顏色函數"><a href="#顏色函數" class="headerlink" title="顏色函數"></a>顏色函數</h2><p><img src="https://miro.medium.com/max/1400/1*SFb0wzFGrTw4byZVEbn_8g.png" alt="color"></p>
+<p>在SCSS中 ，可以利用一些內建的函數，來調整顏色。</p>
+<p>如: darken(#fff, 20%) &#x2F;&#x2F;將白色調暗10%；</p>
+<p>lighten(#000,30% ) &#x2F;&#x2F;將黑色調亮10%;</p>
 ]]></content>
       <categories>
         <category>scss</category>
@@ -545,21 +542,6 @@
 <h2 id="Mixin與extend的使用時機"><a href="#Mixin與extend的使用時機" class="headerlink" title="Mixin與extend的使用時機"></a>Mixin與extend的使用時機</h2><p>基本上來說，<br>@mixin是將程式碼帶入到對應的class去，同時可帶入變數。<br>@extend則是藉由class合併，並吃到共通樣式，但沒辦法帶入變數。</p>
 <p>所以如果你的樣式都固定不變的，不會需要用參數帶進去改變樣式的話，<br>那就用@extend，程式碼會比較少些。</p>
 <p>但如果你的程式碼需要帶入多個變數進行運算時，<br>那用@mixin則較適合。</p>
-]]></content>
-      <categories>
-        <category>scss</category>
-      </categories>
-      <tags>
-        <tag>scss</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(7) SCSS練功坊-顏色函數</title>
-    <url>/2022/06/20/2022-6-20-1-scss-color/</url>
-    <content><![CDATA[<h2 id="顏色函數"><a href="#顏色函數" class="headerlink" title="顏色函數"></a>顏色函數</h2><p><img src="https://miro.medium.com/max/1400/1*SFb0wzFGrTw4byZVEbn_8g.png" alt="color"></p>
-<p>在SCSS中 ，可以利用一些內建的函數，來調整顏色。</p>
-<p>如: darken(#fff, 20%) &#x2F;&#x2F;將白色調暗10%；</p>
-<p>lighten(#000,30% ) &#x2F;&#x2F;將黑色調亮10%;</p>
 ]]></content>
       <categories>
         <category>scss</category>
@@ -603,6 +585,24 @@
 
 
 
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(5) SCSS練功坊-mixin</title>
+    <url>/2022/06/19/2022-6-19-4-scss-mixin/</url>
+    <content><![CDATA[<h2 id="使用-mixin-管理重複的樣式"><a href="#使用-mixin-管理重複的樣式" class="headerlink" title="使用 mixin 管理重複的樣式"></a>使用 mixin 管理重複的樣式</h2><p>當我們有一段樣式，會被重複用到，裡頭樣式數值又會有不同時，可以用mixin做管理。<br>撰寫mixin方法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@mixin + mixin名稱(參數) &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1266/1*M5IXbD8WVeMwgzfadFHNrQ.png" alt="circle"></p>
+<p>上圖中， circle 裡可以帶入 $size，$bg-color等不同參數，如此在不同地方，我們可以依照不同需求，傳入不同參數，做出不同的圓形。</p>
+<p>引入 mixin時，用 @include + mixin名稱</p>
+<p><img src="https://miro.medium.com/max/1140/1*Yn5snpWqUCxsEJ1eA646zQ.png" alt="編譯後結果"></p>
 ]]></content>
       <categories>
         <category>scss</category>
@@ -750,34 +750,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(2) Git 練功坊-數據庫</title>
-    <url>/2022/06/21/2022-6-21-4-git-basic/</url>
-    <content><![CDATA[<h2 id="使用數據庫管理歷史記錄"><a href="#使用數據庫管理歷史記錄" class="headerlink" title="使用數據庫管理歷史記錄"></a>使用數據庫管理歷史記錄</h2><p>數據庫 (Repository) 是git用來記錄檔案或目錄狀態的地方，儲存內容的修改歷史記錄。數據庫可分為兩種</p>
-<ul>
-<li>遠端數據庫 : 配有專用的伺服器，為了讓多人共享而建立的數據庫。</li>
-<li>本地端數據庫 : 在本機專案上建立的數據庫。</li>
-</ul>
-<p>在本地端更新好檔案後，我們可以用push等方法將本地端的資料上傳到遠端數據庫。<br>遠端數據庫的資料有更新時，也可下載更新到本地端。</p>
-<h2 id="初始化git"><a href="#初始化git" class="headerlink" title="初始化git"></a>初始化git</h2><p>如果是第一次用git，需要先輸入姓名和電子信箱的資料</p>
-<p>在終端機輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config — global user.email “ 電子信箱“</span><br><span class="line"></span><br><span class="line">git config — global user.name ”名字”</span><br></pre></td></tr></table></figure>
-
-<p>方便之後再做版本控制時，可以知道是誰修改檔案。</p>
-<h2 id="建立本地端數據庫"><a href="#建立本地端數據庫" class="headerlink" title="建立本地端數據庫"></a>建立本地端數據庫</h2><p>先新開一個專案資料夾並移動進去，先新增一個本地端數據庫<br>在終端機輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init  // 新增本地數據庫</span><br></pre></td></tr></table></figure>
-
-<p>新增完成後，會出現master字樣，代表新增成功囉。</p>
-<p><img src="https://miro.medium.com/max/1354/1*e-Nug4-xJBAoymsYYN91TQ.png" alt="git數據庫"></p>
-<p>數據庫建立好後，下一章節會介紹git基礎語法喔。</p>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(1) Git 練功坊-安裝教學</title>
     <url>/2022/06/21/2022-6-21-3-git-install/</url>
     <content><![CDATA[<h2 id="什麼是git"><a href="#什麼是git" class="headerlink" title="什麼是git"></a>什麼是git</h2><p>以往在做檔案版本的管理時，最簡單的方法就是複製編輯前的檔案並在檔案名稱加上日期，但是，每次編輯檔案都要複製非常的麻煩，也很容易出錯。</p>
@@ -823,6 +795,65 @@
       </tags>
   </entry>
   <entry>
+    <title>(2) Git 練功坊-數據庫</title>
+    <url>/2022/06/21/2022-6-21-4-git-basic/</url>
+    <content><![CDATA[<h2 id="使用數據庫管理歷史記錄"><a href="#使用數據庫管理歷史記錄" class="headerlink" title="使用數據庫管理歷史記錄"></a>使用數據庫管理歷史記錄</h2><p>數據庫 (Repository) 是git用來記錄檔案或目錄狀態的地方，儲存內容的修改歷史記錄。數據庫可分為兩種</p>
+<ul>
+<li>遠端數據庫 : 配有專用的伺服器，為了讓多人共享而建立的數據庫。</li>
+<li>本地端數據庫 : 在本機專案上建立的數據庫。</li>
+</ul>
+<p>在本地端更新好檔案後，我們可以用push等方法將本地端的資料上傳到遠端數據庫。<br>遠端數據庫的資料有更新時，也可下載更新到本地端。</p>
+<h2 id="初始化git"><a href="#初始化git" class="headerlink" title="初始化git"></a>初始化git</h2><p>如果是第一次用git，需要先輸入姓名和電子信箱的資料</p>
+<p>在終端機輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config — global user.email “ 電子信箱“</span><br><span class="line"></span><br><span class="line">git config — global user.name ”名字”</span><br></pre></td></tr></table></figure>
+
+<p>方便之後再做版本控制時，可以知道是誰修改檔案。</p>
+<h2 id="建立本地端數據庫"><a href="#建立本地端數據庫" class="headerlink" title="建立本地端數據庫"></a>建立本地端數據庫</h2><p>先新開一個專案資料夾並移動進去，先新增一個本地端數據庫<br>在終端機輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init  // 新增本地數據庫</span><br></pre></td></tr></table></figure>
+
+<p>新增完成後，會出現master字樣，代表新增成功囉。</p>
+<p><img src="https://miro.medium.com/max/1354/1*e-Nug4-xJBAoymsYYN91TQ.png" alt="git數據庫"></p>
+<p>數據庫建立好後，下一章節會介紹git基礎語法喔。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(3) Git 練功坊-紀錄修改與提交</title>
+    <url>/2022/06/21/2022-6-21-5-git-commit/</url>
+    <content><![CDATA[<p><img src="https://miro.medium.com/max/1400/0*adRfjDwIz9wuzSTb" alt="git流程"></p>
+<h2 id="新增資料並加入索引"><a href="#新增資料並加入索引" class="headerlink" title="新增資料並加入索引"></a>新增資料並加入索引</h2><p>上一章節已經將專案的數據庫建立好了，那我們先在專案內新增一些資料，我先建立一個 「sample.txt」的文字檔案，並在裡面打一些內容。</p>
+<p>此時我們可以將新增的資料加入索引，加入索引的檔案之後才能被commit 提交，方法如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add .    // 將所有更新的檔案加入索引。</span><br><span class="line">git add 檔案名稱  // 將特定檔案加入索引。</span><br></pre></td></tr></table></figure>
+
+<h2 id="查詢檔案狀況"><a href="#查詢檔案狀況" class="headerlink" title="查詢檔案狀況"></a>查詢檔案狀況</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git status  // 查詢目前檔案狀況</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1268/1*0-Hunc2dByNVE3AeTQPTyQ.png" alt="git status"></p>
+<p>上圖中綠色是已加入索引，紅色是未加入。</p>
+<p>若要取消加入索引，可用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git reset HEAD   // 取消已加入索引的全部檔案，此時檔案會呈現未追蹤狀態。</span><br><span class="line">git reset HEAD 檔案名稱   // 取消已加入索引的單個檔案，呈現未追蹤狀態。</span><br></pre></td></tr></table></figure>
+
+<h2 id="提交檔案"><a href="#提交檔案" class="headerlink" title="提交檔案"></a>提交檔案</h2><p>若確認檔案都加入索引後，可以將索引內的檔案提交到數據庫</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git commit -m &quot;更新內容&quot;</span><br></pre></td></tr></table></figure>
+
+<p>我們使用 git commit 將本次的更新提交到數據庫，-m 可以輸入更新的內容重點。<br>通常我們會在專案開發完某個功能後，做一次commit。例如完成首頁輪播功能，或切完首頁版型等等，方便之後做版本切換。</p>
+<p><img src="https://miro.medium.com/max/1400/1*rM-6FClWTQvcFPXmYmq8JQ.png" alt="commit"></p>
+<h2 id="查詢紀錄"><a href="#查詢紀錄" class="headerlink" title="查詢紀錄"></a>查詢紀錄</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git log  // 查詢過去commit 的紀錄</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1400/1*qNvdGY6XePWNMA3h4a--LQ.png" alt="git log"></p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(4) Git 練功坊-遠端數據庫</title>
     <url>/2022/06/21/2022-6-21-6-git-remote/</url>
     <content><![CDATA[<h2 id="遠端數據庫"><a href="#遠端數據庫" class="headerlink" title="遠端數據庫"></a>遠端數據庫</h2><p>之前介紹過如何再本地端提交更新，今天要教大家將本地端的更新提交到遠端數據庫(Github)。</p>
@@ -858,43 +889,32 @@
       </tags>
   </entry>
   <entry>
-    <title>(5) Git 練功坊-合併與衝突</title>
-    <url>/2022/06/23/2022-6-23-1-git-conflict/</url>
-    <content><![CDATA[<h2 id="合併與衝突"><a href="#合併與衝突" class="headerlink" title="合併與衝突"></a>合併與衝突</h2><p>上章節講過我們可以用 git pull 或 git fetch 來下載遠端更新的內容。<br>如果遠端數據庫和本地端數據庫的同一個地方都發生了修改的情況下（例：檔案中同一行的地方）。<br>這時，因為Git不能自動判斷要導入那一個修改內容於是就會發生錯誤。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是 Cat<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">=======</span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是 Dog<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; dog</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    <title>(6) Git 練功坊-建立分支</title>
+    <url>/2022/06/23/2022-6-23-2-git-branch/</url>
+    <content><![CDATA[<h2 id="什麼是分支？"><a href="#什麼是分支？" class="headerlink" title="什麼是分支？"></a>什麼是分支？</h2><p>分支是為了將修改記錄的整體流程分開儲存，讓分開的分支不受其他分支的影響，所以在同一個數據庫裡可以同時進行多個不同的修改。</p>
+<p>當我們輸入完 git init 後，並完成第一次提交後(commit)會自動產生一個 main 分支，在建立其他分支前，所有紀錄都存在main分支上。</p>
+<h2 id="建立分支"><a href="#建立分支" class="headerlink" title="建立分支"></a>建立分支</h2><p>要建立一個新的分支，可以用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git branch 分支名稱</span><br></pre></td></tr></table></figure>
 
-<p>此時發生衝突的地方必須手動修改，如上例，VScode會提醒你產生衝突的地方，此時再決定要留 cat 還是 dog。</p>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(3) Git 練功坊-紀錄修改與提交</title>
-    <url>/2022/06/21/2022-6-21-5-git-commit/</url>
-    <content><![CDATA[<p><img src="https://miro.medium.com/max/1400/0*adRfjDwIz9wuzSTb" alt="git流程"></p>
-<h2 id="新增資料並加入索引"><a href="#新增資料並加入索引" class="headerlink" title="新增資料並加入索引"></a>新增資料並加入索引</h2><p>上一章節已經將專案的數據庫建立好了，那我們先在專案內新增一些資料，我先建立一個 「sample.txt」的文字檔案，並在裡面打一些內容。</p>
-<p>此時我們可以將新增的資料加入索引，加入索引的檔案之後才能被commit 提交，方法如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add .    // 將所有更新的檔案加入索引。</span><br><span class="line">git add 檔案名稱  // 將特定檔案加入索引。</span><br></pre></td></tr></table></figure>
+<p><img src="https://miro.medium.com/max/1206/1*MM7zD5dXszOgNHn_UcqtOg.png" alt="branch"></p>
+<p>要查詢目前有的分支可以輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
 
-<h2 id="查詢檔案狀況"><a href="#查詢檔案狀況" class="headerlink" title="查詢檔案狀況"></a>查詢檔案狀況</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git status  // 查詢目前檔案狀況</span><br></pre></td></tr></table></figure>
+<p><img src="https://miro.medium.com/max/1134/1*8p-_J_x4kqDFcnO15JBRLQ.png" alt="brach"></p>
+<p>此時用git branch 去查詢，可以發現多了 feature1 分支，但目前所在分支還是master。</p>
+<h2 id="切換分支"><a href="#切換分支" class="headerlink" title="切換分支"></a>切換分支</h2><p>假設目前有 master 分支和 feature1分支，我現在在master分支上，想切換到 feature1分支，可用:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git checkout 分支名稱</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://miro.medium.com/max/1268/1*0-Hunc2dByNVE3AeTQPTyQ.png" alt="git status"></p>
-<p>上圖中綠色是已加入索引，紅色是未加入。</p>
-<p>若要取消加入索引，可用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git reset HEAD   // 取消已加入索引的全部檔案，此時檔案會呈現未追蹤狀態。</span><br><span class="line">git reset HEAD 檔案名稱   // 取消已加入索引的單個檔案，呈現未追蹤狀態。</span><br></pre></td></tr></table></figure>
+<p><img src="https://miro.medium.com/max/1218/1*Gzf7OBa_JANOziPgnxYaVQ.png" alt="checkout"></p>
+<h2 id="HEAD標籤"><a href="#HEAD標籤" class="headerlink" title="HEAD標籤"></a>HEAD標籤</h2><p>HEAD是目前所在位置的指標，會跟隨在最新的commit上面，如下圖:</p>
+<p><img src="https://miro.medium.com/max/680/1*vBHV9Vo4Ws2O4a_AfGPdig.png" alt="head"></p>
+<p>在git裡的每個commit都有自己的代碼，我們可以用 git log 查詢所有 commit 紀錄。</p>
+<p><img src="https://miro.medium.com/max/1272/1*fcmwOhm5NG9_XpjeoFhPxw.png" alt="commit"></p>
+<p>如果想看前一版本commit紀錄裡做了哪些事，可以透過指令將HEAD移動到該commit版本上，看完後再移動回最新的commit上。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git checkout commit前四碼</span><br></pre></td></tr></table></figure>
 
-<h2 id="提交檔案"><a href="#提交檔案" class="headerlink" title="提交檔案"></a>提交檔案</h2><p>若確認檔案都加入索引後，可以將索引內的檔案提交到數據庫</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git commit -m &quot;更新內容&quot;</span><br></pre></td></tr></table></figure>
-
-<p>我們使用 git commit 將本次的更新提交到數據庫，-m 可以輸入更新的內容重點。<br>通常我們會在專案開發完某個功能後，做一次commit。例如完成首頁輪播功能，或切完首頁版型等等，方便之後做版本切換。</p>
-<p><img src="https://miro.medium.com/max/1400/1*rM-6FClWTQvcFPXmYmq8JQ.png" alt="commit"></p>
-<h2 id="查詢紀錄"><a href="#查詢紀錄" class="headerlink" title="查詢紀錄"></a>查詢紀錄</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git log  // 查詢過去commit 的紀錄</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/1400/1*qNvdGY6XePWNMA3h4a--LQ.png" alt="git log"></p>
+<p><img src="https://miro.medium.com/max/676/1*ItxAAKHhndN-_oToicuXnw.png" alt="checkout"></p>
+<p>分支的切換其實也就是將HEAD移動到不同分支標籤上而已。</p>
 ]]></content>
       <categories>
         <category>Git</category>
@@ -946,6 +966,21 @@
       </categories>
       <tags>
         <tag>Js觀念篇</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(5) Git 練功坊-合併與衝突</title>
+    <url>/2022/06/23/2022-6-23-1-git-conflict/</url>
+    <content><![CDATA[<h2 id="合併與衝突"><a href="#合併與衝突" class="headerlink" title="合併與衝突"></a>合併與衝突</h2><p>上章節講過我們可以用 git pull 或 git fetch 來下載遠端更新的內容。<br>如果遠端數據庫和本地端數據庫的同一個地方都發生了修改的情況下（例：檔案中同一行的地方）。<br>這時，因為Git不能自動判斷要導入那一個修改內容於是就會發生錯誤。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是 Cat<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">=======</span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是 Dog<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; dog</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此時發生衝突的地方必須手動修改，如上例，VScode會提醒你產生衝突的地方，此時再決定要留 cat 還是 dog。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -1028,25 +1063,272 @@
       </tags>
   </entry>
   <entry>
-    <title>(3) Hexo-基礎Hexo指令</title>
-    <url>/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
-<h2 id="基礎Hexo指令"><a href="#基礎Hexo指令" class="headerlink" title="基礎Hexo指令"></a>基礎Hexo指令</h2><ul>
-<li><code>hexo new &#39;新文章&#39;</code>  新增文章</li>
-<li><code>hexo generate</code> 產生編譯後的靜態檔案</li>
-<li><code>hexo server</code> 開啟一個本地端伺服器</li>
-<li><code>hexo clean</code> 清除暫存檔案</li>
-<li><code>hexo deploy</code> 部屬靜態檔案</li>
+    <title>(4) CSS基礎篇 Flex</title>
+    <url>/2022/06/29/2022-6-29-1-css-flex/</url>
+    <content><![CDATA[<h2 id="什麼是-flex"><a href="#什麼是-flex" class="headerlink" title="什麼是 flex"></a>什麼是 flex</h2><p>flex 和grid一樣是排版用的 css屬性，使用flex時可分為外容器屬性與內元件屬性。以下分別介紹各屬性使用方法。</p>
+<h2 id="外容器屬性"><a href="#外容器屬性" class="headerlink" title="外容器屬性"></a>外容器屬性</h2><h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><p>啟用flex的第一步，就是在外容器設定 display: flex;</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在父層設定 display:flex 可以讓子層區塊並排<br><img src="https://miro.medium.com/max/972/1*cPIZHT7a0P0v5mljoBjdvg.png" alt="flex"></p>
+<p>當子層寬度超過父層時，flex也會依照比例自動做調整，不會跑版，並且當子層其中一個元素高度變高，其他元素也會自動等高。</p>
+<p><img src="https://miro.medium.com/max/1246/1*yO5cUEPDPz7of4-KZyoTCw.png" alt="自動等高"></p>
+<h3 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h3><p>flex的主軸指的是資料的流向 ，預設是從左到右排版，可以設定的值如下:</p>
+<ul>
+<li><p>flex-direction: row; 從左到右</p>
+</li>
+<li><p>flex-direction: row-reverse; 從右到左</p>
+</li>
+<li><p>flex-direction: column; 從上到下</p>
+</li>
+<li><p>flex-direction: column-reverse; 從下到上</p>
+</li>
 </ul>
-<h2 id="產生新文章"><a href="#產生新文章" class="headerlink" title="產生新文章"></a>產生新文章</h2><p>要產生一篇新的文章，可以用 <code>hexo new &#39;新文章</code> 指令，產生後的文章會放在 <code>source</code> 資料夾的 <code>_posts</code>裡</p>
-<h2 id="產生編譯後的檔案"><a href="#產生編譯後的檔案" class="headerlink" title="產生編譯後的檔案"></a>產生編譯後的檔案</h2><p>當文章寫完後，需要將md檔案進行編譯，此時可以用 <code>hexo generate</code> 指令，編譯完後會產生一個 <code>public</code> 資料夾，作為之後部屬使用。<br>此指令的簡寫為 <code>hexo g</code></p>
-<h2 id="開啟一個本地端伺服器"><a href="#開啟一個本地端伺服器" class="headerlink" title="開啟一個本地端伺服器"></a>開啟一個本地端伺服器</h2><p>當靜態檔案編譯完後，可以用 <code>hexo server</code> 指令開啟一個本地端的模擬伺服器，用來即時瀏覽我的寫完的文章，此指令的簡寫為 <code>hexo s</code></p>
-<h2 id="清除暫存檔案"><a href="#清除暫存檔案" class="headerlink" title="清除暫存檔案"></a>清除暫存檔案</h2><p><code>hexo clean</code> 指令主要用來清除一些奇怪的暫存檔案，通常部屬前會先清理一遍。</p>
-<h2 id="部屬靜態檔案"><a href="#部屬靜態檔案" class="headerlink" title="部屬靜態檔案"></a>部屬靜態檔案</h2><p><code>hexo deploy</code> 將我們的靜態網站部屬到雲端使用的指令，詳細用流程在之後部屬的章節會提到。<br>此指令的簡寫為 <code>hexo d</code></p>
-<p>這就是今天 hexo 指令的介紹囉。</p>
+<p><img src="https://miro.medium.com/max/1400/1*jgot2tuYYebDZFe6ZTssyQ.png" alt="主軸"></p>
+<h3 id="justfy-content"><a href="#justfy-content" class="headerlink" title="justfy-content"></a>justfy-content</h3><p>依照主軸的方向(flex-direction)，可以設定 justfy-content 來對齊子元素。所以實際對齊方向是水平或垂直，要依主軸的方向而定喔。</p>
+<p><img src="https://miro.medium.com/max/1400/1*UDLawhonhqaaTSbx5lwa9Q.png" alt="justify-content"></p>
+<h3 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h3><p>超出範圍時是否換行的屬性，分為換行、不換行、換行時反轉。</p>
+<p>預設是 flex-wrap:nowrap 不換行，設定flex-wrap:wrap則會換行。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p><img src="https://miro.medium.com/max/1400/1*gUKuGGbB3B0AfezDlzulZw.png" alt="交錯軸"></p>
+<p>和主軸垂直的方向稱為交錯軸，例如主軸是水平的，那交錯軸就是垂直。align-items屬性可以設定交錯軸的對齊方式。</p>
+<p><img src="https://miro.medium.com/max/1400/1*jxzyFebBjrX8jyZ6VFF9bQ.png" alt="align-items"></p>
+<h3 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h3><p>多行物件的交錯軸對齊，可以使用的屬性和align-items一樣。</p>
+<p><img src="https://miro.medium.com/max/1348/1*bvaLIRwiLKGak1nOLhCwXg.png" alt="align-content"></p>
+<h3 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h3><p>flex-flow 是 flex-direction 與 flex-wrap 的縮寫，所以只要在這前後帶上相對應的值即可。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.flex-container</span> &#123;</span><br><span class="line">  <span class="attribute">flex-flow</span>: &lt;<span class="string">&#x27;flex-direction&#x27;</span>&gt; || &lt;<span class="string">&#x27;flex-wrap&#x27;</span>&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="內元件屬性"><a href="#內元件屬性" class="headerlink" title="內元件屬性"></a>內元件屬性</h2><h3 id="order"><a href="#order" class="headerlink" title="order"></a>order</h3><p>用來指定子層物件的順序，order 預設都是 0。小於 0 的元件會往前排，大於 0 往後排。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box1</span> &#123;</span><br><span class="line">  <span class="attribute">order</span>: <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box2</span> &#123;</span><br><span class="line">  <span class="attribute">order</span> : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/818/1*s71cQM9RnsxFauhOIt6q6w.png" alt="order"></p>
+<h3 id="flex-grow-伸展"><a href="#flex-grow-伸展" class="headerlink" title="flex-grow 伸展"></a>flex-grow 伸展</h3><p>flex-grow 設定元件的伸展性，會把剩下的空間份配給子物件，並針對子物件去設定伸展的比例，預設值為 0不會縮放。<br>如下圖: 設定flex-grow: 2 的元素會有較大的位置。<br><img src="https://miro.medium.com/max/548/1*3qDfiEcjgxQvyup9ygcAww.png" alt="flex-grow"></p>
+<h3 id="flex-shrink-收縮"><a href="#flex-shrink-收縮" class="headerlink" title="flex-shrink 收縮"></a>flex-shrink 收縮</h3><p>flex-shrink: 元件的收縮性，是一個數值，當空間分配還不足時的當前元件的收縮性，預設值為 1 會收縮，如果設置為 0 則不會縮放。</p>
+<p><img src="https://miro.medium.com/max/1400/1*1kyY6pGhIUCz79CHJ74deQ.png" alt="flex-shrink"></p>
+<p>上圖當子層物件寬度超過父層時，如果將子層設定 flex-shrink: 0 ，代表不收縮，此時子層會超出父層寬度。</p>
+<p><img src="https://miro.medium.com/max/1400/1*nANSTLkevML4QdU2VKIHmQ.png" alt="flex-shrink"></p>
+<p>當設定其中一個子層 flex-shrink: 0 ，其他為1時，設定0的物件不收縮，保持原來寬度，設定shrink的則依比例收縮。</p>
+<h3 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h3><p>flex-basis 可以設定子元件 flex-item 的主軸長度。</p>
+<ul>
+<li><p>當主軸為橫向時，對應到元件的寬，</p>
+</li>
+<li><p>當主軸是直向時，對應到元件的高。</p>
+</li>
+</ul>
+<p>可以設定每個flex-item 的 flex-basis 為 0， 就可以依照想要的比例來設定flex-grow。</p>
+<p><img src="https://miro.medium.com/max/1400/1*GN7XSfKQGUABUGAY-nIjSg.png" alt="flex-basis"></p>
+<h3 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h3><p>align-self 可以調整單一物件的交錯軸對齊，可以使用的屬性和align-items一樣。</p>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/10/align-self.svg" alt="align-self"></p>
 ]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
       <tags>
-        <tag>Hexo</tag>
+        <tag>CSS基礎篇</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(3) CSS基礎篇 Grid</title>
+    <url>/2022/06/28/2022-6-28-1-css-grid/</url>
+    <content><![CDATA[<h2 id="Grid-排版"><a href="#Grid-排版" class="headerlink" title="Grid 排版"></a>Grid 排版</h2><p>Grid和flex一樣是用來排版的屬性，flex以單軸為主來排版，Grid則能夠同時設定兩個方向(欄和列)，能夠快速建立網頁布局。</p>
+<p>Grid的屬性可以分成外部屬性和內部屬性，以下分別介紹。</p>
+<h2 id="外部容器-父層"><a href="#外部容器-父層" class="headerlink" title="外部容器(父層)"></a>外部容器(父層)</h2><p>以下介紹可以在父層設定的屬性</p>
+<h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><p>在父層容器設定 display: grid，讓父層是 gird 容器。</p>
+<ul>
+<li>grid – 設定 block-level的 grid</li>
+<li>inline-grid – 設定 inline-level的 grid</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid | inline-grid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grid-template-columns-grid-template-rows"><a href="#grid-template-columns-grid-template-rows" class="headerlink" title="grid-template-columns grid-template-rows"></a>grid-template-columns grid-template-rows</h3><p>設定好 display:grid後，可以用grid template 來定義版型的結構，分別設定column(欄)，和列(row)來排列格線，grid-template-columns 定義水平方向的空間，grid-template-rows 定義垂直方向的空間</p>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/template-column-rows-02.svg" alt="grid"><br><a href="https://css-tricks.com/wp-content/uploads/2018/11/template-column-rows-02.svg">圖片來源</a></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: ...  ...;</span><br><span class="line">  <span class="comment">/* e.g. </span></span><br><span class="line"><span class="comment">      1fr 1fr</span></span><br><span class="line"><span class="comment">      minmax(10px, 1fr) 3fr</span></span><br><span class="line"><span class="comment">      repeat(5, 1fr)</span></span><br><span class="line"><span class="comment">      50px auto 100px 1fr</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="attribute">grid-template-rows</span>: ... ...;</span><br><span class="line">  <span class="comment">/* e.g. </span></span><br><span class="line"><span class="comment">      min-content 1fr min-content</span></span><br><span class="line"><span class="comment">      100px 1fr max-content</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>設定單位可以使用彈性的長度、百分比<br>或用fr (等分)，如下例會將父層寬度扣掉50px後，分成三等份到三欄裡。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">1</span>fr <span class="number">50px</span> <span class="number">1</span>fr <span class="number">1</span>fr; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果有重複一樣寬度的欄位，則可以用repeat設定。 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">repeat(欄位數量, 寬度)</span><br></pre></td></tr></table></figure>
+
+<h3 id="grid-template-areas"><a href="#grid-template-areas" class="headerlink" title="grid-template-areas"></a>grid-template-areas</h3><p>grid-template-areas可以透過將每個欄位命名，將內容作分配。</p>
+<p>在父層設定 grid-template-areas，可設定的值有:</p>
+<ul>
+<li>[欄位名稱] : 設定該欄位名稱。</li>
+<li>.   設定 . 代表是空的欄位。</li>
+<li>none: 代表欄位未定義。</li>
+</ul>
+<p>在子層則設定 grid-area 決定內容要放到哪個欄位。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: header;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item-b</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: main;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item-c</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: sidebar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item-d</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: footer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: auto;</span><br><span class="line">  <span class="attribute">grid-template-areas</span>: </span><br><span class="line">    <span class="string">&quot;header header header header&quot;</span></span><br><span class="line">    <span class="string">&quot;main main . sidebar&quot;</span></span><br><span class="line">    <span class="string">&quot;footer footer footer footer&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/dddgrid-template-areas.svg" alt="grid-area"><br><a href="https://css-tricks.com/wp-content/uploads/2018/11/dddgrid-template-areas.svg">圖片來源</a></p>
+<h3 id="grid-gap-grid-column-gap-grid-row-gap"><a href="#grid-gap-grid-column-gap-grid-row-gap" class="headerlink" title="grid-gap, grid-column-gap, grid-row-gap"></a>grid-gap, grid-column-gap, grid-row-gap</h3><p>設定水平與垂直的欄位間隔</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">column-gap</span>: &#123; <span class="attribute">column-gap</span> &#125;;  //設定每欄的間隔</span><br><span class="line"><span class="attribute">row-gap</span>: &#123; <span class="attribute">row-gap</span> &#125;; //設定每列的間隔</span><br><span class="line"><span class="attribute">gap</span>: &#123; <span class="attribute">row-gap</span> &#125; &#123; <span class="attribute">column-gap</span> &#125;;  // 同時設定欄和列的間隔</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">100px</span> <span class="number">50px</span> <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="number">80px</span> auto <span class="number">80px</span>; </span><br><span class="line">  <span class="attribute">column-gap</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">row-gap</span>: <span class="number">15px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="justify-items"><a href="#justify-items" class="headerlink" title="justify-items"></a>justify-items</h3><p>justify-items 可以設定子元素水平對齊格子的方式，可設定的值有:</p>
+<ul>
+<li>start: 對齊開頭</li>
+<li>end: 對齊末端</li>
+<li>center: 對齊中間</li>
+<li>stretch: 填滿格子(預設值)</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  justify-items: start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/justify-items-start.svg" alt="justify-items: start"></p>
+<h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p>align-items 可以設定子元素垂直對齊格子的方式，可設定的值有:</p>
+<ul>
+<li>start: 對齊頂端</li>
+<li>end: 對齊底部</li>
+<li>center: 對齊中間</li>
+<li>stretch: 填滿格子(預設值)</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/align-items-center.svg" alt="align-items: center"></p>
+<h3 id="place-items"><a href="#place-items" class="headerlink" title="place-items"></a>place-items</h3><p>place-items 能同時設定 justify-items跟align-items</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">place-items: &lt;align-items&gt; / &lt;justify-items&gt;</span><br></pre></td></tr></table></figure>
+<p>第一個值設定 align-items，第二個值設定 justify-items。如果只設一個值，則會同時套用到 justify-items跟align-items。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.center</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  place-items: center;  // 快速將內容置中於格子內</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="justify-content、align-content"><a href="#justify-content、align-content" class="headerlink" title="justify-content、align-content"></a>justify-content、align-content</h3><p>有時候你的格子尺寸可能會小於父層grid容器，此時可以用 justify-content 同時調整所有子元素的水平對齊，align-content 同時調整所有子元素的垂直對齊</p>
+<p>可設定的值:</p>
+<ul>
+<li>start: 對齊開頭</li>
+<li>end: 對齊末端</li>
+<li>center: 對齊中間</li>
+<li>stretch: 填滿格子(預設值)</li>
+<li>space-around: 平均分配寬度和間距</li>
+<li>space-between: 平均分配寬度，第一項和最後一項貼齊邊緣</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">justify-content</span>: end;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/justify-content-end.svg" alt="justify-content: end"></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">align-content</span>: space-around;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/align-content-space-around.svg" alt="align-content: space-around"></p>
+<h3 id="grid-auto-columns-、-grid-auto-rows"><a href="#grid-auto-columns-、-grid-auto-rows" class="headerlink" title="grid-auto-columns 、 grid-auto-rows"></a>grid-auto-columns 、 grid-auto-rows</h3><p>當我們的grid-items數量超過我們設定的格線，或是將元素指定到格線以外時，會自動產生格線。<br>如下我們設定一個 2 x 2的格線。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">60px</span> <span class="number">60px</span>;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="number">90px</span> <span class="number">90px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但子元素設定的區域超過格線內，會自動產生格線。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">1</span> / <span class="number">2</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: <span class="number">2</span> / <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item-b</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">5</span> / <span class="number">6</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: <span class="number">2</span> / <span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/grid-auto-columns-rows-02.svg" alt="gird"></p>
+<p>此時可以設定 grid-auto-columns | grid-auto-rows 來指定自動產生的格線寬度。等於是設定格線寬度或高度的預設值，當格線沒有被 grid-template-columns 設定寬度時，就套用 grid-auto-columns的值。 </p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">grid-auto-columns</span>: <span class="number">60px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="grid-auto-flow"><a href="#grid-auto-flow" class="headerlink" title="grid-auto-flow"></a>grid-auto-flow</h3><p>當有grid-item沒有被指定位置時，gird會自動排列這些grid-item，排列方式如下:</p>
+<ul>
+<li>row: 水平排列 (預設值)</li>
+<li>column: 垂直排列</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">60px</span> <span class="number">60px</span> <span class="number">60px</span> <span class="number">60px</span> <span class="number">60px</span>;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="number">30px</span> <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">grid-auto-flow</span>: row;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">1</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: <span class="number">1</span> / <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item-e</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">5</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: <span class="number">1</span> / <span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/grid-auto-flow-01.svg" alt="水平排列"></p>
+<p>item-b、item-c、item-d 因為沒有指定位置，自動依照grid-auto-flow水平排列</p>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/grid-auto-flow-02.svg" alt="垂直排列"></p>
+<p>item-b、item-c、item-d 因為沒有指定位置，自動依照grid-auto-flow垂直排列</p>
+<h2 id="內部元素-子層"><a href="#內部元素-子層" class="headerlink" title="內部元素(子層)"></a>內部元素(子層)</h2><p>以下介紹可以在內部元素設定的屬性</p>
+<h3 id="grid-column-start-grid-column-end-grid-row-start-grid-row-end"><a href="#grid-column-start-grid-column-end-grid-row-start-grid-row-end" class="headerlink" title="grid-column-start, grid-column-end, grid-row-start, grid-row-end"></a>grid-column-start, grid-column-end, grid-row-start, grid-row-end</h3><p>物件所佔的空間位置，Column 及 Row 所到的起始點及終點</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column-start</span>: &lt;number&gt; | &lt;name&gt; | span &lt;number&gt; | span &lt;name&gt; | auto;</span><br><span class="line">  <span class="attribute">grid-column-end</span>: &lt;number&gt; | &lt;name&gt; | span &lt;number&gt; | span &lt;name&gt; | auto;</span><br><span class="line">  <span class="attribute">grid-row-start</span>: &lt;number&gt; | &lt;name&gt; | span &lt;number&gt; | span &lt;name&gt; | auto;</span><br><span class="line">  <span class="attribute">grid-row-end</span>: &lt;number&gt; | &lt;name&gt; | span &lt;number&gt; | span &lt;name&gt; | auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>number : 用數字表示 物件 所在的線。</li>
+<li>span number - 物件會橫跨的欄位數</li>
+<li>span name - 物件所在的 grid 名稱</li>
+<li>auto - 自動</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  <span class="attribute">grid-row-start</span>: <span class="number">3</span>; <span class="comment">/* 物件起始線 */</span></span><br><span class="line">  <span class="attribute">grid-column-end</span>: span <span class="number">4</span>; <span class="comment">/* 終點線 = 物件所佔的空間數 */</span>  </span><br><span class="line">  <span class="attribute">grid-row-end</span>: auto; // 不設定終點線</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grid-column-、-grid-row"><a href="#grid-column-、-grid-row" class="headerlink" title="grid-column 、 grid-row"></a>grid-column 、 grid-row</h3><p>上面屬性的縮寫，使用斜線 (&#x2F;) 隔開屬性。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: &lt;start-line&gt; / &lt;end-line&gt; | &lt;start-line&gt; / span &lt;value&gt;;</span><br><span class="line">  <span class="attribute">grid-row</span>: &lt;start-line&gt; / &lt;end-line&gt; | &lt;start-line&gt; / span &lt;value&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>start-line: 開始的格線</li>
+<li>end-line : 結束的格線</li>
+<li>span value: 指定橫跨的欄位數</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item-c</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">3</span> / span <span class="number">2</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: third-line / <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/grid-column-row.svg" alt="grid-column"></p>
+<h3 id="justify-self"><a href="#justify-self" class="headerlink" title="justify-self"></a>justify-self</h3><p>指定單一格子內的grid-item水平對齊的方式，可設定的值如下:</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  justify-self: start | end | center | <span class="built_in">stretch</span>(預設值);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>範例: </p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  justify-self: start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/justify-self-start.svg" alt="justify-self"></p>
+<h3 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h3><p>指定單一格子內的grid-item垂直對齊的方式，可設定的值如下:</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: start | end | center | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>範例: </p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: end;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/align-self-end.svg" alt="align-self"></p>
+<h3 id="place-self"><a href="#place-self" class="headerlink" title="place-self"></a>place-self</h3><p>是 align-self跟justify-self的縮寫，用法如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">place-self : &lt;align-self&gt; / &lt;justify-self&gt; </span><br></pre></td></tr></table></figure>
+
+<p>第一個值設定 align-self，第二個值設定justify-self。如果只設定一個值，則會同時套用到align-self跟justify-self。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  place-self: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/place-self-center.svg" alt="center"></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  place-self: center stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/place-self-center-stretch.svg" alt="place-self"></p>
+<h2 id="特殊單位與函式"><a href="#特殊單位與函式" class="headerlink" title="特殊單位與函式"></a>特殊單位與函式</h2><h3 id="fr-單位"><a href="#fr-單位" class="headerlink" title="fr 單位"></a>fr 單位</h3><p>在grid裡，可以用 fr 作為單位，1fr指的是 1等分。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grid-template-columns: 1fr 3fr;</span><br></pre></td></tr></table></figure>
+
+<p>上面我們設定的兩欄就分別代表 25% 和 75% 的寬度。</p>
+<p>fr 也可以搭配其他單位使用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grid-template-columns: 50px min-content 1fr;</span><br></pre></td></tr></table></figure>
+
+<h3 id="關鍵字"><a href="#關鍵字" class="headerlink" title="關鍵字"></a>關鍵字</h3><p>當我們在設定欄位長寬時，可以用 px 、% 、rem 等等，也可以使用關鍵字設定。</p>
+<ul>
+<li>min-content: 指的是內容的最小尺寸</li>
+<li>max-content: 指的是內容的最大尺寸</li>
+</ul>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022062901.png?alt=media&token=acf4677c-2652-40d6-aa52-6fd328611d56" alt="min-content"></p>
+<p>假設有一個grid-item是一段句子:</p>
+<ul>
+<li>min-content: 句子裡最長的字的寬度。</li>
+<li>max-content: 完整句子的寬度。</li>
+</ul>
+<h3 id="特殊函式"><a href="#特殊函式" class="headerlink" title="特殊函式"></a>特殊函式</h3><ul>
+<li>minmax(最小寬度, 最大寬度)</li>
+</ul>
+<p>使用 minmax 可以同時設定欄位的最小和最大寬度</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grid-template-columns: minmax(100px, 1fr) 3fr; </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>repeat(欄位數量, 欄位寬度)</li>
+</ul>
+<p>當要設定的欄位寬度都一樣時，可以用 repeat方法來設定</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grid-template-columns:</span><br><span class="line">  1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;</span><br><span class="line"></span><br><span class="line">/* easier: */</span><br><span class="line">grid-template-columns:</span><br><span class="line">  repeat(8, 1fr);</span><br><span class="line"></span><br><span class="line">/* especially when: */</span><br><span class="line">grid-template-columns:</span><br><span class="line">  repeat(8, minmax(10px, 1fr));</span><br></pre></td></tr></table></figure>
+
+<p>在使用 repeat() 時，如果不確定自己要的重複次數，可以使用 auto-fill 和 autofit 讓重複的網格持續填滿。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  gird-template-<span class="attribute">columns</span>: <span class="built_in">repeat</span>(auto-fill, <span class="number">100px</span>);</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="built_in">repeat</span>(<span class="number">3</span>, <span class="number">50px</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如上例，因為容器寬度是500px, 設定auto-fill 會產生 5 * 3的網格。</p>
+<p>至於 auto-fill 和 auto-fit的差異在:</p>
+<ul>
+<li>auto-fill: 盡量產生重複的欄位。</li>
+<li>auto-fit: 盡量產生重複的欄位，但多的格子會被設為0px，折疊起來。</li>
+</ul>
+<p><a href="https://jhlstudy.blogspot.com/2018/07/grid-layout-auto-fill-auto-fit_8.html">詳細解說文章看這</a></p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS基礎篇</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(9) Git 練功坊-取消修改</title>
+    <url>/2022/06/30/2022-6-30-1-git-reset/</url>
+    <content><![CDATA[<h2 id="取消修改"><a href="#取消修改" class="headerlink" title="取消修改"></a>取消修改</h2><p>在 git 裡主要用兩種方法來取消修改，一種是 git reset，另外一種是 git revert。</p>
+<h2 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h2><p>git reset 利用把分支的參考點退回到上一個 commit 來取消修改。你可以認為這是在”重寫歷史”。git reset 往回移動 branch，原來的 branch 所指向的 commit 好像從來沒有存在過一樣。</p>
+<p><img src="https://miro.medium.com/max/504/1*YExCjHyozE-SQLif6Egfhg.png" alt="reset"><br><img src="https://miro.medium.com/max/674/1*zFOz7tr23cEQG2OTkffCjg.png" alt="reset"></p>
+<p>git reset 可以分為 –hard、 –soft 、 –mixed 三種模式</p>
+<h3 id="reset-–mixed"><a href="#reset-–mixed" class="headerlink" title="reset –mixed"></a>reset –mixed</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git reset --mixed HEAD~1   # 數字表示移動到 HEAD後面第幾個</span><br></pre></td></tr></table></figure>
+
+<p>–mixed 是預設的參數，如果沒有特別加參數，git reset 指令將會使用 –mixed 模式。這個模式會把暫存區的檔案丟掉，但不會動到工作目錄的檔案，也就是說 Commit 拆出來的檔案會留在工作目錄，但不會留在暫存區。</p>
+<h3 id="reset-–soft"><a href="#reset-–soft" class="headerlink" title="reset –soft"></a>reset –soft</h3><p>這個模式下的 reset，工作目錄跟暫存區的檔案都不會被丟掉，所以看起來就只有 HEAD 的移動而已。也因此，Commit 拆出來的檔案會直接放在暫存區。</p>
+<h3 id="reset-–hard"><a href="#reset-–hard" class="headerlink" title="reset –hard"></a>reset –hard</h3><p>hard模式下，不管是工作目錄以及暫存區的檔案都會丟掉。</p>
+<h3 id="取消reset"><a href="#取消reset" class="headerlink" title="取消reset"></a>取消reset</h3><p>如果你reset完後悔，輸入 git checkout + reset點的hash值，是可以回復的。</p>
+<p><img src="https://miro.medium.com/max/290/1*iP8bv0VETpcpfPbl5xEnFA.png" alt="hash"><br><img src="https://miro.medium.com/max/636/1*YzByXkMhsnyLdSpM6dQGjQ.png" alt="checkout"></p>
+<p>但如果有遠端備份(github)的話，不建議用git reset ，因為如果你將本機reset過的紀錄再push一次到遠端，你的同事又從本地端push一次到遠端，那你想reset不要的紀錄又回到遠端了。</p>
+<h2 id="git-revert"><a href="#git-revert" class="headerlink" title="git revert"></a>git revert</h2><p>為了將你想取消的紀錄分享給你的同事，可以用git revert，概念是再做一個新的 Commit，來取消你不要的 Commit，新的commit點上會有 ‘ 代表是revert 的點。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git revert + 要刪除的commit點</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/574/1*c_R6Jsz3I7bhynusCX2Hyg.png" alt="新增C2&#39; 來取消C2"></p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -1080,6 +1362,28 @@
       </tags>
   </entry>
   <entry>
+    <title>(3) Hexo-基礎Hexo指令</title>
+    <url>/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
+<h2 id="基礎Hexo指令"><a href="#基礎Hexo指令" class="headerlink" title="基礎Hexo指令"></a>基礎Hexo指令</h2><ul>
+<li><code>hexo new &#39;新文章&#39;</code>  新增文章</li>
+<li><code>hexo generate</code> 產生編譯後的靜態檔案</li>
+<li><code>hexo server</code> 開啟一個本地端伺服器</li>
+<li><code>hexo clean</code> 清除暫存檔案</li>
+<li><code>hexo deploy</code> 部屬靜態檔案</li>
+</ul>
+<h2 id="產生新文章"><a href="#產生新文章" class="headerlink" title="產生新文章"></a>產生新文章</h2><p>要產生一篇新的文章，可以用 <code>hexo new &#39;新文章</code> 指令，產生後的文章會放在 <code>source</code> 資料夾的 <code>_posts</code>裡</p>
+<h2 id="產生編譯後的檔案"><a href="#產生編譯後的檔案" class="headerlink" title="產生編譯後的檔案"></a>產生編譯後的檔案</h2><p>當文章寫完後，需要將md檔案進行編譯，此時可以用 <code>hexo generate</code> 指令，編譯完後會產生一個 <code>public</code> 資料夾，作為之後部屬使用。<br>此指令的簡寫為 <code>hexo g</code></p>
+<h2 id="開啟一個本地端伺服器"><a href="#開啟一個本地端伺服器" class="headerlink" title="開啟一個本地端伺服器"></a>開啟一個本地端伺服器</h2><p>當靜態檔案編譯完後，可以用 <code>hexo server</code> 指令開啟一個本地端的模擬伺服器，用來即時瀏覽我的寫完的文章，此指令的簡寫為 <code>hexo s</code></p>
+<h2 id="清除暫存檔案"><a href="#清除暫存檔案" class="headerlink" title="清除暫存檔案"></a>清除暫存檔案</h2><p><code>hexo clean</code> 指令主要用來清除一些奇怪的暫存檔案，通常部屬前會先清理一遍。</p>
+<h2 id="部屬靜態檔案"><a href="#部屬靜態檔案" class="headerlink" title="部屬靜態檔案"></a>部屬靜態檔案</h2><p><code>hexo deploy</code> 將我們的靜態網站部屬到雲端使用的指令，詳細用流程在之後部屬的章節會提到。<br>此指令的簡寫為 <code>hexo d</code></p>
+<p>這就是今天 hexo 指令的介紹囉。</p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(1) Hexo 部落格安裝</title>
     <url>/2022/06/07/2022-6-7-Hexo-%E9%83%A8%E8%90%BD%E6%A0%BC%E5%AE%89%E8%A3%9D%E8%88%87%E9%83%A8%E5%B1%AC/</url>
     <content><![CDATA[<h2 id="什麼是-Hexo？"><a href="#什麼是-Hexo？" class="headerlink" title="什麼是 Hexo？"></a>什麼是 Hexo？</h2><p>Hexo 是一個快速、簡單且強大的網誌框架。Hexo 使用 Markdown（或其他標記語言）解析您的文章，並在幾秒鐘內，透過漂亮的主題產生靜態檔案。</p>
@@ -1108,41 +1412,6 @@
 ]]></content>
       <tags>
         <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(6) Git 練功坊-建立分支</title>
-    <url>/2022/06/23/2022-6-23-2-git-branch/</url>
-    <content><![CDATA[<h2 id="什麼是分支？"><a href="#什麼是分支？" class="headerlink" title="什麼是分支？"></a>什麼是分支？</h2><p>分支是為了將修改記錄的整體流程分開儲存，讓分開的分支不受其他分支的影響，所以在同一個數據庫裡可以同時進行多個不同的修改。</p>
-<p>當我們輸入完 git init 後，並完成第一次提交後(commit)會自動產生一個 main 分支，在建立其他分支前，所有紀錄都存在main分支上。</p>
-<h2 id="建立分支"><a href="#建立分支" class="headerlink" title="建立分支"></a>建立分支</h2><p>要建立一個新的分支，可以用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git branch 分支名稱</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/1206/1*MM7zD5dXszOgNHn_UcqtOg.png" alt="branch"></p>
-<p>要查詢目前有的分支可以輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/1134/1*8p-_J_x4kqDFcnO15JBRLQ.png" alt="brach"></p>
-<p>此時用git branch 去查詢，可以發現多了 feature1 分支，但目前所在分支還是master。</p>
-<h2 id="切換分支"><a href="#切換分支" class="headerlink" title="切換分支"></a>切換分支</h2><p>假設目前有 master 分支和 feature1分支，我現在在master分支上，想切換到 feature1分支，可用:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git checkout 分支名稱</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/1218/1*Gzf7OBa_JANOziPgnxYaVQ.png" alt="checkout"></p>
-<h2 id="HEAD標籤"><a href="#HEAD標籤" class="headerlink" title="HEAD標籤"></a>HEAD標籤</h2><p>HEAD是目前所在位置的指標，會跟隨在最新的commit上面，如下圖:</p>
-<p><img src="https://miro.medium.com/max/680/1*vBHV9Vo4Ws2O4a_AfGPdig.png" alt="head"></p>
-<p>在git裡的每個commit都有自己的代碼，我們可以用 git log 查詢所有 commit 紀錄。</p>
-<p><img src="https://miro.medium.com/max/1272/1*fcmwOhm5NG9_XpjeoFhPxw.png" alt="commit"></p>
-<p>如果想看前一版本commit紀錄裡做了哪些事，可以透過指令將HEAD移動到該commit版本上，看完後再移動回最新的commit上。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git checkout commit前四碼</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/676/1*ItxAAKHhndN-_oToicuXnw.png" alt="checkout"></p>
-<p>分支的切換其實也就是將HEAD移動到不同分支標籤上而已。</p>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
       </tags>
   </entry>
   <entry>

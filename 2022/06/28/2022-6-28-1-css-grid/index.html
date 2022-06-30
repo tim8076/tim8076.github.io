@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tim8076.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="使用 css grid 排版">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(3) CSS基礎篇 Grid">
+<meta property="og:url" content="https://tim8076.github.io/2022/06/28/2022-6-28-1-css-grid/index.html">
+<meta property="og:site_name" content="Tim的前端日誌">
+<meta property="og:description" content="使用 css grid 排版">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://css-tricks.com/wp-content/uploads/2018/11/template-column-rows-02.svg">
+<meta property="og:image" content="https://css-tricks.com/wp-content/uploads/2018/11/dddgrid-template-areas.svg">
+<meta property="og:image" content="https://css-tricks.com/wp-content/uploads/2018/11/justify-items-start.svg">
+<meta property="og:image" content="https://css-tricks.com/wp-content/uploads/2018/11/align-items-center.svg">
+<meta property="og:image" content="https://css-tricks.com/wp-content/uploads/2018/11/justify-content-end.svg">
+<meta property="og:image" content="https://css-tricks.com/wp-content/uploads/2018/11/align-content-space-around.svg">
+<meta property="og:image" content="https://css-tricks.com/wp-content/uploads/2018/11/grid-auto-columns-rows-02.svg">
+<meta property="og:image" content="https://css-tricks.com/wp-content/uploads/2018/11/grid-auto-flow-01.svg">
+<meta property="og:image" content="https://css-tricks.com/wp-content/uploads/2018/11/grid-auto-flow-02.svg">
+<meta property="og:image" content="https://css-tricks.com/wp-content/uploads/2018/11/grid-column-row.svg">
+<meta property="og:image" content="https://css-tricks.com/wp-content/uploads/2018/11/justify-self-start.svg">
+<meta property="og:image" content="https://css-tricks.com/wp-content/uploads/2018/11/align-self-end.svg">
+<meta property="og:image" content="https://css-tricks.com/wp-content/uploads/2018/11/place-self-center.svg">
+<meta property="og:image" content="https://css-tricks.com/wp-content/uploads/2018/11/place-self-center-stretch.svg">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022062901.png?alt=media&token=acf4677c-2652-40d6-aa52-6fd328611d56">
+<meta property="article:published_time" content="2022-06-28T09:08:05.000Z">
+<meta property="article:modified_time" content="2022-06-30T13:20:53.188Z">
+<meta property="article:author" content="Tim Chou">
+<meta property="article:tag" content="CSS基礎篇">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://css-tricks.com/wp-content/uploads/2018/11/template-column-rows-02.svg">
+
+
+<link rel="canonical" href="https://tim8076.github.io/2022/06/28/2022-6-28-1-css-grid/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://tim8076.github.io/2022/06/28/2022-6-28-1-css-grid/","path":"2022/06/28/2022-6-28-1-css-grid/","title":"(3) CSS基礎篇 Grid"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>(3) CSS基礎篇 Grid | Tim的前端日誌</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tim的前端日誌</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Grid-%E6%8E%92%E7%89%88"><span class="nav-number">1.</span> <span class="nav-text">Grid 排版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E5%AE%B9%E5%99%A8-%E7%88%B6%E5%B1%A4"><span class="nav-number">2.</span> <span class="nav-text">外部容器(父層)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#display"><span class="nav-number">2.1.</span> <span class="nav-text">display</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-template-columns-grid-template-rows"><span class="nav-number">2.2.</span> <span class="nav-text">grid-template-columns grid-template-rows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-template-areas"><span class="nav-number">2.3.</span> <span class="nav-text">grid-template-areas</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-gap-grid-column-gap-grid-row-gap"><span class="nav-number">2.4.</span> <span class="nav-text">grid-gap, grid-column-gap, grid-row-gap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#justify-items"><span class="nav-number">2.5.</span> <span class="nav-text">justify-items</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#align-items"><span class="nav-number">2.6.</span> <span class="nav-text">align-items</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#place-items"><span class="nav-number">2.7.</span> <span class="nav-text">place-items</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#justify-content%E3%80%81align-content"><span class="nav-number">2.8.</span> <span class="nav-text">justify-content、align-content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-auto-columns-%E3%80%81-grid-auto-rows"><span class="nav-number">2.9.</span> <span class="nav-text">grid-auto-columns 、 grid-auto-rows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-auto-flow"><span class="nav-number">2.10.</span> <span class="nav-text">grid-auto-flow</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A7%E9%83%A8%E5%85%83%E7%B4%A0-%E5%AD%90%E5%B1%A4"><span class="nav-number">3.</span> <span class="nav-text">內部元素(子層)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-column-start-grid-column-end-grid-row-start-grid-row-end"><span class="nav-number">3.1.</span> <span class="nav-text">grid-column-start, grid-column-end, grid-row-start, grid-row-end</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-column-%E3%80%81-grid-row"><span class="nav-number">3.2.</span> <span class="nav-text">grid-column 、 grid-row</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#justify-self"><span class="nav-number">3.3.</span> <span class="nav-text">justify-self</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#align-self"><span class="nav-number">3.4.</span> <span class="nav-text">align-self</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#place-self"><span class="nav-number">3.5.</span> <span class="nav-text">place-self</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E5%96%AE%E4%BD%8D%E8%88%87%E5%87%BD%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">特殊單位與函式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fr-%E5%96%AE%E4%BD%8D"><span class="nav-number">4.1.</span> <span class="nav-text">fr 單位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E9%8D%B5%E5%AD%97"><span class="nav-number">4.2.</span> <span class="nav-text">關鍵字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E5%87%BD%E5%BC%8F"><span class="nav-number">4.3.</span> <span class="nav-text">特殊函式</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tim Chou</p>
+  <div class="site-description" itemprop="description">Zero to Hero</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/tim8076" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/06/28/2022-6-28-1-css-grid/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Tim Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim的前端日誌">
+      <meta itemprop="description" content="Zero to Hero">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="(3) CSS基礎篇 Grid | Tim的前端日誌">
+      <meta itemprop="description" content="使用 css grid 排版">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          (3) CSS基礎篇 Grid
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-06-28 17:08:05" itemprop="dateCreated datePublished" datetime="2022-06-28T17:08:05+08:00">2022-06-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-06-30 21:20:53" itemprop="dateModified" datetime="2022-06-30T21:20:53+08:00">2022-06-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">使用 css grid 排版</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Grid-排版"><a href="#Grid-排版" class="headerlink" title="Grid 排版"></a>Grid 排版</h2><p>Grid和flex一樣是用來排版的屬性，flex以單軸為主來排版，Grid則能夠同時設定兩個方向(欄和列)，能夠快速建立網頁布局。</p>
+<p>Grid的屬性可以分成外部屬性和內部屬性，以下分別介紹。</p>
+<h2 id="外部容器-父層"><a href="#外部容器-父層" class="headerlink" title="外部容器(父層)"></a>外部容器(父層)</h2><p>以下介紹可以在父層設定的屬性</p>
+<h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><p>在父層容器設定 display: grid，讓父層是 gird 容器。</p>
+<ul>
+<li>grid – 設定 block-level的 grid</li>
+<li>inline-grid – 設定 inline-level的 grid</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid | inline-grid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grid-template-columns-grid-template-rows"><a href="#grid-template-columns-grid-template-rows" class="headerlink" title="grid-template-columns grid-template-rows"></a>grid-template-columns grid-template-rows</h3><p>設定好 display:grid後，可以用grid template 來定義版型的結構，分別設定column(欄)，和列(row)來排列格線，grid-template-columns 定義水平方向的空間，grid-template-rows 定義垂直方向的空間</p>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/template-column-rows-02.svg" alt="grid"><br><a target="_blank" rel="noopener" href="https://css-tricks.com/wp-content/uploads/2018/11/template-column-rows-02.svg">圖片來源</a></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: ...  ...;</span><br><span class="line">  <span class="comment">/* e.g. </span></span><br><span class="line"><span class="comment">      1fr 1fr</span></span><br><span class="line"><span class="comment">      minmax(10px, 1fr) 3fr</span></span><br><span class="line"><span class="comment">      repeat(5, 1fr)</span></span><br><span class="line"><span class="comment">      50px auto 100px 1fr</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="attribute">grid-template-rows</span>: ... ...;</span><br><span class="line">  <span class="comment">/* e.g. </span></span><br><span class="line"><span class="comment">      min-content 1fr min-content</span></span><br><span class="line"><span class="comment">      100px 1fr max-content</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>設定單位可以使用彈性的長度、百分比<br>或用fr (等分)，如下例會將父層寬度扣掉50px後，分成三等份到三欄裡。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">1</span>fr <span class="number">50px</span> <span class="number">1</span>fr <span class="number">1</span>fr; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果有重複一樣寬度的欄位，則可以用repeat設定。 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repeat(欄位數量, 寬度)</span><br></pre></td></tr></table></figure>
+
+<h3 id="grid-template-areas"><a href="#grid-template-areas" class="headerlink" title="grid-template-areas"></a>grid-template-areas</h3><p>grid-template-areas可以透過將每個欄位命名，將內容作分配。</p>
+<p>在父層設定 grid-template-areas，可設定的值有:</p>
+<ul>
+<li>[欄位名稱] : 設定該欄位名稱。</li>
+<li>.   設定 . 代表是空的欄位。</li>
+<li>none: 代表欄位未定義。</li>
+</ul>
+<p>在子層則設定 grid-area 決定內容要放到哪個欄位。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: header;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item-b</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: main;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item-c</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: sidebar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item-d</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: footer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: auto;</span><br><span class="line">  <span class="attribute">grid-template-areas</span>: </span><br><span class="line">    <span class="string">&quot;header header header header&quot;</span></span><br><span class="line">    <span class="string">&quot;main main . sidebar&quot;</span></span><br><span class="line">    <span class="string">&quot;footer footer footer footer&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/dddgrid-template-areas.svg" alt="grid-area"><br><a target="_blank" rel="noopener" href="https://css-tricks.com/wp-content/uploads/2018/11/dddgrid-template-areas.svg">圖片來源</a></p>
+<h3 id="grid-gap-grid-column-gap-grid-row-gap"><a href="#grid-gap-grid-column-gap-grid-row-gap" class="headerlink" title="grid-gap, grid-column-gap, grid-row-gap"></a>grid-gap, grid-column-gap, grid-row-gap</h3><p>設定水平與垂直的欄位間隔</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">column-gap</span>: &#123; <span class="attribute">column-gap</span> &#125;;  //設定每欄的間隔</span><br><span class="line"><span class="attribute">row-gap</span>: &#123; <span class="attribute">row-gap</span> &#125;; //設定每列的間隔</span><br><span class="line"><span class="attribute">gap</span>: &#123; <span class="attribute">row-gap</span> &#125; &#123; <span class="attribute">column-gap</span> &#125;;  // 同時設定欄和列的間隔</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">100px</span> <span class="number">50px</span> <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="number">80px</span> auto <span class="number">80px</span>; </span><br><span class="line">  <span class="attribute">column-gap</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">row-gap</span>: <span class="number">15px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="justify-items"><a href="#justify-items" class="headerlink" title="justify-items"></a>justify-items</h3><p>justify-items 可以設定子元素水平對齊格子的方式，可設定的值有:</p>
+<ul>
+<li>start: 對齊開頭</li>
+<li>end: 對齊末端</li>
+<li>center: 對齊中間</li>
+<li>stretch: 填滿格子(預設值)</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  justify-items: start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/justify-items-start.svg" alt="justify-items: start"></p>
+<h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p>align-items 可以設定子元素垂直對齊格子的方式，可設定的值有:</p>
+<ul>
+<li>start: 對齊頂端</li>
+<li>end: 對齊底部</li>
+<li>center: 對齊中間</li>
+<li>stretch: 填滿格子(預設值)</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/align-items-center.svg" alt="align-items: center"></p>
+<h3 id="place-items"><a href="#place-items" class="headerlink" title="place-items"></a>place-items</h3><p>place-items 能同時設定 justify-items跟align-items</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">place-items: &lt;align-items&gt; / &lt;justify-items&gt;</span><br></pre></td></tr></table></figure>
+<p>第一個值設定 align-items，第二個值設定 justify-items。如果只設一個值，則會同時套用到 justify-items跟align-items。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.center</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  place-items: center;  // 快速將內容置中於格子內</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="justify-content、align-content"><a href="#justify-content、align-content" class="headerlink" title="justify-content、align-content"></a>justify-content、align-content</h3><p>有時候你的格子尺寸可能會小於父層grid容器，此時可以用 justify-content 同時調整所有子元素的水平對齊，align-content 同時調整所有子元素的垂直對齊</p>
+<p>可設定的值:</p>
+<ul>
+<li>start: 對齊開頭</li>
+<li>end: 對齊末端</li>
+<li>center: 對齊中間</li>
+<li>stretch: 填滿格子(預設值)</li>
+<li>space-around: 平均分配寬度和間距</li>
+<li>space-between: 平均分配寬度，第一項和最後一項貼齊邊緣</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">justify-content</span>: end;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/justify-content-end.svg" alt="justify-content: end"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">align-content</span>: space-around;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/align-content-space-around.svg" alt="align-content: space-around"></p>
+<h3 id="grid-auto-columns-、-grid-auto-rows"><a href="#grid-auto-columns-、-grid-auto-rows" class="headerlink" title="grid-auto-columns 、 grid-auto-rows"></a>grid-auto-columns 、 grid-auto-rows</h3><p>當我們的grid-items數量超過我們設定的格線，或是將元素指定到格線以外時，會自動產生格線。<br>如下我們設定一個 2 x 2的格線。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">60px</span> <span class="number">60px</span>;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="number">90px</span> <span class="number">90px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但子元素設定的區域超過格線內，會自動產生格線。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">1</span> / <span class="number">2</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: <span class="number">2</span> / <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item-b</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">5</span> / <span class="number">6</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: <span class="number">2</span> / <span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/grid-auto-columns-rows-02.svg" alt="gird"></p>
+<p>此時可以設定 grid-auto-columns | grid-auto-rows 來指定自動產生的格線寬度。等於是設定格線寬度或高度的預設值，當格線沒有被 grid-template-columns 設定寬度時，就套用 grid-auto-columns的值。 </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">grid-auto-columns</span>: <span class="number">60px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="grid-auto-flow"><a href="#grid-auto-flow" class="headerlink" title="grid-auto-flow"></a>grid-auto-flow</h3><p>當有grid-item沒有被指定位置時，gird會自動排列這些grid-item，排列方式如下:</p>
+<ul>
+<li>row: 水平排列 (預設值)</li>
+<li>column: 垂直排列</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">60px</span> <span class="number">60px</span> <span class="number">60px</span> <span class="number">60px</span> <span class="number">60px</span>;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="number">30px</span> <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">grid-auto-flow</span>: row;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">1</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: <span class="number">1</span> / <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item-e</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">5</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: <span class="number">1</span> / <span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/grid-auto-flow-01.svg" alt="水平排列"></p>
+<p>item-b、item-c、item-d 因為沒有指定位置，自動依照grid-auto-flow水平排列</p>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/grid-auto-flow-02.svg" alt="垂直排列"></p>
+<p>item-b、item-c、item-d 因為沒有指定位置，自動依照grid-auto-flow垂直排列</p>
+<h2 id="內部元素-子層"><a href="#內部元素-子層" class="headerlink" title="內部元素(子層)"></a>內部元素(子層)</h2><p>以下介紹可以在內部元素設定的屬性</p>
+<h3 id="grid-column-start-grid-column-end-grid-row-start-grid-row-end"><a href="#grid-column-start-grid-column-end-grid-row-start-grid-row-end" class="headerlink" title="grid-column-start, grid-column-end, grid-row-start, grid-row-end"></a>grid-column-start, grid-column-end, grid-row-start, grid-row-end</h3><p>物件所佔的空間位置，Column 及 Row 所到的起始點及終點</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column-start</span>: &lt;number&gt; | &lt;name&gt; | span &lt;number&gt; | span &lt;name&gt; | auto;</span><br><span class="line">  <span class="attribute">grid-column-end</span>: &lt;number&gt; | &lt;name&gt; | span &lt;number&gt; | span &lt;name&gt; | auto;</span><br><span class="line">  <span class="attribute">grid-row-start</span>: &lt;number&gt; | &lt;name&gt; | span &lt;number&gt; | span &lt;name&gt; | auto;</span><br><span class="line">  <span class="attribute">grid-row-end</span>: &lt;number&gt; | &lt;name&gt; | span &lt;number&gt; | span &lt;name&gt; | auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>number : 用數字表示 物件 所在的線。</li>
+<li>span number - 物件會橫跨的欄位數</li>
+<li>span name - 物件所在的 grid 名稱</li>
+<li>auto - 自動</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  <span class="attribute">grid-row-start</span>: <span class="number">3</span>; <span class="comment">/* 物件起始線 */</span></span><br><span class="line">  <span class="attribute">grid-column-end</span>: span <span class="number">4</span>; <span class="comment">/* 終點線 = 物件所佔的空間數 */</span>  </span><br><span class="line">  <span class="attribute">grid-row-end</span>: auto; // 不設定終點線</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grid-column-、-grid-row"><a href="#grid-column-、-grid-row" class="headerlink" title="grid-column 、 grid-row"></a>grid-column 、 grid-row</h3><p>上面屬性的縮寫，使用斜線 (&#x2F;) 隔開屬性。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: &lt;start-line&gt; / &lt;end-line&gt; | &lt;start-line&gt; / span &lt;value&gt;;</span><br><span class="line">  <span class="attribute">grid-row</span>: &lt;start-line&gt; / &lt;end-line&gt; | &lt;start-line&gt; / span &lt;value&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>start-line: 開始的格線</li>
+<li>end-line : 結束的格線</li>
+<li>span value: 指定橫跨的欄位數</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item-c</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">3</span> / span <span class="number">2</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: third-line / <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/grid-column-row.svg" alt="grid-column"></p>
+<h3 id="justify-self"><a href="#justify-self" class="headerlink" title="justify-self"></a>justify-self</h3><p>指定單一格子內的grid-item水平對齊的方式，可設定的值如下:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  justify-self: start | end | center | <span class="built_in">stretch</span>(預設值);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>範例: </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  justify-self: start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/justify-self-start.svg" alt="justify-self"></p>
+<h3 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h3><p>指定單一格子內的grid-item垂直對齊的方式，可設定的值如下:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: start | end | center | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>範例: </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: end;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/align-self-end.svg" alt="align-self"></p>
+<h3 id="place-self"><a href="#place-self" class="headerlink" title="place-self"></a>place-self</h3><p>是 align-self跟justify-self的縮寫，用法如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">place-self : &lt;align-self&gt; / &lt;justify-self&gt; </span><br></pre></td></tr></table></figure>
+
+<p>第一個值設定 align-self，第二個值設定justify-self。如果只設定一個值，則會同時套用到align-self跟justify-self。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  place-self: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/place-self-center.svg" alt="center"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  place-self: center stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/11/place-self-center-stretch.svg" alt="place-self"></p>
+<h2 id="特殊單位與函式"><a href="#特殊單位與函式" class="headerlink" title="特殊單位與函式"></a>特殊單位與函式</h2><h3 id="fr-單位"><a href="#fr-單位" class="headerlink" title="fr 單位"></a>fr 單位</h3><p>在grid裡，可以用 fr 作為單位，1fr指的是 1等分。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns: 1fr 3fr;</span><br></pre></td></tr></table></figure>
+
+<p>上面我們設定的兩欄就分別代表 25% 和 75% 的寬度。</p>
+<p>fr 也可以搭配其他單位使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns: 50px min-content 1fr;</span><br></pre></td></tr></table></figure>
+
+<h3 id="關鍵字"><a href="#關鍵字" class="headerlink" title="關鍵字"></a>關鍵字</h3><p>當我們在設定欄位長寬時，可以用 px 、% 、rem 等等，也可以使用關鍵字設定。</p>
+<ul>
+<li>min-content: 指的是內容的最小尺寸</li>
+<li>max-content: 指的是內容的最大尺寸</li>
+</ul>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022062901.png?alt=media&token=acf4677c-2652-40d6-aa52-6fd328611d56" alt="min-content"></p>
+<p>假設有一個grid-item是一段句子:</p>
+<ul>
+<li>min-content: 句子裡最長的字的寬度。</li>
+<li>max-content: 完整句子的寬度。</li>
+</ul>
+<h3 id="特殊函式"><a href="#特殊函式" class="headerlink" title="特殊函式"></a>特殊函式</h3><ul>
+<li>minmax(最小寬度, 最大寬度)</li>
+</ul>
+<p>使用 minmax 可以同時設定欄位的最小和最大寬度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns: minmax(100px, 1fr) 3fr; </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>repeat(欄位數量, 欄位寬度)</li>
+</ul>
+<p>當要設定的欄位寬度都一樣時，可以用 repeat方法來設定</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns:</span><br><span class="line">  1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;</span><br><span class="line"></span><br><span class="line">/* easier: */</span><br><span class="line">grid-template-columns:</span><br><span class="line">  repeat(8, 1fr);</span><br><span class="line"></span><br><span class="line">/* especially when: */</span><br><span class="line">grid-template-columns:</span><br><span class="line">  repeat(8, minmax(10px, 1fr));</span><br></pre></td></tr></table></figure>
+
+<p>在使用 repeat() 時，如果不確定自己要的重複次數，可以使用 auto-fill 和 autofit 讓重複的網格持續填滿。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  gird-template-<span class="attribute">columns</span>: <span class="built_in">repeat</span>(auto-fill, <span class="number">100px</span>);</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="built_in">repeat</span>(<span class="number">3</span>, <span class="number">50px</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如上例，因為容器寬度是500px, 設定auto-fill 會產生 5 * 3的網格。</p>
+<p>至於 auto-fill 和 auto-fit的差異在:</p>
+<ul>
+<li>auto-fill: 盡量產生重複的欄位。</li>
+<li>auto-fit: 盡量產生重複的欄位，但多的格子會被設為0px，折疊起來。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://jhlstudy.blogspot.com/2018/07/grid-layout-auto-fill-auto-fit_8.html">詳細解說文章看這</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSS%E5%9F%BA%E7%A4%8E%E7%AF%87/" rel="tag"># CSS基礎篇</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/27/2022-6-24-1-js-requestAnimation/" rel="prev" title="(1) Js進階 requestAnimationFrame">
+                  <i class="fa fa-chevron-left"></i> (1) Js進階 requestAnimationFrame
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/06/29/2022-6-29-1-css-flex/" rel="next" title="(4) CSS基礎篇 Flex">
+                  (4) CSS基礎篇 Flex <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tim Chou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"shosetim","count":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
