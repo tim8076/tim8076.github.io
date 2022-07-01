@@ -1,9 +1,9 @@
 ---
-title: (1) Js進階 requestAnimationFrame
+title: Js 中繪製動畫 requestAnimationFrame
 date: 2022-06-27 16:05:47
 categories: Javascript
 tags: 
-- Js進階
+- Javascript
 description: '利用requestAnimationFrame製作動畫'
 ---
 
