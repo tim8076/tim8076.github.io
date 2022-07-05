@@ -1,9 +1,9 @@
 ---
-title: (1) Js觀念篇 - let、const、var的區別
+title: ES6 let、const、var的區別
 date: 2022-06-21 21:01:42
 categories: Javascript
 tags: 
-- Js觀念篇
+- ES6
 description: '不同變數的宣告方法'
 ---
 
