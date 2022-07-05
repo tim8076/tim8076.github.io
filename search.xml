@@ -75,90 +75,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(1) JS30實作系列 Drum-Kit</title>
-    <url>/2022/06/14/2022-6-14-1-JS30-Drum-Kit/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS30，是由加拿大工程師Wes Bos所建立一系列課程。透過課程內容可以實際學到Javascript的實際應用。<br>本系列文章會實做一些JS30的範例，從中熟練JS的觀念。</p>
-<p>本文從第一個範例開始 Drum-Kit <a href="https://codepen.io/tim-chou/pen/oNEmjKR">範例程式碼</a></p>
-<p><img src="https://miro.medium.com/max/1400/1*wUokqgRhKPwqMbffW1lZeA.png" alt="piano"></p>
-<h2 id="keycode綁定"><a href="#keycode綁定" class="headerlink" title="keycode綁定"></a>keycode綁定</h2><p>在這次挑戰中，要完成的是按下琴鍵後，播放指定音樂，和改變樣式。</p>
-<p>所以第一步要做的是，選出指定的dom元素和音檔，</p>
-<p>在 html 結構中，用 data-key分別對div 跟 audio 元素綁定對應按鍵的 keycode。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">data-key</span>=<span class="string">&quot;65&quot;</span> <span class="attr">class</span>=<span class="string">&quot;key&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">data-key</span>=<span class="string">&quot;65&quot;</span> <span class="attr">src</span>=<span class="string">&quot;sounds/clap.wav&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="事件監聽"><a href="#事件監聽" class="headerlink" title="事件監聽"></a>事件監聽</h2><p>要讓使用者能彈出聲音，要在window建立 keydown事件的監聽，當使用者按下鍵盤時，觸發對應函式。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>,playHandeler,<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">playHandeler</span>(<span class="params">e</span>)&#123;</span><br><span class="line">  <span class="comment">//播音樂</span></span><br><span class="line">  <span class="keyword">const</span> audio = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`audio[data-key=&quot;<span class="subst">$&#123;e.keyCode&#125;</span>&quot;]`</span>);</span><br><span class="line">  <span class="keyword">if</span>(audio)&#123;</span><br><span class="line">    audio.<span class="property">currentTime</span> = <span class="number">0</span>;<span class="comment">//若要連續撥放 要設為0</span></span><br><span class="line">    audio.<span class="title function_">play</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//改樣式</span></span><br><span class="line">  <span class="keyword">const</span> dom = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`div[data-key=&quot;<span class="subst">$&#123;e.keyCode&#125;</span>&quot;]`</span>);</span><br><span class="line">  <span class="keyword">if</span>(dom)&#123;</span><br><span class="line">    dom.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;playing&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在函式中，用 ES6 的選取方法，用 <code>audio[data-key=”$&#123;e.keyCode&#125;”]</code>直接選到 HTML 中的 [data-key]。<br>在利用 if 判斷式，判斷當使用者按到指定的按鍵時，也就是audio為true時，執行播放音檔，audio.play();<br>dom 為true時，執行classList.add()，彈奏時增加樣式。</p>
-<h2 id="動畫結束時，拿掉樣式"><a href="#動畫結束時，拿掉樣式" class="headerlink" title="動畫結束時，拿掉樣式"></a>動畫結束時，拿掉樣式</h2><p>利用foreach，對每一個.key建立監聽，監聽事件為 transitionend 。這個事件是在css的 transition結束時觸發，也就是每一個drum kit撥放完時觸發。<br>要注意，若執行的transition屬性有很多種，如 transform、color、border-color，transitionend 會重複的觸發。<br>今天我們希望的是，在transform動畫結束時拿掉樣式，所以要加上判斷propertyName為 transform時，再執行 classList.remove拿掉樣式。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.key&#x27;</span>).<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">item</span>)&#123;</span><br><span class="line">  item.<span class="title function_">addEventListener</span>(<span class="string">&#x27;transitionend&#x27;</span>, transitionendHandler)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">transitionendHandler</span>(<span class="params">e</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span>(e.<span class="property">propertyName</span> === <span class="string">&#x27;transform&#x27;</span>)&#123;</span><br><span class="line">    e.<span class="property">currentTarget</span>.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;playing&#x27;</span>);</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="額外補充"><a href="#額外補充" class="headerlink" title="額外補充"></a>額外補充</h2><p>若要在html 顯示 鍵盤按鍵 可以用 <code>&lt;kbd&gt;&lt;/kbd&gt;</code> 元素。</p>
-]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>JS30</tag>
-        <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(5) Gulp-postcss</title>
-    <url>/2022/06/17/2022-6-17-1-Gulp-postcss/</url>
-    <content><![CDATA[<h2 id="PostCSS-是什麼"><a href="#PostCSS-是什麼" class="headerlink" title="PostCSS 是什麼 ?"></a>PostCSS 是什麼 ?</h2><p>PostCSS 是一個使用JavaScript 轉換CSS 的工具。<br>以前在撰寫css時，因為有些新的語法舊的瀏覽器不支援，所以需要加上前贅詞</p>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*0gGNaqjQjKhcOhyBck5Bhw.png" alt="img"></p>
-<p>但這步驟如果用人工判斷很費時，此時可以用post css搭配 autoprfixer 套件，來自動加入這些前贅詞。</p>
-<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><p>先安裝套件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install postcss gulp-postcss autoprfixer --save</span><br></pre></td></tr></table></figure>
-
-<p>然後在 <code>gulpfile.js</code> 中載入套件</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> autoprefixer = <span class="built_in">require</span>(<span class="string">&#x27;autoprefixer&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> postcss = <span class="built_in">require</span>(<span class="string">&#x27;gulp-postcss&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>在我們編譯sass的任務中，加入postcss功能</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sassTask</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> plugins = [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">postcss</span>(plugins))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面我們先新增一個 plugins 的變數，並在編譯成css後，加入 <code>postcss(plugins)</code></p>
-<p>此時可能會遇到這個錯誤</p>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*r49hPlucU_l7u-wYZtzGBg.png" alt="error"></p>
-<p>這個錯誤是要我們在根目錄增加一個 .browserslistrc 的檔案，裡面放需要支援的瀏覽器版本條件，如下圖:</p>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*RiUzC2vYWqZEFgT0nCa7lA.png" alt="browser"></p>
-<p>之後如果要調整 CSS 支援版本就只需要調整 .browserslistrc 中的 last X version X 即可，關於支援版本設定，可參考<a href="https://github.com/browserslist/browserslist">這裡</a>。</p>
-<p>以上就完成gulp-postcss的的設定囉</p>
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(4) Gulp-編譯scss</title>
-    <url>/2022/06/16/2022-6-15-4-Gulp-%E7%B7%A8%E8%AD%AFsass/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇來介紹如何在 gulp 中，進行scss的編譯吧。</p>
-<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><p>首先來安裝 gulp-sass 套件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install sass gulp-sass --save</span><br></pre></td></tr></table></figure>
-
-<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>在gulpfile.js裡，依照文件貼上相關設定</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sass = <span class="built_in">require</span>(<span class="string">&#x27;gulp-sass&#x27;</span>)(<span class="built_in">require</span>(<span class="string">&#x27;sass&#x27;</span>));</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">buildStyles</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>上面為編譯scss的gulp任務，用 src 指定 scss 所在的資料夾後，最後在用gulp.dest() 指定編譯後的 css 輸出的位置。</p>
-<p>之後在scss資料夾裡，新增一個all.scss檔案。</p>
-<p>並輸入一些東西</p>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$color</span>: <span class="number">#00cc99</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="variable">$color</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在commend line 輸入 gulp buildStyles 就可以發現scss被編譯成css檔案，並輸出到public資料夾囉。</p>
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(1) Gulp-介紹與安裝</title>
     <url>/2022/06/15/2022-6-15-2-Gulp-%E4%BB%8B%E7%B4%B9%E8%88%87%E5%AE%89%E8%A3%9D/</url>
     <content><![CDATA[<h2 id="Gulp-是什麼"><a href="#Gulp-是什麼" class="headerlink" title="Gulp 是什麼"></a>Gulp 是什麼</h2><p>在以前做網頁開發時，可能只需要處理html、css、js檔案就可以了。但現在前端開發工具越來越多，像css有scss的預處理器、html可以用pug來寫等等。此時就須要一個工具來將這些scss、pug檔案編譯成css跟html。<br>Gulp 就可以用來編譯 Sass、編譯 JavaScript 語法至相容性較高的 ES5、圖片優化壓縮、打包程式碼等等的事情，讓開發者可以專注於開發。</p>
@@ -192,6 +108,92 @@
       </tags>
   </entry>
   <entry>
+    <title>(1) JS實作系列 Drum-Kit</title>
+    <url>/2022/06/14/2022-6-14-1-JS30-Drum-Kit/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本系列文章會實做一些JS的範例，從中熟練JS的觀念。</p>
+<p>本文從第一個範例開始 Drum-Kit <a href="https://codepen.io/tim-chou/pen/oNEmjKR">範例程式碼</a></p>
+<p><img src="https://miro.medium.com/max/1400/1*wUokqgRhKPwqMbffW1lZeA.png" alt="piano"></p>
+<h2 id="keycode綁定"><a href="#keycode綁定" class="headerlink" title="keycode綁定"></a>keycode綁定</h2><p>在這次挑戰中，要完成的是按下琴鍵後，播放指定音樂，和改變樣式。</p>
+<p>所以第一步要做的是，選出指定的dom元素和音檔，</p>
+<p>在 html 結構中，用 data-key分別對div 跟 audio 元素綁定對應按鍵的 keycode。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">data-key</span>=<span class="string">&quot;65&quot;</span> <span class="attr">class</span>=<span class="string">&quot;key&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">data-key</span>=<span class="string">&quot;65&quot;</span> <span class="attr">src</span>=<span class="string">&quot;sounds/clap.wav&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="事件監聽"><a href="#事件監聽" class="headerlink" title="事件監聽"></a>事件監聽</h2><p>要讓使用者能彈出聲音，要在window建立 keydown事件的監聽，當使用者按下鍵盤時，觸發對應函式。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>,playHandeler,<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">playHandeler</span>(<span class="params">e</span>)&#123;</span><br><span class="line">  <span class="comment">//播音樂</span></span><br><span class="line">  <span class="keyword">const</span> audio = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`audio[data-key=&quot;<span class="subst">$&#123;e.keyCode&#125;</span>&quot;]`</span>);</span><br><span class="line">  <span class="keyword">if</span>(audio)&#123;</span><br><span class="line">    audio.<span class="property">currentTime</span> = <span class="number">0</span>;<span class="comment">//若要連續撥放 要設為0</span></span><br><span class="line">    audio.<span class="title function_">play</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//改樣式</span></span><br><span class="line">  <span class="keyword">const</span> dom = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`div[data-key=&quot;<span class="subst">$&#123;e.keyCode&#125;</span>&quot;]`</span>);</span><br><span class="line">  <span class="keyword">if</span>(dom)&#123;</span><br><span class="line">    dom.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;playing&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在函式中，用 ES6 的選取方法，用 <code>audio[data-key=”$&#123;e.keyCode&#125;”]</code>直接選到 HTML 中的 [data-key]。<br>在利用 if 判斷式，判斷當使用者按到指定的按鍵時，也就是audio為true時，執行播放音檔，audio.play();<br>dom 為true時，執行classList.add()，彈奏時增加樣式。</p>
+<h2 id="動畫結束時，拿掉樣式"><a href="#動畫結束時，拿掉樣式" class="headerlink" title="動畫結束時，拿掉樣式"></a>動畫結束時，拿掉樣式</h2><p>利用foreach，對每一個.key建立監聽，監聽事件為 transitionend 。這個事件是在css的 transition結束時觸發，也就是每一個drum kit撥放完時觸發。<br>要注意，若執行的transition屬性有很多種，如 transform、color、border-color，transitionend 會重複的觸發。<br>今天我們希望的是，在transform動畫結束時拿掉樣式，所以要加上判斷propertyName為 transform時，再執行 classList.remove拿掉樣式。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.key&#x27;</span>).<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">item</span>)&#123;</span><br><span class="line">  item.<span class="title function_">addEventListener</span>(<span class="string">&#x27;transitionend&#x27;</span>, transitionendHandler)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">transitionendHandler</span>(<span class="params">e</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span>(e.<span class="property">propertyName</span> === <span class="string">&#x27;transform&#x27;</span>)&#123;</span><br><span class="line">    e.<span class="property">currentTarget</span>.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;playing&#x27;</span>);</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="額外補充"><a href="#額外補充" class="headerlink" title="額外補充"></a>額外補充</h2><p>若要在html 顯示 鍵盤按鍵 可以用 <code>&lt;kbd&gt;&lt;/kbd&gt;</code> 元素。</p>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>JS實作系列</tag>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(2) JS實作系列 時鐘</title>
+    <url>/2022/06/15/2022-6-15-1-JS30-clock/</url>
+    <content><![CDATA[<p><img src="https://miro.medium.com/max/1400/1*JH-e_9OQS1lBH7hqb7lMXQ.png" alt="clock"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這次要在網頁實作一個時鐘，本次的 <a href="https://codepen.io/tim-chou/pen/RwReNQx">範例code</a></p>
+<p>首先在 HTML 中新增 三組 DIV 分別為時、分、秒針</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clock&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clock-face&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand second-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand min-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand hour-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>時、分、秒針都設定為寬高是鐘面100%的正方形，並利用偽元素的方式，將指針加在正方形上，所以我們之後實際旋轉的是正方形。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.hand</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1040/1*hxPjvHGmPHvKxnY7ZZFuUg.png" alt="hand"></p>
+<h2 id="js部分"><a href="#js部分" class="headerlink" title="js部分"></a>js部分</h2><p>在js中，首先選取 時、分、秒針</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> second = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.second-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> min = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.min-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> hour = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.hour-hand&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在setClock函式中，利用 建立 new Date() 取得時間，再用getSeconds、getMinutes、getHours取得秒、時、分。<br>並分別乘上 6 度 (每秒鐘在鐘面佔的角度 )、30度(每小時在鐘面佔的角度)，並利用 .style.transform &#x3D; <code>rotate($&#123;minDeg&#125;deg)</code>的方式指定角度。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">function</span> <span class="title function_">setClock</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">let</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> secondDeg = date.<span class="title function_">getSeconds</span>() * <span class="number">6</span> <span class="comment">// (360/60)每分鐘所佔的角度</span></span><br><span class="line">  <span class="keyword">let</span> minDeg = date.<span class="title function_">getMinutes</span>() * <span class="number">6</span> + date.<span class="title function_">getSeconds</span>()* <span class="number">30</span> / <span class="number">60</span> <span class="comment">// (360/60)每秒所佔的角度</span></span><br><span class="line">  <span class="keyword">let</span> hourDeg = date.<span class="title function_">getHours</span>() * <span class="number">30</span> + date.<span class="title function_">getMinutes</span>()* <span class="number">30</span> / <span class="number">60</span><span class="comment">// (360/12)每小時時針所佔的角度 </span></span><br><span class="line"></span><br><span class="line">  second.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;secondDeg&#125;</span>deg)`</span></span><br><span class="line">  min.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;minDeg&#125;</span>deg)`</span></span><br><span class="line">  hour.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;hourDeg&#125;</span>deg)`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最後用 setInterval 每過一秒就執行一次 setClock 函式，就完成拉。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(setClock,<span class="number">1000</span>); <span class="comment">//設定間隔，持續執行</span></span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>JS實作系列</tag>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(4) Gulp-編譯scss</title>
+    <url>/2022/06/16/2022-6-15-4-Gulp-%E7%B7%A8%E8%AD%AFsass/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇來介紹如何在 gulp 中，進行scss的編譯吧。</p>
+<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><p>首先來安裝 gulp-sass 套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install sass gulp-sass --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>在gulpfile.js裡，依照文件貼上相關設定</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sass = <span class="built_in">require</span>(<span class="string">&#x27;gulp-sass&#x27;</span>)(<span class="built_in">require</span>(<span class="string">&#x27;sass&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">buildStyles</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上面為編譯scss的gulp任務，用 src 指定 scss 所在的資料夾後，最後在用gulp.dest() 指定編譯後的 css 輸出的位置。</p>
+<p>之後在scss資料夾裡，新增一個all.scss檔案。</p>
+<p>並輸入一些東西</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$color</span>: <span class="number">#00cc99</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="variable">$color</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在commend line 輸入 gulp buildStyles 就可以發現scss被編譯成css檔案，並輸出到public資料夾囉。</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(2) Gulp-運作原理介紹</title>
     <url>/2022/06/16/2022-6-15-5-Gulp-%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86/</url>
     <content><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/1200/0*_uAjbnaZaXs1ca6x.png" alt="img"></p>
@@ -207,6 +209,66 @@
 <ol start="4">
 <li>gulp.dest(): 輸出任務的結果</li>
 </ol>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(5) Gulp-postcss</title>
+    <url>/2022/06/17/2022-6-17-1-Gulp-postcss/</url>
+    <content><![CDATA[<h2 id="PostCSS-是什麼"><a href="#PostCSS-是什麼" class="headerlink" title="PostCSS 是什麼 ?"></a>PostCSS 是什麼 ?</h2><p>PostCSS 是一個使用JavaScript 轉換CSS 的工具。<br>以前在撰寫css時，因為有些新的語法舊的瀏覽器不支援，所以需要加上前贅詞</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*0gGNaqjQjKhcOhyBck5Bhw.png" alt="img"></p>
+<p>但這步驟如果用人工判斷很費時，此時可以用post css搭配 autoprfixer 套件，來自動加入這些前贅詞。</p>
+<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><p>先安裝套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install postcss gulp-postcss autoprfixer --save</span><br></pre></td></tr></table></figure>
+
+<p>然後在 <code>gulpfile.js</code> 中載入套件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> autoprefixer = <span class="built_in">require</span>(<span class="string">&#x27;autoprefixer&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> postcss = <span class="built_in">require</span>(<span class="string">&#x27;gulp-postcss&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在我們編譯sass的任務中，加入postcss功能</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sassTask</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> plugins = [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">postcss</span>(plugins))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面我們先新增一個 plugins 的變數，並在編譯成css後，加入 <code>postcss(plugins)</code></p>
+<p>此時可能會遇到這個錯誤</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*r49hPlucU_l7u-wYZtzGBg.png" alt="error"></p>
+<p>這個錯誤是要我們在根目錄增加一個 .browserslistrc 的檔案，裡面放需要支援的瀏覽器版本條件，如下圖:</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*RiUzC2vYWqZEFgT0nCa7lA.png" alt="browser"></p>
+<p>之後如果要調整 CSS 支援版本就只需要調整 .browserslistrc 中的 last X version X 即可，關於支援版本設定，可參考<a href="https://github.com/browserslist/browserslist">這裡</a>。</p>
+<p>以上就完成gulp-postcss的的設定囉</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(7) Gulp-browserSync</title>
+    <url>/2022/06/17/2022-6-17-3-Gulp-browser-sync/</url>
+    <content><![CDATA[<h2 id="什麼是-broswer-sync"><a href="#什麼是-broswer-sync" class="headerlink" title="什麼是 broswer sync"></a>什麼是 broswer sync</h2><p>browserSync 能建立起一個暫時性的開發用伺服器。搭配 gulp 使用，就能達成檔案修改時，browserSnyc 會自動重整畫面，讓開發者能在瀏覽器上即時看到修改後的畫面。</p>
+<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><p>網址: <a href="https://browsersync.io/docs/gulp">https://browsersync.io/docs/gulp</a></p>
+<p>安裝套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install browser-sync gulp --save</span><br></pre></td></tr></table></figure>
+
+<p>在gulpfile.js中引入</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> browserSync = <span class="built_in">require</span>(<span class="string">&#x27;browser-sync&#x27;</span>).<span class="title function_">create</span>();</span><br></pre></td></tr></table></figure>
+
+<p>建立任務，指定伺服器位置為最後輸出的public資料夾</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">browser</span>(<span class="params"></span>)&#123;</span><br><span class="line">  browserSync.<span class="title function_">init</span>(&#123;</span><br><span class="line">    <span class="attr">server</span>: &#123; <span class="attr">baseDir</span>: <span class="string">&quot;./public&quot;</span> &#125;,</span><br><span class="line">    <span class="attr">reloadDebounce</span>: <span class="number">2000</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在其他gulp任務輸出的最後加上 <code>.pipe(browserSync.stream())</code></p>
+<p>如在babel任務加上，就會在babel更新後，自動同步到瀏覽器。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(path.<span class="property">js</span>.<span class="property">src</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">if</span>(options.<span class="property">env</span> === <span class="string">&#x27;prod&#x27;</span>, $.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(path.<span class="property">js</span>.<span class="property">des</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 ]]></content>
       <categories>
         <category>Gulp</category>
@@ -241,68 +303,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(2) JS30實作系列 時鐘</title>
-    <url>/2022/06/15/2022-6-15-1-JS30-clock/</url>
-    <content><![CDATA[<p><img src="https://miro.medium.com/max/1400/1*JH-e_9OQS1lBH7hqb7lMXQ.png" alt="clock"></p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這次要在網頁實作一個時鐘，本次的 <a href="https://codepen.io/tim-chou/pen/RwReNQx">範例code</a></p>
-<p>首先在 HTML 中新增 三組 DIV 分別為時、分、秒針</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clock&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clock-face&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand second-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand min-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand hour-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>時、分、秒針都設定為寬高是鐘面100%的正方形，並利用偽元素的方式，將指針加在正方形上，所以我們之後實際旋轉的是正方形。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.hand</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/1040/1*hxPjvHGmPHvKxnY7ZZFuUg.png" alt="hand"></p>
-<h2 id="js部分"><a href="#js部分" class="headerlink" title="js部分"></a>js部分</h2><p>在js中，首先選取 時、分、秒針</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> second = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.second-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> min = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.min-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> hour = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.hour-hand&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>在setClock函式中，利用 建立 new Date() 取得時間，再用getSeconds、getMinutes、getHours取得秒、時、分。<br>並分別乘上 6 度 (每秒鐘在鐘面佔的角度 )、30度(每小時在鐘面佔的角度)，並利用 .style.transform &#x3D; <code>rotate($&#123;minDeg&#125;deg)</code>的方式指定角度。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">function</span> <span class="title function_">setClock</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">let</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> secondDeg = date.<span class="title function_">getSeconds</span>() * <span class="number">6</span> <span class="comment">// (360/60)每分鐘所佔的角度</span></span><br><span class="line">  <span class="keyword">let</span> minDeg = date.<span class="title function_">getMinutes</span>() * <span class="number">6</span> + date.<span class="title function_">getSeconds</span>()* <span class="number">30</span> / <span class="number">60</span> <span class="comment">// (360/60)每秒所佔的角度</span></span><br><span class="line">  <span class="keyword">let</span> hourDeg = date.<span class="title function_">getHours</span>() * <span class="number">30</span> + date.<span class="title function_">getMinutes</span>()* <span class="number">30</span> / <span class="number">60</span><span class="comment">// (360/12)每小時時針所佔的角度 </span></span><br><span class="line"></span><br><span class="line">  second.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;secondDeg&#125;</span>deg)`</span></span><br><span class="line">  min.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;minDeg&#125;</span>deg)`</span></span><br><span class="line">  hour.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;hourDeg&#125;</span>deg)`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最後用 setInterval 每過一秒就執行一次 setClock 函式，就完成拉。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(setClock,<span class="number">1000</span>); <span class="comment">//設定間隔，持續執行</span></span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>JS30</tag>
-        <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(7) Gulp-browserSync</title>
-    <url>/2022/06/17/2022-6-17-3-Gulp-browser-sync/</url>
-    <content><![CDATA[<h2 id="什麼是-broswer-sync"><a href="#什麼是-broswer-sync" class="headerlink" title="什麼是 broswer sync"></a>什麼是 broswer sync</h2><p>browserSync 能建立起一個暫時性的開發用伺服器。搭配 gulp 使用，就能達成檔案修改時，browserSnyc 會自動重整畫面，讓開發者能在瀏覽器上即時看到修改後的畫面。</p>
-<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><p>網址: <a href="https://browsersync.io/docs/gulp">https://browsersync.io/docs/gulp</a></p>
-<p>安裝套件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install browser-sync gulp --save</span><br></pre></td></tr></table></figure>
-
-<p>在gulpfile.js中引入</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> browserSync = <span class="built_in">require</span>(<span class="string">&#x27;browser-sync&#x27;</span>).<span class="title function_">create</span>();</span><br></pre></td></tr></table></figure>
-
-<p>建立任務，指定伺服器位置為最後輸出的public資料夾</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">browser</span>(<span class="params"></span>)&#123;</span><br><span class="line">  browserSync.<span class="title function_">init</span>(&#123;</span><br><span class="line">    <span class="attr">server</span>: &#123; <span class="attr">baseDir</span>: <span class="string">&quot;./public&quot;</span> &#125;,</span><br><span class="line">    <span class="attr">reloadDebounce</span>: <span class="number">2000</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在其他gulp任務輸出的最後加上 <code>.pipe(browserSync.stream())</code></p>
-<p>如在babel任務加上，就會在babel更新後，自動同步到瀏覽器。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(path.<span class="property">js</span>.<span class="property">src</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">if</span>(options.<span class="property">env</span> === <span class="string">&#x27;prod&#x27;</span>, $.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(path.<span class="property">js</span>.<span class="property">des</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(8) Gulp-檔案壓縮</title>
     <url>/2022/06/17/2022-6-17-4-Gulp-compress/</url>
     <content><![CDATA[<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><ol>
@@ -331,35 +331,6 @@
       </categories>
       <tags>
         <tag>Gulp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(11) Gulp-git</title>
-    <url>/2022/06/18/2022-6-18-3-Gulp-git/</url>
-    <content><![CDATA[<h2 id="初始化git"><a href="#初始化git" class="headerlink" title="初始化git"></a>初始化git</h2><p>這章節，我們來幫gulp專案加入 git 版本控制，若電腦還沒安裝git的話，可以先到<a href="https://git-scm.com/">git官網</a>下載git並安裝。</p>
-<p>安裝好git後，在commend line輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init // 建立本地儲存庫</span><br><span class="line">git add . // 加入所有檔案到目錄</span><br><span class="line">git commit -m &quot;first commit&quot;  // 提交本次紀錄</span><br></pre></td></tr></table></figure>
-
-<h2 id="新增-gitignore-檔案"><a href="#新增-gitignore-檔案" class="headerlink" title="新增 gitignore 檔案"></a>新增 gitignore 檔案</h2><p>因為有一些檔案是不需要加入版本控制的，如 public資料夾、.temp資料夾、node_modules資料夾，此時可以開一個 .gitignore 檔案，將不須控制的檔案忽略。</p>
-<p><img src="https://cdn-images-1.medium.com/max/1320/1*6er_v_0LzoqbD_Pl0lTEgw.png" alt="gitignore"></p>
-<p>在用 git status 去檢查未加入目錄的檔案時，就會發現有加入.gitignore的檔案都消失了，代表這些檔案不用被git做控制。</p>
-<h2 id="快速發佈到-github-pages"><a href="#快速發佈到-github-pages" class="headerlink" title="快速發佈到 github pages"></a>快速發佈到 github pages</h2><p>在完成我們的gulp專案後，可以發佈到 github pages上。</p>
-<p>先下載 <code>gulp-gh-pages</code>  套件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install - save-dev gulp-gh-pages</span><br></pre></td></tr></table></figure>
-
-<p>在gulpfile.js中加入deploy任務，因為有使用gulp-load-plugins這個套件，只要在ghPages()前方加入$即可。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">deploy</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./public/**/*&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">ghPages</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>輸入 gulp deploy後，會在github上新開一個 gh-pages 的分支，自動將public資料夾裡的內容上傳到github。</p>
-<p><img src="https://cdn-images-1.medium.com/max/1320/1*5FV7yd4cKZ0mp4dL-Y1-Dw.png" alt="github"></p>
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
-        <tag>git</tag>
-        <tag>github</tag>
       </tags>
   </entry>
   <entry>
@@ -475,30 +446,32 @@
       </tags>
   </entry>
   <entry>
-    <title>(2) SCSS練功坊-變數variable</title>
-    <url>/2022/06/19/2022-6-19-1-scss-variable/</url>
-    <content><![CDATA[<h2 id="以往css遇到的問題"><a href="#以往css遇到的問題" class="headerlink" title="以往css遇到的問題"></a>以往css遇到的問題</h2><p>以往在寫css時，可能我們會直接將顏色的值寫死，例如:</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f0a</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f0a</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f00</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>(11) Gulp-git</title>
+    <url>/2022/06/18/2022-6-18-3-Gulp-git/</url>
+    <content><![CDATA[<h2 id="初始化git"><a href="#初始化git" class="headerlink" title="初始化git"></a>初始化git</h2><p>這章節，我們來幫gulp專案加入 git 版本控制，若電腦還沒安裝git的話，可以先到<a href="https://git-scm.com/">git官網</a>下載git並安裝。</p>
+<p>安裝好git後，在commend line輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init // 建立本地儲存庫</span><br><span class="line">git add . // 加入所有檔案到目錄</span><br><span class="line">git commit -m &quot;first commit&quot;  // 提交本次紀錄</span><br></pre></td></tr></table></figure>
 
-<p>這樣做的問題是，當今天客戶想將某個顏色替換時，我們必須手動一個一個更改，假如網站有300個地方用到該顏色，就需要手動改300次。</p>
-<p>在 SCSS裡，我們可以使用變數來管理重複的值，例如 我們可以將色碼設定為變數，當後續需要調整顏色時，只要調整變數，就改完全站的設定。</p>
-<h2 id="變數設定方式"><a href="#變數設定方式" class="headerlink" title="變數設定方式"></a>變數設定方式</h2><p>首先先在程式碼最上面打個『$』字號，後面則是自己命名的變數，之後在填上變數的值。</p>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$color-primary</span>: <span class="number">#fa0</span>;</span><br><span class="line"><span class="variable">$color-gray</span>: <span class="number">#aaa</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="新增-gitignore-檔案"><a href="#新增-gitignore-檔案" class="headerlink" title="新增 gitignore 檔案"></a>新增 gitignore 檔案</h2><p>因為有一些檔案是不需要加入版本控制的，如 public資料夾、.temp資料夾、node_modules資料夾，此時可以開一個 .gitignore 檔案，將不須控制的檔案忽略。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*6er_v_0LzoqbD_Pl0lTEgw.png" alt="gitignore"></p>
+<p>在用 git status 去檢查未加入目錄的檔案時，就會發現有加入.gitignore的檔案都消失了，代表這些檔案不用被git做控制。</p>
+<h2 id="快速發佈到-github-pages"><a href="#快速發佈到-github-pages" class="headerlink" title="快速發佈到 github pages"></a>快速發佈到 github pages</h2><p>在完成我們的gulp專案後，可以發佈到 github pages上。</p>
+<p>先下載 <code>gulp-gh-pages</code>  套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install - save-dev gulp-gh-pages</span><br></pre></td></tr></table></figure>
 
-<p>之後需要設定顏色樣式時，就可以引入變數。</p>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="variable">$color-primary</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在gulpfile.js中加入deploy任務，因為有使用gulp-load-plugins這個套件，只要在ghPages()前方加入$即可。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">deploy</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./public/**/*&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">ghPages</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>變數除了支援色碼外還支援「字串」、「數字」等等。</p>
-<p>雙引號的字串也可用 #{ }取出來:</p>
-<p><img src="https://miro.medium.com/max/1004/1*jvZyuT0ob0GIxXyu3fdjoQ.png" alt="va"></p>
-<p><img src="https://miro.medium.com/max/1048/1*ZgC18gRiXbzEUl_FiZrwuQ.png" alt="編譯後"></p>
-<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>學會使用變數以後，就不用辛苦的一個一個修改css了，全站的設定統一由變數管理，讓之後的修改與維護更輕鬆。</p>
+<p>輸入 gulp deploy後，會在github上新開一個 gh-pages 的分支，自動將public資料夾裡的內容上傳到github。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*5FV7yd4cKZ0mp4dL-Y1-Dw.png" alt="github"></p>
 ]]></content>
       <categories>
-        <category>scss</category>
+        <category>Gulp</category>
       </categories>
       <tags>
-        <tag>scss</tag>
+        <tag>Gulp</tag>
+        <tag>git</tag>
+        <tag>github</tag>
       </tags>
   </entry>
   <entry>
@@ -518,30 +491,24 @@
       </tags>
   </entry>
   <entry>
-    <title>(7) SCSS練功坊-顏色函數</title>
-    <url>/2022/06/20/2022-6-20-1-scss-color/</url>
-    <content><![CDATA[<h2 id="顏色函數"><a href="#顏色函數" class="headerlink" title="顏色函數"></a>顏色函數</h2><p><img src="https://miro.medium.com/max/1400/1*SFb0wzFGrTw4byZVEbn_8g.png" alt="color"></p>
-<p>在SCSS中 ，可以利用一些內建的函數，來調整顏色。</p>
-<p>如: darken(#fff, 20%) &#x2F;&#x2F;將白色調暗10%；</p>
-<p>lighten(#000,30% ) &#x2F;&#x2F;將黑色調亮10%;</p>
-]]></content>
-      <categories>
-        <category>scss</category>
-      </categories>
-      <tags>
-        <tag>scss</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(6) SCSS練功坊-extend</title>
-    <url>/2022/06/19/2022-6-19-5-scss-extend/</url>
-    <content><![CDATA[<h2 id="合併樣式"><a href="#合併樣式" class="headerlink" title="合併樣式"></a>合併樣式</h2><p>當我們有一段樣式常常用到，可以用@extend來將樣式合併在一起。</p>
-<p>使用 % +class 撰寫要合併之樣式，並用@extend 來載入樣式。</p>
-<p><img src="https://miro.medium.com/max/1220/1*E5-ebZ9tVXeHmwf4i4uN2w.png" alt="extend"></p>
-<p><img src="https://miro.medium.com/max/1134/1*gUgESgMLa1DmyLz94Rp9Rw.png" alt="編譯後"></p>
-<h2 id="Mixin與extend的使用時機"><a href="#Mixin與extend的使用時機" class="headerlink" title="Mixin與extend的使用時機"></a>Mixin與extend的使用時機</h2><p>基本上來說，<br>@mixin是將程式碼帶入到對應的class去，同時可帶入變數。<br>@extend則是藉由class合併，並吃到共通樣式，但沒辦法帶入變數。</p>
-<p>所以如果你的樣式都固定不變的，不會需要用參數帶進去改變樣式的話，<br>那就用@extend，程式碼會比較少些。</p>
-<p>但如果你的程式碼需要帶入多個變數進行運算時，<br>那用@mixin則較適合。</p>
+    <title>(2) SCSS練功坊-變數variable</title>
+    <url>/2022/06/19/2022-6-19-1-scss-variable/</url>
+    <content><![CDATA[<h2 id="以往css遇到的問題"><a href="#以往css遇到的問題" class="headerlink" title="以往css遇到的問題"></a>以往css遇到的問題</h2><p>以往在寫css時，可能我們會直接將顏色的值寫死，例如:</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f0a</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f0a</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f00</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣做的問題是，當今天客戶想將某個顏色替換時，我們必須手動一個一個更改，假如網站有300個地方用到該顏色，就需要手動改300次。</p>
+<p>在 SCSS裡，我們可以使用變數來管理重複的值，例如 我們可以將色碼設定為變數，當後續需要調整顏色時，只要調整變數，就改完全站的設定。</p>
+<h2 id="變數設定方式"><a href="#變數設定方式" class="headerlink" title="變數設定方式"></a>變數設定方式</h2><p>首先先在程式碼最上面打個『$』字號，後面則是自己命名的變數，之後在填上變數的值。</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$color-primary</span>: <span class="number">#fa0</span>;</span><br><span class="line"><span class="variable">$color-gray</span>: <span class="number">#aaa</span>;</span><br></pre></td></tr></table></figure>
+
+<p>之後需要設定顏色樣式時，就可以引入變數。</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="variable">$color-primary</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>變數除了支援色碼外還支援「字串」、「數字」等等。</p>
+<p>雙引號的字串也可用 #{ }取出來:</p>
+<p><img src="https://miro.medium.com/max/1004/1*jvZyuT0ob0GIxXyu3fdjoQ.png" alt="va"></p>
+<p><img src="https://miro.medium.com/max/1048/1*ZgC18gRiXbzEUl_FiZrwuQ.png" alt="編譯後"></p>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>學會使用變數以後，就不用辛苦的一個一個修改css了，全站的設定統一由變數管理，讓之後的修改與維護更輕鬆。</p>
 ]]></content>
       <categories>
         <category>scss</category>
@@ -594,6 +561,24 @@
       </tags>
   </entry>
   <entry>
+    <title>(6) SCSS練功坊-extend</title>
+    <url>/2022/06/19/2022-6-19-5-scss-extend/</url>
+    <content><![CDATA[<h2 id="合併樣式"><a href="#合併樣式" class="headerlink" title="合併樣式"></a>合併樣式</h2><p>當我們有一段樣式常常用到，可以用@extend來將樣式合併在一起。</p>
+<p>使用 % +class 撰寫要合併之樣式，並用@extend 來載入樣式。</p>
+<p><img src="https://miro.medium.com/max/1220/1*E5-ebZ9tVXeHmwf4i4uN2w.png" alt="extend"></p>
+<p><img src="https://miro.medium.com/max/1134/1*gUgESgMLa1DmyLz94Rp9Rw.png" alt="編譯後"></p>
+<h2 id="Mixin與extend的使用時機"><a href="#Mixin與extend的使用時機" class="headerlink" title="Mixin與extend的使用時機"></a>Mixin與extend的使用時機</h2><p>基本上來說，<br>@mixin是將程式碼帶入到對應的class去，同時可帶入變數。<br>@extend則是藉由class合併，並吃到共通樣式，但沒辦法帶入變數。</p>
+<p>所以如果你的樣式都固定不變的，不會需要用參數帶進去改變樣式的話，<br>那就用@extend，程式碼會比較少些。</p>
+<p>但如果你的程式碼需要帶入多個變數進行運算時，<br>那用@mixin則較適合。</p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(5) SCSS練功坊-mixin</title>
     <url>/2022/06/19/2022-6-19-4-scss-mixin/</url>
     <content><![CDATA[<h2 id="使用-mixin-管理重複的樣式"><a href="#使用-mixin-管理重複的樣式" class="headerlink" title="使用 mixin 管理重複的樣式"></a>使用 mixin 管理重複的樣式</h2><p>當我們有一段樣式，會被重複用到，裡頭樣式數值又會有不同時，可以用mixin做管理。<br>撰寫mixin方法</p>
@@ -603,6 +588,21 @@
 <p>上圖中， circle 裡可以帶入 $size，$bg-color等不同參數，如此在不同地方，我們可以依照不同需求，傳入不同參數，做出不同的圓形。</p>
 <p>引入 mixin時，用 @include + mixin名稱</p>
 <p><img src="https://miro.medium.com/max/1140/1*Yn5snpWqUCxsEJ1eA646zQ.png" alt="編譯後結果"></p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(7) SCSS練功坊-顏色函數</title>
+    <url>/2022/06/20/2022-6-20-1-scss-color/</url>
+    <content><![CDATA[<h2 id="顏色函數"><a href="#顏色函數" class="headerlink" title="顏色函數"></a>顏色函數</h2><p><img src="https://miro.medium.com/max/1400/1*SFb0wzFGrTw4byZVEbn_8g.png" alt="color"></p>
+<p>在SCSS中 ，可以利用一些內建的函數，來調整顏色。</p>
+<p>如: darken(#fff, 20%) &#x2F;&#x2F;將白色調暗10%；</p>
+<p>lighten(#000,30% ) &#x2F;&#x2F;將黑色調亮10%;</p>
 ]]></content>
       <categories>
         <category>scss</category>
@@ -659,6 +659,33 @@
       </categories>
       <tags>
         <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(1) CSS 基礎篇-Position</title>
+    <url>/2022/06/21/2022-6-21-1-css-posotion/</url>
+    <content><![CDATA[<h2 id="Position-屬性介紹"><a href="#Position-屬性介紹" class="headerlink" title="Position 屬性介紹"></a>Position 屬性介紹</h2><p>在網頁中 position 的用途是設定「物件定位時所要的參考對像」，預設狀態下物件的位置是依據資料流來做排列，也就是跟隨資料做排列，如果對物件添加了不同的 position 之後，就能改變物件所參考的空間對像，進而改變物件的位置。</p>
+<p>以下分別介紹各種position 屬性</p>
+<h2 id="static-靜態定位"><a href="#static-靜態定位" class="headerlink" title="static 靜態定位"></a>static 靜態定位</h2><p>是元素的預設值，不會被特別定位」在頁面上特定位置，而是照著瀏覽器預設的配置自動排版在頁面上</p>
+<h2 id="relative-相對定位"><a href="#relative-相對定位" class="headerlink" title="relative 相對定位"></a>relative 相對定位</h2><p>在一個設定為 position: relative 的元素內設定 top 、 right 、 bottom 和 left 屬性，會使其元素「相對地」調整其原本該出現的所在位置，而不管這些「相對定位」過的元素如何在頁面上移動位置或增加了多少空間，都不會影響到原本其他元素所在的位置。可以稱為【偏移顯示】</p>
+<p>不過通常不會對position relative設定top 、 right 等位移，因為會讓元素脫離預設的排版，讓我們很難去設定周圍元素的樣式。</p>
+<p><a href="https://youtu.be/jx5jmI0UlXU?t=166">參考影片</a></p>
+<h2 id="abosulute-絕對定位"><a href="#abosulute-絕對定位" class="headerlink" title="abosulute 絕對定位"></a>abosulute 絕對定位</h2><p>會將元素從預設排版中抽離，就像不存在於html結構中一樣。<br>元素設定 Position abosulute 後會去尋找父層中，有定位的元素做定位，如最常用的 position:relative、或fixed、absolute；<br>若父層都沒有定位元素，就會跟瀏覽器做定位。</p>
+<p>position absolute可以搭配top 、bottom 、right、left 來設定定位位置，如下面範例將元素定位在左上角。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: position;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="absolute搭配-width-height技巧"><a href="#absolute搭配-width-height技巧" class="headerlink" title="absolute搭配 width height技巧"></a>absolute搭配 width height技巧</h3><p>width、height、margin: auto 跟top 、bottom等一起用，可以控制元素的大小與位置，<a href="https://www.youtube.com/watch?v=QGKO0PGzFXQ&t=16s">教學影片</a></p>
+<p><img src="https://miro.medium.com/max/826/1*ThNCveqMOYrXF4nVoTBWkw.png" alt="position"></p>
+<p><img src="https://miro.medium.com/max/1400/1*PIKeD9RV4TGRvLhT3w5ylA.png" alt="position"></p>
+<h2 id="fixed-固定定位"><a href="#fixed-固定定位" class="headerlink" title="fixed 固定定位"></a>fixed 固定定位</h2><p>固定定位（position: fixed）的元素會相對於瀏覽器視窗來定位，這意味著即便頁面捲動，它還是會固定在相同的位置。和 relative 一樣，我們會使用 top 、 right 、 bottom 和 left 屬性來定位。</p>
+<p>固定定位元素不會保留它原本在頁面應有的空間，不會跟其他元素的配置互相干擾。</p>
+<h2 id="sticky-黏著定位"><a href="#sticky-黏著定位" class="headerlink" title="sticky 黏著定位"></a>sticky 黏著定位</h2><p>結合了 position : relative，跟 position: fixed，當使用者沒滑動卷軸時，就跟relative元素一樣，當使用者滑動卷軸時，則跟position: fixed 會固定在視窗上。</p>
+<p><a href="https://codepen.io/tim-chou/pen/NWbvMQL">範例</a></p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS基礎篇</tag>
       </tags>
   </entry>
   <entry>
@@ -768,33 +795,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(1) CSS 基礎篇-Position</title>
-    <url>/2022/06/21/2022-6-21-1-css-posotion/</url>
-    <content><![CDATA[<h2 id="Position-屬性介紹"><a href="#Position-屬性介紹" class="headerlink" title="Position 屬性介紹"></a>Position 屬性介紹</h2><p>在網頁中 position 的用途是設定「物件定位時所要的參考對像」，預設狀態下物件的位置是依據資料流來做排列，也就是跟隨資料做排列，如果對物件添加了不同的 position 之後，就能改變物件所參考的空間對像，進而改變物件的位置。</p>
-<p>以下分別介紹各種position 屬性</p>
-<h2 id="static-靜態定位"><a href="#static-靜態定位" class="headerlink" title="static 靜態定位"></a>static 靜態定位</h2><p>是元素的預設值，不會被特別定位」在頁面上特定位置，而是照著瀏覽器預設的配置自動排版在頁面上</p>
-<h2 id="relative-相對定位"><a href="#relative-相對定位" class="headerlink" title="relative 相對定位"></a>relative 相對定位</h2><p>在一個設定為 position: relative 的元素內設定 top 、 right 、 bottom 和 left 屬性，會使其元素「相對地」調整其原本該出現的所在位置，而不管這些「相對定位」過的元素如何在頁面上移動位置或增加了多少空間，都不會影響到原本其他元素所在的位置。可以稱為【偏移顯示】</p>
-<p>不過通常不會對position relative設定top 、 right 等位移，因為會讓元素脫離預設的排版，讓我們很難去設定周圍元素的樣式。</p>
-<p><a href="https://youtu.be/jx5jmI0UlXU?t=166">參考影片</a></p>
-<h2 id="abosulute-絕對定位"><a href="#abosulute-絕對定位" class="headerlink" title="abosulute 絕對定位"></a>abosulute 絕對定位</h2><p>會將元素從預設排版中抽離，就像不存在於html結構中一樣。<br>元素設定 Position abosulute 後會去尋找父層中，有定位的元素做定位，如最常用的 position:relative、或fixed、absolute；<br>若父層都沒有定位元素，就會跟瀏覽器做定位。</p>
-<p>position absolute可以搭配top 、bottom 、right、left 來設定定位位置，如下面範例將元素定位在左上角。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: position;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="absolute搭配-width-height技巧"><a href="#absolute搭配-width-height技巧" class="headerlink" title="absolute搭配 width height技巧"></a>absolute搭配 width height技巧</h3><p>width、height、margin: auto 跟top 、bottom等一起用，可以控制元素的大小與位置，<a href="https://www.youtube.com/watch?v=QGKO0PGzFXQ&t=16s">教學影片</a></p>
-<p><img src="https://miro.medium.com/max/826/1*ThNCveqMOYrXF4nVoTBWkw.png" alt="position"></p>
-<p><img src="https://miro.medium.com/max/1400/1*PIKeD9RV4TGRvLhT3w5ylA.png" alt="position"></p>
-<h2 id="fixed-固定定位"><a href="#fixed-固定定位" class="headerlink" title="fixed 固定定位"></a>fixed 固定定位</h2><p>固定定位（position: fixed）的元素會相對於瀏覽器視窗來定位，這意味著即便頁面捲動，它還是會固定在相同的位置。和 relative 一樣，我們會使用 top 、 right 、 bottom 和 left 屬性來定位。</p>
-<p>固定定位元素不會保留它原本在頁面應有的空間，不會跟其他元素的配置互相干擾。</p>
-<h2 id="sticky-黏著定位"><a href="#sticky-黏著定位" class="headerlink" title="sticky 黏著定位"></a>sticky 黏著定位</h2><p>結合了 position : relative，跟 position: fixed，當使用者沒滑動卷軸時，就跟relative元素一樣，當使用者滑動卷軸時，則跟position: fixed 會固定在視窗上。</p>
-<p><a href="https://codepen.io/tim-chou/pen/NWbvMQL">範例</a></p>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS基礎篇</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(2) Git 練功坊-數據庫</title>
     <url>/2022/06/21/2022-6-21-4-git-basic/</url>
     <content><![CDATA[<h2 id="使用數據庫管理歷史記錄"><a href="#使用數據庫管理歷史記錄" class="headerlink" title="使用數據庫管理歷史記錄"></a>使用數據庫管理歷史記錄</h2><p>數據庫 (Repository) 是git用來記錄檔案或目錄狀態的地方，儲存內容的修改歷史記錄。數據庫可分為兩種</p>
@@ -851,6 +851,51 @@
       </categories>
       <tags>
         <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ES6 let、const、var的區別</title>
+    <url>/2022/06/21/2022-6-21-7-js-variables/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在es6以前，我們會用 var 來宣告一個變數。而在es6推出後，新增了 let 與 const的變數宣告方法，改善了使用 var 宣告變數的一些缺點，以下用講解 var 與 let const 宣告的差異。</p>
+<h2 id="區塊與函式作用域"><a href="#區塊與函式作用域" class="headerlink" title="區塊與函式作用域"></a>區塊與函式作用域</h2><p>var是函式作用域的設計，在函式內宣告的變數，函式外讀取不到。<br>但在一些使用了區塊語句(用花括號的語句)的像if, else, for, while等等區塊語句中，在這裡面用var宣告的變數仍然是會曝露到全域之中可被存取，例如:</p>
+<p><img src="https://miro.medium.com/max/1178/1*iO1BqGOT_318PIkF8jjxJQ.png" alt="函式作用域"></p>
+<p>let或const來宣告是區塊作用域，就是以區塊語句 { } 為分界的作用域:</p>
+<p>不管是在函式內宣告的變數，或是 在 if, else, for, while等等區塊語句{ }中宣告的變數，都不會在全域中被讀取到。</p>
+<p><img src="https://miro.medium.com/max/964/1*1IltRn_k3xANnY6fWcZW1A.png" alt="區塊作用域"></p>
+<h2 id="重複宣告的問題"><a href="#重複宣告的問題" class="headerlink" title="重複宣告的問題"></a>重複宣告的問題</h2><p>以往用 var 宣告變數，是可以進行重複宣告的: </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>這樣可能會不小心複寫了變數的值，導致專案出錯。</p>
+<p>用 const let 告的變數，在同一個作用域下，則無法重新再被宣告。</p>
+<p><img src="https://miro.medium.com/max/440/1*06HErRPc-Jcyhazl3fuj7w.png" alt="const let"></p>
+<p><img src="https://miro.medium.com/max/1286/1*zsSWcfXZBnj3Ap1D5JE7Pg.png" alt="error"></p>
+<h2 id="常數"><a href="#常數" class="headerlink" title="常數"></a>常數</h2><p>const 針對是常數的定義，常數在一宣告時就必定要指定給值，不然會產生錯誤。而對於常數在ES6的定義是: 不可再指定。</p>
+<p><img src="https://miro.medium.com/max/1278/1*lpOInYC-ccAVD_dBcv5csg.png" alt="const"></p>
+<p>上面因為再次賦予 a &#x3D; 20 而出現錯誤。</p>
+<p>如果你宣告的常數是一個物件或陣列類型，像這種參照類型的值，裡面的值是可以作改變的，如下:</p>
+<p><img src="https://miro.medium.com/max/336/1*IP1XW0OtYFB_Am976yXjNA.png" alt="array"></p>
+<p>所以對於物件、陣列、函式來說，使用 const 常數來宣告就可以，除非你有需要再指定這個陣列或物件的參照。</p>
+<h2 id="Hoisting-向上提升特性"><a href="#Hoisting-向上提升特性" class="headerlink" title="Hoisting 向上提升特性"></a>Hoisting 向上提升特性</h2><p>var 跟 function 都有向上提升特性，在宣告後會自動提升到 js 最上面 ，縱使還沒賦予值，還是先建立好記憶體位置。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> a =<span class="number">3</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<p>如上面程式，我們在第 2 行宣告了 a 變數等於3，但在第一行就讀取a變數，此時並不會報錯，因為 a 已經有記憶體位置了，只是還沒給予值，所以會是 undefined。 在第3行讀取a變數就可以正確讀到 3 的值。</p>
+<p>let 跟 const 沒有向上提升， 必須先宣告、後使用。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b);  <span class="comment">// b is not defined</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">3</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b);  <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>ES6</tag>
       </tags>
   </entry>
   <entry>
@@ -924,89 +969,12 @@
       </tags>
   </entry>
   <entry>
-    <title>(1) Js觀念篇 - let、const、var的區別</title>
-    <url>/2022/06/21/2022-6-21-7-js-variables/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在es6以前，我們會用 var 來宣告一個變數。而在es6推出後，新增了 let 與 const的變數宣告方法，改善了使用 var 宣告變數的一些缺點，以下用講解 var 與 let const 宣告的差異。</p>
-<h2 id="區塊與函式作用域"><a href="#區塊與函式作用域" class="headerlink" title="區塊與函式作用域"></a>區塊與函式作用域</h2><p>var是函式作用域的設計，在函式內宣告的變數，函式外讀取不到。<br>但在一些使用了區塊語句(用花括號的語句)的像if, else, for, while等等區塊語句中，在這裡面用var宣告的變數仍然是會曝露到全域之中可被存取，例如:</p>
-<p><img src="https://miro.medium.com/max/1178/1*iO1BqGOT_318PIkF8jjxJQ.png" alt="函式作用域"></p>
-<p>let或const來宣告是區塊作用域，就是以區塊語句 { } 為分界的作用域:</p>
-<p>不管是在函式內宣告的變數，或是 在 if, else, for, while等等區塊語句{ }中宣告的變數，都不會在全域中被讀取到。</p>
-<p><img src="https://miro.medium.com/max/964/1*1IltRn_k3xANnY6fWcZW1A.png" alt="區塊作用域"></p>
-<h2 id="重複宣告的問題"><a href="#重複宣告的問題" class="headerlink" title="重複宣告的問題"></a>重複宣告的問題</h2><p>以往用 var 宣告變數，是可以進行重複宣告的: </p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-
-<p>這樣可能會不小心複寫了變數的值，導致專案出錯。</p>
-<p>用 const let 告的變數，在同一個作用域下，則無法重新再被宣告。</p>
-<p><img src="https://miro.medium.com/max/440/1*06HErRPc-Jcyhazl3fuj7w.png" alt="const let"></p>
-<p><img src="https://miro.medium.com/max/1286/1*zsSWcfXZBnj3Ap1D5JE7Pg.png" alt="error"></p>
-<h2 id="常數"><a href="#常數" class="headerlink" title="常數"></a>常數</h2><p>const 針對是常數的定義，常數在一宣告時就必定要指定給值，不然會產生錯誤。而對於常數在ES6的定義是: 不可再指定。</p>
-<p><img src="https://miro.medium.com/max/1278/1*lpOInYC-ccAVD_dBcv5csg.png" alt="const"></p>
-<p>上面因為再次賦予 a &#x3D; 20 而出現錯誤。</p>
-<p>如果你宣告的常數是一個物件或陣列類型，像這種參照類型的值，裡面的值是可以作改變的，如下:</p>
-<p><img src="https://miro.medium.com/max/336/1*IP1XW0OtYFB_Am976yXjNA.png" alt="array"></p>
-<p>所以對於物件、陣列、函式來說，使用 const 常數來宣告就可以，除非你有需要再指定這個陣列或物件的參照。</p>
-<h2 id="Hoisting-向上提升特性"><a href="#Hoisting-向上提升特性" class="headerlink" title="Hoisting 向上提升特性"></a>Hoisting 向上提升特性</h2><p>var 跟 function 都有向上提升特性，在宣告後會自動提升到 js 最上面 ，縱使還沒賦予值，還是先建立好記憶體位置。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> a =<span class="number">3</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-
-<p>如上面程式，我們在第 2 行宣告了 a 變數等於3，但在第一行就讀取a變數，此時並不會報錯，因為 a 已經有記憶體位置了，只是還沒給予值，所以會是 undefined。 在第3行讀取a變數就可以正確讀到 3 的值。</p>
-<p>let 跟 const 沒有向上提升， 必須先宣告、後使用。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b);  <span class="comment">// b is not defined</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">3</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b);  <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>Js觀念篇</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(5) Git 練功坊-合併與衝突</title>
     <url>/2022/06/23/2022-6-23-1-git-conflict/</url>
     <content><![CDATA[<h2 id="合併與衝突"><a href="#合併與衝突" class="headerlink" title="合併與衝突"></a>合併與衝突</h2><p>上章節講過我們可以用 git pull 或 git fetch 來下載遠端更新的內容。<br>如果遠端數據庫和本地端數據庫的同一個地方都發生了修改的情況下（例：檔案中同一行的地方）。<br>這時，因為Git不能自動判斷要導入那一個修改內容於是就會發生錯誤。</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是 Cat<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">=======</span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是 Dog<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; dog</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>此時發生衝突的地方必須手動修改，如上例，VScode會提醒你產生衝突的地方，此時再決定要留 cat 還是 dog。</p>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(8) Git 練功坊-推送分支到遠端</title>
-    <url>/2022/06/23/2022-6-23-4-git-branch-remote/</url>
-    <content><![CDATA[<h2 id="推送分支上-github"><a href="#推送分支上-github" class="headerlink" title="推送分支上 github"></a>推送分支上 github</h2><p>本節會講解如何推送branch到github上。</p>
-<p>首先我們先開一個新的分支，並用git checkout 分支，移動到該分支上。</p>
-<p><img src="https://miro.medium.com/max/1400/1*gN684t4CgXrmbfitc8Ro2A.png" alt="add branch"></p>
-<p>再來新增一個commit 記錄到該分支</p>
-<p><img src="https://miro.medium.com/max/1400/1*9GKiKFBMWI50hjFgxLm7QA.png" alt="commit"></p>
-<p>這時如果用git push指令想將本地端的commit推到github上，可能會出現下面錯誤。</p>
-<p><img src="https://miro.medium.com/max/1400/1*050HdBhOzj3125XCFpOFzg.png" alt="error"></p>
-<p>原因是因為我們可能有許多遠端數據庫，有的是測試用的、有的是正式主機用的，git不知道你的分支要推到哪個數據庫。</p>
-<p>所以可用 git remote 指令來查詢本地端有多少遠端數據庫。</p>
-<p><img src="https://miro.medium.com/max/1208/1*ZV4Dyk2Rq2l36mbNiGNxWA.png" alt="remote"></p>
-<p>可以發現有一個 github 預設的 origin 數據庫。</p>
-<p>要將分支推上github 的話 ，可使用指令:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git push 遠端數據庫名稱 分支名稱</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/1268/1*avTlKgGgw8qFA08F88x_Pg.png" alt="push"></p>
-<h2 id="更改遠端數據庫名稱"><a href="#更改遠端數據庫名稱" class="headerlink" title="更改遠端數據庫名稱"></a>更改遠端數據庫名稱</h2><p>如果不想用github預設的origin數據庫名稱，可輸入: </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote rename 更改前名稱 更改後名稱</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/930/1*wNOekbkp-5Gsu3iiFVHGvQ.png" alt="rename"></p>
-<p>在用 git remote來查詢， 會發現數據庫名稱從 origin 改成 github了。</p>
-<p><img src="https://miro.medium.com/max/1400/1*6DAh5wMtkOZ-ga1uvU__fw.png" alt="git-rename"></p>
 ]]></content>
       <categories>
         <category>Git</category>
@@ -1063,68 +1031,65 @@
       </tags>
   </entry>
   <entry>
-    <title>(4) CSS基礎篇 Flex</title>
-    <url>/2022/06/29/2022-6-29-1-css-flex/</url>
-    <content><![CDATA[<h2 id="什麼是-flex"><a href="#什麼是-flex" class="headerlink" title="什麼是 flex"></a>什麼是 flex</h2><p>flex 和grid一樣是排版用的 css屬性，使用flex時可分為外容器屬性與內元件屬性。以下分別介紹各屬性使用方法。</p>
-<h2 id="外容器屬性"><a href="#外容器屬性" class="headerlink" title="外容器屬性"></a>外容器屬性</h2><h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><p>啟用flex的第一步，就是在外容器設定 display: flex;</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>Js 中繪製動畫 requestAnimationFrame</title>
+    <url>/2022/06/27/2022-6-24-1-js-requestAnimation/</url>
+    <content><![CDATA[<h2 id="製作動畫"><a href="#製作動畫" class="headerlink" title="製作動畫"></a>製作動畫</h2><p>在以前用Js中做動畫，可能會用 setInterval()或setTimeOut()，而現在有了更好用的API <code>requestAnimationFrame</code>。</p>
+<h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><p>requestAnimationFrame是依照瀏覽器更新的頻率(通常是 1 &#x2F;60 秒)來更新畫面。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> boxLeft = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params">currentTime</span>) &#123;</span><br><span class="line">  boxLeft += <span class="number">0.1</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(currentTime);</span><br><span class="line">  box.<span class="property">style</span>.<span class="title function_">setProperty</span>(<span class="string">&#x27;--left&#x27;</span>, boxLeft);</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(main);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(main);</span><br></pre></td></tr></table></figure>
 
-<p>在父層設定 display:flex 可以讓子層區塊並排<br><img src="https://miro.medium.com/max/972/1*cPIZHT7a0P0v5mljoBjdvg.png" alt="flex"></p>
-<p>當子層寬度超過父層時，flex也會依照比例自動做調整，不會跑版，並且當子層其中一個元素高度變高，其他元素也會自動等高。</p>
-<p><img src="https://miro.medium.com/max/1246/1*yO5cUEPDPz7of4-KZyoTCw.png" alt="自動等高"></p>
-<h3 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h3><p>flex的主軸指的是資料的流向 ，預設是從左到右排版，可以設定的值如下:</p>
-<ul>
-<li><p>flex-direction: row; 從左到右</p>
-</li>
-<li><p>flex-direction: row-reverse; 從右到左</p>
-</li>
-<li><p>flex-direction: column; 從上到下</p>
-</li>
-<li><p>flex-direction: column-reverse; 從下到上</p>
-</li>
-</ul>
-<p><img src="https://miro.medium.com/max/1400/1*jgot2tuYYebDZFe6ZTssyQ.png" alt="主軸"></p>
-<h3 id="justfy-content"><a href="#justfy-content" class="headerlink" title="justfy-content"></a>justfy-content</h3><p>依照主軸的方向(flex-direction)，可以設定 justfy-content 來對齊子元素。所以實際對齊方向是水平或垂直，要依主軸的方向而定喔。</p>
-<p><img src="https://miro.medium.com/max/1400/1*UDLawhonhqaaTSbx5lwa9Q.png" alt="justify-content"></p>
-<h3 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h3><p>超出範圍時是否換行的屬性，分為換行、不換行、換行時反轉。</p>
-<p>預設是 flex-wrap:nowrap 不換行，設定flex-wrap:wrap則會換行。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p><img src="https://miro.medium.com/max/1400/1*gUKuGGbB3B0AfezDlzulZw.png" alt="交錯軸"></p>
-<p>和主軸垂直的方向稱為交錯軸，例如主軸是水平的，那交錯軸就是垂直。align-items屬性可以設定交錯軸的對齊方式。</p>
-<p><img src="https://miro.medium.com/max/1400/1*jxzyFebBjrX8jyZ6VFF9bQ.png" alt="align-items"></p>
-<h3 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h3><p>多行物件的交錯軸對齊，可以使用的屬性和align-items一樣。</p>
-<p><img src="https://miro.medium.com/max/1348/1*bvaLIRwiLKGak1nOLhCwXg.png" alt="align-content"></p>
-<h3 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h3><p>flex-flow 是 flex-direction 與 flex-wrap 的縮寫，所以只要在這前後帶上相對應的值即可。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.flex-container</span> &#123;</span><br><span class="line">  <span class="attribute">flex-flow</span>: &lt;<span class="string">&#x27;flex-direction&#x27;</span>&gt; || &lt;<span class="string">&#x27;flex-wrap&#x27;</span>&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="內元件屬性"><a href="#內元件屬性" class="headerlink" title="內元件屬性"></a>內元件屬性</h2><h3 id="order"><a href="#order" class="headerlink" title="order"></a>order</h3><p>用來指定子層物件的順序，order 預設都是 0。小於 0 的元件會往前排，大於 0 往後排。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box1</span> &#123;</span><br><span class="line">  <span class="attribute">order</span>: <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box2</span> &#123;</span><br><span class="line">  <span class="attribute">order</span> : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/818/1*s71cQM9RnsxFauhOIt6q6w.png" alt="order"></p>
-<h3 id="flex-grow-伸展"><a href="#flex-grow-伸展" class="headerlink" title="flex-grow 伸展"></a>flex-grow 伸展</h3><p>flex-grow 設定元件的伸展性，會把剩下的空間份配給子物件，並針對子物件去設定伸展的比例，預設值為 0不會縮放。<br>如下圖: 設定flex-grow: 2 的元素會有較大的位置。<br><img src="https://miro.medium.com/max/548/1*3qDfiEcjgxQvyup9ygcAww.png" alt="flex-grow"></p>
-<h3 id="flex-shrink-收縮"><a href="#flex-shrink-收縮" class="headerlink" title="flex-shrink 收縮"></a>flex-shrink 收縮</h3><p>flex-shrink: 元件的收縮性，是一個數值，當空間分配還不足時的當前元件的收縮性，預設值為 1 會收縮，如果設置為 0 則不會縮放。</p>
-<p><img src="https://miro.medium.com/max/1400/1*1kyY6pGhIUCz79CHJ74deQ.png" alt="flex-shrink"></p>
-<p>上圖當子層物件寬度超過父層時，如果將子層設定 flex-shrink: 0 ，代表不收縮，此時子層會超出父層寬度。</p>
-<p><img src="https://miro.medium.com/max/1400/1*nANSTLkevML4QdU2VKIHmQ.png" alt="flex-shrink"></p>
-<p>當設定其中一個子層 flex-shrink: 0 ，其他為1時，設定0的物件不收縮，保持原來寬度，設定shrink的則依比例收縮。</p>
-<h3 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h3><p>flex-basis 可以設定子元件 flex-item 的主軸長度。</p>
-<ul>
-<li><p>當主軸為橫向時，對應到元件的寬，</p>
-</li>
-<li><p>當主軸是直向時，對應到元件的高。</p>
-</li>
-</ul>
-<p>可以設定每個flex-item 的 flex-basis 為 0， 就可以依照想要的比例來設定flex-grow。</p>
-<p><img src="https://miro.medium.com/max/1400/1*GN7XSfKQGUABUGAY-nIjSg.png" alt="flex-basis"></p>
-<h3 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h3><p>align-self 可以調整單一物件的交錯軸對齊，可以使用的屬性和align-items一樣。</p>
-<p><img src="https://css-tricks.com/wp-content/uploads/2018/10/align-self.svg" alt="align-self"></p>
+<p>requestAnimationFrame在約1&#x2F;60秒後呼叫傳給它的callback函式(main)，<br>並且將timestamp當做參數傳給這個callback函式。</p>
+<p>為了讓 requestAnimationFrame 能持續執行，我們在callback函式再執行一次 requestAnimationFrame。</p>
+<p>如果把 timestamp console.log 出來，會發現timesatmp是以每6豪秒持續累加。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022062701.png?alt=media&token=c961a215-9334-4ef0-a5e9-dd9408fb16a3" alt="timestamp"></p>
+<p><a href="https://codepen.io/tim-chou/pen/eYMOVGR">範例</a></p>
+<h2 id="控制更新頻率"><a href="#控制更新頻率" class="headerlink" title="控制更新頻率"></a>控制更新頻率</h2><p>每6毫秒更新一次函式可能太快了，假設我們希望每秒更新一次畫面就好，可如下設定</p>
+<h3 id="紀錄上次更新時間"><a href="#紀錄上次更新時間" class="headerlink" title="紀錄上次更新時間"></a>紀錄上次更新時間</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> lastRenderTime = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params">currentTime</span>) &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(main);</span><br><span class="line">  <span class="keyword">const</span> secondSinceLastRender = (currentTime - lastRenderTime) / <span class="number">1000</span>; <span class="comment">// 將milisecond 轉成 second</span></span><br><span class="line">  lastRenderTime = currentTime;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(currentTime);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以先設一個變數用來記錄上次更新畫面的時間(lastRenderTime)，然後在函式中用currentTime減掉lastRenderTime，就可以得到從上次更新到這次過了多久時間(毫秒)，可以將時間除 1000 轉換成過了幾秒。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022062702.png?alt=media&token=6ebc37f7-3bc4-4e9b-a951-4533190544ef" alt="second"></p>
+<p>可以發現每次更新的間隔時間約是 6 毫秒。</p>
+<h3 id="設定更新門檻"><a href="#設定更新門檻" class="headerlink" title="設定更新門檻"></a>設定更新門檻</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">SPEED</span> = <span class="number">2</span>; <span class="comment">// 每秒更新次數</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params">currentTime</span>) &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(main);</span><br><span class="line">  <span class="keyword">const</span> secondSinceLastRender = (currentTime - lastRenderTime) / <span class="number">1000</span>; <span class="comment">// 將milisecond 轉成 second</span></span><br><span class="line">  <span class="keyword">if</span> (secondSinceLastRender &lt; <span class="number">1</span> / <span class="variable constant_">SPEED</span>) <span class="keyword">return</span>;</span><br><span class="line">  lastRenderTime = currentTime;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;render&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(main);</span><br></pre></td></tr></table></figure>
+<p>先設定SPEED變數代表每秒更新次數，在main函式裡增加判斷</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (secondSinceLastRender &lt; <span class="number">1</span> / <span class="variable constant_">SPEED</span>) <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+<p>用 1 除以 SPEED 可以得到每零點幾秒才能更新，上例是0.5秒更新1次，也就是每秒更新2次。<br>當 secondSinceLastRender 小於更新頻律，就將函式 return 不執行。</p>
+<p>以上就完成控制更新頻律的方法了。</p>
 ]]></content>
       <categories>
-        <category>CSS</category>
+        <category>Javascript</category>
       </categories>
       <tags>
-        <tag>CSS基礎篇</tag>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(8) Git 練功坊-推送分支到遠端</title>
+    <url>/2022/06/23/2022-6-23-4-git-branch-remote/</url>
+    <content><![CDATA[<h2 id="推送分支上-github"><a href="#推送分支上-github" class="headerlink" title="推送分支上 github"></a>推送分支上 github</h2><p>本節會講解如何推送branch到github上。</p>
+<p>首先我們先開一個新的分支，並用git checkout 分支，移動到該分支上。</p>
+<p><img src="https://miro.medium.com/max/1400/1*gN684t4CgXrmbfitc8Ro2A.png" alt="add branch"></p>
+<p>再來新增一個commit 記錄到該分支</p>
+<p><img src="https://miro.medium.com/max/1400/1*9GKiKFBMWI50hjFgxLm7QA.png" alt="commit"></p>
+<p>這時如果用git push指令想將本地端的commit推到github上，可能會出現下面錯誤。</p>
+<p><img src="https://miro.medium.com/max/1400/1*050HdBhOzj3125XCFpOFzg.png" alt="error"></p>
+<p>原因是因為我們可能有許多遠端數據庫，有的是測試用的、有的是正式主機用的，git不知道你的分支要推到哪個數據庫。</p>
+<p>所以可用 git remote 指令來查詢本地端有多少遠端數據庫。</p>
+<p><img src="https://miro.medium.com/max/1208/1*ZV4Dyk2Rq2l36mbNiGNxWA.png" alt="remote"></p>
+<p>可以發現有一個 github 預設的 origin 數據庫。</p>
+<p>要將分支推上github 的話 ，可使用指令:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git push 遠端數據庫名稱 分支名稱</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1268/1*avTlKgGgw8qFA08F88x_Pg.png" alt="push"></p>
+<h2 id="更改遠端數據庫名稱"><a href="#更改遠端數據庫名稱" class="headerlink" title="更改遠端數據庫名稱"></a>更改遠端數據庫名稱</h2><p>如果不想用github預設的origin數據庫名稱，可輸入: </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote rename 更改前名稱 更改後名稱</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/930/1*wNOekbkp-5Gsu3iiFVHGvQ.png" alt="rename"></p>
+<p>在用 git remote來查詢， 會發現數據庫名稱從 origin 改成 github了。</p>
+<p><img src="https://miro.medium.com/max/1400/1*6DAh5wMtkOZ-ga1uvU__fw.png" alt="git-rename"></p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -1332,55 +1297,68 @@
       </tags>
   </entry>
   <entry>
-    <title>(1) Js進階 requestAnimationFrame</title>
-    <url>/2022/06/27/2022-6-24-1-js-requestAnimation/</url>
-    <content><![CDATA[<h2 id="製作動畫"><a href="#製作動畫" class="headerlink" title="製作動畫"></a>製作動畫</h2><p>在以前用Js中做動畫，可能會用 setInterval()或setTimeOut()，而現在有了更好用的API <code>requestAnimationFrame</code>。</p>
-<h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><p>requestAnimationFrame是依照瀏覽器更新的頻率(通常是 1 &#x2F;60 秒)來更新畫面。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> boxLeft = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params">currentTime</span>) &#123;</span><br><span class="line">  boxLeft += <span class="number">0.1</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(currentTime);</span><br><span class="line">  box.<span class="property">style</span>.<span class="title function_">setProperty</span>(<span class="string">&#x27;--left&#x27;</span>, boxLeft);</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(main);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(main);</span><br></pre></td></tr></table></figure>
+    <title>(4) CSS基礎篇 Flex</title>
+    <url>/2022/06/29/2022-6-29-1-css-flex/</url>
+    <content><![CDATA[<h2 id="什麼是-flex"><a href="#什麼是-flex" class="headerlink" title="什麼是 flex"></a>什麼是 flex</h2><p>flex 和grid一樣是排版用的 css屬性，使用flex時可分為外容器屬性與內元件屬性。以下分別介紹各屬性使用方法。</p>
+<h2 id="外容器屬性"><a href="#外容器屬性" class="headerlink" title="外容器屬性"></a>外容器屬性</h2><h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><p>啟用flex的第一步，就是在外容器設定 display: flex;</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>requestAnimationFrame在約1&#x2F;60秒後呼叫傳給它的callback函式(main)，<br>並且將timestamp當做參數傳給這個callback函式。</p>
-<p>為了讓 requestAnimationFrame 能持續執行，我們在callback函式再執行一次 requestAnimationFrame。</p>
-<p>如果把 timestamp console.log 出來，會發現timesatmp是以每6豪秒持續累加。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022062701.png?alt=media&token=c961a215-9334-4ef0-a5e9-dd9408fb16a3" alt="timestamp"></p>
-<p><a href="https://codepen.io/tim-chou/pen/eYMOVGR">範例</a></p>
-<h2 id="控制更新頻率"><a href="#控制更新頻率" class="headerlink" title="控制更新頻率"></a>控制更新頻率</h2><p>每6毫秒更新一次函式可能太快了，假設我們希望每秒更新一次畫面就好，可如下設定</p>
-<h3 id="紀錄上次更新時間"><a href="#紀錄上次更新時間" class="headerlink" title="紀錄上次更新時間"></a>紀錄上次更新時間</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> lastRenderTime = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params">currentTime</span>) &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(main);</span><br><span class="line">  <span class="keyword">const</span> secondSinceLastRender = (currentTime - lastRenderTime) / <span class="number">1000</span>; <span class="comment">// 將milisecond 轉成 second</span></span><br><span class="line">  lastRenderTime = currentTime;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(currentTime);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以先設一個變數用來記錄上次更新畫面的時間(lastRenderTime)，然後在函式中用currentTime減掉lastRenderTime，就可以得到從上次更新到這次過了多久時間(毫秒)，可以將時間除 1000 轉換成過了幾秒。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022062702.png?alt=media&token=6ebc37f7-3bc4-4e9b-a951-4533190544ef" alt="second"></p>
-<p>可以發現每次更新的間隔時間約是 6 毫秒。</p>
-<h3 id="設定更新門檻"><a href="#設定更新門檻" class="headerlink" title="設定更新門檻"></a>設定更新門檻</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">SPEED</span> = <span class="number">2</span>; <span class="comment">// 每秒更新次數</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params">currentTime</span>) &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(main);</span><br><span class="line">  <span class="keyword">const</span> secondSinceLastRender = (currentTime - lastRenderTime) / <span class="number">1000</span>; <span class="comment">// 將milisecond 轉成 second</span></span><br><span class="line">  <span class="keyword">if</span> (secondSinceLastRender &lt; <span class="number">1</span> / <span class="variable constant_">SPEED</span>) <span class="keyword">return</span>;</span><br><span class="line">  lastRenderTime = currentTime;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;render&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(main);</span><br></pre></td></tr></table></figure>
-<p>先設定SPEED變數代表每秒更新次數，在main函式裡增加判斷</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (secondSinceLastRender &lt; <span class="number">1</span> / <span class="variable constant_">SPEED</span>) <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
-<p>用 1 除以 SPEED 可以得到每零點幾秒才能更新，上例是0.5秒更新1次，也就是每秒更新2次。<br>當 secondSinceLastRender 小於更新頻律，就將函式 return 不執行。</p>
-<p>以上就完成控制更新頻律的方法了。</p>
+<p>在父層設定 display:flex 可以讓子層區塊並排<br><img src="https://miro.medium.com/max/972/1*cPIZHT7a0P0v5mljoBjdvg.png" alt="flex"></p>
+<p>當子層寬度超過父層時，flex也會依照比例自動做調整，不會跑版，並且當子層其中一個元素高度變高，其他元素也會自動等高。</p>
+<p><img src="https://miro.medium.com/max/1246/1*yO5cUEPDPz7of4-KZyoTCw.png" alt="自動等高"></p>
+<h3 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h3><p>flex的主軸指的是資料的流向 ，預設是從左到右排版，可以設定的值如下:</p>
+<ul>
+<li><p>flex-direction: row; 從左到右</p>
+</li>
+<li><p>flex-direction: row-reverse; 從右到左</p>
+</li>
+<li><p>flex-direction: column; 從上到下</p>
+</li>
+<li><p>flex-direction: column-reverse; 從下到上</p>
+</li>
+</ul>
+<p><img src="https://miro.medium.com/max/1400/1*jgot2tuYYebDZFe6ZTssyQ.png" alt="主軸"></p>
+<h3 id="justfy-content"><a href="#justfy-content" class="headerlink" title="justfy-content"></a>justfy-content</h3><p>依照主軸的方向(flex-direction)，可以設定 justfy-content 來對齊子元素。所以實際對齊方向是水平或垂直，要依主軸的方向而定喔。</p>
+<p><img src="https://miro.medium.com/max/1400/1*UDLawhonhqaaTSbx5lwa9Q.png" alt="justify-content"></p>
+<h3 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h3><p>超出範圍時是否換行的屬性，分為換行、不換行、換行時反轉。</p>
+<p>預設是 flex-wrap:nowrap 不換行，設定flex-wrap:wrap則會換行。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p><img src="https://miro.medium.com/max/1400/1*gUKuGGbB3B0AfezDlzulZw.png" alt="交錯軸"></p>
+<p>和主軸垂直的方向稱為交錯軸，例如主軸是水平的，那交錯軸就是垂直。align-items屬性可以設定交錯軸的對齊方式。</p>
+<p><img src="https://miro.medium.com/max/1400/1*jxzyFebBjrX8jyZ6VFF9bQ.png" alt="align-items"></p>
+<h3 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h3><p>多行物件的交錯軸對齊，可以使用的屬性和align-items一樣。</p>
+<p><img src="https://miro.medium.com/max/1348/1*bvaLIRwiLKGak1nOLhCwXg.png" alt="align-content"></p>
+<h3 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h3><p>flex-flow 是 flex-direction 與 flex-wrap 的縮寫，所以只要在這前後帶上相對應的值即可。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.flex-container</span> &#123;</span><br><span class="line">  <span class="attribute">flex-flow</span>: &lt;<span class="string">&#x27;flex-direction&#x27;</span>&gt; || &lt;<span class="string">&#x27;flex-wrap&#x27;</span>&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="內元件屬性"><a href="#內元件屬性" class="headerlink" title="內元件屬性"></a>內元件屬性</h2><h3 id="order"><a href="#order" class="headerlink" title="order"></a>order</h3><p>用來指定子層物件的順序，order 預設都是 0。小於 0 的元件會往前排，大於 0 往後排。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box1</span> &#123;</span><br><span class="line">  <span class="attribute">order</span>: <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box2</span> &#123;</span><br><span class="line">  <span class="attribute">order</span> : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/818/1*s71cQM9RnsxFauhOIt6q6w.png" alt="order"></p>
+<h3 id="flex-grow-伸展"><a href="#flex-grow-伸展" class="headerlink" title="flex-grow 伸展"></a>flex-grow 伸展</h3><p>flex-grow 設定元件的伸展性，會把剩下的空間份配給子物件，並針對子物件去設定伸展的比例，預設值為 0不會縮放。<br>如下圖: 設定flex-grow: 2 的元素會有較大的位置。<br><img src="https://miro.medium.com/max/548/1*3qDfiEcjgxQvyup9ygcAww.png" alt="flex-grow"></p>
+<h3 id="flex-shrink-收縮"><a href="#flex-shrink-收縮" class="headerlink" title="flex-shrink 收縮"></a>flex-shrink 收縮</h3><p>flex-shrink: 元件的收縮性，是一個數值，當空間分配還不足時的當前元件的收縮性，預設值為 1 會收縮，如果設置為 0 則不會縮放。</p>
+<p><img src="https://miro.medium.com/max/1400/1*1kyY6pGhIUCz79CHJ74deQ.png" alt="flex-shrink"></p>
+<p>上圖當子層物件寬度超過父層時，如果將子層設定 flex-shrink: 0 ，代表不收縮，此時子層會超出父層寬度。</p>
+<p><img src="https://miro.medium.com/max/1400/1*nANSTLkevML4QdU2VKIHmQ.png" alt="flex-shrink"></p>
+<p>當設定其中一個子層 flex-shrink: 0 ，其他為1時，設定0的物件不收縮，保持原來寬度，設定shrink的則依比例收縮。</p>
+<h3 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h3><p>flex-basis 可以設定子元件 flex-item 的主軸長度。</p>
+<ul>
+<li><p>當主軸為橫向時，對應到元件的寬，</p>
+</li>
+<li><p>當主軸是直向時，對應到元件的高。</p>
+</li>
+</ul>
+<p>可以設定每個flex-item 的 flex-basis 為 0， 就可以依照想要的比例來設定flex-grow。</p>
+<p><img src="https://miro.medium.com/max/1400/1*GN7XSfKQGUABUGAY-nIjSg.png" alt="flex-basis"></p>
+<h3 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h3><p>align-self 可以調整單一物件的交錯軸對齊，可以使用的屬性和align-items一樣。</p>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/10/align-self.svg" alt="align-self"></p>
 ]]></content>
       <categories>
-        <category>Javascript</category>
+        <category>CSS</category>
       </categories>
       <tags>
-        <tag>Js進階</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(3) Hexo-基礎Hexo指令</title>
-    <url>/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
-<h2 id="基礎Hexo指令"><a href="#基礎Hexo指令" class="headerlink" title="基礎Hexo指令"></a>基礎Hexo指令</h2><ul>
-<li><code>hexo new &#39;新文章&#39;</code>  新增文章</li>
-<li><code>hexo generate</code> 產生編譯後的靜態檔案</li>
-<li><code>hexo server</code> 開啟一個本地端伺服器</li>
-<li><code>hexo clean</code> 清除暫存檔案</li>
-<li><code>hexo deploy</code> 部屬靜態檔案</li>
-</ul>
-<h2 id="產生新文章"><a href="#產生新文章" class="headerlink" title="產生新文章"></a>產生新文章</h2><p>要產生一篇新的文章，可以用 <code>hexo new &#39;新文章</code> 指令，產生後的文章會放在 <code>source</code> 資料夾的 <code>_posts</code>裡</p>
-<h2 id="產生編譯後的檔案"><a href="#產生編譯後的檔案" class="headerlink" title="產生編譯後的檔案"></a>產生編譯後的檔案</h2><p>當文章寫完後，需要將md檔案進行編譯，此時可以用 <code>hexo generate</code> 指令，編譯完後會產生一個 <code>public</code> 資料夾，作為之後部屬使用。<br>此指令的簡寫為 <code>hexo g</code></p>
-<h2 id="開啟一個本地端伺服器"><a href="#開啟一個本地端伺服器" class="headerlink" title="開啟一個本地端伺服器"></a>開啟一個本地端伺服器</h2><p>當靜態檔案編譯完後，可以用 <code>hexo server</code> 指令開啟一個本地端的模擬伺服器，用來即時瀏覽我的寫完的文章，此指令的簡寫為 <code>hexo s</code></p>
-<h2 id="清除暫存檔案"><a href="#清除暫存檔案" class="headerlink" title="清除暫存檔案"></a>清除暫存檔案</h2><p><code>hexo clean</code> 指令主要用來清除一些奇怪的暫存檔案，通常部屬前會先清理一遍。</p>
-<h2 id="部屬靜態檔案"><a href="#部屬靜態檔案" class="headerlink" title="部屬靜態檔案"></a>部屬靜態檔案</h2><p><code>hexo deploy</code> 將我們的靜態網站部屬到雲端使用的指令，詳細用流程在之後部屬的章節會提到。<br>此指令的簡寫為 <code>hexo d</code></p>
-<p>這就是今天 hexo 指令的介紹囉。</p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
+        <tag>CSS基礎篇</tag>
       </tags>
   </entry>
   <entry>
@@ -1409,6 +1387,28 @@
 <h3 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h3><p>_config.yml 是網站的配置檔案（如下圖），網站的各種配置設定都在這邊，例如：網頁標題、網站描述、網站的網址、路徑等等，詳細內容可以參考： <a href="https://hexo.io/zh-tw/docs/configuration">https://hexo.io/zh-tw/docs/configuration</a></p>
 <p>大家可以自行修改看看，如下圖</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060801.png?alt=media&token=a28a52df-edb2-4848-a690-9fe3f5807343" alt="config修改"></p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(3) Hexo-基礎Hexo指令</title>
+    <url>/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
+<h2 id="基礎Hexo指令"><a href="#基礎Hexo指令" class="headerlink" title="基礎Hexo指令"></a>基礎Hexo指令</h2><ul>
+<li><code>hexo new &#39;新文章&#39;</code>  新增文章</li>
+<li><code>hexo generate</code> 產生編譯後的靜態檔案</li>
+<li><code>hexo server</code> 開啟一個本地端伺服器</li>
+<li><code>hexo clean</code> 清除暫存檔案</li>
+<li><code>hexo deploy</code> 部屬靜態檔案</li>
+</ul>
+<h2 id="產生新文章"><a href="#產生新文章" class="headerlink" title="產生新文章"></a>產生新文章</h2><p>要產生一篇新的文章，可以用 <code>hexo new &#39;新文章</code> 指令，產生後的文章會放在 <code>source</code> 資料夾的 <code>_posts</code>裡</p>
+<h2 id="產生編譯後的檔案"><a href="#產生編譯後的檔案" class="headerlink" title="產生編譯後的檔案"></a>產生編譯後的檔案</h2><p>當文章寫完後，需要將md檔案進行編譯，此時可以用 <code>hexo generate</code> 指令，編譯完後會產生一個 <code>public</code> 資料夾，作為之後部屬使用。<br>此指令的簡寫為 <code>hexo g</code></p>
+<h2 id="開啟一個本地端伺服器"><a href="#開啟一個本地端伺服器" class="headerlink" title="開啟一個本地端伺服器"></a>開啟一個本地端伺服器</h2><p>當靜態檔案編譯完後，可以用 <code>hexo server</code> 指令開啟一個本地端的模擬伺服器，用來即時瀏覽我的寫完的文章，此指令的簡寫為 <code>hexo s</code></p>
+<h2 id="清除暫存檔案"><a href="#清除暫存檔案" class="headerlink" title="清除暫存檔案"></a>清除暫存檔案</h2><p><code>hexo clean</code> 指令主要用來清除一些奇怪的暫存檔案，通常部屬前會先清理一遍。</p>
+<h2 id="部屬靜態檔案"><a href="#部屬靜態檔案" class="headerlink" title="部屬靜態檔案"></a>部屬靜態檔案</h2><p><code>hexo deploy</code> 將我們的靜態網站部屬到雲端使用的指令，詳細用流程在之後部屬的章節會提到。<br>此指令的簡寫為 <code>hexo d</code></p>
+<p>這就是今天 hexo 指令的介紹囉。</p>
 ]]></content>
       <tags>
         <tag>Hexo</tag>
@@ -1509,6 +1509,210 @@
 ]]></content>
       <tags>
         <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ajax解說系列(1) Ajax的原理</title>
+    <url>/2022/07/01/2022-7-1-1-js-ajax/</url>
+    <content><![CDATA[<h2 id="Ajax-原理"><a href="#Ajax-原理" class="headerlink" title="Ajax 原理"></a>Ajax 原理</h2><p>AJAX即「Asynchronous JavaScript and XML」（非同步的JavaScript與XML技術）</p>
+<p>傳統的Web應用允許使用者端填寫表單（form），當送出表單時就向網頁伺服器傳送一個請求。伺服器接收並處理傳來的表單，然後送回一個新的網頁，但這個做法浪費了許多頻寬，因為在前後兩個頁面中的大部分HTML碼往往是相同的。</p>
+<p>Ajax 透過瀏覽器發送一個網頁請求給伺服器，伺服器再回傳對應資料，如此不用重新整理網頁，就能更新資料，並避免了在網路上傳送那些沒有改變的資訊。網頁請求代碼可分為以下幾種</p>
+<h2 id="網頁請求狀態碼"><a href="#網頁請求狀態碼" class="headerlink" title="網頁請求狀態碼"></a>網頁請求狀態碼</h2><ul>
+<li>資訊回應 (Informational responses, 100–199),</li>
+<li>成功回應 (Successful responses, 200–299),</li>
+<li>重定向 (Redirects, 300–399),</li>
+<li>用戶端錯誤 (Client errors, 400–499),</li>
+<li>伺服器端錯誤 (Server errors, 500–599).</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+        <tag>Ajax</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ajax解說系列(3) Fetch</title>
+    <url>/2022/07/01/2022-7-1-3-js-fetch/</url>
+    <content><![CDATA[<h2 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a>Fetch</h2><p>和 XMLHttpRequest一樣，Fetch 是window物件底下的方法，用來發送網路請求。當請求成功，fetch就會回傳一個promise物件(狀態是fulfilled)，這物件內會帶有response物件，裏面會放有我們想抓的資料。</p>
+<p>以下介紹不同請求類型的用法:</p>
+<h2 id="Get"><a href="#Get" class="headerlink" title="Get"></a>Get</h2><p><img src="https://miro.medium.com/max/919/1*aa1YL0BX_PnipFIh2nJgJQ.png" alt="get"></p>
+<p>單純發送get請求時，在fetch填入api的url，在第一次.then接收時，要用.json()方法，將資料轉為物件，此時會返回一個promise。<br>在用一個then去接收promise返回的資料，此時就是真正的物件資料。</p>
+<h2 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h2><p><img src="https://miro.medium.com/max/1155/1*FArkQAKzv0-HP0tZ7_PRmQ.png" alt="post"></p>
+<ol>
+<li>使用post資料到伺服器時，要設定 method: ‘POST’，</li>
+<li>headers 要設定 傳送資料的格式:</li>
+</ol>
+<ul>
+<li>json 格式 : application&#x2F;json</li>
+<li>傳統表單格式: application&#x2F;x-www-form-urlencoded</li>
+</ul>
+<ol start="3">
+<li>body 內放要傳送的資料，記得資料要用JSON.stringify轉為字串傳入。</li>
+<li>最後用 .then .catch接收回傳資料。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+        <tag>Ajax</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ajax解說系列(2) XMLHttpRequest</title>
+    <url>/2022/07/01/2022-7-1-2-js-XMLHttpRequest/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>XMLHttpRequest (XHR) 是 JavaScript 著名的 古老 API，能透過它操作 HTTP 請求，進行網路作業，<br>擷取資料的同時，卻不需進行頁面重載 (page reload)，以下介紹使用方法</p>
+<h2 id="建立物件"><a href="#建立物件" class="headerlink" title="建立物件"></a>建立物件</h2><p>我們可以透過new 一個 XMLHttpRequest 物件 ，來向伺服器發送請求，這個XMLHttpRequest 物件包含許多屬性可使用。</p>
+<p><img src="https://miro.medium.com/max/714/1*e4T8bl0a1-yLF-6ty31wSA.png" alt="xml"><br><img src="https://miro.medium.com/max/1155/1*32TavTHF8TJWAcE5XIOyGw.png"></p>
+<p>其中 readyState 的狀態分為幾種，分別代表發出請求的不同階段</p>
+<ul>
+<li>1 代表你用了 open 但還沒有把資料傳過去</li>
+<li>2 偵測到你用 send</li>
+<li>3 資料loading 中 ，可能資料太大</li>
+<li>4 你撈到資料了，數據完全接收了</li>
+</ul>
+<h2 id="設定請求"><a href="#設定請求" class="headerlink" title="設定請求"></a>設定請求</h2><p>使用 open() 方法，設定請求，<br>請求方法 除了 GET 與 POST，還能使用 PUT、DELETE、HEAD、OPTIONS</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&#x27;請求方法&#x27;</span>, <span class="string">&#x27;請求資源網址&#x27;</span>, <span class="literal">true</span> | <span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+
+<p>其中第三個參數代表: </p>
+<p>true 代表非同步，不等資料回傳，程式碼就會繼續跑。<br>false 代表同步，資料回傳，程式碼才繼續跑。</p>
+<h2 id="發送請求"><a href="#發送請求" class="headerlink" title="發送請求"></a>發送請求</h2><p>使用 send() 方法，發送請求。</p>
+<p><img src="https://miro.medium.com/max/1155/1*DvrAzDHjq31_kdppxvivyQ.png" alt="send"></p>
+<h2 id="監聽事件"><a href="#監聽事件" class="headerlink" title="監聽事件"></a>監聽事件</h2><p>當使用非同步時，要監聽onload事件，確認資料撈回後，再進行處理。</p>
+<p><img src="https://miro.medium.com/max/1155/1*-UC5WKjY-A5ClIMLUM3PbQ.png" alt="on-load"></p>
+<h2 id="POST-方法"><a href="#POST-方法" class="headerlink" title="POST 方法"></a>POST 方法</h2><p>和 get取得資料不同，利用 post 方法，傳送資料到伺服器，可以做帳號驗證、登入等功能。</p>
+<p><img src="https://miro.medium.com/max/1155/1*4ip7E7cbry2cIWUcO1Ufvg.png" alt="post"></p>
+<ol>
+<li>open方法，選用post</li>
+<li>setRequestHeader，指定傳送資料的格式</li>
+</ol>
+<ul>
+<li>json : application&#x2F;json</li>
+<li>傳統表單: application&#x2F;x-www-form-urlencoded</li>
+</ul>
+<ol start="3">
+<li><p>send 傳送要核對的資料 ，利用 &amp; 連接多筆資料</p>
+</li>
+<li><p>監聽 onload事件，處理回傳後資料</p>
+</li>
+</ol>
+<p><img src="https://miro.medium.com/max/1086/1*RSI2A1RPc5obLx5K_sYEyQ.png" alt="onload"></p>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+        <tag>Ajax</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ajax解說系列(4) Axios 套件</title>
+    <url>/2022/07/01/2022-7-1-4-js-axios/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>除了使用 fetch這種原生api來處理AJAX以外，我們也可以使用套件來處理，本文介紹的axios即是處理ajax可用的套件。</p>
+<h2 id="axios基本語法"><a href="#axios基本語法" class="headerlink" title="axios基本語法"></a>axios基本語法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">axios</span>(url[,config])</span><br></pre></td></tr></table></figure>
+
+<p>axios回傳的是一個promise，所以我們可以用 <code>.then() .catch()</code> 來接收結果。</p>
+<h2 id="get-方法"><a href="#get-方法" class="headerlink" title="get 方法"></a>get 方法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.<span class="title function_">get</span>(<span class="string">&#x27;https://example/api/&#x27;</span>)</span><br><span class="line">    .<span class="title function_">then</span>( <span class="function">(<span class="params">response</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(response))</span><br><span class="line">    .<span class="title function_">catch</span>( <span class="function">(<span class="params">error</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(error));</span><br></pre></td></tr></table></figure>
+
+<p>用 axios.get(‘資源網址’) 即可發出get請求。</p>
+<p>也可加入參數，参數放在params屬性裏面</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.<span class="title function_">get</span>(<span class="string">&#x27;https://example/api/&#x27;</span>,&#123;</span><br><span class="line">    <span class="attr">params</span>: &#123;</span><br><span class="line">        <span class="attr">gender</span>: <span class="string">&#x27;female&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(res))</span><br><span class="line">.<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(error))</span><br></pre></td></tr></table></figure>
+
+<h2 id="post-方法"><a href="#post-方法" class="headerlink" title="post 方法"></a>post 方法</h2><p><img src="https://miro.medium.com/max/1155/1*wUR2CLqYOBdpxogkcB-5aA.png" alt="post"><br><img src="https://miro.medium.com/max/1155/1*pwaLtrNzCstPuhKF9p6Spg.png" alt="post"></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.<span class="title function_">post</span>(‘api網址’ , 物件格式資料)</span><br></pre></td></tr></table></figure>
+<p>用.then接收成功資訊，.catch()接收失敗資訊</p>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+        <tag>Ajax</tag>
+        <tag>Axios</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ES6 解構賦值</title>
+    <url>/2022/07/05/2022-7-5-2-js-Destructuring/</url>
+    <content><![CDATA[<h2 id="傳統陣列賦值方式"><a href="#傳統陣列賦值方式" class="headerlink" title="傳統陣列賦值方式"></a>傳統陣列賦值方式</h2><p><img src="https://miro.medium.com/max/1348/1*WRcYmXNDmWXhrmOBVYS34Q.png" alt="傳統傳統賦值"></p>
+<p>以往作法我們會將 family 裡的值一一取出，在分別賦予到新的變數上。</p>
+<h2 id="陣列解構賦值"><a href="#陣列解構賦值" class="headerlink" title="陣列解構賦值"></a>陣列解構賦值</h2><p><img src="https://miro.medium.com/max/1330/1*KVVs3jLuIIJLivh1ni2xnA.png" alt="陣列解構"></p>
+<p>將右方 family 的陣列資料，鏡射到左方的陣列中，如此左方陣列裡的變數就可以被賦予family陣列裡的值。</p>
+<p>若鏡射時左右數量不同，則剩下的值不會做解構賦值，如下圖，老媽、老爸就不會作賦值。</p>
+<p><img src="https://miro.medium.com/max/1318/1*DWgYoQQAPpEH_tUejL1ujg.png" alt="陣列解構"></p>
+<p>若左方陣列有空白，則空白會被跳過，不會被賦值。</p>
+<p><img src="https://miro.medium.com/max/1314/1*rTlQeB9E5esDJJQKr5vJBg.png" alt="空白跳過"></p>
+<h2 id="字串解構"><a href="#字串解構" class="headerlink" title="字串解構"></a>字串解構</h2><p>字串也可以用類似陣列的手法，進行解構賦值。</p>
+<p><img src="https://miro.medium.com/max/1100/1*YIo9Qm5uJ2rHAFPOd3o3dw.png" alt="字串解構"></p>
+<h2 id="物件解構"><a href="#物件解構" class="headerlink" title="物件解構"></a>物件解構</h2><p><img src="https://miro.medium.com/max/932/1*W0aj9nt9dyVof6E0vQiQeg.png" alt="物件解構"></p>
+<p>我們可以 利用一個 { } ，取出右方GinyuTeam物件裡Ginyu屬性的值，</p>
+<p>賦予到 Ginyu這個變數上。</p>
+<p><img src="https://miro.medium.com/max/952/1*jzBRrM81reRf7TMxA6rfQw.png" alt="物件解構"></p>
+<p>也可以賦予 Ginyu 一個新的變數名稱 kobe，此時 kobe就被賦予Ginyu的值。</p>
+<h2 id="預設值"><a href="#預設值" class="headerlink" title="預設值"></a>預設值</h2><p><img src="https://miro.medium.com/max/1184/1*xJW3YCVIfO6gx1zapA8sOg.png" alt="預設值"></p>
+<p>我們也可以使用預設值的方式，當左方變數沒有被右方賦值時，就使用預設值</p>
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><p><img src="https://miro.medium.com/max/982/1*ryzueSCVtqdlplZdq8u-pg.png" alt="物件解構"></p>
+<p>將 GinyuTeam 用…拆出裡面的值，再放到新的 { }中，然後再將這個物件，賦予到 newTeam，此時 newTeam和GinyuTeam是兩個不同物件。</p>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(3) JS實作系列 貪吃蛇</title>
+    <url>/2022/07/05/2022-7-5-3-js-snake/</url>
+    <content><![CDATA[<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022070501.png?alt=media&token=6741a203-d871-44fe-bb24-89915fb088d7" alt="snake-game"></p>
+<p><a href="https://tim8076.github.io/JS-underground-snake-game/">Demo 連結</a><br><a href="https://github.com/tim8076/JS-underground-snake-game">程式碼</a></p>
+<p>這次要來實作貪吃蛇小遊戲，因為程式較多，會將JS檔案拆分再用export 、import來匯入和匯出，方便做程式碼管理。</p>
+<h2 id="繪製網格"><a href="#繪製網格" class="headerlink" title="繪製網格"></a>繪製網格</h2><p>在遊戲畫面中的格子，我們可以用 <a href="https://tim8076.github.io/2022/06/28/2022-6-28-1-css-grid/?highlight=grid">grid</a> 來繪製。用 grid 製作的好處是方便我們在js中取得每個格子的座標將蛇繪製到網格上，網格數量則使用css變數來帶入。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.game-board</span> &#123;</span><br><span class="line">  <span class="attr">--col-num</span>: <span class="number">28</span>;</span><br><span class="line">  <span class="attr">--row-num</span>: <span class="number">16</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">640px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">var</span>(--color-primary);</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="built_in">var</span>(--color-primary);</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">gap</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="built_in">repeat</span>(<span class="built_in">var</span>(--col-num), <span class="number">1</span>fr);</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="built_in">repeat</span>(<span class="built_in">var</span>(--row-num), <span class="number">1</span>fr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="建立動畫-loop-函式"><a href="#建立動畫-loop-函式" class="headerlink" title="建立動畫 loop 函式"></a>建立動畫 loop 函式</h2><p>要讓貪吃蛇不停地在畫面上移動，我們需要一個可以每秒更新的函式，以往可以用 setInterval來達成。但 setInterval 可能會有時間誤差的問題，所以我們改用 <a href="https://tim8076.github.io/2022/06/27/2022-6-24-1-js-requestAnimation/">requestAnimationFrame</a> 來製作。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> lastRenderTime = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">let</span> speed = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">animate</span>(<span class="params">currentTime</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> currentPage = <span class="title function_">getCurrentPage</span>();</span><br><span class="line">  <span class="keyword">const</span> requestId = <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(animate);</span><br><span class="line">  <span class="keyword">const</span> secondSinceLastRender = (currentTime - lastRenderTime) / <span class="number">1000</span>; <span class="comment">// 將milisecond 轉成 second</span></span><br><span class="line">  <span class="keyword">if</span> (secondSinceLastRender &lt; <span class="number">1</span> / speed) <span class="keyword">return</span>;</span><br><span class="line">  lastRenderTime = currentTime;</span><br><span class="line">  <span class="title function_">update</span>();</span><br><span class="line">  <span class="title function_">draw</span>();</span><br><span class="line">  <span class="keyword">if</span> (currentPage !== <span class="string">&#x27;game-page&#x27;</span>) <span class="title function_">cancelAnimationFrame</span>(requestId);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(animate);</span><br></pre></td></tr></table></figure>
+<p>requestAnimationFrame 會在我們設定的時間到後自動執行函式，讓貪吃蛇能持續移動。</p>
+<h2 id="繪製貪吃蛇"><a href="#繪製貪吃蛇" class="headerlink" title="繪製貪吃蛇"></a>繪製貪吃蛇</h2><p>貪吃蛇的身體是由不同格子組成，我們可以用物件帶入x 跟y的值，代表該節身體的位置。之後我們在操作蛇的移動和增加身體時，都是在操作這個陣列。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> snakeBody = [</span><br><span class="line">  &#123; <span class="attr">x</span>: <span class="number">14</span>, <span class="attr">y</span>: <span class="number">6</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">x</span>: <span class="number">14</span>, <span class="attr">y</span>: <span class="number">7</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">x</span>: <span class="number">14</span>, <span class="attr">y</span>: <span class="number">8</span> &#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>移動身體的部分，概念是將每節身體的位置，設定成上一節身體的位置，這樣每次繪製影格時，蛇就會移動。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = snakeBody.<span class="property">length</span> - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">     snakeBody[i + <span class="number">1</span>] = &#123; ...snakeBody[i] &#125;;  <span class="comment">// 設定最後一個的元素變成倒數第二的元素</span></span><br><span class="line">   &#125;</span><br><span class="line">   snakeBody[<span class="number">0</span>].<span class="property">x</span> += direction.<span class="property">x</span>;</span><br><span class="line">   snakeBody[<span class="number">0</span>].<span class="property">y</span> += direction.<span class="property">y</span>;</span><br></pre></td></tr></table></figure>
+
+<p>那有了蛇的 x y 座標後，剩下的就是在html中將對應的座標選起來，並加上對應的class。<br>如蛇的頭部 index 是 0，就加上head的class。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">drawSnake</span>(<span class="params">gameBoard, boardSet</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> gridItems = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.grid-item&#x27;</span>);</span><br><span class="line">  gridItems.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> item.<span class="property">className</span> = <span class="string">&#x27;grid-item&#x27;</span>);</span><br><span class="line">  snakeBody.<span class="title function_">forEach</span>(<span class="function">(<span class="params">body, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> gridItem = <span class="title function_">getGridItemByXY</span>(&#123; gameBoard, boardSet, <span class="attr">postion</span>: body &#125;);</span><br><span class="line">    gridItem.<span class="property">className</span> = <span class="string">&#x27;grid-item&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (index === <span class="number">0</span>) gridItem.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;head&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (index === <span class="number">1</span>) gridItem.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;gray-100&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (index === <span class="number">2</span>) gridItem.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;gray-200&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (index === <span class="number">3</span>) gridItem.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;gray-300&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (index === <span class="number">4</span>) gridItem.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;gray-400&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (index &gt; <span class="number">4</span>) gridItem.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;body&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上就是製作的貪吃蛇遊戲的方法囉。</p>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>JS實作系列</tag>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ajax解說系列(5) CORS</title>
+    <url>/2022/07/05/2022-7-5-1-js-cors/</url>
+    <content><![CDATA[<h2 id="Cross-Origin-Resource-Sharing"><a href="#Cross-Origin-Resource-Sharing" class="headerlink" title="Cross-Origin Resource Sharing"></a>Cross-Origin Resource Sharing</h2><p>當我們使用 XMLHttpRequest 或 fecth等方式向伺服器發送請求時，都必須遵守都遵守同源政策（same-origin policy），只能請求與應用程式相同網域的 HTTP 資源。</p>
+<p>跨來源資源共用（CORS），則是一種使用額外 HTTP 標頭令目前瀏覽網站的使用者代理取得存取其他來源（網域）伺服器特定資源權限的機制。</p>
+<p>當對方開啟 CORS，就能存取跨網域的資源。</p>
+<p>使用 api 前可以到，<a href="https://test-cors.org/">test-cors.org</a> 網站測試 api</p>
+<p>結果 200 代表可串接<br>結果 0 代表不能跨網域串接</p>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+        <tag>cors</tag>
       </tags>
   </entry>
 </search>
