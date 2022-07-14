@@ -60,3 +60,36 @@ req.query.參數名稱   取得參數的值
 上面範例中，先將 search跟 limit 從req.query解構出來後，再利用if判斷 search跟limit有沒有值，有的話就用search跟limit做資料過濾。
 
 如果過濾完沒有值，就回傳空陣列，有值則回傳過濾後陣列。要注意 res回傳只能有一個，所以 前面判斷後的res要加上return。
+
+## 路由模組化
+
+為了將不同頁面的路由做模組化，可以先新增一個routes資料，裏頭放不同頁面的路由，例如我有一個user頁面的路由。
+
+![](https://miro.medium.com/max/784/1*x1CvqoWfVU-tyqLdd4pvvA.png)
+
+![](https://miro.medium.com/max/1400/1*o2HfO91SWYAhQT_quM6pfg.png)
+
+在user.js裡，可以先載入express.Router()這個模組。利用這個模組，去接分頁的路由。
+
+![](https://miro.medium.com/max/1400/1*U_m027G0wE2o4rhvsuKJGQ.png)
+
+在app.js中，可以將’./routes/user’引入，再用app.use載入。
+
+``` js
+app.use('/user', user)，// 使用者造訪/user時，就會去user模組裡載入對應的路由。
+```
+
+### function 拆分
+
+更進一步，我們可以將 routes裡的function再拆分出來到 controllers 資料夾
+![](https://miro.medium.com/max/714/1*RaxVzLnFqPCea4SL4msVqQ.png)
+
+![](https://miro.medium.com/max/1400/1*n_Ji23Gxgq7a-GN9VRW9vQ.png)
+
+在 people.js中，我將路由的callback function拆分出來，在用module.exports一次export出去。
+
+![](https://miro.medium.com/max/1400/1*lT4RKWhgu8Kka-jH1ueqdQ.png)
+
+在 路由的 js檔中，再將這些方法 require 進來。
+
+

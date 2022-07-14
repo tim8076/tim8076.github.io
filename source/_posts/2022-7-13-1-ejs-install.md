@@ -1,9 +1,10 @@
 ---
-title: (9) EJS 樣板語言-安裝
+title: Express框架(6) EJS樣板語言
 date: 2022-07-13 10:57:54
 categories: Node.js
 tags: 
 - Node.js
+- Express
 description: '介紹與安裝ejs樣板'
 ---
 
