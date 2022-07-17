@@ -49,36 +49,31 @@
       </tags>
   </entry>
   <entry>
-    <title>(1) Gulp-介紹與安裝</title>
-    <url>/2022/06/15/2022-6-15-2-Gulp-%E4%BB%8B%E7%B4%B9%E8%88%87%E5%AE%89%E8%A3%9D/</url>
-    <content><![CDATA[<h2 id="Gulp-是什麼"><a href="#Gulp-是什麼" class="headerlink" title="Gulp 是什麼"></a>Gulp 是什麼</h2><p>在以前做網頁開發時，可能只需要處理html、css、js檔案就可以了。但現在前端開發工具越來越多，像css有scss的預處理器、html可以用pug來寫等等。此時就須要一個工具來將這些scss、pug檔案編譯成css跟html。<br>Gulp 就可以用來編譯 Sass、編譯 JavaScript 語法至相容性較高的 ES5、圖片優化壓縮、打包程式碼等等的事情，讓開發者可以專注於開發。</p>
-<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><h3 id="安裝node-js與npm"><a href="#安裝node-js與npm" class="headerlink" title="安裝node.js與npm"></a>安裝node.js與npm</h3><p>首先我們需要要先安裝 <a href="https://nodejs.org/en/">nodejs</a>，我們選擇穩定版(LTS)來安裝，安裝過程就不再贅述。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061501.png?alt=media&token=3db09d20-f796-4c7b-8c12-0e894845871f" alt="nodejs"></p>
-<p>安裝好後，到vscode編輯器，輸入下列指令來確認是否安裝完成。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm -v   </span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
+    <title>(1) JS實作系列 Drum-Kit</title>
+    <url>/2022/06/14/2022-6-14-1-JS30-Drum-Kit/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本系列文章會實做一些JS的範例，從中熟練JS的觀念。</p>
+<p>本文從第一個範例開始 Drum-Kit <a href="https://codepen.io/tim-chou/pen/oNEmjKR">範例程式碼</a></p>
+<p><img src="https://miro.medium.com/max/1400/1*wUokqgRhKPwqMbffW1lZeA.png" alt="piano"></p>
+<h2 id="keycode綁定"><a href="#keycode綁定" class="headerlink" title="keycode綁定"></a>keycode綁定</h2><p>在這次挑戰中，要完成的是按下琴鍵後，播放指定音樂，和改變樣式。</p>
+<p>所以第一步要做的是，選出指定的dom元素和音檔，</p>
+<p>在 html 結構中，用 data-key分別對div 跟 audio 元素綁定對應按鍵的 keycode。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">data-key</span>=<span class="string">&quot;65&quot;</span> <span class="attr">class</span>=<span class="string">&quot;key&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">data-key</span>=<span class="string">&quot;65&quot;</span> <span class="attr">src</span>=<span class="string">&quot;sounds/clap.wav&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>若有正確安裝，會顯示版本號。</p>
-<h2 id="安裝全域的-Gulp"><a href="#安裝全域的-Gulp" class="headerlink" title="安裝全域的 Gulp"></a>安裝全域的 Gulp</h2><p>在commend line輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp -g  //windows系統</span><br><span class="line">sudo npm install gulp -g //Mac系統</span><br></pre></td></tr></table></figure>
-<p>npm安裝套件分為全域與專案安裝，全域安裝只需安裝一次即可。</p>
-<h2 id="安裝專案的Gulp"><a href="#安裝專案的Gulp" class="headerlink" title="安裝專案的Gulp"></a>安裝專案的Gulp</h2><p>我們先用vscode開一個新的資料夾作為這次專案使用。</p>
-<p>先在commend line 輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
-<p>輸入完後，會新增一個package.json檔案，這個檔案會用來管理這個專案的套件。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061502.png?alt=media&token=b12ce94d-b001-4fa8-b8b2-2912c6dca318" alt="package.json"></p>
-<p>之後輸入下面指令來安裝專案內的gulp</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp --save</span><br></pre></td></tr></table></figure>
+<h2 id="事件監聽"><a href="#事件監聽" class="headerlink" title="事件監聽"></a>事件監聽</h2><p>要讓使用者能彈出聲音，要在window建立 keydown事件的監聽，當使用者按下鍵盤時，觸發對應函式。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>,playHandeler,<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">playHandeler</span>(<span class="params">e</span>)&#123;</span><br><span class="line">  <span class="comment">//播音樂</span></span><br><span class="line">  <span class="keyword">const</span> audio = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`audio[data-key=&quot;<span class="subst">$&#123;e.keyCode&#125;</span>&quot;]`</span>);</span><br><span class="line">  <span class="keyword">if</span>(audio)&#123;</span><br><span class="line">    audio.<span class="property">currentTime</span> = <span class="number">0</span>;<span class="comment">//若要連續撥放 要設為0</span></span><br><span class="line">    audio.<span class="title function_">play</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//改樣式</span></span><br><span class="line">  <span class="keyword">const</span> dom = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`div[data-key=&quot;<span class="subst">$&#123;e.keyCode&#125;</span>&quot;]`</span>);</span><br><span class="line">  <span class="keyword">if</span>(dom)&#123;</span><br><span class="line">    dom.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;playing&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>安裝完成後輸入下面指令檢查一下，有正確安裝會顯示版本。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gulp -v</span><br></pre></td></tr></table></figure>
+<p>在函式中，用 ES6 的選取方法，用 <code>audio[data-key=”$&#123;e.keyCode&#125;”]</code>直接選到 HTML 中的 [data-key]。<br>在利用 if 判斷式，判斷當使用者按到指定的按鍵時，也就是audio為true時，執行播放音檔，audio.play();<br>dom 為true時，執行classList.add()，彈奏時增加樣式。</p>
+<h2 id="動畫結束時，拿掉樣式"><a href="#動畫結束時，拿掉樣式" class="headerlink" title="動畫結束時，拿掉樣式"></a>動畫結束時，拿掉樣式</h2><p>利用foreach，對每一個.key建立監聽，監聽事件為 transitionend 。這個事件是在css的 transition結束時觸發，也就是每一個drum kit撥放完時觸發。<br>要注意，若執行的transition屬性有很多種，如 transform、color、border-color，transitionend 會重複的觸發。<br>今天我們希望的是，在transform動畫結束時拿掉樣式，所以要加上判斷propertyName為 transform時，再執行 classList.remove拿掉樣式。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.key&#x27;</span>).<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">item</span>)&#123;</span><br><span class="line">  item.<span class="title function_">addEventListener</span>(<span class="string">&#x27;transitionend&#x27;</span>, transitionendHandler)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">transitionendHandler</span>(<span class="params">e</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span>(e.<span class="property">propertyName</span> === <span class="string">&#x27;transform&#x27;</span>)&#123;</span><br><span class="line">    e.<span class="property">currentTarget</span>.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;playing&#x27;</span>);</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>到這邊就完成專案內gulp的安裝，下一堂課會帶大家新增一個gulp file，做一些好玩的功能囉。</p>
+<h2 id="額外補充"><a href="#額外補充" class="headerlink" title="額外補充"></a>額外補充</h2><p>若要在html 顯示 鍵盤按鍵 可以用 <code>&lt;kbd&gt;&lt;/kbd&gt;</code> 元素。</p>
 ]]></content>
       <categories>
-        <category>Gulp</category>
+        <category>Javascript</category>
       </categories>
       <tags>
-        <tag>Gulp</tag>
+        <tag>JS實作系列</tag>
+        <tag>Javascript</tag>
       </tags>
   </entry>
   <entry>
@@ -108,33 +103,6 @@
 ]]></content>
       <tags>
         <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(3) Gulp-撰寫gulp file</title>
-    <url>/2022/06/16/2022-6-15-3-Gulp-%E5%9F%BA%E7%A4%8E%E7%AF%87/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前面已經將專案的環境與gulp都安裝好了，這節會開始介紹如何撰寫你的第一支 gulp file</p>
-<h2 id="開始撰寫-gulp-file"><a href="#開始撰寫-gulp-file" class="headerlink" title="開始撰寫 gulp file"></a>開始撰寫 gulp file</h2><p>一開始先在專案的根目錄新增一個檔案 <code>gulpfile.js</code>檔案</p>
-<p>然後在根目錄 新增一個 <code>source</code> 資料夾<br>並在source資料夾內新增一個 style.css</p>
-<p><img src="https://i.imgur.com/GsAJaOF.png" alt="img"></p>
-<p>在gulpfile.js 最上面先引入 GULP</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> gulp = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>然後我們可以新增一個簡單的gulp任務</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">funciton <span class="title function_">copyFile</span>(<span class="params"></span>) &#123;</span><br><span class="line">   gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/**/*/.css&#x27;</span>)</span><br><span class="line">     .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面這段程式中，我們用了 <code>gulp.src()</code> 來指定來源檔案的位置，<br>並用 <code>gulp.dest()</code> 將檔案輸出到指定的public資料夾。</p>
-<p>然後可以開啟 commend line 輸入指令 </p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">gulp copyFile</span><br></pre></td></tr></table></figure>
-
-<p>就會發現檔案已經被輸出到 public 資料夾囉。</p>
-<p>下堂課會開始介紹 其他的各種gulp任務喔。</p>
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
       </tags>
   </entry>
   <entry>
@@ -170,6 +138,66 @@
       </tags>
   </entry>
   <entry>
+    <title>(1) Gulp-介紹與安裝</title>
+    <url>/2022/06/15/2022-6-15-2-Gulp-%E4%BB%8B%E7%B4%B9%E8%88%87%E5%AE%89%E8%A3%9D/</url>
+    <content><![CDATA[<h2 id="Gulp-是什麼"><a href="#Gulp-是什麼" class="headerlink" title="Gulp 是什麼"></a>Gulp 是什麼</h2><p>在以前做網頁開發時，可能只需要處理html、css、js檔案就可以了。但現在前端開發工具越來越多，像css有scss的預處理器、html可以用pug來寫等等。此時就須要一個工具來將這些scss、pug檔案編譯成css跟html。<br>Gulp 就可以用來編譯 Sass、編譯 JavaScript 語法至相容性較高的 ES5、圖片優化壓縮、打包程式碼等等的事情，讓開發者可以專注於開發。</p>
+<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><h3 id="安裝node-js與npm"><a href="#安裝node-js與npm" class="headerlink" title="安裝node.js與npm"></a>安裝node.js與npm</h3><p>首先我們需要要先安裝 <a href="https://nodejs.org/en/">nodejs</a>，我們選擇穩定版(LTS)來安裝，安裝過程就不再贅述。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061501.png?alt=media&token=3db09d20-f796-4c7b-8c12-0e894845871f" alt="nodejs"></p>
+<p>安裝好後，到vscode編輯器，輸入下列指令來確認是否安裝完成。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm -v   </span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+<p>若有正確安裝，會顯示版本號。</p>
+<h2 id="安裝全域的-Gulp"><a href="#安裝全域的-Gulp" class="headerlink" title="安裝全域的 Gulp"></a>安裝全域的 Gulp</h2><p>在commend line輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp -g  //windows系統</span><br><span class="line">sudo npm install gulp -g //Mac系統</span><br></pre></td></tr></table></figure>
+<p>npm安裝套件分為全域與專案安裝，全域安裝只需安裝一次即可。</p>
+<h2 id="安裝專案的Gulp"><a href="#安裝專案的Gulp" class="headerlink" title="安裝專案的Gulp"></a>安裝專案的Gulp</h2><p>我們先用vscode開一個新的資料夾作為這次專案使用。</p>
+<p>先在commend line 輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+<p>輸入完後，會新增一個package.json檔案，這個檔案會用來管理這個專案的套件。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022061502.png?alt=media&token=b12ce94d-b001-4fa8-b8b2-2912c6dca318" alt="package.json"></p>
+<p>之後輸入下面指令來安裝專案內的gulp</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp --save</span><br></pre></td></tr></table></figure>
+
+<p>安裝完成後輸入下面指令檢查一下，有正確安裝會顯示版本。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gulp -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>到這邊就完成專案內gulp的安裝，下一堂課會帶大家新增一個gulp file，做一些好玩的功能囉。</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(3) Gulp-撰寫gulp file</title>
+    <url>/2022/06/16/2022-6-15-3-Gulp-%E5%9F%BA%E7%A4%8E%E7%AF%87/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前面已經將專案的環境與gulp都安裝好了，這節會開始介紹如何撰寫你的第一支 gulp file</p>
+<h2 id="開始撰寫-gulp-file"><a href="#開始撰寫-gulp-file" class="headerlink" title="開始撰寫 gulp file"></a>開始撰寫 gulp file</h2><p>一開始先在專案的根目錄新增一個檔案 <code>gulpfile.js</code>檔案</p>
+<p>然後在根目錄 新增一個 <code>source</code> 資料夾<br>並在source資料夾內新增一個 style.css</p>
+<p><img src="https://i.imgur.com/GsAJaOF.png" alt="img"></p>
+<p>在gulpfile.js 最上面先引入 GULP</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> gulp = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>然後我們可以新增一個簡單的gulp任務</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">funciton <span class="title function_">copyFile</span>(<span class="params"></span>) &#123;</span><br><span class="line">   gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/**/*/.css&#x27;</span>)</span><br><span class="line">     .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面這段程式中，我們用了 <code>gulp.src()</code> 來指定來源檔案的位置，<br>並用 <code>gulp.dest()</code> 將檔案輸出到指定的public資料夾。</p>
+<p>然後可以開啟 commend line 輸入指令 </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">gulp copyFile</span><br></pre></td></tr></table></figure>
+
+<p>就會發現檔案已經被輸出到 public 資料夾囉。</p>
+<p>下堂課會開始介紹 其他的各種gulp任務喔。</p>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(4) Gulp-編譯scss</title>
     <url>/2022/06/16/2022-6-15-4-Gulp-%E7%B7%A8%E8%AD%AFsass/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇來介紹如何在 gulp 中，進行scss的編譯吧。</p>
@@ -196,34 +224,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(1) JS實作系列 Drum-Kit</title>
-    <url>/2022/06/14/2022-6-14-1-JS30-Drum-Kit/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本系列文章會實做一些JS的範例，從中熟練JS的觀念。</p>
-<p>本文從第一個範例開始 Drum-Kit <a href="https://codepen.io/tim-chou/pen/oNEmjKR">範例程式碼</a></p>
-<p><img src="https://miro.medium.com/max/1400/1*wUokqgRhKPwqMbffW1lZeA.png" alt="piano"></p>
-<h2 id="keycode綁定"><a href="#keycode綁定" class="headerlink" title="keycode綁定"></a>keycode綁定</h2><p>在這次挑戰中，要完成的是按下琴鍵後，播放指定音樂，和改變樣式。</p>
-<p>所以第一步要做的是，選出指定的dom元素和音檔，</p>
-<p>在 html 結構中，用 data-key分別對div 跟 audio 元素綁定對應按鍵的 keycode。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">data-key</span>=<span class="string">&quot;65&quot;</span> <span class="attr">class</span>=<span class="string">&quot;key&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">data-key</span>=<span class="string">&quot;65&quot;</span> <span class="attr">src</span>=<span class="string">&quot;sounds/clap.wav&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="事件監聽"><a href="#事件監聽" class="headerlink" title="事件監聽"></a>事件監聽</h2><p>要讓使用者能彈出聲音，要在window建立 keydown事件的監聽，當使用者按下鍵盤時，觸發對應函式。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>,playHandeler,<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">playHandeler</span>(<span class="params">e</span>)&#123;</span><br><span class="line">  <span class="comment">//播音樂</span></span><br><span class="line">  <span class="keyword">const</span> audio = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`audio[data-key=&quot;<span class="subst">$&#123;e.keyCode&#125;</span>&quot;]`</span>);</span><br><span class="line">  <span class="keyword">if</span>(audio)&#123;</span><br><span class="line">    audio.<span class="property">currentTime</span> = <span class="number">0</span>;<span class="comment">//若要連續撥放 要設為0</span></span><br><span class="line">    audio.<span class="title function_">play</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//改樣式</span></span><br><span class="line">  <span class="keyword">const</span> dom = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`div[data-key=&quot;<span class="subst">$&#123;e.keyCode&#125;</span>&quot;]`</span>);</span><br><span class="line">  <span class="keyword">if</span>(dom)&#123;</span><br><span class="line">    dom.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;playing&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在函式中，用 ES6 的選取方法，用 <code>audio[data-key=”$&#123;e.keyCode&#125;”]</code>直接選到 HTML 中的 [data-key]。<br>在利用 if 判斷式，判斷當使用者按到指定的按鍵時，也就是audio為true時，執行播放音檔，audio.play();<br>dom 為true時，執行classList.add()，彈奏時增加樣式。</p>
-<h2 id="動畫結束時，拿掉樣式"><a href="#動畫結束時，拿掉樣式" class="headerlink" title="動畫結束時，拿掉樣式"></a>動畫結束時，拿掉樣式</h2><p>利用foreach，對每一個.key建立監聽，監聽事件為 transitionend 。這個事件是在css的 transition結束時觸發，也就是每一個drum kit撥放完時觸發。<br>要注意，若執行的transition屬性有很多種，如 transform、color、border-color，transitionend 會重複的觸發。<br>今天我們希望的是，在transform動畫結束時拿掉樣式，所以要加上判斷propertyName為 transform時，再執行 classList.remove拿掉樣式。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.key&#x27;</span>).<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">item</span>)&#123;</span><br><span class="line">  item.<span class="title function_">addEventListener</span>(<span class="string">&#x27;transitionend&#x27;</span>, transitionendHandler)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">transitionendHandler</span>(<span class="params">e</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span>(e.<span class="property">propertyName</span> === <span class="string">&#x27;transform&#x27;</span>)&#123;</span><br><span class="line">    e.<span class="property">currentTarget</span>.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;playing&#x27;</span>);</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="額外補充"><a href="#額外補充" class="headerlink" title="額外補充"></a>額外補充</h2><p>若要在html 顯示 鍵盤按鍵 可以用 <code>&lt;kbd&gt;&lt;/kbd&gt;</code> 元素。</p>
-]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>JS實作系列</tag>
-        <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(2) Gulp-運作原理介紹</title>
     <url>/2022/06/16/2022-6-15-5-Gulp-%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86/</url>
     <content><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/1200/0*_uAjbnaZaXs1ca6x.png" alt="img"></p>
@@ -239,6 +239,36 @@
 <ol start="4">
 <li>gulp.dest(): 輸出任務的結果</li>
 </ol>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(5) Gulp-postcss</title>
+    <url>/2022/06/17/2022-6-17-1-Gulp-postcss/</url>
+    <content><![CDATA[<h2 id="PostCSS-是什麼"><a href="#PostCSS-是什麼" class="headerlink" title="PostCSS 是什麼 ?"></a>PostCSS 是什麼 ?</h2><p>PostCSS 是一個使用JavaScript 轉換CSS 的工具。<br>以前在撰寫css時，因為有些新的語法舊的瀏覽器不支援，所以需要加上前贅詞</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*0gGNaqjQjKhcOhyBck5Bhw.png" alt="img"></p>
+<p>但這步驟如果用人工判斷很費時，此時可以用post css搭配 autoprfixer 套件，來自動加入這些前贅詞。</p>
+<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><p>先安裝套件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install postcss gulp-postcss autoprfixer --save</span><br></pre></td></tr></table></figure>
+
+<p>然後在 <code>gulpfile.js</code> 中載入套件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> autoprefixer = <span class="built_in">require</span>(<span class="string">&#x27;autoprefixer&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> postcss = <span class="built_in">require</span>(<span class="string">&#x27;gulp-postcss&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在我們編譯sass的任務中，加入postcss功能</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sassTask</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> plugins = [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">postcss</span>(plugins))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面我們先新增一個 plugins 的變數，並在編譯成css後，加入 <code>postcss(plugins)</code></p>
+<p>此時可能會遇到這個錯誤</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*r49hPlucU_l7u-wYZtzGBg.png" alt="error"></p>
+<p>這個錯誤是要我們在根目錄增加一個 .browserslistrc 的檔案，裡面放需要支援的瀏覽器版本條件，如下圖:</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*RiUzC2vYWqZEFgT0nCa7lA.png" alt="browser"></p>
+<p>之後如果要調整 CSS 支援版本就只需要調整 .browserslistrc 中的 last X version X 即可，關於支援版本設定，可參考<a href="https://github.com/browserslist/browserslist">這裡</a>。</p>
+<p>以上就完成gulp-postcss的的設定囉</p>
 ]]></content>
       <categories>
         <category>Gulp</category>
@@ -303,27 +333,28 @@
       </tags>
   </entry>
   <entry>
-    <title>(5) Gulp-postcss</title>
-    <url>/2022/06/17/2022-6-17-1-Gulp-postcss/</url>
-    <content><![CDATA[<h2 id="PostCSS-是什麼"><a href="#PostCSS-是什麼" class="headerlink" title="PostCSS 是什麼 ?"></a>PostCSS 是什麼 ?</h2><p>PostCSS 是一個使用JavaScript 轉換CSS 的工具。<br>以前在撰寫css時，因為有些新的語法舊的瀏覽器不支援，所以需要加上前贅詞</p>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*0gGNaqjQjKhcOhyBck5Bhw.png" alt="img"></p>
-<p>但這步驟如果用人工判斷很費時，此時可以用post css搭配 autoprfixer 套件，來自動加入這些前贅詞。</p>
-<h2 id="安裝流程"><a href="#安裝流程" class="headerlink" title="安裝流程"></a>安裝流程</h2><p>先安裝套件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install postcss gulp-postcss autoprfixer --save</span><br></pre></td></tr></table></figure>
+    <title>(8) Gulp-檔案壓縮</title>
+    <url>/2022/06/17/2022-6-17-4-Gulp-compress/</url>
+    <content><![CDATA[<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><ol>
+<li>壓縮 css套件: <a href="https://www.npmjs.com/package/gulp-clean-css">gulp-clean-css</a></li>
+<li>壓縮 js套件: <a href="https://www.npmjs.com/package/gulp-uglify">gulp-uglify</a></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp-clean-css gulp-uglify --save</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>壓縮css的部分，可以在編譯完scss後，進行壓縮</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sassTask</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> plugins = [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>(&#123;</span><br><span class="line">      <span class="attr">includePaths</span>: [<span class="string">&#x27;./node_modules/bootstrap/scss&#x27;</span>]</span><br><span class="line">    &#125;).<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">postcss</span>(plugins))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">cleanCss</span>(&#123; <span class="attr">compatibility</span>: <span class="string">&#x27;ie8&#x27;</span> &#125;)))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*mpisvD3qy987427Pd2n-kg.png" alt="壓縮css程式碼"></p>
+<p>壓縮js的部分，可在babel編譯完後並且合併後( concat ) 進行壓縮</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/js/**/*.js&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>然後在 <code>gulpfile.js</code> 中載入套件</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> autoprefixer = <span class="built_in">require</span>(<span class="string">&#x27;autoprefixer&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> postcss = <span class="built_in">require</span>(<span class="string">&#x27;gulp-postcss&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>在我們編譯sass的任務中，加入postcss功能</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sassTask</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> plugins = [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>().<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">postcss</span>(plugins))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面我們先新增一個 plugins 的變數，並在編譯成css後，加入 <code>postcss(plugins)</code></p>
-<p>此時可能會遇到這個錯誤</p>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*r49hPlucU_l7u-wYZtzGBg.png" alt="error"></p>
-<p>這個錯誤是要我們在根目錄增加一個 .browserslistrc 的檔案，裡面放需要支援的瀏覽器版本條件，如下圖:</p>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*RiUzC2vYWqZEFgT0nCa7lA.png" alt="browser"></p>
-<p>之後如果要調整 CSS 支援版本就只需要調整 .browserslistrc 中的 last X version X 即可，關於支援版本設定，可參考<a href="https://github.com/browserslist/browserslist">這裡</a>。</p>
-<p>以上就完成gulp-postcss的的設定囉</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*1anhKo-vPFyBKX4scALEZw.png" alt="壓縮js"></p>
+<h2 id="壓縮成果"><a href="#壓縮成果" class="headerlink" title="壓縮成果"></a>壓縮成果</h2><ol>
+<li>css被壓成一行</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*tweaZBqP0_OJL3SnSgi-fQ.png" alt="css"></p>
+<ol start="2">
+<li>js被壓成一行</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*O3lohBob7h6KxqHGfVvong.png" alt="js"></p>
 ]]></content>
       <categories>
         <category>Gulp</category>
@@ -365,64 +396,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(8) Gulp-檔案壓縮</title>
-    <url>/2022/06/17/2022-6-17-4-Gulp-compress/</url>
-    <content><![CDATA[<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><ol>
-<li>壓縮 css套件: <a href="https://www.npmjs.com/package/gulp-clean-css">gulp-clean-css</a></li>
-<li>壓縮 js套件: <a href="https://www.npmjs.com/package/gulp-uglify">gulp-uglify</a></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install gulp-clean-css gulp-uglify --save</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="載入設定"><a href="#載入設定" class="headerlink" title="載入設定"></a>載入設定</h2><p>壓縮css的部分，可以在編譯完scss後，進行壓縮</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sassTask</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> plugins = [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/scss/**/*.scss&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">sass</span>(&#123;</span><br><span class="line">      <span class="attr">includePaths</span>: [<span class="string">&#x27;./node_modules/bootstrap/scss&#x27;</span>]</span><br><span class="line">    &#125;).<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, sass.<span class="property">logError</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">postcss</span>(plugins))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">cleanCss</span>(&#123; <span class="attr">compatibility</span>: <span class="string">&#x27;ie8&#x27;</span> &#125;)))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/css&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*mpisvD3qy987427Pd2n-kg.png" alt="壓縮css程式碼"></p>
-<p>壓縮js的部分，可在babel編譯完後並且合併後( concat ) 進行壓縮</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">babel</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./source/js/**/*.js&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">init</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;all.js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">uglify</span>()))</span><br><span class="line">    .<span class="title function_">pipe</span>($.sourcemaps.<span class="title function_">write</span>(<span class="string">&#x27;.&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public/js&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*1anhKo-vPFyBKX4scALEZw.png" alt="壓縮js"></p>
-<h2 id="壓縮成果"><a href="#壓縮成果" class="headerlink" title="壓縮成果"></a>壓縮成果</h2><ol>
-<li>css被壓成一行</li>
-</ol>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*tweaZBqP0_OJL3SnSgi-fQ.png" alt="css"></p>
-<ol start="2">
-<li>js被壓成一行</li>
-</ol>
-<p><img src="https://cdn-images-1.medium.com/max/1200/1*O3lohBob7h6KxqHGfVvong.png" alt="js"></p>
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(2) SCSS練功坊-變數variable</title>
-    <url>/2022/06/19/2022-6-19-1-scss-variable/</url>
-    <content><![CDATA[<h2 id="以往css遇到的問題"><a href="#以往css遇到的問題" class="headerlink" title="以往css遇到的問題"></a>以往css遇到的問題</h2><p>以往在寫css時，可能我們會直接將顏色的值寫死，例如:</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f0a</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f0a</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f00</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>這樣做的問題是，當今天客戶想將某個顏色替換時，我們必須手動一個一個更改，假如網站有300個地方用到該顏色，就需要手動改300次。</p>
-<p>在 SCSS裡，我們可以使用變數來管理重複的值，例如 我們可以將色碼設定為變數，當後續需要調整顏色時，只要調整變數，就改完全站的設定。</p>
-<h2 id="變數設定方式"><a href="#變數設定方式" class="headerlink" title="變數設定方式"></a>變數設定方式</h2><p>首先先在程式碼最上面打個『$』字號，後面則是自己命名的變數，之後在填上變數的值。</p>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$color-primary</span>: <span class="number">#fa0</span>;</span><br><span class="line"><span class="variable">$color-gray</span>: <span class="number">#aaa</span>;</span><br></pre></td></tr></table></figure>
-
-<p>之後需要設定顏色樣式時，就可以引入變數。</p>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="variable">$color-primary</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>變數除了支援色碼外還支援「字串」、「數字」等等。</p>
-<p>雙引號的字串也可用 #{ }取出來:</p>
-<p><img src="https://miro.medium.com/max/1004/1*jvZyuT0ob0GIxXyu3fdjoQ.png" alt="va"></p>
-<p><img src="https://miro.medium.com/max/1048/1*ZgC18gRiXbzEUl_FiZrwuQ.png" alt="編譯後"></p>
-<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>學會使用變數以後，就不用辛苦的一個一個修改css了，全站的設定統一由變數管理，讓之後的修改與維護更輕鬆。</p>
-]]></content>
-      <categories>
-        <category>scss</category>
-      </categories>
-      <tags>
-        <tag>scss</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(10) Gulp 釋出開發成品</title>
     <url>/2022/06/18/2022-6-18-2-Gulp-result/</url>
     <content><![CDATA[<h2 id="安裝-gulp-clean"><a href="#安裝-gulp-clean" class="headerlink" title="安裝 gulp clean"></a>安裝 gulp clean</h2><p>在gulp專案中，有時我們可能在source資料夾裡有一些test檔案，是不該被編譯到public資料夾內的。但無法記得到底哪些test已經被編譯，那些沒有。此時就可以用 gulp clean、gulp-sequence來清理最終的public資料夾。</p>
@@ -455,34 +428,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(12) Gulp-ejs</title>
-    <url>/2022/06/18/2022-6-18-4-Gulp-ejs/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>當我們在開發一個多頁式網站時，常常會有許多重複的區塊，例如表頭與表尾，可以將這些重複的區塊抽離出來，作為layout。此時就需要用到樣板語言來達成，來替 HTML 語言加入條件判斷、for 迴圈、元件化、套用模板等等功能。<br>本篇會介紹如何在gulp中，加入ejs樣板語言，幫助我們將重複的區塊抽離。</p>
-<h2 id="套件安裝"><a href="#套件安裝" class="headerlink" title="套件安裝"></a>套件安裝</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install ejs --save   //安裝ejs</span><br><span class="line">npm install gulp-front-matter --save  // 幫每頁 HTML 個別設定變數</span><br><span class="line">npm install gulp-layout --save  // 以先接收 front-matter 傳來的值，然後傳到 EJS 模板接收變數，再轉成 HTML</span><br></pre></td></tr></table></figure>
-
-<h2 id="ejs-任務建立"><a href="#ejs-任務建立" class="headerlink" title="ejs 任務建立"></a>ejs 任務建立</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">ejs</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(path.<span class="property">html</span>.<span class="property">src</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">frontMatter</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(</span><br><span class="line">      $.<span class="title function_">layout</span>(<span class="function">(<span class="params">file</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> file.<span class="property">frontMatter</span>;</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">if</span>(options.<span class="property">env</span> === <span class="string">&#x27;prod&#x27;</span>, $.<span class="title function_">htmlmin</span>(&#123; <span class="attr">collapseWhitespace</span>: <span class="literal">true</span> &#125;)))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="資料夾結構"><a href="#資料夾結構" class="headerlink" title="資料夾結構"></a>資料夾結構</h2><p><img src="https://cdn-images-1.medium.com/max/1320/1*3cxas_T2MN-W3YIgg9v5aQ.png" alt="folder"></p>
-<p>在source裡建立一個layout.ejs檔案，裡頭可放表頭表尾等每一頁都會出現的區塊。</p>
-<p><img src="https://cdn-images-1.medium.com/max/1320/1*XO6XwQGH-rn7AG2R3g9OsA.png" alt="layout"></p>
-<p>在html裡，因為每個頁面會想客製化設定一些資訊，所以會在每個有使用到 EJS 模板的 HTML 檔的上方放上 front-matter。以首頁為例，front-matter 有著這些資訊：</p>
-<p><img src="https://cdn-images-1.medium.com/max/1320/1*Oo079oe6jMdMI5VqfJyrTg.png" alt="front-matter"></p>
-<p>因此，ejs就可以取用 title變數取得首頁的值，並用layout變數指定layout的ejs檔。<br>整個運作過程大概是這樣：</p>
-<ol>
-<li>目錄下有具有 front-matter 的html檔、還有ejs 模板的 EJS 檔案</li>
-<li>gulp-front-matter 套件會解析檔案中的 front-matter 部份，並轉成 JS object</li>
-<li>gulp-layout 接收 JS object，把它跟 ejs 模板摻摻在一起，產出瀏覽器看得懂的 HTML 檔</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Gulp</category>
-      </categories>
-      <tags>
-        <tag>Gulp</tag>
-        <tag>ejs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(11) Gulp-git</title>
     <url>/2022/06/18/2022-6-18-3-Gulp-git/</url>
     <content><![CDATA[<h2 id="初始化git"><a href="#初始化git" class="headerlink" title="初始化git"></a>初始化git</h2><p>這章節，我們來幫gulp專案加入 git 版本控制，若電腦還沒安裝git的話，可以先到<a href="https://git-scm.com/">git官網</a>下載git並安裝。</p>
@@ -512,6 +457,61 @@
       </tags>
   </entry>
   <entry>
+    <title>(2) SCSS練功坊-變數variable</title>
+    <url>/2022/06/19/2022-6-19-1-scss-variable/</url>
+    <content><![CDATA[<h2 id="以往css遇到的問題"><a href="#以往css遇到的問題" class="headerlink" title="以往css遇到的問題"></a>以往css遇到的問題</h2><p>以往在寫css時，可能我們會直接將顏色的值寫死，例如:</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> <span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f0a</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f0a</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f00</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣做的問題是，當今天客戶想將某個顏色替換時，我們必須手動一個一個更改，假如網站有300個地方用到該顏色，就需要手動改300次。</p>
+<p>在 SCSS裡，我們可以使用變數來管理重複的值，例如 我們可以將色碼設定為變數，當後續需要調整顏色時，只要調整變數，就改完全站的設定。</p>
+<h2 id="變數設定方式"><a href="#變數設定方式" class="headerlink" title="變數設定方式"></a>變數設定方式</h2><p>首先先在程式碼最上面打個『$』字號，後面則是自己命名的變數，之後在填上變數的值。</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$color-primary</span>: <span class="number">#fa0</span>;</span><br><span class="line"><span class="variable">$color-gray</span>: <span class="number">#aaa</span>;</span><br></pre></td></tr></table></figure>
+
+<p>之後需要設定顏色樣式時，就可以引入變數。</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="variable">$color-primary</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>變數除了支援色碼外還支援「字串」、「數字」等等。</p>
+<p>雙引號的字串也可用 #{ }取出來:</p>
+<p><img src="https://miro.medium.com/max/1004/1*jvZyuT0ob0GIxXyu3fdjoQ.png" alt="va"></p>
+<p><img src="https://miro.medium.com/max/1048/1*ZgC18gRiXbzEUl_FiZrwuQ.png" alt="編譯後"></p>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>學會使用變數以後，就不用辛苦的一個一個修改css了，全站的設定統一由變數管理，讓之後的修改與維護更輕鬆。</p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(12) Gulp-ejs</title>
+    <url>/2022/06/18/2022-6-18-4-Gulp-ejs/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>當我們在開發一個多頁式網站時，常常會有許多重複的區塊，例如表頭與表尾，可以將這些重複的區塊抽離出來，作為layout。此時就需要用到樣板語言來達成，來替 HTML 語言加入條件判斷、for 迴圈、元件化、套用模板等等功能。<br>本篇會介紹如何在gulp中，加入ejs樣板語言，幫助我們將重複的區塊抽離。</p>
+<h2 id="套件安裝"><a href="#套件安裝" class="headerlink" title="套件安裝"></a>套件安裝</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install ejs --save   //安裝ejs</span><br><span class="line">npm install gulp-front-matter --save  // 幫每頁 HTML 個別設定變數</span><br><span class="line">npm install gulp-layout --save  // 以先接收 front-matter 傳來的值，然後傳到 EJS 模板接收變數，再轉成 HTML</span><br></pre></td></tr></table></figure>
+
+<h2 id="ejs-任務建立"><a href="#ejs-任務建立" class="headerlink" title="ejs 任務建立"></a>ejs 任務建立</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">ejs</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(path.<span class="property">html</span>.<span class="property">src</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">plumber</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">frontMatter</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>(</span><br><span class="line">      $.<span class="title function_">layout</span>(<span class="function">(<span class="params">file</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> file.<span class="property">frontMatter</span>;</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">if</span>(options.<span class="property">env</span> === <span class="string">&#x27;prod&#x27;</span>, $.<span class="title function_">htmlmin</span>(&#123; <span class="attr">collapseWhitespace</span>: <span class="literal">true</span> &#125;)))</span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./public&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>(browserSync.<span class="title function_">stream</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="資料夾結構"><a href="#資料夾結構" class="headerlink" title="資料夾結構"></a>資料夾結構</h2><p><img src="https://cdn-images-1.medium.com/max/1320/1*3cxas_T2MN-W3YIgg9v5aQ.png" alt="folder"></p>
+<p>在source裡建立一個layout.ejs檔案，裡頭可放表頭表尾等每一頁都會出現的區塊。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*XO6XwQGH-rn7AG2R3g9OsA.png" alt="layout"></p>
+<p>在html裡，因為每個頁面會想客製化設定一些資訊，所以會在每個有使用到 EJS 模板的 HTML 檔的上方放上 front-matter。以首頁為例，front-matter 有著這些資訊：</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*Oo079oe6jMdMI5VqfJyrTg.png" alt="front-matter"></p>
+<p>因此，ejs就可以取用 title變數取得首頁的值，並用layout變數指定layout的ejs檔。<br>整個運作過程大概是這樣：</p>
+<ol>
+<li>目錄下有具有 front-matter 的html檔、還有ejs 模板的 EJS 檔案</li>
+<li>gulp-front-matter 套件會解析檔案中的 front-matter 部份，並轉成 JS object</li>
+<li>gulp-layout 接收 JS object，把它跟 ejs 模板摻摻在一起，產出瀏覽器看得懂的 HTML 檔</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Gulp</category>
+      </categories>
+      <tags>
+        <tag>Gulp</tag>
+        <tag>ejs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(1) SCSS練功坊-基礎介紹</title>
     <url>/2022/06/18/2022-6-18-5-scss-intro/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>scss屬於css的預處理器，他加入了程式語言所用的變數、迴圈、模組化等概念，讓我們更方便管理css。<br>現今較為主流的 CSS 預處理器有三種，分別是 Sass&#x2F;SCSS、Less、Stylus，其中的 Sass&#x2F;SCSS 是目前較多人使用的選擇。</p>
@@ -523,40 +523,6 @@
 <figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="selector-tag">ul</span> &#123;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>scss的功能除了上述介紹的巢狀語法以外，還有許多如變數、函式、mixin、模組化等概念會在之後等章節來介紹喔。</p>
-]]></content>
-      <categories>
-        <category>scss</category>
-      </categories>
-      <tags>
-        <tag>scss</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(5) SCSS練功坊-mixin</title>
-    <url>/2022/06/19/2022-6-19-4-scss-mixin/</url>
-    <content><![CDATA[<h2 id="使用-mixin-管理重複的樣式"><a href="#使用-mixin-管理重複的樣式" class="headerlink" title="使用 mixin 管理重複的樣式"></a>使用 mixin 管理重複的樣式</h2><p>當我們有一段樣式，會被重複用到，裡頭樣式數值又會有不同時，可以用mixin做管理。<br>撰寫mixin方法</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@mixin + mixin名稱(參數) &#123; &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/1266/1*M5IXbD8WVeMwgzfadFHNrQ.png" alt="circle"></p>
-<p>上圖中， circle 裡可以帶入 $size，$bg-color等不同參數，如此在不同地方，我們可以依照不同需求，傳入不同參數，做出不同的圓形。</p>
-<p>引入 mixin時，用 @include + mixin名稱</p>
-<p><img src="https://miro.medium.com/max/1140/1*Yn5snpWqUCxsEJ1eA646zQ.png" alt="編譯後結果"></p>
-]]></content>
-      <categories>
-        <category>scss</category>
-      </categories>
-      <tags>
-        <tag>scss</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(3) SCSS練功坊-計算功能</title>
-    <url>/2022/06/19/2022-6-19-2-scss-calc/</url>
-    <content><![CDATA[<h2 id="計算功能"><a href="#計算功能" class="headerlink" title="計算功能"></a>計算功能</h2><p>在 SCSS裡，我們可以用變數來做加減乘除等運算，如下我設定了 $font-size: 16px，之後再利用這個變數做運算，計算出其他font-size大小。但要注意計算時單位必須一樣。</p>
-<p><img src="https://miro.medium.com/max/1028/1*n0VDI1urUorAt3oPPs4YXA.png" alt="font-size"></p>
-<p>計算單位 除了px單位外，em與%數也可以，但假使你用px+em與%單位的話，會跳錯誤，因為單位不同。</p>
-<h2 id="範例-計算container-寬度"><a href="#範例-計算container-寬度" class="headerlink" title="範例: 計算container 寬度"></a>範例: 計算container 寬度</h2><p>有一個 container 寬度為 $width :920px；裡面有6個子元素box，利用 width &#x2F; 6 ，直接算出每個box寬度。</p>
-<p><img src="https://miro.medium.com/max/842/1*EzxbD-ztoCWUm-wqE3OVLA.png" alt="container"></p>
 ]]></content>
       <categories>
         <category>scss</category>
@@ -609,6 +575,40 @@
       </tags>
   </entry>
   <entry>
+    <title>(3) SCSS練功坊-計算功能</title>
+    <url>/2022/06/19/2022-6-19-2-scss-calc/</url>
+    <content><![CDATA[<h2 id="計算功能"><a href="#計算功能" class="headerlink" title="計算功能"></a>計算功能</h2><p>在 SCSS裡，我們可以用變數來做加減乘除等運算，如下我設定了 $font-size: 16px，之後再利用這個變數做運算，計算出其他font-size大小。但要注意計算時單位必須一樣。</p>
+<p><img src="https://miro.medium.com/max/1028/1*n0VDI1urUorAt3oPPs4YXA.png" alt="font-size"></p>
+<p>計算單位 除了px單位外，em與%數也可以，但假使你用px+em與%單位的話，會跳錯誤，因為單位不同。</p>
+<h2 id="範例-計算container-寬度"><a href="#範例-計算container-寬度" class="headerlink" title="範例: 計算container 寬度"></a>範例: 計算container 寬度</h2><p>有一個 container 寬度為 $width :920px；裡面有6個子元素box，利用 width &#x2F; 6 ，直接算出每個box寬度。</p>
+<p><img src="https://miro.medium.com/max/842/1*EzxbD-ztoCWUm-wqE3OVLA.png" alt="container"></p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(5) SCSS練功坊-mixin</title>
+    <url>/2022/06/19/2022-6-19-4-scss-mixin/</url>
+    <content><![CDATA[<h2 id="使用-mixin-管理重複的樣式"><a href="#使用-mixin-管理重複的樣式" class="headerlink" title="使用 mixin 管理重複的樣式"></a>使用 mixin 管理重複的樣式</h2><p>當我們有一段樣式，會被重複用到，裡頭樣式數值又會有不同時，可以用mixin做管理。<br>撰寫mixin方法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@mixin + mixin名稱(參數) &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1266/1*M5IXbD8WVeMwgzfadFHNrQ.png" alt="circle"></p>
+<p>上圖中， circle 裡可以帶入 $size，$bg-color等不同參數，如此在不同地方，我們可以依照不同需求，傳入不同參數，做出不同的圓形。</p>
+<p>引入 mixin時，用 @include + mixin名稱</p>
+<p><img src="https://miro.medium.com/max/1140/1*Yn5snpWqUCxsEJ1eA646zQ.png" alt="編譯後結果"></p>
+]]></content>
+      <categories>
+        <category>scss</category>
+      </categories>
+      <tags>
+        <tag>scss</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(7) SCSS練功坊-顏色函數</title>
     <url>/2022/06/20/2022-6-20-1-scss-color/</url>
     <content><![CDATA[<h2 id="顏色函數"><a href="#顏色函數" class="headerlink" title="顏色函數"></a>顏色函數</h2><p><img src="https://miro.medium.com/max/1400/1*SFb0wzFGrTw4byZVEbn_8g.png" alt="color"></p>
@@ -633,27 +633,6 @@
 <h2 id="Mixin與extend的使用時機"><a href="#Mixin與extend的使用時機" class="headerlink" title="Mixin與extend的使用時機"></a>Mixin與extend的使用時機</h2><p>基本上來說，<br>@mixin是將程式碼帶入到對應的class去，同時可帶入變數。<br>@extend則是藉由class合併，並吃到共通樣式，但沒辦法帶入變數。</p>
 <p>所以如果你的樣式都固定不變的，不會需要用參數帶進去改變樣式的話，<br>那就用@extend，程式碼會比較少些。</p>
 <p>但如果你的程式碼需要帶入多個變數進行運算時，<br>那用@mixin則較適合。</p>
-]]></content>
-      <categories>
-        <category>scss</category>
-      </categories>
-      <tags>
-        <tag>scss</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(9) SCSS練功坊-7+1資料夾規劃</title>
-    <url>/2022/06/20/2022-6-20-3-scss-7-1/</url>
-    <content><![CDATA[<h2 id="7-1-資料夾規劃"><a href="#7-1-資料夾規劃" class="headerlink" title="7 + 1 資料夾規劃"></a>7 + 1 資料夾規劃</h2><p>當我們有許多SCSS檔案要規劃時，可以使用7+1歸納法，也就是7個資料夾搭配 1個 all.scss檔案</p>
-<p><img src="https://miro.medium.com/max/1128/1*jmb4MvIeinaRy7etvwvhZw.png" alt="img"></p>
-<h3 id="abstract-資料夾"><a href="#abstract-資料夾" class="headerlink" title="abstract 資料夾"></a>abstract 資料夾</h3><p>放 variables、mixin、funtion等不會真正產出 css 的 scss 檔案</p>
-<h3 id="base-資料夾"><a href="#base-資料夾" class="headerlink" title="base 資料夾"></a>base 資料夾</h3><p>放 base.scss 、 reset.scss、Typography等全域設定的scss</p>
-<h3 id="components-資料夾"><a href="#components-資料夾" class="headerlink" title="components 資料夾"></a>components 資料夾</h3><p>放全站都會用到的元件，如 button 、 label、nav等等</p>
-<h3 id="layout-資料夾"><a href="#layout-資料夾" class="headerlink" title="layout 資料夾"></a>layout 資料夾</h3><p>放全站共用的layout區塊，如 grid 、header、footer等等</p>
-<h3 id="pages-資料夾"><a href="#pages-資料夾" class="headerlink" title="pages 資料夾"></a>pages 資料夾</h3><p>放 每頁不同的scss</p>
-<h3 id="themes資料夾"><a href="#themes資料夾" class="headerlink" title="themes資料夾"></a>themes資料夾</h3><p>如果你的網站有主題樣式，可以放這裡</p>
-<h3 id="vendor-資料夾"><a href="#vendor-資料夾" class="headerlink" title="vendor 資料夾"></a>vendor 資料夾</h3><p>放外部資源的scss檔，如bootstrap.scss</p>
-<p>另外可參考<a href="https://gist.github.com/rveitch/84cea9650092119527bc">此網站配置</a></p>
 ]]></content>
       <categories>
         <category>scss</category>
@@ -692,48 +671,24 @@
       </tags>
   </entry>
   <entry>
-    <title>(1) CSS 基礎篇-Position</title>
-    <url>/2022/06/21/2022-6-21-1-css-posotion/</url>
-    <content><![CDATA[<h2 id="Position-屬性介紹"><a href="#Position-屬性介紹" class="headerlink" title="Position 屬性介紹"></a>Position 屬性介紹</h2><p>在網頁中 position 的用途是設定「物件定位時所要的參考對像」，預設狀態下物件的位置是依據資料流來做排列，也就是跟隨資料做排列，如果對物件添加了不同的 position 之後，就能改變物件所參考的空間對像，進而改變物件的位置。</p>
-<p>以下分別介紹各種position 屬性</p>
-<h2 id="static-靜態定位"><a href="#static-靜態定位" class="headerlink" title="static 靜態定位"></a>static 靜態定位</h2><p>是元素的預設值，不會被特別定位」在頁面上特定位置，而是照著瀏覽器預設的配置自動排版在頁面上</p>
-<h2 id="relative-相對定位"><a href="#relative-相對定位" class="headerlink" title="relative 相對定位"></a>relative 相對定位</h2><p>在一個設定為 position: relative 的元素內設定 top 、 right 、 bottom 和 left 屬性，會使其元素「相對地」調整其原本該出現的所在位置，而不管這些「相對定位」過的元素如何在頁面上移動位置或增加了多少空間，都不會影響到原本其他元素所在的位置。可以稱為【偏移顯示】</p>
-<p>不過通常不會對position relative設定top 、 right 等位移，因為會讓元素脫離預設的排版，讓我們很難去設定周圍元素的樣式。</p>
-<p><a href="https://youtu.be/jx5jmI0UlXU?t=166">參考影片</a></p>
-<h2 id="abosulute-絕對定位"><a href="#abosulute-絕對定位" class="headerlink" title="abosulute 絕對定位"></a>abosulute 絕對定位</h2><p>會將元素從預設排版中抽離，就像不存在於html結構中一樣。<br>元素設定 Position abosulute 後會去尋找父層中，有定位的元素做定位，如最常用的 position:relative、或fixed、absolute；<br>若父層都沒有定位元素，就會跟瀏覽器做定位。</p>
-<p>position absolute可以搭配top 、bottom 、right、left 來設定定位位置，如下面範例將元素定位在左上角。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: position;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="absolute搭配-width-height技巧"><a href="#absolute搭配-width-height技巧" class="headerlink" title="absolute搭配 width height技巧"></a>absolute搭配 width height技巧</h3><p>width、height、margin: auto 跟top 、bottom等一起用，可以控制元素的大小與位置，<a href="https://www.youtube.com/watch?v=QGKO0PGzFXQ&t=16s">教學影片</a></p>
-<p><img src="https://miro.medium.com/max/826/1*ThNCveqMOYrXF4nVoTBWkw.png" alt="position"></p>
-<p><img src="https://miro.medium.com/max/1400/1*PIKeD9RV4TGRvLhT3w5ylA.png" alt="position"></p>
-<h2 id="fixed-固定定位"><a href="#fixed-固定定位" class="headerlink" title="fixed 固定定位"></a>fixed 固定定位</h2><p>固定定位（position: fixed）的元素會相對於瀏覽器視窗來定位，這意味著即便頁面捲動，它還是會固定在相同的位置。和 relative 一樣，我們會使用 top 、 right 、 bottom 和 left 屬性來定位。</p>
-<p>固定定位元素不會保留它原本在頁面應有的空間，不會跟其他元素的配置互相干擾。</p>
-<h2 id="sticky-黏著定位"><a href="#sticky-黏著定位" class="headerlink" title="sticky 黏著定位"></a>sticky 黏著定位</h2><p>結合了 position : relative，跟 position: fixed，當使用者沒滑動卷軸時，就跟relative元素一樣，當使用者滑動卷軸時，則跟position: fixed 會固定在視窗上。</p>
-<p><a href="https://codepen.io/tim-chou/pen/NWbvMQL">範例</a></p>
+    <title>(9) SCSS練功坊-7+1資料夾規劃</title>
+    <url>/2022/06/20/2022-6-20-3-scss-7-1/</url>
+    <content><![CDATA[<h2 id="7-1-資料夾規劃"><a href="#7-1-資料夾規劃" class="headerlink" title="7 + 1 資料夾規劃"></a>7 + 1 資料夾規劃</h2><p>當我們有許多SCSS檔案要規劃時，可以使用7+1歸納法，也就是7個資料夾搭配 1個 all.scss檔案</p>
+<p><img src="https://miro.medium.com/max/1128/1*jmb4MvIeinaRy7etvwvhZw.png" alt="img"></p>
+<h3 id="abstract-資料夾"><a href="#abstract-資料夾" class="headerlink" title="abstract 資料夾"></a>abstract 資料夾</h3><p>放 variables、mixin、funtion等不會真正產出 css 的 scss 檔案</p>
+<h3 id="base-資料夾"><a href="#base-資料夾" class="headerlink" title="base 資料夾"></a>base 資料夾</h3><p>放 base.scss 、 reset.scss、Typography等全域設定的scss</p>
+<h3 id="components-資料夾"><a href="#components-資料夾" class="headerlink" title="components 資料夾"></a>components 資料夾</h3><p>放全站都會用到的元件，如 button 、 label、nav等等</p>
+<h3 id="layout-資料夾"><a href="#layout-資料夾" class="headerlink" title="layout 資料夾"></a>layout 資料夾</h3><p>放全站共用的layout區塊，如 grid 、header、footer等等</p>
+<h3 id="pages-資料夾"><a href="#pages-資料夾" class="headerlink" title="pages 資料夾"></a>pages 資料夾</h3><p>放 每頁不同的scss</p>
+<h3 id="themes資料夾"><a href="#themes資料夾" class="headerlink" title="themes資料夾"></a>themes資料夾</h3><p>如果你的網站有主題樣式，可以放這裡</p>
+<h3 id="vendor-資料夾"><a href="#vendor-資料夾" class="headerlink" title="vendor 資料夾"></a>vendor 資料夾</h3><p>放外部資源的scss檔，如bootstrap.scss</p>
+<p>另外可參考<a href="https://gist.github.com/rveitch/84cea9650092119527bc">此網站配置</a></p>
 ]]></content>
       <categories>
-        <category>CSS</category>
+        <category>scss</category>
       </categories>
       <tags>
-        <tag>CSS基礎篇</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(1) Git 練功坊-安裝教學</title>
-    <url>/2022/06/21/2022-6-21-3-git-install/</url>
-    <content><![CDATA[<h2 id="什麼是git"><a href="#什麼是git" class="headerlink" title="什麼是git"></a>什麼是git</h2><p>以往在做檔案版本的管理時，最簡單的方法就是複製編輯前的檔案並在檔案名稱加上日期，但是，每次編輯檔案都要複製非常的麻煩，也很容易出錯。</p>
-<p>Git為分散式版本控制系統，可以把檔案的狀態作為更新歷史記錄保存起來。因此可以把編輯過的檔案復原到以前的狀態，也可以顯示編輯過內容的差異。</p>
-<p>本系列文章為參考 <a href="https://courses.hexschool.com/p/git-github">六角學院git課程</a> 紀錄。</p>
-<h2 id="安裝git"><a href="#安裝git" class="headerlink" title="安裝git"></a>安裝git</h2><p><img src="https://miro.medium.com/max/1400/1*9tfhhWJLGL5HM7V99xkKXw.png" alt="git官網"></p>
-<p>先到 <a href="https://git-scm.com/">git官網</a> 下載git</p>
-<h2 id="確認git版本"><a href="#確認git版本" class="headerlink" title="確認git版本"></a>確認git版本</h2><p>在VScode編輯器裡，按 ctrl + ~ 開啟終端機畫面。<br>輸入 <code>git version</code> 確認下載的git版本，若有出現版本號，就安裝成功囉。</p>
-<p><img src="https://miro.medium.com/max/1138/1*Q48Ug1afDJ2JzugYH_fslA.png" alt="git版本"></p>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
+        <tag>scss</tag>
       </tags>
   </entry>
   <entry>
@@ -762,6 +717,33 @@
       <tags>
         <tag>CSS</tag>
         <tag>RWD</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(1) CSS 基礎篇-Position</title>
+    <url>/2022/06/21/2022-6-21-1-css-posotion/</url>
+    <content><![CDATA[<h2 id="Position-屬性介紹"><a href="#Position-屬性介紹" class="headerlink" title="Position 屬性介紹"></a>Position 屬性介紹</h2><p>在網頁中 position 的用途是設定「物件定位時所要的參考對像」，預設狀態下物件的位置是依據資料流來做排列，也就是跟隨資料做排列，如果對物件添加了不同的 position 之後，就能改變物件所參考的空間對像，進而改變物件的位置。</p>
+<p>以下分別介紹各種position 屬性</p>
+<h2 id="static-靜態定位"><a href="#static-靜態定位" class="headerlink" title="static 靜態定位"></a>static 靜態定位</h2><p>是元素的預設值，不會被特別定位」在頁面上特定位置，而是照著瀏覽器預設的配置自動排版在頁面上</p>
+<h2 id="relative-相對定位"><a href="#relative-相對定位" class="headerlink" title="relative 相對定位"></a>relative 相對定位</h2><p>在一個設定為 position: relative 的元素內設定 top 、 right 、 bottom 和 left 屬性，會使其元素「相對地」調整其原本該出現的所在位置，而不管這些「相對定位」過的元素如何在頁面上移動位置或增加了多少空間，都不會影響到原本其他元素所在的位置。可以稱為【偏移顯示】</p>
+<p>不過通常不會對position relative設定top 、 right 等位移，因為會讓元素脫離預設的排版，讓我們很難去設定周圍元素的樣式。</p>
+<p><a href="https://youtu.be/jx5jmI0UlXU?t=166">參考影片</a></p>
+<h2 id="abosulute-絕對定位"><a href="#abosulute-絕對定位" class="headerlink" title="abosulute 絕對定位"></a>abosulute 絕對定位</h2><p>會將元素從預設排版中抽離，就像不存在於html結構中一樣。<br>元素設定 Position abosulute 後會去尋找父層中，有定位的元素做定位，如最常用的 position:relative、或fixed、absolute；<br>若父層都沒有定位元素，就會跟瀏覽器做定位。</p>
+<p>position absolute可以搭配top 、bottom 、right、left 來設定定位位置，如下面範例將元素定位在左上角。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: position;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="absolute搭配-width-height技巧"><a href="#absolute搭配-width-height技巧" class="headerlink" title="absolute搭配 width height技巧"></a>absolute搭配 width height技巧</h3><p>width、height、margin: auto 跟top 、bottom等一起用，可以控制元素的大小與位置，<a href="https://www.youtube.com/watch?v=QGKO0PGzFXQ&t=16s">教學影片</a></p>
+<p><img src="https://miro.medium.com/max/826/1*ThNCveqMOYrXF4nVoTBWkw.png" alt="position"></p>
+<p><img src="https://miro.medium.com/max/1400/1*PIKeD9RV4TGRvLhT3w5ylA.png" alt="position"></p>
+<h2 id="fixed-固定定位"><a href="#fixed-固定定位" class="headerlink" title="fixed 固定定位"></a>fixed 固定定位</h2><p>固定定位（position: fixed）的元素會相對於瀏覽器視窗來定位，這意味著即便頁面捲動，它還是會固定在相同的位置。和 relative 一樣，我們會使用 top 、 right 、 bottom 和 left 屬性來定位。</p>
+<p>固定定位元素不會保留它原本在頁面應有的空間，不會跟其他元素的配置互相干擾。</p>
+<h2 id="sticky-黏著定位"><a href="#sticky-黏著定位" class="headerlink" title="sticky 黏著定位"></a>sticky 黏著定位</h2><p>結合了 position : relative，跟 position: fixed，當使用者沒滑動卷軸時，就跟relative元素一樣，當使用者滑動卷軸時，則跟position: fixed 會固定在視窗上。</p>
+<p><a href="https://codepen.io/tim-chou/pen/NWbvMQL">範例</a></p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS基礎篇</tag>
       </tags>
   </entry>
   <entry>
@@ -825,6 +807,24 @@
       </tags>
   </entry>
   <entry>
+    <title>(1) Git 練功坊-安裝教學</title>
+    <url>/2022/06/21/2022-6-21-3-git-install/</url>
+    <content><![CDATA[<h2 id="什麼是git"><a href="#什麼是git" class="headerlink" title="什麼是git"></a>什麼是git</h2><p>以往在做檔案版本的管理時，最簡單的方法就是複製編輯前的檔案並在檔案名稱加上日期，但是，每次編輯檔案都要複製非常的麻煩，也很容易出錯。</p>
+<p>Git為分散式版本控制系統，可以把檔案的狀態作為更新歷史記錄保存起來。因此可以把編輯過的檔案復原到以前的狀態，也可以顯示編輯過內容的差異。</p>
+<p>本系列文章為參考 <a href="https://courses.hexschool.com/p/git-github">六角學院git課程</a> 紀錄。</p>
+<h2 id="安裝git"><a href="#安裝git" class="headerlink" title="安裝git"></a>安裝git</h2><p><img src="https://miro.medium.com/max/1400/1*9tfhhWJLGL5HM7V99xkKXw.png" alt="git官網"></p>
+<p>先到 <a href="https://git-scm.com/">git官網</a> 下載git</p>
+<h2 id="確認git版本"><a href="#確認git版本" class="headerlink" title="確認git版本"></a>確認git版本</h2><p>在VScode編輯器裡，按 ctrl + ~ 開啟終端機畫面。<br>輸入 <code>git version</code> 確認下載的git版本，若有出現版本號，就安裝成功囉。</p>
+<p><img src="https://miro.medium.com/max/1138/1*Q48Ug1afDJ2JzugYH_fslA.png" alt="git版本"></p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(2) Git 練功坊-數據庫</title>
     <url>/2022/06/21/2022-6-21-4-git-basic/</url>
     <content><![CDATA[<h2 id="使用數據庫管理歷史記錄"><a href="#使用數據庫管理歷史記錄" class="headerlink" title="使用數據庫管理歷史記錄"></a>使用數據庫管理歷史記錄</h2><p>數據庫 (Repository) 是git用來記錄檔案或目錄狀態的地方，儲存內容的修改歷史記錄。數據庫可分為兩種</p>
@@ -844,41 +844,6 @@
 <p>新增完成後，會出現master字樣，代表新增成功囉。</p>
 <p><img src="https://miro.medium.com/max/1354/1*e-Nug4-xJBAoymsYYN91TQ.png" alt="git數據庫"></p>
 <p>數據庫建立好後，下一章節會介紹git基礎語法喔。</p>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(4) Git 練功坊-遠端數據庫</title>
-    <url>/2022/06/21/2022-6-21-6-git-remote/</url>
-    <content><![CDATA[<h2 id="遠端數據庫"><a href="#遠端數據庫" class="headerlink" title="遠端數據庫"></a>遠端數據庫</h2><p>之前介紹過如何再本地端提交更新，今天要教大家將本地端的更新提交到遠端數據庫(Github)。</p>
-<h2 id="註冊Github"><a href="#註冊Github" class="headerlink" title="註冊Github"></a>註冊Github</h2><p>我們要先去 <a href="https://github.com/">GitHub</a> 註冊會員。</p>
-<p><img src="https://ithelp.ithome.com.tw/upload/images/20190908/20119923T2oDPSuQK3.png" alt="github"></p>
-<h2 id="新建一個-repository"><a href="#新建一個-repository" class="headerlink" title="新建一個 repository"></a>新建一個 repository</h2><p>註冊好帳號後，可以在github上新建一個 repository 數據庫</p>
-<p><img src="https://miro.medium.com/max/1400/1*7xMLMI0zZ87X4s9Hi4EIHg.png" alt="repository"></p>
-<p>這邊填寫數據庫名稱</p>
-<p><img src="https://miro.medium.com/max/1400/1*PdIfUXuiD4hS1HDjNyhU7w.png" alt="repo-name"></p>
-<h2 id="複製遠端數據庫到本地端"><a href="#複製遠端數據庫到本地端" class="headerlink" title="複製遠端數據庫到本地端"></a>複製遠端數據庫到本地端</h2><p>新開一個專案資料夾並移動進去</p>
-<p>輸入:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone 遠端數據庫網址</span><br></pre></td></tr></table></figure>
-
-<p>輸入完後，會將遠端新增的repository複製到本地資料夾內。</p>
-<p><img src="https://miro.medium.com/max/1400/1*TRv6Lzld1DosUcNDlJWErQ.png" alt="git-clone"></p>
-<h2 id="推送資料到遠端數據庫"><a href="#推送資料到遠端數據庫" class="headerlink" title="推送資料到遠端數據庫"></a>推送資料到遠端數據庫</h2><p>在本地端新增資料，並照上個章節的做法 commit完以後，就可以將 commit 上傳到遠端資料夾內囉。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git push  // 將資料推到遠端</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/1400/1*7mwBekzTKtNV_DHCBs_txg.png" alt="上傳成功"></p>
-<h2 id="從遠端下載資料"><a href="#從遠端下載資料" class="headerlink" title="從遠端下載資料"></a>從遠端下載資料</h2><p>若遠端資料庫的資料有更新，比如說其他同事有push新的資料上去，那我們有兩種方式將資料下載下來。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git pull  // 從遠端拉取資料下來，並直接合併</span><br></pre></td></tr></table></figure>
-
-<p>執行 git pull 會將遠端更新的資料下載下來，並且會直接合併。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git fetch  // 從遠端拉取資料下來，但不合併</span><br></pre></td></tr></table></figure>
-
-<p>執行 git fetch 也會從遠端下載資料下來，但不會直接合併，而是以新的commit呈現。<br>等確認這些新的commit內容ok，可以再自行用 git merge 合併進專案。</p>
 ]]></content>
       <categories>
         <category>Git</category>
@@ -910,6 +875,86 @@
 <h2 id="查詢紀錄"><a href="#查詢紀錄" class="headerlink" title="查詢紀錄"></a>查詢紀錄</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git log  // 查詢過去commit 的紀錄</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://miro.medium.com/max/1400/1*qNvdGY6XePWNMA3h4a--LQ.png" alt="git log"></p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ES6 let、const、var的區別</title>
+    <url>/2022/06/21/2022-6-21-7-js-variables/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在es6以前，我們會用 var 來宣告一個變數。而在es6推出後，新增了 let 與 const的變數宣告方法，改善了使用 var 宣告變數的一些缺點，以下用講解 var 與 let const 宣告的差異。</p>
+<h2 id="區塊與函式作用域"><a href="#區塊與函式作用域" class="headerlink" title="區塊與函式作用域"></a>區塊與函式作用域</h2><p>var是函式作用域的設計，在函式內宣告的變數，函式外讀取不到。<br>但在一些使用了區塊語句(用花括號的語句)的像if, else, for, while等等區塊語句中，在這裡面用var宣告的變數仍然是會曝露到全域之中可被存取，例如:</p>
+<p><img src="https://miro.medium.com/max/1178/1*iO1BqGOT_318PIkF8jjxJQ.png" alt="函式作用域"></p>
+<p>let或const來宣告是區塊作用域，就是以區塊語句 { } 為分界的作用域:</p>
+<p>不管是在函式內宣告的變數，或是 在 if, else, for, while等等區塊語句{ }中宣告的變數，都不會在全域中被讀取到。</p>
+<p><img src="https://miro.medium.com/max/964/1*1IltRn_k3xANnY6fWcZW1A.png" alt="區塊作用域"></p>
+<h2 id="重複宣告的問題"><a href="#重複宣告的問題" class="headerlink" title="重複宣告的問題"></a>重複宣告的問題</h2><p>以往用 var 宣告變數，是可以進行重複宣告的: </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>這樣可能會不小心複寫了變數的值，導致專案出錯。</p>
+<p>用 const let 告的變數，在同一個作用域下，則無法重新再被宣告。</p>
+<p><img src="https://miro.medium.com/max/440/1*06HErRPc-Jcyhazl3fuj7w.png" alt="const let"></p>
+<p><img src="https://miro.medium.com/max/1286/1*zsSWcfXZBnj3Ap1D5JE7Pg.png" alt="error"></p>
+<h2 id="常數"><a href="#常數" class="headerlink" title="常數"></a>常數</h2><p>const 針對是常數的定義，常數在一宣告時就必定要指定給值，不然會產生錯誤。而對於常數在ES6的定義是: 不可再指定。</p>
+<p><img src="https://miro.medium.com/max/1278/1*lpOInYC-ccAVD_dBcv5csg.png" alt="const"></p>
+<p>上面因為再次賦予 a &#x3D; 20 而出現錯誤。</p>
+<p>如果你宣告的常數是一個物件或陣列類型，像這種參照類型的值，裡面的值是可以作改變的，如下:</p>
+<p><img src="https://miro.medium.com/max/336/1*IP1XW0OtYFB_Am976yXjNA.png" alt="array"></p>
+<p>所以對於物件、陣列、函式來說，使用 const 常數來宣告就可以，除非你有需要再指定這個陣列或物件的參照。</p>
+<h2 id="Hoisting-向上提升特性"><a href="#Hoisting-向上提升特性" class="headerlink" title="Hoisting 向上提升特性"></a>Hoisting 向上提升特性</h2><p>var 跟 function 都有向上提升特性，在宣告後會自動提升到 js 最上面 ，縱使還沒賦予值，還是先建立好記憶體位置。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> a =<span class="number">3</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<p>如上面程式，我們在第 2 行宣告了 a 變數等於3，但在第一行就讀取a變數，此時並不會報錯，因為 a 已經有記憶體位置了，只是還沒給予值，所以會是 undefined。 在第3行讀取a變數就可以正確讀到 3 的值。</p>
+<p>let 跟 const 沒有向上提升， 必須先宣告、後使用。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b);  <span class="comment">// b is not defined</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">3</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b);  <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(4) Git 練功坊-遠端數據庫</title>
+    <url>/2022/06/21/2022-6-21-6-git-remote/</url>
+    <content><![CDATA[<h2 id="遠端數據庫"><a href="#遠端數據庫" class="headerlink" title="遠端數據庫"></a>遠端數據庫</h2><p>之前介紹過如何再本地端提交更新，今天要教大家將本地端的更新提交到遠端數據庫(Github)。</p>
+<h2 id="註冊Github"><a href="#註冊Github" class="headerlink" title="註冊Github"></a>註冊Github</h2><p>我們要先去 <a href="https://github.com/">GitHub</a> 註冊會員。</p>
+<p><img src="https://ithelp.ithome.com.tw/upload/images/20190908/20119923T2oDPSuQK3.png" alt="github"></p>
+<h2 id="新建一個-repository"><a href="#新建一個-repository" class="headerlink" title="新建一個 repository"></a>新建一個 repository</h2><p>註冊好帳號後，可以在github上新建一個 repository 數據庫</p>
+<p><img src="https://miro.medium.com/max/1400/1*7xMLMI0zZ87X4s9Hi4EIHg.png" alt="repository"></p>
+<p>這邊填寫數據庫名稱</p>
+<p><img src="https://miro.medium.com/max/1400/1*PdIfUXuiD4hS1HDjNyhU7w.png" alt="repo-name"></p>
+<h2 id="複製遠端數據庫到本地端"><a href="#複製遠端數據庫到本地端" class="headerlink" title="複製遠端數據庫到本地端"></a>複製遠端數據庫到本地端</h2><p>新開一個專案資料夾並移動進去</p>
+<p>輸入:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone 遠端數據庫網址</span><br></pre></td></tr></table></figure>
+
+<p>輸入完後，會將遠端新增的repository複製到本地資料夾內。</p>
+<p><img src="https://miro.medium.com/max/1400/1*TRv6Lzld1DosUcNDlJWErQ.png" alt="git-clone"></p>
+<h2 id="推送資料到遠端數據庫"><a href="#推送資料到遠端數據庫" class="headerlink" title="推送資料到遠端數據庫"></a>推送資料到遠端數據庫</h2><p>在本地端新增資料，並照上個章節的做法 commit完以後，就可以將 commit 上傳到遠端資料夾內囉。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git push  // 將資料推到遠端</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1400/1*7mwBekzTKtNV_DHCBs_txg.png" alt="上傳成功"></p>
+<h2 id="從遠端下載資料"><a href="#從遠端下載資料" class="headerlink" title="從遠端下載資料"></a>從遠端下載資料</h2><p>若遠端資料庫的資料有更新，比如說其他同事有push新的資料上去，那我們有兩種方式將資料下載下來。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git pull  // 從遠端拉取資料下來，並直接合併</span><br></pre></td></tr></table></figure>
+
+<p>執行 git pull 會將遠端更新的資料下載下來，並且會直接合併。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git fetch  // 從遠端拉取資料下來，但不合併</span><br></pre></td></tr></table></figure>
+
+<p>執行 git fetch 也會從遠端下載資料下來，但不會直接合併，而是以新的commit呈現。<br>等確認這些新的commit內容ok，可以再自行用 git merge 合併進專案。</p>
 ]]></content>
       <categories>
         <category>Git</category>
@@ -969,83 +1014,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ES6 let、const、var的區別</title>
-    <url>/2022/06/21/2022-6-21-7-js-variables/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在es6以前，我們會用 var 來宣告一個變數。而在es6推出後，新增了 let 與 const的變數宣告方法，改善了使用 var 宣告變數的一些缺點，以下用講解 var 與 let const 宣告的差異。</p>
-<h2 id="區塊與函式作用域"><a href="#區塊與函式作用域" class="headerlink" title="區塊與函式作用域"></a>區塊與函式作用域</h2><p>var是函式作用域的設計，在函式內宣告的變數，函式外讀取不到。<br>但在一些使用了區塊語句(用花括號的語句)的像if, else, for, while等等區塊語句中，在這裡面用var宣告的變數仍然是會曝露到全域之中可被存取，例如:</p>
-<p><img src="https://miro.medium.com/max/1178/1*iO1BqGOT_318PIkF8jjxJQ.png" alt="函式作用域"></p>
-<p>let或const來宣告是區塊作用域，就是以區塊語句 { } 為分界的作用域:</p>
-<p>不管是在函式內宣告的變數，或是 在 if, else, for, while等等區塊語句{ }中宣告的變數，都不會在全域中被讀取到。</p>
-<p><img src="https://miro.medium.com/max/964/1*1IltRn_k3xANnY6fWcZW1A.png" alt="區塊作用域"></p>
-<h2 id="重複宣告的問題"><a href="#重複宣告的問題" class="headerlink" title="重複宣告的問題"></a>重複宣告的問題</h2><p>以往用 var 宣告變數，是可以進行重複宣告的: </p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-
-<p>這樣可能會不小心複寫了變數的值，導致專案出錯。</p>
-<p>用 const let 告的變數，在同一個作用域下，則無法重新再被宣告。</p>
-<p><img src="https://miro.medium.com/max/440/1*06HErRPc-Jcyhazl3fuj7w.png" alt="const let"></p>
-<p><img src="https://miro.medium.com/max/1286/1*zsSWcfXZBnj3Ap1D5JE7Pg.png" alt="error"></p>
-<h2 id="常數"><a href="#常數" class="headerlink" title="常數"></a>常數</h2><p>const 針對是常數的定義，常數在一宣告時就必定要指定給值，不然會產生錯誤。而對於常數在ES6的定義是: 不可再指定。</p>
-<p><img src="https://miro.medium.com/max/1278/1*lpOInYC-ccAVD_dBcv5csg.png" alt="const"></p>
-<p>上面因為再次賦予 a &#x3D; 20 而出現錯誤。</p>
-<p>如果你宣告的常數是一個物件或陣列類型，像這種參照類型的值，裡面的值是可以作改變的，如下:</p>
-<p><img src="https://miro.medium.com/max/336/1*IP1XW0OtYFB_Am976yXjNA.png" alt="array"></p>
-<p>所以對於物件、陣列、函式來說，使用 const 常數來宣告就可以，除非你有需要再指定這個陣列或物件的參照。</p>
-<h2 id="Hoisting-向上提升特性"><a href="#Hoisting-向上提升特性" class="headerlink" title="Hoisting 向上提升特性"></a>Hoisting 向上提升特性</h2><p>var 跟 function 都有向上提升特性，在宣告後會自動提升到 js 最上面 ，縱使還沒賦予值，還是先建立好記憶體位置。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> a =<span class="number">3</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-
-<p>如上面程式，我們在第 2 行宣告了 a 變數等於3，但在第一行就讀取a變數，此時並不會報錯，因為 a 已經有記憶體位置了，只是還沒給予值，所以會是 undefined。 在第3行讀取a變數就可以正確讀到 3 的值。</p>
-<p>let 跟 const 沒有向上提升， 必須先宣告、後使用。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b);  <span class="comment">// b is not defined</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">3</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b);  <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>ES6</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(8) Git 練功坊-推送分支到遠端</title>
-    <url>/2022/06/23/2022-6-23-4-git-branch-remote/</url>
-    <content><![CDATA[<h2 id="推送分支上-github"><a href="#推送分支上-github" class="headerlink" title="推送分支上 github"></a>推送分支上 github</h2><p>本節會講解如何推送branch到github上。</p>
-<p>首先我們先開一個新的分支，並用git checkout 分支，移動到該分支上。</p>
-<p><img src="https://miro.medium.com/max/1400/1*gN684t4CgXrmbfitc8Ro2A.png" alt="add branch"></p>
-<p>再來新增一個commit 記錄到該分支</p>
-<p><img src="https://miro.medium.com/max/1400/1*9GKiKFBMWI50hjFgxLm7QA.png" alt="commit"></p>
-<p>這時如果用git push指令想將本地端的commit推到github上，可能會出現下面錯誤。</p>
-<p><img src="https://miro.medium.com/max/1400/1*050HdBhOzj3125XCFpOFzg.png" alt="error"></p>
-<p>原因是因為我們可能有許多遠端數據庫，有的是測試用的、有的是正式主機用的，git不知道你的分支要推到哪個數據庫。</p>
-<p>所以可用 git remote 指令來查詢本地端有多少遠端數據庫。</p>
-<p><img src="https://miro.medium.com/max/1208/1*ZV4Dyk2Rq2l36mbNiGNxWA.png" alt="remote"></p>
-<p>可以發現有一個 github 預設的 origin 數據庫。</p>
-<p>要將分支推上github 的話 ，可使用指令:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git push 遠端數據庫名稱 分支名稱</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/1268/1*avTlKgGgw8qFA08F88x_Pg.png" alt="push"></p>
-<h2 id="更改遠端數據庫名稱"><a href="#更改遠端數據庫名稱" class="headerlink" title="更改遠端數據庫名稱"></a>更改遠端數據庫名稱</h2><p>如果不想用github預設的origin數據庫名稱，可輸入: </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote rename 更改前名稱 更改後名稱</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/930/1*wNOekbkp-5Gsu3iiFVHGvQ.png" alt="rename"></p>
-<p>在用 git remote來查詢， 會發現數據庫名稱從 origin 改成 github了。</p>
-<p><img src="https://miro.medium.com/max/1400/1*6DAh5wMtkOZ-ga1uvU__fw.png" alt="git-rename"></p>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(7) Git 練功坊-分支合併與刪除</title>
     <url>/2022/06/23/2022-6-23-3-git-merge/</url>
     <content><![CDATA[<h2 id="分支合併-merge"><a href="#分支合併-merge" class="headerlink" title="分支合併 merge"></a>分支合併 merge</h2><p><img src="https://miro.medium.com/max/1080/1*fnd052WeDjGw8beojbdr9Q.png" alt="branch"></p>
@@ -1093,68 +1061,35 @@
       </tags>
   </entry>
   <entry>
-    <title>(4) CSS基礎篇 Flex</title>
-    <url>/2022/06/29/2022-6-29-1-css-flex/</url>
-    <content><![CDATA[<h2 id="什麼是-flex"><a href="#什麼是-flex" class="headerlink" title="什麼是 flex"></a>什麼是 flex</h2><p>flex 和grid一樣是排版用的 css屬性，使用flex時可分為外容器屬性與內元件屬性。以下分別介紹各屬性使用方法。</p>
-<h2 id="外容器屬性"><a href="#外容器屬性" class="headerlink" title="外容器屬性"></a>外容器屬性</h2><h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><p>啟用flex的第一步，就是在外容器設定 display: flex;</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>(8) Git 練功坊-推送分支到遠端</title>
+    <url>/2022/06/23/2022-6-23-4-git-branch-remote/</url>
+    <content><![CDATA[<h2 id="推送分支上-github"><a href="#推送分支上-github" class="headerlink" title="推送分支上 github"></a>推送分支上 github</h2><p>本節會講解如何推送branch到github上。</p>
+<p>首先我們先開一個新的分支，並用git checkout 分支，移動到該分支上。</p>
+<p><img src="https://miro.medium.com/max/1400/1*gN684t4CgXrmbfitc8Ro2A.png" alt="add branch"></p>
+<p>再來新增一個commit 記錄到該分支</p>
+<p><img src="https://miro.medium.com/max/1400/1*9GKiKFBMWI50hjFgxLm7QA.png" alt="commit"></p>
+<p>這時如果用git push指令想將本地端的commit推到github上，可能會出現下面錯誤。</p>
+<p><img src="https://miro.medium.com/max/1400/1*050HdBhOzj3125XCFpOFzg.png" alt="error"></p>
+<p>原因是因為我們可能有許多遠端數據庫，有的是測試用的、有的是正式主機用的，git不知道你的分支要推到哪個數據庫。</p>
+<p>所以可用 git remote 指令來查詢本地端有多少遠端數據庫。</p>
+<p><img src="https://miro.medium.com/max/1208/1*ZV4Dyk2Rq2l36mbNiGNxWA.png" alt="remote"></p>
+<p>可以發現有一個 github 預設的 origin 數據庫。</p>
+<p>要將分支推上github 的話 ，可使用指令:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git push 遠端數據庫名稱 分支名稱</span><br></pre></td></tr></table></figure>
 
-<p>在父層設定 display:flex 可以讓子層區塊並排<br><img src="https://miro.medium.com/max/972/1*cPIZHT7a0P0v5mljoBjdvg.png" alt="flex"></p>
-<p>當子層寬度超過父層時，flex也會依照比例自動做調整，不會跑版，並且當子層其中一個元素高度變高，其他元素也會自動等高。</p>
-<p><img src="https://miro.medium.com/max/1246/1*yO5cUEPDPz7of4-KZyoTCw.png" alt="自動等高"></p>
-<h3 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h3><p>flex的主軸指的是資料的流向 ，預設是從左到右排版，可以設定的值如下:</p>
-<ul>
-<li><p>flex-direction: row; 從左到右</p>
-</li>
-<li><p>flex-direction: row-reverse; 從右到左</p>
-</li>
-<li><p>flex-direction: column; 從上到下</p>
-</li>
-<li><p>flex-direction: column-reverse; 從下到上</p>
-</li>
-</ul>
-<p><img src="https://miro.medium.com/max/1400/1*jgot2tuYYebDZFe6ZTssyQ.png" alt="主軸"></p>
-<h3 id="justfy-content"><a href="#justfy-content" class="headerlink" title="justfy-content"></a>justfy-content</h3><p>依照主軸的方向(flex-direction)，可以設定 justfy-content 來對齊子元素。所以實際對齊方向是水平或垂直，要依主軸的方向而定喔。</p>
-<p><img src="https://miro.medium.com/max/1400/1*UDLawhonhqaaTSbx5lwa9Q.png" alt="justify-content"></p>
-<h3 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h3><p>超出範圍時是否換行的屬性，分為換行、不換行、換行時反轉。</p>
-<p>預設是 flex-wrap:nowrap 不換行，設定flex-wrap:wrap則會換行。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://miro.medium.com/max/1268/1*avTlKgGgw8qFA08F88x_Pg.png" alt="push"></p>
+<h2 id="更改遠端數據庫名稱"><a href="#更改遠端數據庫名稱" class="headerlink" title="更改遠端數據庫名稱"></a>更改遠端數據庫名稱</h2><p>如果不想用github預設的origin數據庫名稱，可輸入: </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote rename 更改前名稱 更改後名稱</span><br></pre></td></tr></table></figure>
 
-<h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p><img src="https://miro.medium.com/max/1400/1*gUKuGGbB3B0AfezDlzulZw.png" alt="交錯軸"></p>
-<p>和主軸垂直的方向稱為交錯軸，例如主軸是水平的，那交錯軸就是垂直。align-items屬性可以設定交錯軸的對齊方式。</p>
-<p><img src="https://miro.medium.com/max/1400/1*jxzyFebBjrX8jyZ6VFF9bQ.png" alt="align-items"></p>
-<h3 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h3><p>多行物件的交錯軸對齊，可以使用的屬性和align-items一樣。</p>
-<p><img src="https://miro.medium.com/max/1348/1*bvaLIRwiLKGak1nOLhCwXg.png" alt="align-content"></p>
-<h3 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h3><p>flex-flow 是 flex-direction 與 flex-wrap 的縮寫，所以只要在這前後帶上相對應的值即可。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.flex-container</span> &#123;</span><br><span class="line">  <span class="attribute">flex-flow</span>: &lt;<span class="string">&#x27;flex-direction&#x27;</span>&gt; || &lt;<span class="string">&#x27;flex-wrap&#x27;</span>&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="內元件屬性"><a href="#內元件屬性" class="headerlink" title="內元件屬性"></a>內元件屬性</h2><h3 id="order"><a href="#order" class="headerlink" title="order"></a>order</h3><p>用來指定子層物件的順序，order 預設都是 0。小於 0 的元件會往前排，大於 0 往後排。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box1</span> &#123;</span><br><span class="line">  <span class="attribute">order</span>: <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box2</span> &#123;</span><br><span class="line">  <span class="attribute">order</span> : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/818/1*s71cQM9RnsxFauhOIt6q6w.png" alt="order"></p>
-<h3 id="flex-grow-伸展"><a href="#flex-grow-伸展" class="headerlink" title="flex-grow 伸展"></a>flex-grow 伸展</h3><p>flex-grow 設定元件的伸展性，會把剩下的空間份配給子物件，並針對子物件去設定伸展的比例，預設值為 0不會縮放。<br>如下圖: 設定flex-grow: 2 的元素會有較大的位置。<br><img src="https://miro.medium.com/max/548/1*3qDfiEcjgxQvyup9ygcAww.png" alt="flex-grow"></p>
-<h3 id="flex-shrink-收縮"><a href="#flex-shrink-收縮" class="headerlink" title="flex-shrink 收縮"></a>flex-shrink 收縮</h3><p>flex-shrink: 元件的收縮性，是一個數值，當空間分配還不足時的當前元件的收縮性，預設值為 1 會收縮，如果設置為 0 則不會縮放。</p>
-<p><img src="https://miro.medium.com/max/1400/1*1kyY6pGhIUCz79CHJ74deQ.png" alt="flex-shrink"></p>
-<p>上圖當子層物件寬度超過父層時，如果將子層設定 flex-shrink: 0 ，代表不收縮，此時子層會超出父層寬度。</p>
-<p><img src="https://miro.medium.com/max/1400/1*nANSTLkevML4QdU2VKIHmQ.png" alt="flex-shrink"></p>
-<p>當設定其中一個子層 flex-shrink: 0 ，其他為1時，設定0的物件不收縮，保持原來寬度，設定shrink的則依比例收縮。</p>
-<h3 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h3><p>flex-basis 可以設定子元件 flex-item 的主軸長度。</p>
-<ul>
-<li><p>當主軸為橫向時，對應到元件的寬，</p>
-</li>
-<li><p>當主軸是直向時，對應到元件的高。</p>
-</li>
-</ul>
-<p>可以設定每個flex-item 的 flex-basis 為 0， 就可以依照想要的比例來設定flex-grow。</p>
-<p><img src="https://miro.medium.com/max/1400/1*GN7XSfKQGUABUGAY-nIjSg.png" alt="flex-basis"></p>
-<h3 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h3><p>align-self 可以調整單一物件的交錯軸對齊，可以使用的屬性和align-items一樣。</p>
-<p><img src="https://css-tricks.com/wp-content/uploads/2018/10/align-self.svg" alt="align-self"></p>
+<p><img src="https://miro.medium.com/max/930/1*wNOekbkp-5Gsu3iiFVHGvQ.png" alt="rename"></p>
+<p>在用 git remote來查詢， 會發現數據庫名稱從 origin 改成 github了。</p>
+<p><img src="https://miro.medium.com/max/1400/1*6DAh5wMtkOZ-ga1uvU__fw.png" alt="git-rename"></p>
 ]]></content>
       <categories>
-        <category>CSS</category>
+        <category>Git</category>
       </categories>
       <tags>
-        <tag>CSS基礎篇</tag>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -1185,64 +1120,6 @@
       </categories>
       <tags>
         <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(9) Git 練功坊-取消修改</title>
-    <url>/2022/06/30/2022-6-30-1-git-reset/</url>
-    <content><![CDATA[<h2 id="取消修改"><a href="#取消修改" class="headerlink" title="取消修改"></a>取消修改</h2><p>在 git 裡主要用兩種方法來取消修改，一種是 git reset，另外一種是 git revert。</p>
-<h2 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h2><p>git reset 利用把分支的參考點退回到上一個 commit 來取消修改。你可以認為這是在”重寫歷史”。git reset 往回移動 branch，原來的 branch 所指向的 commit 好像從來沒有存在過一樣。</p>
-<p><img src="https://miro.medium.com/max/504/1*YExCjHyozE-SQLif6Egfhg.png" alt="reset"><br><img src="https://miro.medium.com/max/674/1*zFOz7tr23cEQG2OTkffCjg.png" alt="reset"></p>
-<p>git reset 可以分為 –hard、 –soft 、 –mixed 三種模式</p>
-<h3 id="reset-–mixed"><a href="#reset-–mixed" class="headerlink" title="reset –mixed"></a>reset –mixed</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git reset --mixed HEAD~1   # 數字表示移動到 HEAD後面第幾個</span><br></pre></td></tr></table></figure>
-
-<p>–mixed 是預設的參數，如果沒有特別加參數，git reset 指令將會使用 –mixed 模式。這個模式會把暫存區的檔案丟掉，但不會動到工作目錄的檔案，也就是說 Commit 拆出來的檔案會留在工作目錄，但不會留在暫存區。</p>
-<h3 id="reset-–soft"><a href="#reset-–soft" class="headerlink" title="reset –soft"></a>reset –soft</h3><p>這個模式下的 reset，工作目錄跟暫存區的檔案都不會被丟掉，所以看起來就只有 HEAD 的移動而已。也因此，Commit 拆出來的檔案會直接放在暫存區。</p>
-<h3 id="reset-–hard"><a href="#reset-–hard" class="headerlink" title="reset –hard"></a>reset –hard</h3><p>hard模式下，不管是工作目錄以及暫存區的檔案都會丟掉。</p>
-<h3 id="取消reset"><a href="#取消reset" class="headerlink" title="取消reset"></a>取消reset</h3><p>如果你reset完後悔，輸入 git checkout + reset點的hash值，是可以回復的。</p>
-<p><img src="https://miro.medium.com/max/290/1*iP8bv0VETpcpfPbl5xEnFA.png" alt="hash"><br><img src="https://miro.medium.com/max/636/1*YzByXkMhsnyLdSpM6dQGjQ.png" alt="checkout"></p>
-<p>但如果有遠端備份(github)的話，不建議用git reset ，因為如果你將本機reset過的紀錄再push一次到遠端，你的同事又從本地端push一次到遠端，那你想reset不要的紀錄又回到遠端了。</p>
-<h2 id="git-revert"><a href="#git-revert" class="headerlink" title="git revert"></a>git revert</h2><p>為了將你想取消的紀錄分享給你的同事，可以用git revert，概念是再做一個新的 Commit，來取消你不要的 Commit，新的commit點上會有 ‘ 代表是revert 的點。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git revert + 要刪除的commit點</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://miro.medium.com/max/574/1*c_R6Jsz3I7bhynusCX2Hyg.png" alt="新增C2&#39; 來取消C2"></p>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(1) Hexo 部落格安裝</title>
-    <url>/2022/06/07/2022-6-7-Hexo-%E9%83%A8%E8%90%BD%E6%A0%BC%E5%AE%89%E8%A3%9D%E8%88%87%E9%83%A8%E5%B1%AC/</url>
-    <content><![CDATA[<h2 id="什麼是-Hexo？"><a href="#什麼是-Hexo？" class="headerlink" title="什麼是 Hexo？"></a>什麼是 Hexo？</h2><p>Hexo 是一個快速、簡單且強大的網誌框架。Hexo 使用 Markdown（或其他標記語言）解析您的文章，並在幾秒鐘內，透過漂亮的主題產生靜態檔案。</p>
-<h2 id="安裝需求"><a href="#安裝需求" class="headerlink" title="安裝需求"></a>安裝需求</h2><ul>
-<li><a href="http://nodejs.org/">Node.js</a> (Node.js 版本需不低於8.10，建議使用 Node.js 10.0 及以上版本)</li>
-<li><a href="http://git-scm.com/">Git</a></li>
-</ul>
-<p>若您的電腦已經安裝上述的必備軟體，那麼恭喜您！只需要透過 npm 即可完成 Hexo 的安裝。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<p>一旦 Hexo 完成後，請執行下列指令，Hexo 會在指定資料夾中建立所有您需要的檔案。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-
-<p>建立完成後，專案資料夾會有下列檔案：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
-
-<h2 id="資料夾配置說明"><a href="#資料夾配置說明" class="headerlink" title="資料夾配置說明"></a>資料夾配置說明</h2><p>以下說明不同資料夾功能</p>
-<h3 id="scaffolds"><a href="#scaffolds" class="headerlink" title="scaffolds"></a>scaffolds</h3><p>scaffolds 資料夾裡放的是md範例檔案，當我們要寫新聞章時，可以將範例檔另存到source資料夾裡，來開始撰寫。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060702.png?alt=media&token=3ee586a3-0af2-4191-8cac-1d299028f03b" alt="scaffolds圖片範例"></p>
-<h3 id="source"><a href="#source" class="headerlink" title="source"></a>source</h3><p>source 資料夾是放置文章的地方。所有的檔案或是資料夾通常都會在這邊，開頭會加上 _(底線) 來命名，讓這些資料夾或是檔案也成為隱藏檔案而被忽略，除了 _posts 資料夾以外。Markdown 和 HTML 檔案會被發布並存放到 public 資料夾，而其他檔案沒有以底線命名的就會被拷貝過去。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060701.png?alt=media&token=a71a827f-ea1c-4ad8-b570-0ce5372488b6" alt="source資料夾"></p>
-<h3 id="themes"><a href="#themes" class="headerlink" title="themes"></a>themes</h3><p>themes 資料夾放的是hexo的主題樣式，後續更換主題也是將檔案載到這個地方。</p>
-<h3 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h3><p>_config.yml 是網站的配置檔案（如下圖），網站的各種配置設定都在這邊，例如：網頁標題、網站描述、網站的網址、路徑等等，詳細內容可以參考： <a href="https://hexo.io/zh-tw/docs/configuration">https://hexo.io/zh-tw/docs/configuration</a></p>
-<p>大家可以自行修改看看，如下圖</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060801.png?alt=media&token=a28a52df-edb2-4848-a690-9fe3f5807343" alt="config修改"></p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -1423,22 +1300,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(2) Hexo 撰寫第一篇文章</title>
-    <url>/2022/06/08/2022-6-8-Hexo-%E6%92%B0%E5%AF%AB%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<h2 id="建立你的第一篇文章"><a href="#建立你的第一篇文章" class="headerlink" title="建立你的第一篇文章"></a>建立你的第一篇文章</h2><p>我們可以在Vscode 中，開啟上個章節所建立的專案</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060802.png?alt=media&token=cba3f60e-8fba-4f61-83b4-9668e01bd2e7" alt="專案圖片"></p>
-<p>在Vscode中用快捷鍵 Control + ESC，開啟終端機 </p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060803.png?alt=media&token=e185edcc-77fc-4d1e-8499-b6c467085d8b" alt="終端機"></p>
-<p>然後下方終端機輸入 <code>hexo new &#39;我的第一篇部落格文章&#39;</code> 輸入完後會顯示 <code>INFO  Generated: 2022/06/07/2022-6-7-Hexo-部落格安裝與部屬/index.html</code> 代表文章被順利建立在source資料夾裡的 <code>_posts</code>底下。</p>
-<h2 id="MD-內容"><a href="#MD-內容" class="headerlink" title="MD 內容"></a>MD 內容</h2><p>在md檔案裡，最上面會有可以填寫 標題等欄位<br><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060804.png?alt=media&token=27df0ccb-a65b-434b-aece-6c7af864d641" alt="標題"></p>
-<p>文章撰寫則以Markdown格式為主，若不了解Markdown格式，可以參考 <a href="https://markdown.tw/">markdown</a></p>
-<p>以上就是撰寫文章的方法囉</p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(3) Hexo-基礎Hexo指令</title>
     <url>/2022/06/08/2022-6-8-Hexo-%E5%9F%BA%E7%A4%8EHexo%E6%8C%87%E4%BB%A4/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文將會介紹一些基礎的Hexo指令，那就一起看下去吧。</p>
@@ -1458,6 +1319,98 @@
 ]]></content>
       <tags>
         <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(9) Git 練功坊-取消修改</title>
+    <url>/2022/06/30/2022-6-30-1-git-reset/</url>
+    <content><![CDATA[<h2 id="取消修改"><a href="#取消修改" class="headerlink" title="取消修改"></a>取消修改</h2><p>在 git 裡主要用兩種方法來取消修改，一種是 git reset，另外一種是 git revert。</p>
+<h2 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h2><p>git reset 利用把分支的參考點退回到上一個 commit 來取消修改。你可以認為這是在”重寫歷史”。git reset 往回移動 branch，原來的 branch 所指向的 commit 好像從來沒有存在過一樣。</p>
+<p><img src="https://miro.medium.com/max/504/1*YExCjHyozE-SQLif6Egfhg.png" alt="reset"><br><img src="https://miro.medium.com/max/674/1*zFOz7tr23cEQG2OTkffCjg.png" alt="reset"></p>
+<p>git reset 可以分為 –hard、 –soft 、 –mixed 三種模式</p>
+<h3 id="reset-–mixed"><a href="#reset-–mixed" class="headerlink" title="reset –mixed"></a>reset –mixed</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git reset --mixed HEAD~1   # 數字表示移動到 HEAD後面第幾個</span><br></pre></td></tr></table></figure>
+
+<p>–mixed 是預設的參數，如果沒有特別加參數，git reset 指令將會使用 –mixed 模式。這個模式會把暫存區的檔案丟掉，但不會動到工作目錄的檔案，也就是說 Commit 拆出來的檔案會留在工作目錄，但不會留在暫存區。</p>
+<h3 id="reset-–soft"><a href="#reset-–soft" class="headerlink" title="reset –soft"></a>reset –soft</h3><p>這個模式下的 reset，工作目錄跟暫存區的檔案都不會被丟掉，所以看起來就只有 HEAD 的移動而已。也因此，Commit 拆出來的檔案會直接放在暫存區。</p>
+<h3 id="reset-–hard"><a href="#reset-–hard" class="headerlink" title="reset –hard"></a>reset –hard</h3><p>hard模式下，不管是工作目錄以及暫存區的檔案都會丟掉。</p>
+<h3 id="取消reset"><a href="#取消reset" class="headerlink" title="取消reset"></a>取消reset</h3><p>如果你reset完後悔，輸入 git checkout + reset點的hash值，是可以回復的。</p>
+<p><img src="https://miro.medium.com/max/290/1*iP8bv0VETpcpfPbl5xEnFA.png" alt="hash"><br><img src="https://miro.medium.com/max/636/1*YzByXkMhsnyLdSpM6dQGjQ.png" alt="checkout"></p>
+<p>但如果有遠端備份(github)的話，不建議用git reset ，因為如果你將本機reset過的紀錄再push一次到遠端，你的同事又從本地端push一次到遠端，那你想reset不要的紀錄又回到遠端了。</p>
+<h2 id="git-revert"><a href="#git-revert" class="headerlink" title="git revert"></a>git revert</h2><p>為了將你想取消的紀錄分享給你的同事，可以用git revert，概念是再做一個新的 Commit，來取消你不要的 Commit，新的commit點上會有 ‘ 代表是revert 的點。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git revert + 要刪除的commit點</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/574/1*c_R6Jsz3I7bhynusCX2Hyg.png" alt="新增C2&#39; 來取消C2"></p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(4) CSS基礎篇 Flex</title>
+    <url>/2022/06/29/2022-6-29-1-css-flex/</url>
+    <content><![CDATA[<h2 id="什麼是-flex"><a href="#什麼是-flex" class="headerlink" title="什麼是 flex"></a>什麼是 flex</h2><p>flex 和grid一樣是排版用的 css屬性，使用flex時可分為外容器屬性與內元件屬性。以下分別介紹各屬性使用方法。</p>
+<h2 id="外容器屬性"><a href="#外容器屬性" class="headerlink" title="外容器屬性"></a>外容器屬性</h2><h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><p>啟用flex的第一步，就是在外容器設定 display: flex;</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在父層設定 display:flex 可以讓子層區塊並排<br><img src="https://miro.medium.com/max/972/1*cPIZHT7a0P0v5mljoBjdvg.png" alt="flex"></p>
+<p>當子層寬度超過父層時，flex也會依照比例自動做調整，不會跑版，並且當子層其中一個元素高度變高，其他元素也會自動等高。</p>
+<p><img src="https://miro.medium.com/max/1246/1*yO5cUEPDPz7of4-KZyoTCw.png" alt="自動等高"></p>
+<h3 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h3><p>flex的主軸指的是資料的流向 ，預設是從左到右排版，可以設定的值如下:</p>
+<ul>
+<li><p>flex-direction: row; 從左到右</p>
+</li>
+<li><p>flex-direction: row-reverse; 從右到左</p>
+</li>
+<li><p>flex-direction: column; 從上到下</p>
+</li>
+<li><p>flex-direction: column-reverse; 從下到上</p>
+</li>
+</ul>
+<p><img src="https://miro.medium.com/max/1400/1*jgot2tuYYebDZFe6ZTssyQ.png" alt="主軸"></p>
+<h3 id="justfy-content"><a href="#justfy-content" class="headerlink" title="justfy-content"></a>justfy-content</h3><p>依照主軸的方向(flex-direction)，可以設定 justfy-content 來對齊子元素。所以實際對齊方向是水平或垂直，要依主軸的方向而定喔。</p>
+<p><img src="https://miro.medium.com/max/1400/1*UDLawhonhqaaTSbx5lwa9Q.png" alt="justify-content"></p>
+<h3 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h3><p>超出範圍時是否換行的屬性，分為換行、不換行、換行時反轉。</p>
+<p>預設是 flex-wrap:nowrap 不換行，設定flex-wrap:wrap則會換行。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p><img src="https://miro.medium.com/max/1400/1*gUKuGGbB3B0AfezDlzulZw.png" alt="交錯軸"></p>
+<p>和主軸垂直的方向稱為交錯軸，例如主軸是水平的，那交錯軸就是垂直。align-items屬性可以設定交錯軸的對齊方式。</p>
+<p><img src="https://miro.medium.com/max/1400/1*jxzyFebBjrX8jyZ6VFF9bQ.png" alt="align-items"></p>
+<h3 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h3><p>多行物件的交錯軸對齊，可以使用的屬性和align-items一樣。</p>
+<p><img src="https://miro.medium.com/max/1348/1*bvaLIRwiLKGak1nOLhCwXg.png" alt="align-content"></p>
+<h3 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h3><p>flex-flow 是 flex-direction 與 flex-wrap 的縮寫，所以只要在這前後帶上相對應的值即可。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.flex-container</span> &#123;</span><br><span class="line">  <span class="attribute">flex-flow</span>: &lt;<span class="string">&#x27;flex-direction&#x27;</span>&gt; || &lt;<span class="string">&#x27;flex-wrap&#x27;</span>&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="內元件屬性"><a href="#內元件屬性" class="headerlink" title="內元件屬性"></a>內元件屬性</h2><h3 id="order"><a href="#order" class="headerlink" title="order"></a>order</h3><p>用來指定子層物件的順序，order 預設都是 0。小於 0 的元件會往前排，大於 0 往後排。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box1</span> &#123;</span><br><span class="line">  <span class="attribute">order</span>: <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box2</span> &#123;</span><br><span class="line">  <span class="attribute">order</span> : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/818/1*s71cQM9RnsxFauhOIt6q6w.png" alt="order"></p>
+<h3 id="flex-grow-伸展"><a href="#flex-grow-伸展" class="headerlink" title="flex-grow 伸展"></a>flex-grow 伸展</h3><p>flex-grow 設定元件的伸展性，會把剩下的空間份配給子物件，並針對子物件去設定伸展的比例，預設值為 0不會縮放。<br>如下圖: 設定flex-grow: 2 的元素會有較大的位置。<br><img src="https://miro.medium.com/max/548/1*3qDfiEcjgxQvyup9ygcAww.png" alt="flex-grow"></p>
+<h3 id="flex-shrink-收縮"><a href="#flex-shrink-收縮" class="headerlink" title="flex-shrink 收縮"></a>flex-shrink 收縮</h3><p>flex-shrink: 元件的收縮性，是一個數值，當空間分配還不足時的當前元件的收縮性，預設值為 1 會收縮，如果設置為 0 則不會縮放。</p>
+<p><img src="https://miro.medium.com/max/1400/1*1kyY6pGhIUCz79CHJ74deQ.png" alt="flex-shrink"></p>
+<p>上圖當子層物件寬度超過父層時，如果將子層設定 flex-shrink: 0 ，代表不收縮，此時子層會超出父層寬度。</p>
+<p><img src="https://miro.medium.com/max/1400/1*nANSTLkevML4QdU2VKIHmQ.png" alt="flex-shrink"></p>
+<p>當設定其中一個子層 flex-shrink: 0 ，其他為1時，設定0的物件不收縮，保持原來寬度，設定shrink的則依比例收縮。</p>
+<h3 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h3><p>flex-basis 可以設定子元件 flex-item 的主軸長度。</p>
+<ul>
+<li><p>當主軸為橫向時，對應到元件的寬，</p>
+</li>
+<li><p>當主軸是直向時，對應到元件的高。</p>
+</li>
+</ul>
+<p>可以設定每個flex-item 的 flex-basis 為 0， 就可以依照想要的比例來設定flex-grow。</p>
+<p><img src="https://miro.medium.com/max/1400/1*GN7XSfKQGUABUGAY-nIjSg.png" alt="flex-basis"></p>
+<h3 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h3><p>align-self 可以調整單一物件的交錯軸對齊，可以使用的屬性和align-items一樣。</p>
+<p><img src="https://css-tricks.com/wp-content/uploads/2018/10/align-self.svg" alt="align-self"></p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS基礎篇</tag>
       </tags>
   </entry>
   <entry>
@@ -1488,29 +1441,82 @@
       </tags>
   </entry>
   <entry>
-    <title>Ajax解說系列(4) Axios 套件</title>
-    <url>/2022/07/01/2022-7-1-4-js-axios/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>除了使用 fetch這種原生api來處理AJAX以外，我們也可以使用套件來處理，本文介紹的axios即是處理ajax可用的套件。</p>
-<h2 id="axios基本語法"><a href="#axios基本語法" class="headerlink" title="axios基本語法"></a>axios基本語法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">axios</span>(url[,config])</span><br></pre></td></tr></table></figure>
+    <title>(1) Hexo 部落格安裝</title>
+    <url>/2022/06/07/2022-6-7-Hexo-%E9%83%A8%E8%90%BD%E6%A0%BC%E5%AE%89%E8%A3%9D%E8%88%87%E9%83%A8%E5%B1%AC/</url>
+    <content><![CDATA[<h2 id="什麼是-Hexo？"><a href="#什麼是-Hexo？" class="headerlink" title="什麼是 Hexo？"></a>什麼是 Hexo？</h2><p>Hexo 是一個快速、簡單且強大的網誌框架。Hexo 使用 Markdown（或其他標記語言）解析您的文章，並在幾秒鐘內，透過漂亮的主題產生靜態檔案。</p>
+<h2 id="安裝需求"><a href="#安裝需求" class="headerlink" title="安裝需求"></a>安裝需求</h2><ul>
+<li><a href="http://nodejs.org/">Node.js</a> (Node.js 版本需不低於8.10，建議使用 Node.js 10.0 及以上版本)</li>
+<li><a href="http://git-scm.com/">Git</a></li>
+</ul>
+<p>若您的電腦已經安裝上述的必備軟體，那麼恭喜您！只需要透過 npm 即可完成 Hexo 的安裝。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
 
-<p>axios回傳的是一個promise，所以我們可以用 <code>.then() .catch()</code> 來接收結果。</p>
-<h2 id="get-方法"><a href="#get-方法" class="headerlink" title="get 方法"></a>get 方法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.<span class="title function_">get</span>(<span class="string">&#x27;https://example/api/&#x27;</span>)</span><br><span class="line">    .<span class="title function_">then</span>( <span class="function">(<span class="params">response</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(response))</span><br><span class="line">    .<span class="title function_">catch</span>( <span class="function">(<span class="params">error</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(error));</span><br></pre></td></tr></table></figure>
+<p>一旦 Hexo 完成後，請執行下列指令，Hexo 會在指定資料夾中建立所有您需要的檔案。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
 
-<p>用 axios.get(‘資源網址’) 即可發出get請求。</p>
-<p>也可加入參數，参數放在params屬性裏面</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.<span class="title function_">get</span>(<span class="string">&#x27;https://example/api/&#x27;</span>,&#123;</span><br><span class="line">    <span class="attr">params</span>: &#123;</span><br><span class="line">        <span class="attr">gender</span>: <span class="string">&#x27;female&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(res))</span><br><span class="line">.<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(error))</span><br></pre></td></tr></table></figure>
+<p>建立完成後，專案資料夾會有下列檔案：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
 
-<h2 id="post-方法"><a href="#post-方法" class="headerlink" title="post 方法"></a>post 方法</h2><p><img src="https://miro.medium.com/max/1155/1*wUR2CLqYOBdpxogkcB-5aA.png" alt="post"><br><img src="https://miro.medium.com/max/1155/1*pwaLtrNzCstPuhKF9p6Spg.png" alt="post"></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.<span class="title function_">post</span>(‘api網址’ , 物件格式資料)</span><br></pre></td></tr></table></figure>
-<p>用.then接收成功資訊，.catch()接收失敗資訊</p>
+<h2 id="資料夾配置說明"><a href="#資料夾配置說明" class="headerlink" title="資料夾配置說明"></a>資料夾配置說明</h2><p>以下說明不同資料夾功能</p>
+<h3 id="scaffolds"><a href="#scaffolds" class="headerlink" title="scaffolds"></a>scaffolds</h3><p>scaffolds 資料夾裡放的是md範例檔案，當我們要寫新聞章時，可以將範例檔另存到source資料夾裡，來開始撰寫。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060702.png?alt=media&token=3ee586a3-0af2-4191-8cac-1d299028f03b" alt="scaffolds圖片範例"></p>
+<h3 id="source"><a href="#source" class="headerlink" title="source"></a>source</h3><p>source 資料夾是放置文章的地方。所有的檔案或是資料夾通常都會在這邊，開頭會加上 _(底線) 來命名，讓這些資料夾或是檔案也成為隱藏檔案而被忽略，除了 _posts 資料夾以外。Markdown 和 HTML 檔案會被發布並存放到 public 資料夾，而其他檔案沒有以底線命名的就會被拷貝過去。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060701.png?alt=media&token=a71a827f-ea1c-4ad8-b570-0ce5372488b6" alt="source資料夾"></p>
+<h3 id="themes"><a href="#themes" class="headerlink" title="themes"></a>themes</h3><p>themes 資料夾放的是hexo的主題樣式，後續更換主題也是將檔案載到這個地方。</p>
+<h3 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h3><p>_config.yml 是網站的配置檔案（如下圖），網站的各種配置設定都在這邊，例如：網頁標題、網站描述、網站的網址、路徑等等，詳細內容可以參考： <a href="https://hexo.io/zh-tw/docs/configuration">https://hexo.io/zh-tw/docs/configuration</a></p>
+<p>大家可以自行修改看看，如下圖</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060801.png?alt=media&token=a28a52df-edb2-4848-a690-9fe3f5807343" alt="config修改"></p>
 ]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
       <tags>
-        <tag>Javascript</tag>
-        <tag>Ajax</tag>
-        <tag>Axios</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(6) Hexo-新增佈景主題</title>
+    <url>/2022/06/09/2022-6-9-2-Hexo-%E6%96%B0%E5%A2%9E%E4%BD%88%E6%99%AF%E4%B8%BB%E9%A1%8C/</url>
+    <content><![CDATA[<h2 id="挑選佈景主題"><a href="#挑選佈景主題" class="headerlink" title="挑選佈景主題"></a>挑選佈景主題</h2><p>除了Hexo預設的版型外，也可以新增不同的佈景主題上去。<br>可以先來到 <a href="https://hexo.io/themes/">Hexo 官網</a>的主題區挑選你喜歡的主題</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060904.png?alt=media&token=9deec5ff-8e70-433d-810c-412773e6566d" alt="theme-page"></p>
+<p>本文以 <a href="https://theme-next.js.org/">NexT</a> 主題為例，點選後來到NextT官網。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060905.png?alt=media&token=ae056e59-0cfc-4958-8d21-e18bfa158b6d" alt="NEXTT"></p>
+<p>點選左上角doc可以進入教學文件。</p>
+<h2 id="下載NextT主題"><a href="#下載NextT主題" class="headerlink" title="下載NextT主題"></a>下載NextT主題</h2><p>這邊使用NPM來下載主題，在你的Vscode的終端機輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd hexo-site</span><br><span class="line">$ npm install hexo-theme-next</span><br></pre></td></tr></table></figure>
+
+<h2 id="主題設定檔"><a href="#主題設定檔" class="headerlink" title="主題設定檔"></a>主題設定檔</h2><p>下載好後會發現我們現在有兩個 <code>_config.yml</code>設定檔</p>
+<ol>
+<li>第一個在我們專案的根目錄，也就是一開始hexo的設定檔</li>
+<li>第二個在我們主題的目錄下，(e.g. <code>thems/next/_config.yml</code> or <code>node_modules/hexo-theme-next/_config.yml</code>)</li>
+</ol>
+<p>以下稱第一個為hexo設定檔，第二個為NextT設定檔。</p>
+<h2 id="hexo設定檔"><a href="#hexo設定檔" class="headerlink" title="hexo設定檔"></a>hexo設定檔</h2><p>當我們下載完NextT主題後，到hexo設定檔裡，找到theme選項，並將值改為 next</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+
+<h2 id="NextT設定檔"><a href="#NextT設定檔" class="headerlink" title="NextT設定檔"></a>NextT設定檔</h2><p>官網不建議我們直接修改NextT設定檔，所以我們可以在專案根目錄新增一個 <code>/_config.next.yml</code>檔案。<br>我們可以複製所有NextT設定檔裡的資料到我們新增的 _config.next.yml 檔案裡。</p>
+<p>NextT有提供四種不同風格的版型，可以在此挑選你喜愛的版型，只要將 # 取消或勾選即可</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060906.png?alt=media&token=cacc04e2-a6d7-4992-b096-37bb1a2bb206" alt="scheme"></p>
+<p>Next 也提供dark mode可以選擇，只要將dark mode改為true即可</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060907.png?alt=media&token=c97c2e01-2382-4dec-abee-f64b3e5cb980" alt="darkmode"></p>
+<p>以上都設定好後，就可發現我們的部落格套用了nextT主題囉</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060908.png?alt=media&token=7b16821f-7ef1-4b28-b075-5be943ebfd76" alt="theme"></p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(2) Hexo 撰寫第一篇文章</title>
+    <url>/2022/06/08/2022-6-8-Hexo-%E6%92%B0%E5%AF%AB%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<h2 id="建立你的第一篇文章"><a href="#建立你的第一篇文章" class="headerlink" title="建立你的第一篇文章"></a>建立你的第一篇文章</h2><p>我們可以在Vscode 中，開啟上個章節所建立的專案</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060802.png?alt=media&token=cba3f60e-8fba-4f61-83b4-9668e01bd2e7" alt="專案圖片"></p>
+<p>在Vscode中用快捷鍵 Control + ESC，開啟終端機 </p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060803.png?alt=media&token=e185edcc-77fc-4d1e-8499-b6c467085d8b" alt="終端機"></p>
+<p>然後下方終端機輸入 <code>hexo new &#39;我的第一篇部落格文章&#39;</code> 輸入完後會顯示 <code>INFO  Generated: 2022/06/07/2022-6-7-Hexo-部落格安裝與部屬/index.html</code> 代表文章被順利建立在source資料夾裡的 <code>_posts</code>底下。</p>
+<h2 id="MD-內容"><a href="#MD-內容" class="headerlink" title="MD 內容"></a>MD 內容</h2><p>在md檔案裡，最上面會有可以填寫 標題等欄位<br><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060804.png?alt=media&token=27df0ccb-a65b-434b-aece-6c7af864d641" alt="標題"></p>
+<p>文章撰寫則以Markdown格式為主，若不了解Markdown格式，可以參考 <a href="https://markdown.tw/">markdown</a></p>
+<p>以上就是撰寫文章的方法囉</p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -1555,86 +1561,6 @@
 ]]></content>
       <tags>
         <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(6) Hexo-新增佈景主題</title>
-    <url>/2022/06/09/2022-6-9-2-Hexo-%E6%96%B0%E5%A2%9E%E4%BD%88%E6%99%AF%E4%B8%BB%E9%A1%8C/</url>
-    <content><![CDATA[<h2 id="挑選佈景主題"><a href="#挑選佈景主題" class="headerlink" title="挑選佈景主題"></a>挑選佈景主題</h2><p>除了Hexo預設的版型外，也可以新增不同的佈景主題上去。<br>可以先來到 <a href="https://hexo.io/themes/">Hexo 官網</a>的主題區挑選你喜歡的主題</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060904.png?alt=media&token=9deec5ff-8e70-433d-810c-412773e6566d" alt="theme-page"></p>
-<p>本文以 <a href="https://theme-next.js.org/">NexT</a> 主題為例，點選後來到NextT官網。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060905.png?alt=media&token=ae056e59-0cfc-4958-8d21-e18bfa158b6d" alt="NEXTT"></p>
-<p>點選左上角doc可以進入教學文件。</p>
-<h2 id="下載NextT主題"><a href="#下載NextT主題" class="headerlink" title="下載NextT主題"></a>下載NextT主題</h2><p>這邊使用NPM來下載主題，在你的Vscode的終端機輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd hexo-site</span><br><span class="line">$ npm install hexo-theme-next</span><br></pre></td></tr></table></figure>
-
-<h2 id="主題設定檔"><a href="#主題設定檔" class="headerlink" title="主題設定檔"></a>主題設定檔</h2><p>下載好後會發現我們現在有兩個 <code>_config.yml</code>設定檔</p>
-<ol>
-<li>第一個在我們專案的根目錄，也就是一開始hexo的設定檔</li>
-<li>第二個在我們主題的目錄下，(e.g. <code>thems/next/_config.yml</code> or <code>node_modules/hexo-theme-next/_config.yml</code>)</li>
-</ol>
-<p>以下稱第一個為hexo設定檔，第二個為NextT設定檔。</p>
-<h2 id="hexo設定檔"><a href="#hexo設定檔" class="headerlink" title="hexo設定檔"></a>hexo設定檔</h2><p>當我們下載完NextT主題後，到hexo設定檔裡，找到theme選項，並將值改為 next</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
-
-<h2 id="NextT設定檔"><a href="#NextT設定檔" class="headerlink" title="NextT設定檔"></a>NextT設定檔</h2><p>官網不建議我們直接修改NextT設定檔，所以我們可以在專案根目錄新增一個 <code>/_config.next.yml</code>檔案。<br>我們可以複製所有NextT設定檔裡的資料到我們新增的 _config.next.yml 檔案裡。</p>
-<p>NextT有提供四種不同風格的版型，可以在此挑選你喜愛的版型，只要將 # 取消或勾選即可</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060906.png?alt=media&token=cacc04e2-a6d7-4992-b096-37bb1a2bb206" alt="scheme"></p>
-<p>Next 也提供dark mode可以選擇，只要將dark mode改為true即可</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060907.png?alt=media&token=c97c2e01-2382-4dec-abee-f64b3e5cb980" alt="darkmode"></p>
-<p>以上都設定好後，就可發現我們的部落格套用了nextT主題囉</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022060908.png?alt=media&token=7b16821f-7ef1-4b28-b075-5be943ebfd76" alt="theme"></p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Ajax解說系列(3) Fetch</title>
-    <url>/2022/07/01/2022-7-1-3-js-fetch/</url>
-    <content><![CDATA[<h2 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a>Fetch</h2><p>和 XMLHttpRequest一樣，Fetch 是window物件底下的方法，用來發送網路請求。當請求成功，fetch就會回傳一個promise物件(狀態是fulfilled)，這物件內會帶有response物件，裏面會放有我們想抓的資料。</p>
-<p>以下介紹不同請求類型的用法:</p>
-<h2 id="Get"><a href="#Get" class="headerlink" title="Get"></a>Get</h2><p><img src="https://miro.medium.com/max/919/1*aa1YL0BX_PnipFIh2nJgJQ.png" alt="get"></p>
-<p>單純發送get請求時，在fetch填入api的url，在第一次.then接收時，要用.json()方法，將資料轉為物件，此時會返回一個promise。<br>在用一個then去接收promise返回的資料，此時就是真正的物件資料。</p>
-<h2 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h2><p><img src="https://miro.medium.com/max/1155/1*FArkQAKzv0-HP0tZ7_PRmQ.png" alt="post"></p>
-<ol>
-<li>使用post資料到伺服器時，要設定 method: ‘POST’，</li>
-<li>headers 要設定 傳送資料的格式:</li>
-</ol>
-<ul>
-<li>json 格式 : application&#x2F;json</li>
-<li>傳統表單格式: application&#x2F;x-www-form-urlencoded</li>
-</ul>
-<ol start="3">
-<li>body 內放要傳送的資料，記得資料要用JSON.stringify轉為字串傳入。</li>
-<li>最後用 .then .catch接收回傳資料。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>Javascript</tag>
-        <tag>Ajax</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(2) 透過 Node.js 執行 JS 檔案</title>
-    <url>/2022/07/11/2022-7-11-1-node-run/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上一篇我們已經將 Node.js 安裝好了，這章節就小試身手，來用 Node.js 執行檔案吧。</p>
-<h2 id="新增js檔案"><a href="#新增js檔案" class="headerlink" title="新增js檔案"></a>新增js檔案</h2><p>我們先在桌面新增一個project資料夾，並在裡面新增一隻app.js檔案。新增後，我們用vscode編輯器開啟該資料夾。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071101.png?alt=media&token=58b8f450-806a-4c33-bafe-b23e4a61353e" alt="project"></p>
-<h2 id="執行js檔案"><a href="#執行js檔案" class="headerlink" title="執行js檔案"></a>執行js檔案</h2><p>檔案開啟後，我們就可用node.js來執行它，開啟終端機並輸入:</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">node app.<span class="property">js</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071102.png?alt=media&token=9980edd6-0205-420e-9705-26810cb3818a" alt="執行js檔案"></p>
-<p>執行後就可看到終端機順利輸出 console.log的結果囉。</p>
-]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
-      <tags>
-        <tag>Node.js</tag>
       </tags>
   </entry>
   <entry>
@@ -1686,6 +1612,35 @@
       </tags>
   </entry>
   <entry>
+    <title>Ajax解說系列(3) Fetch</title>
+    <url>/2022/07/01/2022-7-1-3-js-fetch/</url>
+    <content><![CDATA[<h2 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a>Fetch</h2><p>和 XMLHttpRequest一樣，Fetch 是window物件底下的方法，用來發送網路請求。當請求成功，fetch就會回傳一個promise物件(狀態是fulfilled)，這物件內會帶有response物件，裏面會放有我們想抓的資料。</p>
+<p>以下介紹不同請求類型的用法:</p>
+<h2 id="Get"><a href="#Get" class="headerlink" title="Get"></a>Get</h2><p><img src="https://miro.medium.com/max/919/1*aa1YL0BX_PnipFIh2nJgJQ.png" alt="get"></p>
+<p>單純發送get請求時，在fetch填入api的url，在第一次.then接收時，要用.json()方法，將資料轉為物件，此時會返回一個promise。<br>在用一個then去接收promise返回的資料，此時就是真正的物件資料。</p>
+<h2 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h2><p><img src="https://miro.medium.com/max/1155/1*FArkQAKzv0-HP0tZ7_PRmQ.png" alt="post"></p>
+<ol>
+<li>使用post資料到伺服器時，要設定 method: ‘POST’，</li>
+<li>headers 要設定 傳送資料的格式:</li>
+</ol>
+<ul>
+<li>json 格式 : application&#x2F;json</li>
+<li>傳統表單格式: application&#x2F;x-www-form-urlencoded</li>
+</ul>
+<ol start="3">
+<li>body 內放要傳送的資料，記得資料要用JSON.stringify轉為字串傳入。</li>
+<li>最後用 .then .catch接收回傳資料。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+        <tag>Ajax</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(4) Node.js require、module exports 模組設計</title>
     <url>/2022/07/11/2022-7-11-3-node-export-import/</url>
     <content><![CDATA[<h2 id="匯入匯出"><a href="#匯入匯出" class="headerlink" title="匯入匯出"></a>匯入匯出</h2><p>在node.js如果想讀取或匯出不同js檔案的資料，可用:</p>
@@ -1701,6 +1656,51 @@
       </categories>
       <tags>
         <tag>Node.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(2) 透過 Node.js 執行 JS 檔案</title>
+    <url>/2022/07/11/2022-7-11-1-node-run/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上一篇我們已經將 Node.js 安裝好了，這章節就小試身手，來用 Node.js 執行檔案吧。</p>
+<h2 id="新增js檔案"><a href="#新增js檔案" class="headerlink" title="新增js檔案"></a>新增js檔案</h2><p>我們先在桌面新增一個project資料夾，並在裡面新增一隻app.js檔案。新增後，我們用vscode編輯器開啟該資料夾。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071101.png?alt=media&token=58b8f450-806a-4c33-bafe-b23e4a61353e" alt="project"></p>
+<h2 id="執行js檔案"><a href="#執行js檔案" class="headerlink" title="執行js檔案"></a>執行js檔案</h2><p>檔案開啟後，我們就可用node.js來執行它，開啟終端機並輸入:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">node app.<span class="property">js</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071102.png?alt=media&token=9980edd6-0205-420e-9705-26810cb3818a" alt="執行js檔案"></p>
+<p>執行後就可看到終端機順利輸出 console.log的結果囉。</p>
+]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ajax解說系列(4) Axios 套件</title>
+    <url>/2022/07/01/2022-7-1-4-js-axios/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>除了使用 fetch這種原生api來處理AJAX以外，我們也可以使用套件來處理，本文介紹的axios即是處理ajax可用的套件。</p>
+<h2 id="axios基本語法"><a href="#axios基本語法" class="headerlink" title="axios基本語法"></a>axios基本語法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">axios</span>(url[,config])</span><br></pre></td></tr></table></figure>
+
+<p>axios回傳的是一個promise，所以我們可以用 <code>.then() .catch()</code> 來接收結果。</p>
+<h2 id="get-方法"><a href="#get-方法" class="headerlink" title="get 方法"></a>get 方法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.<span class="title function_">get</span>(<span class="string">&#x27;https://example/api/&#x27;</span>)</span><br><span class="line">    .<span class="title function_">then</span>( <span class="function">(<span class="params">response</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(response))</span><br><span class="line">    .<span class="title function_">catch</span>( <span class="function">(<span class="params">error</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(error));</span><br></pre></td></tr></table></figure>
+
+<p>用 axios.get(‘資源網址’) 即可發出get請求。</p>
+<p>也可加入參數，参數放在params屬性裏面</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.<span class="title function_">get</span>(<span class="string">&#x27;https://example/api/&#x27;</span>,&#123;</span><br><span class="line">    <span class="attr">params</span>: &#123;</span><br><span class="line">        <span class="attr">gender</span>: <span class="string">&#x27;female&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(res))</span><br><span class="line">.<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(error))</span><br></pre></td></tr></table></figure>
+
+<h2 id="post-方法"><a href="#post-方法" class="headerlink" title="post 方法"></a>post 方法</h2><p><img src="https://miro.medium.com/max/1155/1*wUR2CLqYOBdpxogkcB-5aA.png" alt="post"><br><img src="https://miro.medium.com/max/1155/1*pwaLtrNzCstPuhKF9p6Spg.png" alt="post"></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.<span class="title function_">post</span>(‘api網址’ , 物件格式資料)</span><br></pre></td></tr></table></figure>
+<p>用.then接收成功資訊，.catch()接收失敗資訊</p>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+        <tag>Ajax</tag>
+        <tag>Axios</tag>
       </tags>
   </entry>
   <entry>
@@ -1725,29 +1725,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Express框架(1) 開啟web伺服器</title>
-    <url>/2022/07/11/2022-7-11-6-node-express-1/</url>
-    <content><![CDATA[<h2 id="什麼是Express"><a href="#什麼是Express" class="headerlink" title="什麼是Express?"></a>什麼是Express?</h2><p>Express 這個套件主要幫忙解決許多node.js http server 所需要的基本服務，讓開發http service 變得更為容易，不需要像之前需要透過層層模組（module）才有辦法開始編寫自己的程式。</p>
-<p>這個套件是由TJ Holowaychuk 製作而成的套件，裡面包含基本的路由處理(route)，http 資料處理（GET&#x2F;POST&#x2F;PUT），另外還與樣板套件（js html template engine）搭配，同時也可以處理許多複雜化的問題。</p>
-<h2 id="安裝express"><a href="#安裝express" class="headerlink" title="安裝express"></a>安裝express</h2><p>在新專案裡 輸入 npm init 建立 package.json檔後，輸入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install express --save   // 安裝express 套件</span><br></pre></td></tr></table></figure>
-
-<h2 id="建立web伺服器"><a href="#建立web伺服器" class="headerlink" title="建立web伺服器"></a>建立web伺服器</h2><p><img src="https://miro.medium.com/max/1400/1*-a7Jvq3IudAqXHKVJYVXKQ.png" alt="app.js"></p>
-<p>在js檔裡，先把express require()進來，並將express賦予到app變數上。</p>
-<p>app.get: 第一個參數是路由，看前端是訪問哪個網址，第二個function則帶入req, res參數。</p>
-<p>app.listen: 監聽個別的port。</p>
-<h2 id="404頁面設計"><a href="#404頁面設計" class="headerlink" title="404頁面設計"></a>404頁面設計</h2><p><img src="https://miro.medium.com/max/1236/1*WcOY6fVxz7hTrTSOot1xyQ.png" alt="404頁面"></p>
-<p>使用app.all(‘*’)來設計404頁面，不論使用者是發出 get 、post 、put 、delete請求，都會觸發app.all。並且使用 * 做為路由，代表不管使用者前往哪個路由都會觸發這個function。</p>
-]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
-      <tags>
-        <tag>Node.js</tag>
-        <tag>Express</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(5) Node.js 內建模組 createServer</title>
     <url>/2022/07/11/2022-7-11-4-node-createServer/</url>
     <content><![CDATA[<h2 id="內建模組-createServer"><a href="#內建模組-createServer" class="headerlink" title="內建模組 createServer"></a>內建模組 createServer</h2><p>在 node.js 中有許多內建模組，其中 createServer 可以用來開啟個web伺服器。</p>
@@ -1765,6 +1742,25 @@
       </categories>
       <tags>
         <tag>Node.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Express框架(2) 網址規則</title>
+    <url>/2022/07/11/2022-7-11-7-node-network/</url>
+    <content><![CDATA[<h2 id="網址的組成"><a href="#網址的組成" class="headerlink" title="網址的組成"></a>網址的組成</h2><p><img src="https://miro.medium.com/max/1400/1*IeJWJEhLIuP0HUfUKMcPgA.png" alt="網址組成"></p>
+<p><img src="https://miro.medium.com/max/1400/1*QuRd_DEPJoO76rLIFYklQw.png" alt="https"></p>
+<p>https相較http協定，因為有加密是較安全的。</p>
+<p><img src="https://miro.medium.com/max/1400/1*324Ulsn-ffPuzx9EX1eMwg.png" alt="網域"></p>
+<p>購買好主網址後，次網域可以依據不同服務掛在主網域下。</p>
+<p><img src="https://miro.medium.com/max/1400/1*mXxjTDg-yFBJUeKlT2zo4g.png" alt="參數"></p>
+<p>在路徑search之後，可以設置query也就是參數，傳到後端後會解析成物件格式，再用這個物件去資料庫撈出對應資料。參數可以有多個，彼此用 &amp; 符號連接。</p>
+]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>Express</tag>
       </tags>
   </entry>
   <entry>
@@ -1802,48 +1798,19 @@
       </tags>
   </entry>
   <entry>
-    <title>Express框架(2) 網址規則</title>
-    <url>/2022/07/11/2022-7-11-7-node-network/</url>
-    <content><![CDATA[<h2 id="網址的組成"><a href="#網址的組成" class="headerlink" title="網址的組成"></a>網址的組成</h2><p><img src="https://miro.medium.com/max/1400/1*IeJWJEhLIuP0HUfUKMcPgA.png" alt="網址組成"></p>
-<p><img src="https://miro.medium.com/max/1400/1*QuRd_DEPJoO76rLIFYklQw.png" alt="https"></p>
-<p>https相較http協定，因為有加密是較安全的。</p>
-<p><img src="https://miro.medium.com/max/1400/1*324Ulsn-ffPuzx9EX1eMwg.png" alt="網域"></p>
-<p>購買好主網址後，次網域可以依據不同服務掛在主網域下。</p>
-<p><img src="https://miro.medium.com/max/1400/1*mXxjTDg-yFBJUeKlT2zo4g.png" alt="參數"></p>
-<p>在路徑search之後，可以設置query也就是參數，傳到後端後會解析成物件格式，再用這個物件去資料庫撈出對應資料。參數可以有多個，彼此用 &amp; 符號連接。</p>
-]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
-      <tags>
-        <tag>Node.js</tag>
-        <tag>Express</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Express框架(4) Middleware</title>
-    <url>/2022/07/12/2022-7-12-1-node-middleware/</url>
-    <content><![CDATA[<h2 id="Middleware-概念"><a href="#Middleware-概念" class="headerlink" title="Middleware 概念"></a>Middleware 概念</h2><p>Middleware 像水管一樣可以串聯在一起，所有的 Request 及 Response 都會層層經過這些水管。<br>用圖例可以很容易理解，如下圖：</p>
-<p><img src="https://miro.medium.com/max/1200/0*6JyVusGg4jQkcBJw.png" alt="middleware"></p>
-<h2 id="App-use"><a href="#App-use" class="headerlink" title="App.use"></a>App.use</h2><p>在express中，使用app.use作為類似守門員的角色，app.use就像一層一層的水管，當程式符合條件，才會執行next()，進到下一個funciton。</p>
-<p><img src="https://miro.medium.com/max/1400/1*ZG8cv5Yke-HB8ZdEx0oUoQ.png" alt="app.use"></p>
-<h2 id="404路由設定"><a href="#404路由設定" class="headerlink" title="404路由設定"></a>404路由設定</h2><p><img src="https://miro.medium.com/max/1400/1*tdatSPLTGHYNUeRLNnEzNA.png" alt="404"></p>
-<p>當今天使用者輸入錯誤網址，應該要回傳404頁面。像上圖，當使用者輸入 &#x2F;user ，那沒問題會進入user頁面。</p>
-<p>但如果輸入錯誤，可以使用app.use，來回傳res.status(404)，並且send一個404提示頁面給使用者看。如果是程式有問題則可回傳res.status(500)。</p>
-<h2 id="middleware-位置"><a href="#middleware-位置" class="headerlink" title="middleware 位置"></a>middleware 位置</h2><p>middleware寫的位置也可不同，以下介紹不同的寫法:</p>
-<h3 id="寫在參數內"><a href="#寫在參數內" class="headerlink" title="寫在參數內"></a>寫在參數內</h3><p>middleware也可以寫在路由函式的第二個參數，當使用者進入’&#x2F;user’後，就會進入守門員 middleware，當通過next()後，才會跑最後的function。</p>
-<p><img src="https://miro.medium.com/max/1400/1*eIOZrfAsK9x2Ey328D1wxQ.png" alt="寫在第二個參數"></p>
-<h3 id="加入多個middleware"><a href="#加入多個middleware" class="headerlink" title="加入多個middleware"></a>加入多個middleware</h3><p>加入多個middleware，可以用陣列方式</p>
-<p><img src="https://miro.medium.com/max/1400/1*9IjEP7363kE6HV1ZgHI8GA.png" alt="多個middleware"></p>
-<h3 id="加入所有router"><a href="#加入所有router" class="headerlink" title="加入所有router"></a>加入所有router</h3><p>上圖中，我們是手動將logger加入路由中，但當今天路由很多時，無法一一加入，可以用app.use(middleware)，一次將middleware加入所有頁面。</p>
-<p><img src="https://miro.medium.com/max/1400/1*-18WRu76rnoT2zAaDQyObw.png" alt="加入所有router"></p>
-<p>當有多個middleware要加入時，可以用陣列方式加入，陣列裡的順序會影響middleware的執行順序。</p>
-<p><img src="https://miro.medium.com/max/1328/1*QXP-U-OUPfYuBOMyqT9B8Q.png" alt="加入多個"></p>
-<h3 id="加入指定路徑的路由"><a href="#加入指定路徑的路由" class="headerlink" title="加入指定路徑的路由"></a>加入指定路徑的路由</h3><p><img src="https://miro.medium.com/max/948/1*tArClOuxGOqWKeursFf5NQ.png"></p>
-<p>app.use()，第一個參數可加入指定路徑，如上圖只要路徑是&#x2F;api開頭的都會被加上middleware，如 &#x2F;api&#x2F;about、&#x2F;api&#x2F;products</p>
-<p><img src="https://miro.medium.com/max/1216/1*H0R6d3NsPCX423vN5NZT3A.png"></p>
-<h2 id="express內建-middleware"><a href="#express內建-middleware" class="headerlink" title="express內建 middleware"></a>express內建 middleware</h2><p>在express中，已經內建了許多 middleware，如之前學過的express.static()</p>
-<p><img src="https://miro.medium.com/max/908/1*eQ0DKpqLRQ2rIXcShoOwxg.png"></p>
+    <title>Express框架(1) 開啟web伺服器</title>
+    <url>/2022/07/11/2022-7-11-6-node-express-1/</url>
+    <content><![CDATA[<h2 id="什麼是Express"><a href="#什麼是Express" class="headerlink" title="什麼是Express?"></a>什麼是Express?</h2><p>Express 這個套件主要幫忙解決許多node.js http server 所需要的基本服務，讓開發http service 變得更為容易，不需要像之前需要透過層層模組（module）才有辦法開始編寫自己的程式。</p>
+<p>這個套件是由TJ Holowaychuk 製作而成的套件，裡面包含基本的路由處理(route)，http 資料處理（GET&#x2F;POST&#x2F;PUT），另外還與樣板套件（js html template engine）搭配，同時也可以處理許多複雜化的問題。</p>
+<h2 id="安裝express"><a href="#安裝express" class="headerlink" title="安裝express"></a>安裝express</h2><p>在新專案裡 輸入 npm init 建立 package.json檔後，輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install express --save   // 安裝express 套件</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立web伺服器"><a href="#建立web伺服器" class="headerlink" title="建立web伺服器"></a>建立web伺服器</h2><p><img src="https://miro.medium.com/max/1400/1*-a7Jvq3IudAqXHKVJYVXKQ.png" alt="app.js"></p>
+<p>在js檔裡，先把express require()進來，並將express賦予到app變數上。</p>
+<p>app.get: 第一個參數是路由，看前端是訪問哪個網址，第二個function則帶入req, res參數。</p>
+<p>app.listen: 監聽個別的port。</p>
+<h2 id="404頁面設計"><a href="#404頁面設計" class="headerlink" title="404頁面設計"></a>404頁面設計</h2><p><img src="https://miro.medium.com/max/1236/1*WcOY6fVxz7hTrTSOot1xyQ.png" alt="404頁面"></p>
+<p>使用app.all(‘*’)來設計404頁面，不論使用者是發出 get 、post 、put 、delete請求，都會觸發app.all。並且使用 * 做為路由，代表不管使用者前往哪個路由都會觸發這個function。</p>
 ]]></content>
       <categories>
         <category>Node.js</category>
@@ -1899,18 +1866,29 @@
       </tags>
   </entry>
   <entry>
-    <title>Express框架(6) EJS樣板語言</title>
-    <url>/2022/07/13/2022-7-13-1-ejs-install/</url>
-    <content><![CDATA[<h2 id="EJS-介紹"><a href="#EJS-介紹" class="headerlink" title="EJS 介紹"></a>EJS 介紹</h2><p>EJS 的全名是「Embedded Javascript」，顧名思義就是內嵌式的樣板引擎，可以將邏輯與內容直接嵌入到 HTML 頁面上，也就是 EJS 可以讓我們利用 JavaScript 生成 HTML 頁面 。</p>
-<h2 id="替-Express-加入-EJS"><a href="#替-Express-加入-EJS" class="headerlink" title="替 Express 加入 EJS"></a>替 Express 加入 EJS</h2><p>首先要先來安裝 EJS 套件進入專案，這邊選用 <a href="https://www.npmjs.com/package/ejs-locals">ejs-locals</a> 這個鄉民開發的套件，因為正版ejs有些功能較缺乏。</p>
-<p><img src="https://miro.medium.com/max/1400/1*gfvzeVND9wZ-5HET2qaaKg.png"></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">app.<span class="title function_">engine</span>() <span class="comment">// 指定我們要用的樣板引擎是ejs。</span></span><br><span class="line">app.<span class="title function_">set</span>(<span class="string">&#x27;views&#x27;</span>, <span class="string">&#x27;./views&#x27;</span>)  <span class="comment">//設定views資料夾，存放所有ejs樣板檔案。</span></span><br><span class="line">app.<span class="title function_">set</span>(<span class="string">&#x27;view engine&#x27;</span>, <span class="string">&#x27;ejs&#x27;</span>) <span class="comment">// 告訴express要用ejs樣板來跑。</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="新增-ejs-檔案"><a href="#新增-ejs-檔案" class="headerlink" title="新增 ejs 檔案"></a>新增 ejs 檔案</h2><p><img src="https://miro.medium.com/max/788/1*GVlx6DfG7W4l9SMN9UOcAg.png"></p>
-<p><img src="https://miro.medium.com/max/1400/1*q-nTWNurcyFK6D3LeObr6w.png"></p>
-<p>在view資料夾下，新增不同頁面的 ejs檔案。</p>
-<p><img src="https://miro.medium.com/max/1400/1*RvhXzYdnc6cshoJ3NhS3Zg.png"></p>
-<p>在app.get裡，可以用res.render()來指定要渲染的ejs檔案，這邊不用加副檔名.ejs，因為在app.set時已經指定渲染樣板為ejs。</p>
+    <title>Express框架(4) Middleware</title>
+    <url>/2022/07/12/2022-7-12-1-node-middleware/</url>
+    <content><![CDATA[<h2 id="Middleware-概念"><a href="#Middleware-概念" class="headerlink" title="Middleware 概念"></a>Middleware 概念</h2><p>Middleware 像水管一樣可以串聯在一起，所有的 Request 及 Response 都會層層經過這些水管。<br>用圖例可以很容易理解，如下圖：</p>
+<p><img src="https://miro.medium.com/max/1200/0*6JyVusGg4jQkcBJw.png" alt="middleware"></p>
+<h2 id="App-use"><a href="#App-use" class="headerlink" title="App.use"></a>App.use</h2><p>在express中，使用app.use作為類似守門員的角色，app.use就像一層一層的水管，當程式符合條件，才會執行next()，進到下一個funciton。</p>
+<p><img src="https://miro.medium.com/max/1400/1*ZG8cv5Yke-HB8ZdEx0oUoQ.png" alt="app.use"></p>
+<h2 id="404路由設定"><a href="#404路由設定" class="headerlink" title="404路由設定"></a>404路由設定</h2><p><img src="https://miro.medium.com/max/1400/1*tdatSPLTGHYNUeRLNnEzNA.png" alt="404"></p>
+<p>當今天使用者輸入錯誤網址，應該要回傳404頁面。像上圖，當使用者輸入 &#x2F;user ，那沒問題會進入user頁面。</p>
+<p>但如果輸入錯誤，可以使用app.use，來回傳res.status(404)，並且send一個404提示頁面給使用者看。如果是程式有問題則可回傳res.status(500)。</p>
+<h2 id="middleware-位置"><a href="#middleware-位置" class="headerlink" title="middleware 位置"></a>middleware 位置</h2><p>middleware寫的位置也可不同，以下介紹不同的寫法:</p>
+<h3 id="寫在參數內"><a href="#寫在參數內" class="headerlink" title="寫在參數內"></a>寫在參數內</h3><p>middleware也可以寫在路由函式的第二個參數，當使用者進入’&#x2F;user’後，就會進入守門員 middleware，當通過next()後，才會跑最後的function。</p>
+<p><img src="https://miro.medium.com/max/1400/1*eIOZrfAsK9x2Ey328D1wxQ.png" alt="寫在第二個參數"></p>
+<h3 id="加入多個middleware"><a href="#加入多個middleware" class="headerlink" title="加入多個middleware"></a>加入多個middleware</h3><p>加入多個middleware，可以用陣列方式</p>
+<p><img src="https://miro.medium.com/max/1400/1*9IjEP7363kE6HV1ZgHI8GA.png" alt="多個middleware"></p>
+<h3 id="加入所有router"><a href="#加入所有router" class="headerlink" title="加入所有router"></a>加入所有router</h3><p>上圖中，我們是手動將logger加入路由中，但當今天路由很多時，無法一一加入，可以用app.use(middleware)，一次將middleware加入所有頁面。</p>
+<p><img src="https://miro.medium.com/max/1400/1*-18WRu76rnoT2zAaDQyObw.png" alt="加入所有router"></p>
+<p>當有多個middleware要加入時，可以用陣列方式加入，陣列裡的順序會影響middleware的執行順序。</p>
+<p><img src="https://miro.medium.com/max/1328/1*QXP-U-OUPfYuBOMyqT9B8Q.png" alt="加入多個"></p>
+<h3 id="加入指定路徑的路由"><a href="#加入指定路徑的路由" class="headerlink" title="加入指定路徑的路由"></a>加入指定路徑的路由</h3><p><img src="https://miro.medium.com/max/948/1*tArClOuxGOqWKeursFf5NQ.png"></p>
+<p>app.use()，第一個參數可加入指定路徑，如上圖只要路徑是&#x2F;api開頭的都會被加上middleware，如 &#x2F;api&#x2F;about、&#x2F;api&#x2F;products</p>
+<p><img src="https://miro.medium.com/max/1216/1*H0R6d3NsPCX423vN5NZT3A.png"></p>
+<h2 id="express內建-middleware"><a href="#express內建-middleware" class="headerlink" title="express內建 middleware"></a>express內建 middleware</h2><p>在express中，已經內建了許多 middleware，如之前學過的express.static()</p>
+<p><img src="https://miro.medium.com/max/908/1*eQ0DKpqLRQ2rIXcShoOwxg.png"></p>
 ]]></content>
       <categories>
         <category>Node.js</category>
@@ -1940,6 +1918,51 @@
       </tags>
   </entry>
   <entry>
+    <title>Express框架(6) EJS樣板語言</title>
+    <url>/2022/07/13/2022-7-13-1-ejs-install/</url>
+    <content><![CDATA[<h2 id="EJS-介紹"><a href="#EJS-介紹" class="headerlink" title="EJS 介紹"></a>EJS 介紹</h2><p>EJS 的全名是「Embedded Javascript」，顧名思義就是內嵌式的樣板引擎，可以將邏輯與內容直接嵌入到 HTML 頁面上，也就是 EJS 可以讓我們利用 JavaScript 生成 HTML 頁面 。</p>
+<h2 id="替-Express-加入-EJS"><a href="#替-Express-加入-EJS" class="headerlink" title="替 Express 加入 EJS"></a>替 Express 加入 EJS</h2><p>首先要先來安裝 EJS 套件進入專案，這邊選用 <a href="https://www.npmjs.com/package/ejs-locals">ejs-locals</a> 這個鄉民開發的套件，因為正版ejs有些功能較缺乏。</p>
+<p><img src="https://miro.medium.com/max/1400/1*gfvzeVND9wZ-5HET2qaaKg.png"></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">app.<span class="title function_">engine</span>() <span class="comment">// 指定我們要用的樣板引擎是ejs。</span></span><br><span class="line">app.<span class="title function_">set</span>(<span class="string">&#x27;views&#x27;</span>, <span class="string">&#x27;./views&#x27;</span>)  <span class="comment">//設定views資料夾，存放所有ejs樣板檔案。</span></span><br><span class="line">app.<span class="title function_">set</span>(<span class="string">&#x27;view engine&#x27;</span>, <span class="string">&#x27;ejs&#x27;</span>) <span class="comment">// 告訴express要用ejs樣板來跑。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="新增-ejs-檔案"><a href="#新增-ejs-檔案" class="headerlink" title="新增 ejs 檔案"></a>新增 ejs 檔案</h2><p><img src="https://miro.medium.com/max/788/1*GVlx6DfG7W4l9SMN9UOcAg.png"></p>
+<p><img src="https://miro.medium.com/max/1400/1*q-nTWNurcyFK6D3LeObr6w.png"></p>
+<p>在view資料夾下，新增不同頁面的 ejs檔案。</p>
+<p><img src="https://miro.medium.com/max/1400/1*RvhXzYdnc6cshoJ3NhS3Zg.png"></p>
+<p>在app.get裡，可以用res.render()來指定要渲染的ejs檔案，這邊不用加副檔名.ejs，因為在app.set時已經指定渲染樣板為ejs。</p>
+]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>Express</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Postman-API 管理工具</title>
+    <url>/2022/07/13/2022-7-13-3-postman/</url>
+    <content><![CDATA[<h2 id="什麼是postman"><a href="#什麼是postman" class="headerlink" title="什麼是postman?"></a>什麼是postman?</h2><p>Postman 是一個可以模擬 HTTP Request 的工具，其中包含常見的 HTTP 的請求方式，例如： GET 、POST、PUT、DELETE，而它的主要功能就是能夠快速的測試你的 API 是否能夠正常的請求資料，並得到正確的請求結果。</p>
+<h2 id="安裝程式"><a href="#安裝程式" class="headerlink" title="安裝程式"></a>安裝程式</h2><p>首先來 <a href="https://www.postman.com/downloads/">postman官網</a> 下載postman程式。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071301.png?alt=media&token=11df68e4-e1e5-49a5-9bb6-86811c4c9aae" alt="postman"></p>
+<h2 id="基礎操作"><a href="#基礎操作" class="headerlink" title="基礎操作"></a>基礎操作</h2><p>開啟postman程式後，左側是我們的放專案資料夾的區域，每個資料夾裡可以新增該專案要測試的api。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071302.png?alt=media&token=9886dcd1-a663-44d5-bebe-c1cd8d07ff35"></p>
+<p>可以新增 GET 、POST、PUT、DELETE 等不同請求的api進行測試。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071303.png?alt=media&token=9f647251-777b-4e37-861d-83ea5174168d"></p>
+<h2 id="post-傳送表單資料"><a href="#post-傳送表單資料" class="headerlink" title="post 傳送表單資料"></a>post 傳送表單資料</h2><p>在postman裡，我們可以模擬前端表單發送資料。api方法選擇 POST，並在body輸入key跟value，其中key就相當於表單的name，value就是name的值，表單方法選擇 <code>x-www-form-urlencoded</code>。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071304.png?alt=media&token=2d840b29-a9b9-4280-8bf1-c2591e4abce9"></p>
+<p>如果是向後端傳送 JSON格式，body裡選擇 raw ，格式選擇 JSON</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071305.png?alt=media&token=55812d07-a857-4c5f-b1a2-245ce2518337"></p>
+]]></content>
+      <categories>
+        <category>Postman</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>Postman</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Express框架(7) EJS Layout</title>
     <url>/2022/07/13/2022-7-13-2-ejs-layout/</url>
     <content><![CDATA[<h2 id="設定樣板"><a href="#設定樣板" class="headerlink" title="設定樣板"></a>設定樣板</h2><p>我們可以新增一個 layout.ejs 作為樣板頁面使用，layout裡加入 <code>&lt;%- body %&gt;</code> 語法，會將其他ejs檔內容匯入。</p>
@@ -1960,31 +1983,6 @@
 <p><img src="https://miro.medium.com/max/1108/1*eqFjWH00H2lzsN12qE2sTw.png"></p>
 <p>在ejs裡一樣可以用 for 語法去渲染陣列出來</p>
 <p><img src="https://miro.medium.com/max/1152/1*TWV9_MNkwNTjiJcBaz2Q4Q.png"></p>
-]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
-      <tags>
-        <tag>Node.js</tag>
-        <tag>Express</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Express框架(8) body-parser</title>
-    <url>/2022/07/13/2022-7-13-4-body-parser/</url>
-    <content><![CDATA[<h2 id="body-parser-是什麼？"><a href="#body-parser-是什麼？" class="headerlink" title="body-parser 是什麼？"></a>body-parser 是什麼？</h2><p>body-parser 是 Express 經常使用的中介軟體，用於解析請求的資料(body)，比如說：POST 一筆 JSON 格式的資料到我們的 Express App，這時可以透過 body-parser 快速解析這筆資料，以方便取用。下方的圖為 Express 的運作模型，可以看到 body-parser 會先進行資料的解析，才會把解析後的資料傳給其他相關的 middleware 使用。</p>
-<p><img src="https://miro.medium.com/max/1400/0*8sAI6T1cahPoR-e6.png"></p>
-<h2 id="使用-body-parser"><a href="#使用-body-parser" class="headerlink" title="使用 body-parser"></a>使用 body-parser</h2><p>在express4的版本已經內建body-parser的功能，所以直接使用即可:</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(express.<span class="title function_">json</span>());  <span class="comment">// 解析json格式</span></span><br><span class="line">app.<span class="title function_">use</span>(express.<span class="title function_">urlencoded</span>(&#123; <span class="attr">extended</span>: <span class="literal">false</span> &#125;)); <span class="comment">// 解析表單資料</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="表單設計"><a href="#表單設計" class="headerlink" title="表單設計"></a>表單設計</h2><p><img src="https://miro.medium.com/max/1196/1*XUZu72p4jof3Tk6jZl6xOg.png"></p>
-<p>在Form標籤上，action的路徑代標資料會傳到哪，method則選用post代表將資料送出到後端。</p>
-<p><img src="https://miro.medium.com/max/1156/1*xn-Ao4WJiGUQEVJh2uRRDw.png"></p>
-<p>在app.js中，可以設計app.post去接收前端表單的資料，第一個參數’&#x2F;searchList’ 也就是前端表單的action路徑。</p>
-<p>接收到的req.body會是一個 json格式，key值就是前端input所指定的name。</p>
-<h2 id="Redirect-跳轉頁面設定"><a href="#Redirect-跳轉頁面設定" class="headerlink" title="Redirect 跳轉頁面設定"></a>Redirect 跳轉頁面設定</h2><p><img src="https://miro.medium.com/max/1240/1*Ky3EZaP8KjIveIpTp7b7eA.png"></p>
-<p>當我們收到前端傳來的表單資料後，並將資料處理完後，就可以用</p>
-<p>res.redirect(‘路由’)將網頁導回 指定頁面。</p>
 ]]></content>
       <categories>
         <category>Node.js</category>
@@ -2023,26 +2021,56 @@
       </tags>
   </entry>
   <entry>
-    <title>Postman-API 管理工具</title>
-    <url>/2022/07/13/2022-7-13-3-postman/</url>
-    <content><![CDATA[<h2 id="什麼是postman"><a href="#什麼是postman" class="headerlink" title="什麼是postman?"></a>什麼是postman?</h2><p>Postman 是一個可以模擬 HTTP Request 的工具，其中包含常見的 HTTP 的請求方式，例如： GET 、POST、PUT、DELETE，而它的主要功能就是能夠快速的測試你的 API 是否能夠正常的請求資料，並得到正確的請求結果。</p>
-<h2 id="安裝程式"><a href="#安裝程式" class="headerlink" title="安裝程式"></a>安裝程式</h2><p>首先來 <a href="https://www.postman.com/downloads/">postman官網</a> 下載postman程式。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071301.png?alt=media&token=11df68e4-e1e5-49a5-9bb6-86811c4c9aae" alt="postman"></p>
-<h2 id="基礎操作"><a href="#基礎操作" class="headerlink" title="基礎操作"></a>基礎操作</h2><p>開啟postman程式後，左側是我們的放專案資料夾的區域，每個資料夾裡可以新增該專案要測試的api。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071302.png?alt=media&token=9886dcd1-a663-44d5-bebe-c1cd8d07ff35"></p>
-<p>可以新增 GET 、POST、PUT、DELETE 等不同請求的api進行測試。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071303.png?alt=media&token=9f647251-777b-4e37-861d-83ea5174168d"></p>
-<h2 id="post-傳送表單資料"><a href="#post-傳送表單資料" class="headerlink" title="post 傳送表單資料"></a>post 傳送表單資料</h2><p>在postman裡，我們可以模擬前端表單發送資料。api方法選擇 POST，並在body輸入key跟value，其中key就相當於表單的name，value就是name的值，表單方法選擇 <code>x-www-form-urlencoded</code>。</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071304.png?alt=media&token=2d840b29-a9b9-4280-8bf1-c2591e4abce9"></p>
-<p>如果是向後端傳送 JSON格式，body裡選擇 raw ，格式選擇 JSON</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071305.png?alt=media&token=55812d07-a857-4c5f-b1a2-245ce2518337"></p>
+    <title>Express框架(8) body-parser</title>
+    <url>/2022/07/13/2022-7-13-4-body-parser/</url>
+    <content><![CDATA[<h2 id="body-parser-是什麼？"><a href="#body-parser-是什麼？" class="headerlink" title="body-parser 是什麼？"></a>body-parser 是什麼？</h2><p>body-parser 是 Express 經常使用的中介軟體，用於解析請求的資料(body)，比如說：POST 一筆 JSON 格式的資料到我們的 Express App，這時可以透過 body-parser 快速解析這筆資料，以方便取用。下方的圖為 Express 的運作模型，可以看到 body-parser 會先進行資料的解析，才會把解析後的資料傳給其他相關的 middleware 使用。</p>
+<p><img src="https://miro.medium.com/max/1400/0*8sAI6T1cahPoR-e6.png"></p>
+<h2 id="使用-body-parser"><a href="#使用-body-parser" class="headerlink" title="使用 body-parser"></a>使用 body-parser</h2><p>在express4的版本已經內建body-parser的功能，所以直接使用即可:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(express.<span class="title function_">json</span>());  <span class="comment">// 解析json格式</span></span><br><span class="line">app.<span class="title function_">use</span>(express.<span class="title function_">urlencoded</span>(&#123; <span class="attr">extended</span>: <span class="literal">false</span> &#125;)); <span class="comment">// 解析表單資料</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="表單設計"><a href="#表單設計" class="headerlink" title="表單設計"></a>表單設計</h2><p><img src="https://miro.medium.com/max/1196/1*XUZu72p4jof3Tk6jZl6xOg.png"></p>
+<p>在Form標籤上，action的路徑代標資料會傳到哪，method則選用post代表將資料送出到後端。</p>
+<p><img src="https://miro.medium.com/max/1156/1*xn-Ao4WJiGUQEVJh2uRRDw.png"></p>
+<p>在app.js中，可以設計app.post去接收前端表單的資料，第一個參數’&#x2F;searchList’ 也就是前端表單的action路徑。</p>
+<p>接收到的req.body會是一個 json格式，key值就是前端input所指定的name。</p>
+<h2 id="Redirect-跳轉頁面設定"><a href="#Redirect-跳轉頁面設定" class="headerlink" title="Redirect 跳轉頁面設定"></a>Redirect 跳轉頁面設定</h2><p><img src="https://miro.medium.com/max/1240/1*Ky3EZaP8KjIveIpTp7b7eA.png"></p>
+<p>當我們收到前端傳來的表單資料後，並將資料處理完後，就可以用</p>
+<p>res.redirect(‘路由’)將網頁導回 指定頁面。</p>
 ]]></content>
       <categories>
-        <category>Postman</category>
+        <category>Node.js</category>
       </categories>
       <tags>
         <tag>Node.js</tag>
-        <tag>Postman</tag>
+        <tag>Express</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MongoDB (一) 安裝MongoDB與基礎指令</title>
+    <url>/2022/07/15/2022-7-15-1-mongodb-install/</url>
+    <content><![CDATA[<h2 id="MongoDB是什麼"><a href="#MongoDB是什麼" class="headerlink" title="MongoDB是什麼?"></a>MongoDB是什麼?</h2><p>MongoDB 是一個開源的「NoSQL ( 非關聯性 ) 文件資料庫」，具有以下優點:</p>
+<ul>
+<li>不須先創立數據表格，且數據格式自由<br>MySQL 須創建表格讓 MySQL 抓取數據，而 MongoDB 不需事先創建表格，也能將數據直接寫入並彈性添加欄位，且欄位的格式較自由，例如:欄位使用數字或是字符串皆可。</li>
+<li>可以處理json結構<br>MongoDB 將資料儲存為文件（類似 JSON 物件），以 field-value 為結構成對儲存，value 可以包含值、文件、陣列、文件陣列，讀取欄位內的數值。</li>
+</ul>
+<h2 id="安裝MongoDB"><a href="#安裝MongoDB" class="headerlink" title="安裝MongoDB"></a>安裝MongoDB</h2><p>到<a href="https://www.mongodb.com/docs/manual/administration/install-community/">此網站</a> 安裝mongoDB</p>
+<p><img src="https://miro.medium.com/max/1400/1*FCigXxB4Kis3PZ85fq2xiw.png"></p>
+<p>到<a href="https://www.mongodb.com/docs/mongodb-shell/install/">此網站</a> 安裝 mongosh(連線到mongoDB會用到的工具)</p>
+<p><img src="https://miro.medium.com/max/1400/1*pLlEilk0USrVukdgBbCKug.png"></p>
+<p>安裝好後，打開終端機輸入 mongosh，會顯示目前安裝的mongoDB版本。</p>
+<p><img src="https://miro.medium.com/max/1400/1*_2EgvYu5TghFeA6_a7R2hw.png"></p>
+<h2 id="基礎指令"><a href="#基礎指令" class="headerlink" title="基礎指令"></a>基礎指令</h2><p><code>show dbs </code>: 顯示目前有的資料庫</p>
+<p><img src="https://miro.medium.com/max/604/1*ZY3KbCmUBn6qjpZSbP1UYw.png"></p>
+<p><code>use 資料庫名稱</code>: 新增資料庫</p>
+<p><img src="https://miro.medium.com/max/640/1*8sW3YtdIxNhjE7ItSA-mCQ.png"></p>
+<p><code>show collections</code> : 顯示資料庫裡的collections</p>
+<p><code>db.dropDatabase()</code> : 刪除目前資料庫</p>
+<p><img src="https://miro.medium.com/max/840/1*bwoP97w5Dk7fMWbJBF8PUA.png"></p>
+<p><code>cls</code> : 清除終端機指令</p>
+<p><code>exit</code> : 離開mongosh，回到終端機</p>
+]]></content>
+      <tags>
+        <tag>MongoDB</tag>
       </tags>
   </entry>
   <entry>
@@ -2099,31 +2127,64 @@
       </tags>
   </entry>
   <entry>
-    <title>MongoDB (一) 安裝MongoDB與基礎指令</title>
-    <url>/2022/07/15/2022-7-15-1-mongodb-install/</url>
-    <content><![CDATA[<h2 id="MongoDB是什麼"><a href="#MongoDB是什麼" class="headerlink" title="MongoDB是什麼?"></a>MongoDB是什麼?</h2><p>MongoDB 是一個開源的「NoSQL ( 非關聯性 ) 文件資料庫」，具有以下優點:</p>
-<ul>
-<li>不須先創立數據表格，且數據格式自由<br>MySQL 須創建表格讓 MySQL 抓取數據，而 MongoDB 不需事先創建表格，也能將數據直接寫入並彈性添加欄位，且欄位的格式較自由，例如:欄位使用數字或是字符串皆可。</li>
-<li>可以處理json結構<br>MongoDB 將資料儲存為文件（類似 JSON 物件），以 field-value 為結構成對儲存，value 可以包含值、文件、陣列、文件陣列，讀取欄位內的數值。</li>
-</ul>
-<h2 id="安裝MongoDB"><a href="#安裝MongoDB" class="headerlink" title="安裝MongoDB"></a>安裝MongoDB</h2><p>到<a href="https://www.mongodb.com/docs/manual/administration/install-community/">此網站</a> 安裝mongoDB</p>
-<p><img src="https://miro.medium.com/max/1400/1*FCigXxB4Kis3PZ85fq2xiw.png"></p>
-<p>到<a href="https://www.mongodb.com/docs/mongodb-shell/install/">此網站</a> 安裝 mongosh(連線到mongoDB會用到的工具)</p>
-<p><img src="https://miro.medium.com/max/1400/1*pLlEilk0USrVukdgBbCKug.png"></p>
-<p>安裝好後，打開終端機輸入 mongosh，會顯示目前安裝的mongoDB版本。</p>
-<p><img src="https://miro.medium.com/max/1400/1*_2EgvYu5TghFeA6_a7R2hw.png"></p>
-<h2 id="基礎指令"><a href="#基礎指令" class="headerlink" title="基礎指令"></a>基礎指令</h2><p><code>show dbs </code>: 顯示目前有的資料庫</p>
-<p><img src="https://miro.medium.com/max/604/1*ZY3KbCmUBn6qjpZSbP1UYw.png"></p>
-<p><code>use 資料庫名稱</code>: 新增資料庫</p>
-<p><img src="https://miro.medium.com/max/640/1*8sW3YtdIxNhjE7ItSA-mCQ.png"></p>
-<p><code>show collections</code> : 顯示資料庫裡的collections</p>
-<p><code>db.dropDatabase()</code> : 刪除目前資料庫</p>
-<p><img src="https://miro.medium.com/max/840/1*bwoP97w5Dk7fMWbJBF8PUA.png"></p>
-<p><code>cls</code> : 清除終端機指令</p>
-<p><code>exit</code> : 離開mongosh，回到終端機</p>
+    <title>MongoDB (二) 新增與尋找</title>
+    <url>/2022/07/16/2022-7-15-2-mongodb-find/</url>
+    <content><![CDATA[<h2 id="新增單筆資料"><a href="#新增單筆資料" class="headerlink" title="新增單筆資料"></a>新增單筆資料</h2><p><img src="https://miro.medium.com/max/1400/1*gVW--Mwzkr8MGyRqEAiJqQ.png"></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">insertOne</span>() <span class="comment">// 新增單筆資料</span></span><br></pre></td></tr></table></figure>
+
+<p>使用insertOne()語法，在users這個collection裡面新增一筆資料(document)，資料以物件形式加入。</p>
+<h2 id="新增多筆資料"><a href="#新增多筆資料" class="headerlink" title="新增多筆資料"></a>新增多筆資料</h2><p><img src="https://miro.medium.com/max/1400/1*iifEjaw0vesRmNJuc55dJA.png"></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">insertMany</span>([])  <span class="comment">// 加入多筆資料，每筆資料為物件格式。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="尋找資料"><a href="#尋找資料" class="headerlink" title="尋找資料"></a>尋找資料</h2><ol>
+<li>尋找所有資料<br><img src="https://miro.medium.com/max/1400/1*u24PrSDc2Y_O9za1Sd5cVg.png"></li>
+</ol>
+<p>使用 find()，將collection 裡的所有資料(document)列出，可以看到在mongoDB裡，每一筆資料的格式可以不同，也能在物件裡再放物件格式。</p>
+<ol start="2">
+<li>.find({ 搜尋條件 })， 尋找指定資料</li>
+</ol>
+<p><img src="https://miro.medium.com/max/1400/1*1y28loJEsDtZ7HFlUP8VDw.png"></p>
+<ol start="3">
+<li>find({ 搜尋條件 }, { 需要欄位}): 尋找指定資料，並只回傳需要的欄位，1 代表要回傳的欄位, 0代表不要回傳的欄位</li>
+</ol>
+<p><img src="https://miro.medium.com/max/1400/1*rd21DIRvfdpCTdqRS-l0Dw.png" alt="只回傳 name 跟 age的欄位"></p>
+<p><img src="https://miro.medium.com/max/1400/1*__9L7fjSlJVkfnh569nIdw.png" alt="回傳age以外的欄位"></p>
+<h2 id="篩選資料"><a href="#篩選資料" class="headerlink" title="篩選資料"></a>篩選資料</h2><ol>
+<li>限制搜尋筆數: .limit(筆數)</li>
+</ol>
+<p><img src="https://miro.medium.com/max/1400/1*fslx_qLREPu8Do0OA-iOSw.png"></p>
+<ol start="2">
+<li>資料排序: sort( {}):</li>
+</ol>
+<p>物件key值為要排序的屬性， value為 1(降冪) 或 -1 (升冪)</p>
+<p><img src="https://miro.medium.com/max/1400/1*GDXlcgddlVyMXtV_YSXm3A.png"></p>
+<ol start="3">
+<li>多條件排序</li>
+</ol>
+<p><img src="https://miro.medium.com/max/1400/1*6l6JUe1cSsM3b1DxQi1mGQ.png"></p>
+<p>sort()裡可放多屬性，會依照屬性順序做排序，如上圖會先將age做排序，若age一樣再用name做排序。</p>
+<ol start="4">
+<li>跳過項目 .skip(跳過數量)</li>
+</ol>
+<p><img src="https://miro.medium.com/max/1400/1*0G0NEDl6BejHTCqxO5DK7Q.png" alt="掠過第一筆資料"></p>
 ]]></content>
       <tags>
         <tag>MongoDB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MongoDB Atlas(一) 申請帳號</title>
+    <url>/2022/07/17/2022-7-17-4-mongodb-altas-1/</url>
+    <content><![CDATA[<p>MongoDB Atlas是MongoDB公司的雲端資料庫服務，使用流程如下:</p>
+<h2 id="申請MongoDB-Atlas帳號"><a href="#申請MongoDB-Atlas帳號" class="headerlink" title="申請MongoDB Atlas帳號:"></a>申請MongoDB Atlas帳號:</h2><p>首先來到<a href="https://www.mongodb.com/docs/atlas/getting-started/">教學文件</a>，選擇 part 1 建立 Atlas 帳號</p>
+<p><img src="https://miro.medium.com/max/963/1*Hjhk1iYTMWb_GCy_K4NBXw.png"></p>
+<p>點選 Navigate to MongoDB Atlas <a href="https://account.mongodb.com/account/login">login page</a>，建立帳號，可選擇以 google帳號登入</p>
+<p><img src="https://miro.medium.com/max/963/1*Sgx4vYxwmNQKpvPLWpgncw.png"></p>
+<h2 id="登入後，選擇-免費方案"><a href="#登入後，選擇-免費方案" class="headerlink" title="登入後，選擇 免費方案"></a>登入後，選擇 免費方案</h2><p><img src="https://miro.medium.com/max/963/1*zlpW3hRL4mjLRzqOmpwDZg.png"></p>
+<h2 id="建立新的-cluster，可以使用預設選項"><a href="#建立新的-cluster，可以使用預設選項" class="headerlink" title="建立新的 cluster，可以使用預設選項"></a>建立新的 cluster，可以使用預設選項</h2><p><img src="https://miro.medium.com/max/963/1*BdPWvYS1aBgAffyGUDi4hQ.png"></p>
+]]></content>
+      <tags>
+        <tag>MongoDB Atlas</tag>
       </tags>
   </entry>
   <entry>
@@ -2182,6 +2243,132 @@
       </tags>
   </entry>
   <entry>
+    <title>MongoDB (四) 更新與刪除</title>
+    <url>/2022/07/17/2022-7-17-3-mongodb-update/</url>
+    <content><![CDATA[<h2 id="資料更新"><a href="#資料更新" class="headerlink" title="資料更新"></a>資料更新</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">updateOne(&#123;被更新的資料&#125;, &#123;更新的值&#125;)  // 更新一筆資料</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1400/1*ug2VR90bERK_zuhJmFfx8g.png" alt="使用$set設定新的值"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">inc: 加上指定的值</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1400/1*W51QCzgqqGCkg1kerrN5zQ.png" alt="inc: 加上指定的值"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rename: 更改資料的key值</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1400/1*HY-saJY9Gpey46CwgZ5oUg.png" alt="將name欄位改為lora欄位"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">unset: 移除指定欄位，欄位值設為&quot; &quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1400/1*-Mua6NP_A-PuJvpEEL3OaA.png" alt="移除age欄位"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">push: 新增值到陣列裡</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1400/1*cmlaV3bI4wBQIEHXQLfygw.png" alt="新增swimming到hobbies陣列裡"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pull: 移除陣列裡的值</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1400/1*soqRd9QGuXDnt0fV-OWsMQ.png" alt="移除陣列裡Running的值"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">updateMan: 更新多筆資料</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1400/1*sRe0B1aVt_Pv46R0II2ifA.png" alt="將所有有address的欄位取消address欄位"></p>
+<h2 id="取代資料"><a href="#取代資料" class="headerlink" title="取代資料"></a>取代資料</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">replaceOne: 將原本物件刪除後，取代成新的物件</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1400/1*yjbgM_WfQTt2c7DGmbVPCQ.png" alt="將原本name為lin的物件刪除後，更新成name為linda的物件"></p>
+<h2 id="刪除資料"><a href="#刪除資料" class="headerlink" title="刪除資料"></a>刪除資料</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deleteOne: 將指定物件刪除</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://miro.medium.com/max/1180/1*BcicLblVY6EVtI7JwnPe9g.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deleteMany: 刪除多筆資料</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>MongoDB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MongoDB Atlas(二) cluster</title>
+    <url>/2022/07/17/2022-7-17-5-mongodb-atlas-2/</url>
+    <content><![CDATA[<p>建立好新的資料庫後，先設定 Database Access ，也就是誰能讀取這個資料庫。</p>
+<p><img src="https://miro.medium.com/max/963/1*F2bjbKiANh6uFsQp1tpkSA.png"></p>
+<p>點選 Add New Database User， 並設定user的帳號密碼</p>
+<p><img src="https://miro.medium.com/max/963/1*m_dIUQS6di3FJapbiGozvg.png"></p>
+<p>再來點擊左側 Network Access ，設定能讀取資料庫的ip位置</p>
+<p><img src="https://miro.medium.com/max/963/1*mtkdr8aabVXwwI6IsatThw.png"></p>
+<p>點選 allow access from anywhere，</p>
+<p><img src="https://miro.medium.com/max/963/1*Uqnh7SBIp_tYBAUm1pYG6g.png"></p>
+<p>再來點擊左側 database，再點選connect，來連接資料庫</p>
+<p><img src="https://miro.medium.com/max/963/1*121AdSPsVRfepmRDFuk6uA.png"></p>
+<p>點選第二個 connect your application</p>
+<p><img src="https://miro.medium.com/max/963/1*ao4jvrYVDTBkrjJbSIJFCQ.png"></p>
+<p>選擇 node版本 3.6以後</p>
+<p><img src="https://miro.medium.com/max/963/1*_SUU-2aT2xZg0Es9UyvL8w.png"></p>
+<p>複製程式碼到我們的node js專案</p>
+<p><img src="https://miro.medium.com/max/963/1*57tPw1zIMwFn-utOPvOcQg.png"></p>
+<p>在專案裡新增 db資料夾，並新增 connect.js</p>
+<p><img src="https://miro.medium.com/max/572/1*NqGtYaYQtlb0WRYAo-FZfw.png"></p>
+<p>將剛才mongodb複製的程式碼貼到js檔裡，存成字串。</p>
+<p><img src="https://miro.medium.com/max/963/1*kJYiQqrSShd0_KFCJ7ydmw.png"></p>
+<h2 id="建立collection"><a href="#建立collection" class="headerlink" title="建立collection"></a>建立collection</h2><p>再來建立collection，點選 browser collection</p>
+<p><img src="https://miro.medium.com/max/963/1*b7CtG2I0gJMQyiMJF6HQog.png"></p>
+<p>點新增資料</p>
+<p><img src="https://miro.medium.com/max/963/1*jpcAAKfrTjYuQF-E53gd_Q.png"></p>
+<p>輸入資料庫名稱</p>
+<p><img src="https://miro.medium.com/max/648/1*qBIe4FrsTM63sUQMKusSzQ.png"></p>
+<p>在database中，可以創建不同的collections ，裡面是不同的資料集。如下圖我創建了 products跟 users兩個collection</p>
+<p><img src="https://miro.medium.com/max/1400/1*KaQPsHVvi9EDSRBM_l0dyQ.png"></p>
+<p>點選右邊 建立 document，可以建立collection 裡的資料</p>
+<p><img src="https://miro.medium.com/max/794/1*blQsTCUmepOwQsf3qOSAcw.png"></p>
+<p><img src="https://miro.medium.com/max/1400/1*_KsCSl0FYeKEMLiZkaAHTA.png"></p>
+]]></content>
+      <tags>
+        <tag>MongoDB Atlas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Express框架(11) dotenv 套件</title>
+    <url>/2022/07/17/2022-7-17-7-dotenv/</url>
+    <content><![CDATA[<h2 id="什麼是dotenv"><a href="#什麼是dotenv" class="headerlink" title="什麼是dotenv"></a>什麼是dotenv</h2><p>一般來說不會把資料庫連線帳號、密碼等相關訊息寫在程式碼裡面，通常寫在一個檔案裡面。而在 node.js 的專案裡，我們可以將機密資訊儲存在 .env 檔中來管理。</p>
+<h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install dotenv --save  // 安裝套件</span><br></pre></td></tr></table></figure>
+
+<h2 id="載入套件"><a href="#載入套件" class="headerlink" title="載入套件"></a>載入套件</h2><p>在express的專案中載入套件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>).<span class="title function_">config</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="新增-env-檔"><a href="#新增-env-檔" class="headerlink" title="新增 .env 檔"></a>新增 .env 檔</h2><p>在專案根目錄新增 .env 檔</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071702.png?alt=media&token=7a875b5c-01fa-4eb2-9b41-795559f47e02"></p>
+<h2 id="新增資料"><a href="#新增資料" class="headerlink" title="新增資料"></a>新增資料</h2><p>在 .env檔裡可以儲存資訊，用<code>變數=值</code>的方式儲存</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MYDATA=123456</span><br></pre></td></tr></table></figure>
+
+<h2 id="讀取資料"><a href="#讀取資料" class="headerlink" title="讀取資料"></a>讀取資料</h2><p>.env檔的資料建好後，可以來讀取讀，語法是:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">process.env.變數名稱</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>Express</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mongoose (1) 安裝並整合到專案</title>
+    <url>/2022/07/17/2022-7-17-6-mongoose-1/</url>
+    <content><![CDATA[<h2 id="Mongoose-是什麼"><a href="#Mongoose-是什麼" class="headerlink" title="Mongoose 是什麼?"></a>Mongoose 是什麼?</h2><p>Mongoose 是 MongoDB 的 ODM（Object Data Modeling） 套件，可以讓我們更方便處理 CRUD。透過 mongoose 的使用，我們可以更像在操作 relational database。</p>
+<h2 id="安裝-mongoose"><a href="#安裝-mongoose" class="headerlink" title="安裝 mongoose"></a>安裝 mongoose</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install --save mongoose</span><br></pre></td></tr></table></figure>
+
+<p>安裝好後到Express專案內新增 db 資料夾，資料夾裡新增 connect.js，這隻js裡會放連線到資料庫用的程式。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/project-fb4ac.appspot.com/o/2022071701.png?alt=media&token=8e3d4509-43ec-400a-9683-075f4e06ada7"></p>
+<p>在 connect.js 裡載入mongoose，將 mongoose方法包在 connectDB函式裡並匯出</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> mongoose = <span class="built_in">require</span>(<span class="string">&#x27;mongoose&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">connectDB</span> = (<span class="params">url</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> mongoose.<span class="title function_">connect</span>(url, &#123;</span><br><span class="line">    <span class="attr">useNewUrlParser</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">useCreateIndex</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">useFindAndModify</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">useUnifiedTopology</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = connectDB</span><br></pre></td></tr></table></figure>
+
+<p>在app.js裡 載入 connectDB方法，為了讓 我們的專案在資料庫連接成功後再啟動，使用 await語法等待 connectDB()成功後，再去做app.listen()。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>).<span class="title function_">config</span>();</span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> connectDB = <span class="built_in">require</span>(<span class="string">&#x27;./db/connect&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> port = process.<span class="property">env</span>.<span class="property">PORT</span> || <span class="number">3000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">start</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">connectDB</span>(process.<span class="property">env</span>.<span class="property">MONGO_URL</span>);</span><br><span class="line">    app.<span class="title function_">listen</span>(port, <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`server is listening port <span class="subst">$&#123;port&#125;</span>`</span>));</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">start</span>();</span><br></pre></td></tr></table></figure>
+
+<p>上面的port我們會存在 .env 檔裡，再用 <code>process.env.變數</code>的方式載入，這麼做是為了將機密資訊都放在 .env檔裡管理， .env檔並不會上傳到github上，因此相對而言是安全的。</p>
+]]></content>
+      <tags>
+        <tag>Express</tag>
+        <tag>Mongoose</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Ajax解說系列(5) CORS</title>
     <url>/2022/07/05/2022-7-5-1-js-cors/</url>
     <content><![CDATA[<h2 id="Cross-Origin-Resource-Sharing"><a href="#Cross-Origin-Resource-Sharing" class="headerlink" title="Cross-Origin Resource Sharing"></a>Cross-Origin Resource Sharing</h2><p>當我們使用 XMLHttpRequest 或 fecth等方式向伺服器發送請求時，都必須遵守都遵守同源政策（same-origin policy），只能請求與應用程式相同網域的 HTTP 資源。</p>
@@ -2196,52 +2383,6 @@
       <tags>
         <tag>Javascript</tag>
         <tag>cors</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MongoDB (二) 新增與尋找</title>
-    <url>/2022/07/16/2022-7-15-2-mongodb-find/</url>
-    <content><![CDATA[<h2 id="新增單筆資料"><a href="#新增單筆資料" class="headerlink" title="新增單筆資料"></a>新增單筆資料</h2><p><img src="https://miro.medium.com/max/1400/1*gVW--Mwzkr8MGyRqEAiJqQ.png"></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">insertOne</span>() <span class="comment">// 新增單筆資料</span></span><br></pre></td></tr></table></figure>
-
-<p>使用insertOne()語法，在users這個collection裡面新增一筆資料(document)，資料以物件形式加入。</p>
-<h2 id="新增多筆資料"><a href="#新增多筆資料" class="headerlink" title="新增多筆資料"></a>新增多筆資料</h2><p><img src="https://miro.medium.com/max/1400/1*iifEjaw0vesRmNJuc55dJA.png"></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">insertMany</span>([])  <span class="comment">// 加入多筆資料，每筆資料為物件格式。</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="尋找資料"><a href="#尋找資料" class="headerlink" title="尋找資料"></a>尋找資料</h2><ol>
-<li>尋找所有資料<br><img src="https://miro.medium.com/max/1400/1*u24PrSDc2Y_O9za1Sd5cVg.png"></li>
-</ol>
-<p>使用 find()，將collection 裡的所有資料(document)列出，可以看到在mongoDB裡，每一筆資料的格式可以不同，也能在物件裡再放物件格式。</p>
-<ol start="2">
-<li>.find({ 搜尋條件 })， 尋找指定資料</li>
-</ol>
-<p><img src="https://miro.medium.com/max/1400/1*1y28loJEsDtZ7HFlUP8VDw.png"></p>
-<ol start="3">
-<li>find({ 搜尋條件 }, { 需要欄位}): 尋找指定資料，並只回傳需要的欄位，1 代表要回傳的欄位, 0代表不要回傳的欄位</li>
-</ol>
-<p><img src="https://miro.medium.com/max/1400/1*rd21DIRvfdpCTdqRS-l0Dw.png" alt="只回傳 name 跟 age的欄位"></p>
-<p><img src="https://miro.medium.com/max/1400/1*__9L7fjSlJVkfnh569nIdw.png" alt="回傳age以外的欄位"></p>
-<h2 id="篩選資料"><a href="#篩選資料" class="headerlink" title="篩選資料"></a>篩選資料</h2><ol>
-<li>限制搜尋筆數: .limit(筆數)</li>
-</ol>
-<p><img src="https://miro.medium.com/max/1400/1*fslx_qLREPu8Do0OA-iOSw.png"></p>
-<ol start="2">
-<li>資料排序: sort( {}):</li>
-</ol>
-<p>物件key值為要排序的屬性， value為 1(降冪) 或 -1 (升冪)</p>
-<p><img src="https://miro.medium.com/max/1400/1*GDXlcgddlVyMXtV_YSXm3A.png"></p>
-<ol start="3">
-<li>多條件排序</li>
-</ol>
-<p><img src="https://miro.medium.com/max/1400/1*6l6JUe1cSsM3b1DxQi1mGQ.png"></p>
-<p>sort()裡可放多屬性，會依照屬性順序做排序，如上圖會先將age做排序，若age一樣再用name做排序。</p>
-<ol start="4">
-<li>跳過項目 .skip(跳過數量)</li>
-</ol>
-<p><img src="https://miro.medium.com/max/1400/1*0G0NEDl6BejHTCqxO5DK7Q.png" alt="掠過第一筆資料"></p>
-]]></content>
-      <tags>
-        <tag>MongoDB</tag>
       </tags>
   </entry>
   <entry>
