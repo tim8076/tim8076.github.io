@@ -1,9 +1,10 @@
 ---
 title: Mongoose (2) 建立model與schema
 date: 2022-07-17 14:26:39
+tags:
 - Mongoose
 - Express
-description: '建立model與schema來操作資料'
+description: '建立model與schema'
 ---
 
 ## Mongoose 觀念與名詞
@@ -51,12 +52,41 @@ schema 裡資料格式的也可做驗證，可用方法:
 - min: 最小值。
 - max: 最大值。
 - default: 預設值。
+- lowercase: true | false  //是否要小寫
+- uppercase: true | false  //是否要大寫
 - immutable:  true | false  //是否可修改
 
+補充日期預設方法:
+
+``` js
+createAt: {
+  type: Date,
+  default: () => Date.now(), // 每次建立物件時，會給新的日期。
+}
+```
 validate: 自訂驗證函式(validator)，並可回傳message
 
 ![](https://miro.medium.com/max/1400/1*A_uOjCJwU-B83LJsIYYnpw.png)
 
+## schema 加上方法
+我們可以在 schema加上方法，讓每個new出來的document使用。
+
+``` js
+const person = new mongoose.Schema({
+  name: {
+    type: String,
+  },
+})
+person.methods.sayHi = function() {
+  console.log(`Hi My name is ${Kyle}`)
+}
+```
+方法建立在schema可以在每個實體使用
+
+``` js
+const person = await person.find({ name: 'Kyle' }); 
+person.sayHi(); // Hi My name is Kyle
+```
 ## model操作資料
 
 ![](https://miro.medium.com/max/1362/1*we3LBZ7EKHPeN3mNiXkhXA.png)
@@ -65,6 +95,6 @@ validate: 自訂驗證函式(validator)，並可回傳message
 
 ![](https://miro.medium.com/max/1164/1*RwDqw3zkTCV5XXHAdgOzLw.png)
 
-上面是post方法對應的函式，可以使用 Task.create()方法，將使用者傳來的資料，建立成一筆 document。
+上面是post方法對應的函式，可以使用 Task.create()方法，將使用者傳來的資料，建立成一筆 document。詳細的Model操作方法下一章節介紹。
 
 
