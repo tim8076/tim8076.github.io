@@ -3,7 +3,6 @@ title: Mongoose (2) 建立model與schema
 date: 2022-07-17 14:26:39
 tags:
 - Mongoose
-- Express
 description: '建立model與schema'
 ---
 

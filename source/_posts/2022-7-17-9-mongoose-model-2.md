@@ -3,7 +3,6 @@ title: Mongoose (3) model方法介紹
 date: 2022-07-17 16:13:59
 tags:
 - Mongoose
-- Express
 description: '使用model操作資料'
 ---
 
