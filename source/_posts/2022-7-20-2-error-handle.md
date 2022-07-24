@@ -25,6 +25,8 @@ throw new Error('testing async errors');
   - custom-api.js
   - bad-request.js
   - not-found.js
+- middleware
+  - error-handler
 ```
 
 首先在根目錄建立errors資料夾，底下會有處裡不同錯誤的js檔，以下分別說明
@@ -83,15 +85,32 @@ module.exports = {
 
 ## 使用方法
 
-要使用錯誤方法時，可以先將要用的方法從index.js匯入使用。
+要使用錯誤方法時，可以先將要用的方法從index.js匯入使用，再將錯誤拋出。
 
 ``` js
 const { BadRequestError, UnauthenticatedError } = require('../errors');
 throw new BadRequestError('Please provide email and password');
 ```
 
+## error middleware
 
+當錯誤拋出後，會進到 error-handler 的 middleware 處理
 
+``` js
+const { CustomAPIError } = require('../errors')
+const { StatusCodes } = require('http-status-codes')
+const errorHandlerMiddleware = (err, req, res, next) => {
+  let customError = {
+    statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,`
+    message: err.message || 'Something went wrong try again later'
+  }
+  return res.status(customError.statusCode).json({ msg: customError.message });
+}
+
+module.exports = errorHandlerMiddleware
+```
+
+errorHandlerMiddleware 函式接收的 err 參數如果是我們自行丟出的會有 statusCode 和 message，我們就回傳customError的資訊。若不是則回傳預設的  StatusCodes.INTERNAL_SERVER_ERROR 。
 
 
 
