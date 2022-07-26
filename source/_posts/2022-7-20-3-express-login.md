@@ -2,6 +2,7 @@
 title: Express實戰系列(1) 製作註冊登入功能
 date: 2022-07-20 21:16:43
 tags: Express實戰系列
+description: '實作註冊登入功能'
 ---
 
 ## 環境簡介
