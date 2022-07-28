@@ -2361,10 +2361,9 @@
 <p>在app.js裡 載入 connectDB方法，為了讓 我們的專案在資料庫連接成功後再啟動，使用 await語法等待 connectDB()成功後，再去做app.listen()。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>).<span class="title function_">config</span>();</span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> connectDB = <span class="built_in">require</span>(<span class="string">&#x27;./db/connect&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> port = process.<span class="property">env</span>.<span class="property">PORT</span> || <span class="number">3000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">start</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">connectDB</span>(process.<span class="property">env</span>.<span class="property">MONGO_URL</span>);</span><br><span class="line">    app.<span class="title function_">listen</span>(port, <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`server is listening port <span class="subst">$&#123;port&#125;</span>`</span>));</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">start</span>();</span><br></pre></td></tr></table></figure>
 
-<p>上面的port我們會存在 .env 檔裡，再用 <code>process.env.變數</code>的方式載入，這麼做是為了將機密資訊都放在 .env檔裡管理， .env檔並不會上傳到github上，因此相對而言是安全的。</p>
+<p>上面連線的port我們會存在 .env 檔裡，再用 <code>process.env.變數</code>的方式載入，這麼做是為了將機密資訊都放在 .env檔裡管理， .env檔並不會上傳到github上，因此相對而言是安全的。</p>
 ]]></content>
       <tags>
-        <tag>Express</tag>
         <tag>Mongoose</tag>
       </tags>
   </entry>
@@ -2470,6 +2469,478 @@
       <tags>
         <tag>JS實作系列</tag>
         <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mongoose (2) 建立model與schema</title>
+    <url>/2022/07/17/2022-7-17-8-mongoose-model/</url>
+    <content><![CDATA[<h2 id="Mongoose-觀念與名詞"><a href="#Mongoose-觀念與名詞" class="headerlink" title="Mongoose 觀念與名詞"></a>Mongoose 觀念與名詞</h2><p>Mongoose 提供了 schema-based 的解決方案讓我們直接操作資料，在透過 Mongoose 操作資料庫時，有幾個名詞要先有概念:</p>
+<ul>
+<li>Schema: 存資料庫模型的檔案</li>
+<li>Model: 由 Schema 當參數產生的 instance 可以用來操作資料庫</li>
+<li>collection: 在 MongoDB 中的表</li>
+</ul>
+<h2 id="Mongoose-Schema-設計"><a href="#Mongoose-Schema-設計" class="headerlink" title="Mongoose Schema 設計"></a>Mongoose Schema 設計</h2><p>要使用 Mongoose 操作的第一步就是要從定義 Schema 開始，定義完成後 Schema 會自動對應到 MongoDB 中的一個 collection，另外因為不像傳統資料庫那樣有 join 的概念，所以拿資料的時候可以依照我們的使用情境去設計，像是以撈取為主的話就可以透過雙向參照的設計去加速，詳細可以參考MongoDB Schema 設計指南。</p>
+<h2 id="建立-Schema"><a href="#建立-Schema" class="headerlink" title="建立 Schema"></a>建立 Schema</h2><p><img src="https://miro.medium.com/max/842/1*kzEelgX6y-K3JF6dTMFElA.png"></p>
+<p><img src="https://miro.medium.com/max/1400/1*DkN-K-S-ONv16m1V4wFJAQ.png"></p>
+<p>在model資料夾裡，建立js檔，並利用 monggose.Schema({})，來建立所有document的結構。只有在 Schema 裡建立的屬性如 name，才會傳入mogodb資料庫。</p>
+<p>建立好 Schema 結構， 在將schema建立成一個model實體 可以用來操作資料庫(crud)。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = mongoose.<span class="title function_">model</span>(<span class="string">&#x27;Product&#x27;</span>, productSchema);</span><br></pre></td></tr></table></figure>
+
+<h2 id="schema-拆分"><a href="#schema-拆分" class="headerlink" title="schema 拆分"></a>schema 拆分</h2><p><img src="https://miro.medium.com/max/1376/1*MTktN8cHSR_vVoz5N_yWhA.png"></p>
+<p>當要定義的物件過於複雜時，可以另外拆分一個schema來定義，如上圖address的值是定義在 addressSchema裡。</p>
+<h2 id="schema-驗證"><a href="#schema-驗證" class="headerlink" title="schema 驗證"></a>schema 驗證</h2><p><img src="https://miro.medium.com/max/1400/1*Tzl9Vg6A_Z4nPDE3KumAHw.png"></p>
+<p>schema 裡資料格式的也可做驗證，可用方法:</p>
+<ul>
+<li>type: String | Number | Boolean | Date  &#x2F;&#x2F; 指定屬性的型別 </li>
+<li>required: true | false  &#x2F;&#x2F;是否必填</li>
+<li>trim: true | false  &#x2F;&#x2F;是否去頭尾空白</li>
+<li>maxlength: 最多字數。</li>
+<li>min: 最小值。</li>
+<li>max: 最大值。</li>
+<li>default: 預設值。</li>
+<li>lowercase: true | false  &#x2F;&#x2F;是否要小寫</li>
+<li>uppercase: true | false  &#x2F;&#x2F;是否要大寫</li>
+<li>immutable:  true | false  &#x2F;&#x2F;是否可修改</li>
+</ul>
+<p>補充日期預設方法:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="attr">createAt</span>: &#123;</span><br><span class="line">  <span class="attr">type</span>: <span class="title class_">Date</span>,</span><br><span class="line">  <span class="attr">default</span>: <span class="function">() =&gt;</span> <span class="title class_">Date</span>.<span class="title function_">now</span>(), <span class="comment">// 每次建立物件時，會給新的日期。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>validate: 自訂驗證函式(validator)，並可回傳message</p>
+<p><img src="https://miro.medium.com/max/1400/1*A_uOjCJwU-B83LJsIYYnpw.png"></p>
+<h2 id="schema-加上方法"><a href="#schema-加上方法" class="headerlink" title="schema 加上方法"></a>schema 加上方法</h2><p>我們可以在 schema加上方法，讓每個new出來的document使用。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> mongoose.<span class="title class_">Schema</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">String</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line">person.<span class="property">methods</span>.<span class="property">sayHi</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Hi My name is <span class="subst">$&#123;Kyle&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>方法建立在schema可以在每個實體使用</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> person = <span class="keyword">await</span> person.<span class="title function_">find</span>(&#123; <span class="attr">name</span>: <span class="string">&#x27;Kyle&#x27;</span> &#125;); </span><br><span class="line">person.<span class="title function_">sayHi</span>(); <span class="comment">// Hi My name is Kyle</span></span><br></pre></td></tr></table></figure>
+<h2 id="model操作資料"><a href="#model操作資料" class="headerlink" title="model操作資料"></a>model操作資料</h2><p><img src="https://miro.medium.com/max/1362/1*we3LBZ7EKHPeN3mNiXkhXA.png"></p>
+<p>在我們controllers裡的js檔裡，可以將剛才export的model引入。</p>
+<p><img src="https://miro.medium.com/max/1164/1*RwDqw3zkTCV5XXHAdgOzLw.png"></p>
+<p>上面是post方法對應的函式，可以使用 Task.create()方法，將使用者傳來的資料，建立成一筆 document。詳細的Model操作方法下一章節介紹。</p>
+]]></content>
+      <tags>
+        <tag>Mongoose</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mongoose (3) model方法介紹</title>
+    <url>/2022/07/17/2022-7-17-9-mongoose-model-2/</url>
+    <content><![CDATA[<h2 id="搜尋資料"><a href="#搜尋資料" class="headerlink" title="搜尋資料"></a>搜尋資料</h2><h3 id="搜尋全部資料"><a href="#搜尋全部資料" class="headerlink" title="搜尋全部資料"></a>搜尋全部資料</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Person</span> = <span class="built_in">require</span>(<span class="string">&#x27;../models/person&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">await</span> <span class="title class_">Person</span>.<span class="title function_">find</span>(&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>使用 find 方法傳入空物件，會回傳所有資料。因為find會回傳 .then() ，所以可以用 await 來接收結果。</p>
+<h3 id="搜尋特定資料"><a href="#搜尋特定資料" class="headerlink" title="搜尋特定資料"></a>搜尋特定資料</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Person</span>.</span><br><span class="line">  <span class="title function_">find</span>(&#123;</span><br><span class="line">    <span class="attr">occupation</span>: <span class="regexp">/host/</span>,</span><br><span class="line">    <span class="string">&#x27;name.last&#x27;</span>: <span class="string">&#x27;Ghost&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: &#123; <span class="attr">$gt</span>: <span class="number">17</span>, <span class="attr">$lt</span>: <span class="number">66</span> &#125;,  <span class="comment">// 年齡 &gt;17 &amp;&amp; &lt;66</span></span><br><span class="line">    <span class="attr">likes</span>: &#123; <span class="attr">$in</span>: [<span class="string">&#x27;vaporizing&#x27;</span>, <span class="string">&#x27;talking&#x27;</span>] &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<p>如果要對值進行篩選，可以在後方加入篩選語法，語法和 <a href="https://tim8076.github.io/2022/07/16/2022-7-17-2-mongodb-filter/">mongodb</a> 是一樣的。</p>
+<h3 id="限制資料比數"><a href="#限制資料比數" class="headerlink" title="限制資料比數"></a>限制資料比數</h3><p>想限制資料筆數，可以加上 .limit</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Person</span>.<span class="title function_">find</span>(&#123;&#125;).<span class="title function_">limit</span>(<span class="number">10</span>) <span class="comment">// 回傳前10筆資料</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="資料排序"><a href="#資料排序" class="headerlink" title="資料排序"></a>資料排序</h3><p>要對特定值做排序，用 sort方法，。加上 - 代表降冪排序，反之則正向排序。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Person</span>.<span class="title function_">find</span>(&#123;&#125;).<span class="title function_">sort</span>(<span class="string">&#x27;name -occupation&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="回傳特定的key值"><a href="#回傳特定的key值" class="headerlink" title="回傳特定的key值"></a>回傳特定的key值</h3><p>如果只想回傳特定的key值，用 select()。 加上 - 代表降冪排序，反之則正向排序。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Person</span>.<span class="title function_">find</span>(&#123;&#125;).<span class="title function_">select</span>(<span class="string">&#x27;name -gender&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="新增資料"><a href="#新增資料" class="headerlink" title="新增資料"></a>新增資料</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Person</span> = <span class="built_in">require</span>(<span class="string">&#x27;../models/person&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> <span class="title class_">Person</span>(&#123; <span class="attr">name</span>: <span class="string">&#x27;Kyle&#x27;</span>, <span class="attr">age</span>: <span class="number">16</span> &#125;);</span><br><span class="line"><span class="keyword">await</span> person.<span class="title function_">save</span>();</span><br></pre></td></tr></table></figure>
+<p>用mongoose新增一筆資料很簡單，假設有一個 Person 的model，只要用 new Person({})帶入新增的值即可建立資料，再用.save()將資料存進資料庫，因為.save()是 async function ，所以記得加上 await。</p>
+<h2 id="修改資料"><a href="#修改資料" class="headerlink" title="修改資料"></a>修改資料</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Person</span> = <span class="built_in">require</span>(<span class="string">&#x27;../models/person&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> <span class="title class_">Person</span>(&#123; <span class="attr">name</span>: <span class="string">&#x27;Kyle&#x27;</span>, <span class="attr">age</span>: <span class="number">16</span> &#125;);</span><br><span class="line">person.<span class="property">name</span> = <span class="string">&#x27;Sally&#x27;</span>;</span><br><span class="line"><span class="keyword">await</span> person.<span class="title function_">save</span>();</span><br></pre></td></tr></table></figure>
+
+<p>修改資料可以直接將物件的值賦予新的值，再用 .save() 存入資料庫即可。如上我們將 Kyle 改為 Sally。</p>
+<h2 id="刪除資料"><a href="#刪除資料" class="headerlink" title="刪除資料"></a>刪除資料</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Person</span> = <span class="built_in">require</span>(<span class="string">&#x27;../models/person&#x27;</span>);</span><br><span class="line"><span class="keyword">await</span> <span class="title class_">Person</span>.<span class="title function_">deleteOne</span>(&#123; <span class="attr">name</span>: <span class="string">&#x27;Kyle&#x27;</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>deleteOne 會刪除符合條件的第一筆資料。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Person</span> = <span class="built_in">require</span>(<span class="string">&#x27;../models/person&#x27;</span>);</span><br><span class="line"><span class="keyword">await</span> <span class="title class_">Person</span>.<span class="title function_">deleteMany</span>(&#123; <span class="attr">name</span>: <span class="string">&#x27;Kyle&#x27;</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>deleteMany 刪除所有符合條件的資料。</p>
+]]></content>
+      <tags>
+        <tag>Mongoose</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JWT 介紹</title>
+    <url>/2022/07/18/2022-7-18-1-jwt/</url>
+    <content><![CDATA[<h2 id="JWT-運作原理"><a href="#JWT-運作原理" class="headerlink" title="JWT 運作原理"></a>JWT 運作原理</h2><p><img src="https://cdn-images-1.medium.com/max/1100/1*_B02lJ2aSxKt4bCh7Q1-ZA.png"></p>
+<p>當使用者傳送post request 到伺服器時，伺服器會產生Json Web Token用來加密使用者傳來的資料，並使用 secrest key來加密。<br>加密完後就會將JWT回傳給瀏覽器，瀏覽器可以選擇各種儲存token的方式例如cookie。<br>當使用者再次發出request請求時，會在header附帶上JWT token，伺服器收到token後會使用 同樣secrest key來進行解密，確認token的資料是否一樣。確認token沒問題後，就可從token中取得user的資料，例如帳密，再回傳給前端。</p>
+<h2 id="和session的差異"><a href="#和session的差異" class="headerlink" title="和session的差異"></a>和session的差異</h2><p>session運作的原理和jwt類似，但主要差別是，session會儲存user資料在伺服器，伺服器利用session id來尋找user資料。<br>jwt則將使用者資料存在token裡，token則會被保存在前端，伺服器不用儲存任何資料。也就是說，可以使用同樣的token在不同的伺服器上，不像session可能遇到不同伺服器有不同session而無法登入的情況。</p>
+<h2 id="JWT-加密過程"><a href="#JWT-加密過程" class="headerlink" title="JWT 加密過程"></a>JWT 加密過程</h2><p><img src="https://cdn-images-1.medium.com/max/1100/1*HptXxES6PVfkrYYNNAGERw.png"></p>
+<p>左欄是加密後的JWT TOKEN，右欄則是解密後的token，解密後的token分為三部分:</p>
+<ul>
+<li>HEADER:  包含用來加密、解密的演算法。</li>
+<li>PAYLOAD: 儲存在token裡的資料。</li>
+<li>VERIFY SIGNATURE: 用來驗證token是否被使用者更改。</li>
+</ul>
+<p>使用base64URL來加密或解密HEADER跟PAYLOAD，並使用secret Key來加解密，也就是左欄紅色跟紫色的密碼。<br>實際流程: 當伺服器收到jwt token後，會將左欄紅色跟紫色的密碼，用指定的演算法(上圖是HS256)來hash，並確認hash後的值是否等於最後一段藍色的密碼。</p>
+<h2 id="實戰加密流程"><a href="#實戰加密流程" class="headerlink" title="實戰加密流程"></a>實戰加密流程</h2><h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><p>在node.js專案中，先下載套件 jsonwebtoken</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install --save jsonwebtoken </span><br></pre></td></tr></table></figure>
+
+<p>在 controller 裡引入jwt</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> jwt = <span class="built_in">require</span>(<span class="string">&#x27;jsonwebtoken&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="後端加密"><a href="#後端加密" class="headerlink" title="後端加密"></a>後端加密</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">login</span> = <span class="keyword">async</span> (<span class="params">req, res</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; username, password &#125; = req.<span class="property">body</span>;</span><br><span class="line">  <span class="keyword">const</span> id = <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">getDate</span>();</span><br><span class="line">  <span class="keyword">const</span> token = jwt.<span class="title function_">sign</span>(&#123; id, username &#125;, process.<span class="property">env</span>.<span class="property">JWT_SECRET</span>, &#123; <span class="attr">expiresIn</span>: <span class="string">&#x27;30d&#x27;</span> &#125;)</span><br><span class="line">  res.<span class="title function_">status</span>(<span class="number">200</span>).<span class="title function_">json</span>(&#123;</span><br><span class="line">    <span class="attr">msg</span>: <span class="string">&#x27;user created&#x27;</span>,</span><br><span class="line">    token,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>jwt.sign()</code> 來加密，加密完後將token回傳給前端。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">jwt.sign(&#123; payload &#125;, 金鑰, &#123; expiresIn : 過期時間&#125; )</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一個參數為 payload: 使用者和相關的資訊都可以放置其中(ex: id、name)。</li>
+<li>第二個是金鑰字串，通常會是複雜的字串存在.env檔裡</li>
+<li>第三個可傳入 token 過期時間</li>
+</ul>
+<p>不要將隱私資訊存放在 Payload 當中， Payload 和 Header 被轉換成 Base64 編碼後，能夠被輕易的轉換回來<br>因此不應該把如用戶密碼等重要資料存取在 Payload 當中</p>
+<h3 id="前端接收token"><a href="#前端接收token" class="headerlink" title="前端接收token"></a>前端接收token</h3><p>前端發出網路請求後成功後(例如登入成功)，會收到後端回傳的token，前端可以先存入 localStorage</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; data &#125; = <span class="keyword">await</span> axios.<span class="title function_">post</span>(<span class="string">&#x27;/api/v1/login&#x27;</span>, &#123; username, password &#125;)</span><br><span class="line"><span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(<span class="string">&#x27;token&#x27;</span>, data.<span class="property">token</span>)</span><br></pre></td></tr></table></figure>
+
+<p>當再次發出的請求是需要驗證時，需要傳token給後端驗證。在HEADER中使用Authorization並帶入存取的Token</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> token = <span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; data &#125; = <span class="keyword">await</span> axios.<span class="title function_">get</span>(<span class="string">&#x27;/api/v1/dashboard&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">headers</span>: &#123;</span><br><span class="line">    <span class="title class_">Authorization</span>: <span class="string">`Bearer <span class="subst">$&#123;token&#125;</span>`</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="後端接收token"><a href="#後端接收token" class="headerlink" title="後端接收token"></a>後端接收token</h3><p>當後端收到前端帶有token的請求後，可以從 <code>req.headers.authorization</code> 裡收到token的值。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  authorization: &#x27;Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsInVzZXJuYW1lIjoicGV0ZXIiLCJpYXQiOjE2NTgxMjk2OTQsImV4cCI6MTY2MDcyMTY5NH0.4RNbP5jIx9GU1-makuVaxhU3g-cSbXhRJWynitjhu3Y&#x27;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用split方法取得 Bearer 後面的token字串</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> authHeader = req.<span class="property">headers</span>.<span class="property">authorization</span>;</span><br><span class="line"><span class="keyword">if</span> (!authHeader || !authHeader.<span class="title function_">startsWith</span>(<span class="string">&#x27;Bearer &#x27;</span>)) &#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">CustomAPIError</span>(<span class="string">&#x27;No token provided&#x27;</span>, <span class="number">400</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> token = authHeader.<span class="title function_">split</span>(<span class="string">&#x27; &#x27;</span>)[<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+
+<p>取得 token字串後，可以用 <code>jwt.verify(token, 金鑰)</code> 來解析</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> decoded = jwt.<span class="title function_">verify</span>(token, process.<span class="property">env</span>.<span class="property">JWT_SECRET</span>);</span><br></pre></td></tr></table></figure>
+
+<p>當token解析符合金鑰字串時，就會將當初加密的物件(payload)解析出來:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">id</span>: <span class="string">&#x27;123&#x27;</span>,</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;tim&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>JWT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Express框架(12) 錯誤處理範例</title>
+    <url>/2022/07/20/2022-7-20-2-error-handle/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在node.js裡遇到錯誤時我們可能會直接丟出錯誤</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;testing async errors&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>在這章節會介紹如何統整不同錯誤的api在一個資料夾，方便管理。</p>
+<h2 id="新增errors資料夾"><a href="#新增errors資料夾" class="headerlink" title="新增errors資料夾"></a>新增errors資料夾</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- errrors</span><br><span class="line">  - index.js</span><br><span class="line">  - custom-api.js</span><br><span class="line">  - bad-request.js</span><br><span class="line">  - not-found.js</span><br><span class="line">- middleware</span><br><span class="line">  - error-handler</span><br></pre></td></tr></table></figure>
+
+<p>首先在根目錄建立errors資料夾，底下會有處裡不同錯誤的js檔，以下分別說明</p>
+<h2 id="custom-api"><a href="#custom-api" class="headerlink" title="custom-api"></a>custom-api</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CustomAPIError</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Error</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">message</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(message)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title class_">CustomAPIError</span></span><br></pre></td></tr></table></figure>
+
+<p>建立 custom-api.js 檔，裡面我們會 extend 一個 CustomAPIError 的 class ，再將 CustomAPIError 匯出。</p>
+<h2 id="建立不同錯誤的js"><a href="#建立不同錯誤的js" class="headerlink" title="建立不同錯誤的js"></a>建立不同錯誤的js</h2><p>當我們建立好 CustomAPIError 後，可以新增不同錯誤的js檔，以下以 Badrequest 錯誤為例:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">StatusCodes</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;http-status-codes&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">CustomAPIError</span> = <span class="built_in">require</span>(<span class="string">&#x27;./custom-api&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BadRequestError</span> <span class="keyword">extends</span> <span class="title class_ inherited__">CustomAPIError</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">message</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(message);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">statusCode</span> = <span class="title class_">StatusCodes</span>.<span class="property">BAD_REQUEST</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title class_">BadRequestError</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Badrequest 一樣會extend CustomAPIError ，statusCode的部分則會用’http-status-codes’這個套件帶入錯誤代碼。</p>
+<h2 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h2><p>當不同錯誤的js檔建立好了，可以再新增 index.js統一匯出，這樣之後要使用不同錯誤方法時，可以統一由index這邊匯入。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">CustomAPIError</span> = <span class="built_in">require</span>(<span class="string">&#x27;./custom-api&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">UnauthenticatedError</span> = <span class="built_in">require</span>(<span class="string">&#x27;./unauthenticated&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">NotFoundError</span> = <span class="built_in">require</span>(<span class="string">&#x27;./not-found&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">BadRequestError</span> = <span class="built_in">require</span>(<span class="string">&#x27;./bad-request&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="title class_">CustomAPIError</span>,</span><br><span class="line">  <span class="title class_">UnauthenticatedError</span>,</span><br><span class="line">  <span class="title class_">NotFoundError</span>,</span><br><span class="line">  <span class="title class_">BadRequestError</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>要使用錯誤方法時，可以先將要用的方法從index.js匯入使用，再將錯誤拋出。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">BadRequestError</span>, <span class="title class_">UnauthenticatedError</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;../errors&#x27;</span>);</span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">BadRequestError</span>(<span class="string">&#x27;Please provide email and password&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="error-middleware"><a href="#error-middleware" class="headerlink" title="error middleware"></a>error middleware</h2><p>當錯誤拋出後，會進到 error-handler 的 middleware 處理</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">CustomAPIError</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;../errors&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">StatusCodes</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;http-status-codes&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">errorHandlerMiddleware</span> = (<span class="params">err, req, res, next</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> customError = &#123;</span><br><span class="line">    <span class="attr">statusCode</span>: err.<span class="property">statusCode</span> || <span class="title class_">StatusCodes</span>.<span class="property">INTERNAL_SERVER_ERROR</span>,<span class="string">`</span></span><br><span class="line"><span class="string">    message: err.message || &#x27;Something went wrong try again later&#x27;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">  return res.status(customError.statusCode).json(&#123; msg: customError.message &#125;);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">module.exports = errorHandlerMiddleware</span></span><br></pre></td></tr></table></figure>
+
+<p>errorHandlerMiddleware 函式接收的 err 參數如果是我們自行丟出的會有 statusCode 和 message，我們就回傳customError的資訊。若不是則回傳預設的  StatusCodes.INTERNAL_SERVER_ERROR 。</p>
+]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>Express</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mongoose (4) middleware介紹</title>
+    <url>/2022/07/20/2022-7-20-1-mongoose-middleware/</url>
+    <content><![CDATA[<h2 id="使用middleware"><a href="#使用middleware" class="headerlink" title="使用middleware"></a>使用middleware</h2><p>在mongoose裡，我們也可以使用middleware函式，middlware作用在schema層級，分為  pre and post 兩種，以下介紹使用方法。</p>
+<h2 id="使用-pre-函示"><a href="#使用-pre-函示" class="headerlink" title="使用 pre 函示"></a>使用 pre 函示</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">UserSchema</span> = <span class="keyword">new</span> mongoose.<span class="title class_">Schema</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="title class_">String</span>,</span><br><span class="line">  <span class="attr">password</span>: <span class="title class_">String</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="title class_">UserSchema</span>.<span class="title function_">pre</span>(<span class="string">&#x27;save&#x27;</span>, <span class="keyword">async</span> <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> salt = <span class="keyword">await</span> bcrypt.<span class="title function_">genSalt</span>(<span class="number">10</span>);</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">password</span> = <span class="keyword">await</span> bcrypt.<span class="title function_">hash</span>(<span class="variable language_">this</span>.<span class="property">password</span>, salt);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>document middleware可以被綁定不同的函式如下:</p>
+<ul>
+<li>validate</li>
+<li>save</li>
+<li>remove</li>
+<li>updateOne</li>
+<li>deleteOne</li>
+</ul>
+<p>如上例 ， 當UserSchema被儲存 <code>.save()</code> 時，會先觸發middleware將password加密。</p>
+]]></content>
+      <tags>
+        <tag>Express</tag>
+        <tag>Mongoose</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Express實戰系列(1) 製作註冊登入功能</title>
+    <url>/2022/07/20/2022-7-20-3-express-login/</url>
+    <content><![CDATA[<h2 id="環境簡介"><a href="#環境簡介" class="headerlink" title="環境簡介"></a>環境簡介</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- controllers  </span><br><span class="line">  - auth.js</span><br><span class="line">- model</span><br><span class="line">  - User.js</span><br><span class="line">- route    </span><br><span class="line">  - auth.js</span><br><span class="line">- middleware</span><br><span class="line">  - authentication</span><br></pre></td></tr></table></figure>
+
+<p>這次要製作註冊登入功能，route 和 controllers 資料夾理會有 auth的 路由(route) 和 函式(controller)，另外有建立User的model。本次使用 express搭配 mongoDB製作。</p>
+<h2 id="建立User的schema"><a href="#建立User的schema" class="headerlink" title="建立User的schema"></a>建立User的schema</h2><p>首先在 model裡的 User.js建立user的 schema，也就是每筆使用者的資料格式，包括用戶姓名、email、password等等。會用到mongoose提供的驗證方法。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">UserSchema</span> = <span class="keyword">new</span> mongoose.<span class="title class_">Schema</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">String</span>,</span><br><span class="line">    <span class="attr">required</span>: [<span class="literal">true</span>, <span class="string">&#x27;Please provide name&#x27;</span>],</span><br><span class="line">    <span class="attr">maxlength</span>: <span class="number">50</span>,</span><br><span class="line">    <span class="attr">minlength</span>: <span class="number">3</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">email</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">String</span>,</span><br><span class="line">    <span class="attr">required</span>: [<span class="literal">true</span>, <span class="string">&#x27;Please provide email&#x27;</span>],</span><br><span class="line">    <span class="attr">match</span>: [</span><br><span class="line">      <span class="regexp">/^(([^&lt;&gt;()[\]\\.,;:\s@&quot;]+(\.[^&lt;&gt;()[\]\\.,;:\s@&quot;]+)*)|(&quot;.+&quot;))@((\[[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]&#123;2,&#125;))$/</span>,</span><br><span class="line">      <span class="string">&#x27;Please provide a valid email&#x27;</span>,</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">unique</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">password</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">String</span>,</span><br><span class="line">    <span class="attr">required</span>: [<span class="literal">true</span>, <span class="string">&#x27;Please provide password&#x27;</span>],</span><br><span class="line">    <span class="attr">minlength</span>: <span class="number">6</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在user的schema裡可以新增加密的方法，使用 bcrypt套件來對password加密，因為希望password加密後再存入資料庫。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">UserSchema</span>.<span class="title function_">pre</span>(<span class="string">&#x27;save&#x27;</span>, <span class="keyword">async</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> salt = <span class="keyword">await</span> bcrypt.<span class="title function_">genSalt</span>(<span class="number">10</span>)</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">password</span> = <span class="keyword">await</span> bcrypt.<span class="title function_">hash</span>(<span class="variable language_">this</span>.<span class="property">password</span>, salt)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="註冊路由"><a href="#註冊路由" class="headerlink" title="註冊路由"></a>註冊路由</h2><p>註冊使用者的 controller 函式如下: </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">User</span> = <span class="built_in">require</span>(<span class="string">&#x27;../models/User&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">StatusCodes</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;http-status-codes&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">BadRequestError</span>, <span class="title class_">UnauthenticatedError</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;../errors&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用者註冊</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">register</span> = <span class="keyword">async</span> (<span class="params">req, res</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> user = <span class="keyword">await</span> <span class="title class_">User</span>.<span class="title function_">create</span>(&#123; ...req.<span class="property">body</span> &#125;)</span><br><span class="line">  <span class="keyword">const</span> token = user.<span class="title function_">createJWT</span>()</span><br><span class="line">  res.<span class="title function_">status</span>(<span class="title class_">StatusCodes</span>.<span class="property">CREATED</span>).<span class="title function_">json</span>(&#123; <span class="attr">user</span>: &#123; <span class="attr">name</span>: user.<span class="property">name</span> &#125;, token &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>製作註冊功能時，使用者在前端會傳入 name 跟 password 的資料，資料會以物件方式存在 req.body裡</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;王曉明&#x27;</span>,</span><br><span class="line">  <span class="attr">password</span>: <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>當路由收到資料後，用 <code>.create()</code>建立新的使用者，此時如果使用少傳了name或password，會觸發 mongoose 的驗證機制，直接拋出錯誤。</p>
+<p>建立使用者後，用寫在<a href="https://tim8076.github.io/2022/07/17/2022-7-17-8-mongoose-model/?highlight=schema#schema-%E5%8A%A0%E4%B8%8A%E6%96%B9%E6%B3%95">User的schema上的方法</a>來產生 jwt的 token，最後這個token會回傳給前端做下次登入驗證用，詳細<a href="https://tim8076.github.io/2022/07/18/2022-7-18-1-jwt/?highlight=jwt#%E5%AF%A6%E6%88%B0%E5%8A%A0%E5%AF%86%E6%B5%81%E7%A8%8B">jwt用法看這裡</a></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">UserSchema</span>.<span class="property">methods</span>.<span class="property">createJWT</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> jwt.<span class="title function_">sign</span>(</span><br><span class="line">    &#123; <span class="attr">userId</span>: <span class="variable language_">this</span>.<span class="property">_id</span>, <span class="attr">name</span>: <span class="variable language_">this</span>.<span class="property">name</span> &#125;,</span><br><span class="line">    process.<span class="property">env</span>.<span class="property">JWT_SECRET</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">expiresIn</span>: process.<span class="property">env</span>.<span class="property">JWT_LIFETIME</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="登入路由"><a href="#登入路由" class="headerlink" title="登入路由"></a>登入路由</h2><p>當使用者成功註冊後，可以進行登入</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">login</span> = <span class="keyword">async</span> (<span class="params">req, res</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; email, password &#125; = req.<span class="property">body</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!email || !password) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">BadRequestError</span>(<span class="string">&#x27;Please provide email and password&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> user = <span class="keyword">await</span> <span class="title class_">User</span>.<span class="title function_">findOne</span>(&#123; email &#125;)</span><br><span class="line">  <span class="keyword">if</span> (!user) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UnauthenticatedError</span>(<span class="string">&#x27;Invalid Credentials&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> isPasswordCorrect = <span class="keyword">await</span> user.<span class="title function_">comparePassword</span>(password)</span><br><span class="line">  <span class="keyword">if</span> (!isPasswordCorrect) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UnauthenticatedError</span>(<span class="string">&#x27;Invalid Credentials&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// compare password</span></span><br><span class="line">  <span class="keyword">const</span> token = user.<span class="title function_">createJWT</span>()</span><br><span class="line">  res.<span class="title function_">status</span>(<span class="title class_">StatusCodes</span>.<span class="property">OK</span>).<span class="title function_">json</span>(&#123; <span class="attr">user</span>: &#123; <span class="attr">name</span>: user.<span class="property">name</span> &#125;, token &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先從req.body裡可以取得前端傳來的 email和password資料</p>
+<ol>
+<li><p>先檢查 email 和 password 是否存在，不存在的話直接丟出錯誤。</p>
+</li>
+<li><p>確認有帳密資料後，用 email資料取得資料庫裡對應的user資料，如果找不到user則回傳錯誤。</p>
+</li>
+<li><p>再來比對使用者輸入的密碼是否一樣，使用 bcrypt套件裡的compare功能，比對的函式一樣放在UserSchema的methods裡。</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">UserSchema</span>.<span class="property">methods</span>.<span class="property">comparePassword</span> = <span class="keyword">async</span> <span class="keyword">function</span> (<span class="params">canditatePassword</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> isMatch = <span class="keyword">await</span> bcrypt.<span class="title function_">compare</span>(canditatePassword, <span class="variable language_">this</span>.<span class="property">password</span>)</span><br><span class="line">  <span class="keyword">return</span> isMatch</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>確認密碼一樣後，就可以新增 jwt token 並回傳端，登入成功。</p>
+<h2 id="新增驗證的middleware"><a href="#新增驗證的middleware" class="headerlink" title="新增驗證的middleware"></a>新增驗證的middleware</h2><p>使用者註冊和登入後，前端會獲得token，作為之後驗證使用。可以在middleware資料夾內新增 autentication的js檔。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">auth</span> = <span class="keyword">async</span> (<span class="params">req, res, next</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> authHeader = req.<span class="property">headers</span>.<span class="property">authorization</span>;</span><br><span class="line">  <span class="keyword">if</span> (!authHeader || !authHeader.<span class="title function_">startsWith</span>(<span class="string">&#x27;Bearer&#x27;</span>)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UnauthenticatedError</span>(<span class="string">&#x27;Authentication invalid&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> token = authHeader.<span class="title function_">split</span>(<span class="string">&#x27; &#x27;</span>)[<span class="number">1</span>];</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> payload = jwt.<span class="title function_">verify</span>(token, process.<span class="property">env</span>.<span class="property">JWT_SECRET</span>);</span><br><span class="line">    req.<span class="property">user</span> = &#123; <span class="attr">userId</span>: payload.<span class="property">userId</span>, <span class="attr">name</span>: payload.<span class="property">name</span> &#125;;</span><br><span class="line">    <span class="title function_">next</span>();</span><br><span class="line">  &#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UnauthenticatedError</span>(<span class="string">&#x27;Authentication invalid&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在驗證邏輯中，前端會將token放在headers.authorization裡，所以先判斷 req 裡有沒有 authorization 的資料，沒有則回報錯誤。<br>若有則將token字串取出，之後用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">jwt.verify(token, token金鑰)</span><br></pre></td></tr></table></figure>
+
+<p>將token資料解析回當初加密前的物件格式</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;user&#x27;</span>,</span><br><span class="line">  <span class="attr">userId</span>: <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>取得物件後，就將資訊存在 req.user裡，方便之後再路由裡取得user資訊。</p>
+]]></content>
+      <tags>
+        <tag>Express實戰系列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Express框架(13) 安全處理套件</title>
+    <url>/2022/07/22/2022-7-22-1-express-safe-plugins/</url>
+    <content><![CDATA[<p>這篇介紹幾個常用的 安全性套件如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install helmet --save   // helmet藉由設定多個http-header來保護app</span><br><span class="line">npm install cors --save     // cors允許跨域的網路請求</span><br><span class="line">npm install xss-clean --save  // 防止xss攻擊</span><br><span class="line">npm install express-rate-limit  // 防止太頻繁的請求</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*iiglV8mBgWLo9fmYK2f2kQ.png" alt="載入套件"></p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*PXV7BHiBXv1zxakGrrVfSg.png" alt="使用套件"></p>
+]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>Express</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vscode 常用套件</title>
+    <url>/2022/07/22/2022-7-22-2-vscodes-plugins/</url>
+    <content><![CDATA[<ol>
+<li>Monokai Dark Soda</li>
+</ol>
+<p>將樣式改為 sublime 配色</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*NO_R722LcJMiVFOtN7u2bQ.png"></p>
+<ol start="2">
+<li>Live Server</li>
+</ol>
+<p>幫助我們建立本地端serve，來開啟html檔案。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*UutF0FyzyEhBea3QEy_nKg.png"></p>
+<ol start="3">
+<li>AutoFileName</li>
+</ol>
+<p>自動補齊文件路徑</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*RWm3j8aBqGyN5N_M8xldiQ.png"></p>
+<ol start="4">
+<li>Copy filename</li>
+</ol>
+<p>右鍵點選檔案，可以直接複製檔名</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*1puNqb7bDaubwhfzxzaQhQ.png"></p>
+<ol start="5">
+<li>git graph</li>
+</ol>
+<p>快速瀏覽 git commit 與 分支</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/35f08c9edb0403027a52b8941abf732b.png"></p>
+<ol start="6">
+<li>Material Icon Theme</li>
+</ol>
+<p>提供好看的檔案 icon 圖示</p>
+<p><img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/logo.png"></p>
+]]></content>
+      <categories>
+        <category>VScode</category>
+      </categories>
+      <tags>
+        <tag>VScode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Cookie 介紹(一) 概念篇</title>
+    <url>/2022/07/24/2022-7-24-1-cookie-1/</url>
+    <content><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/1100/0*xElr-lBELjhvCKM1.png"></p>
+<p><img src="https://cdn-images-1.medium.com/max/1100/1*7JB8X8Z3wYWCcc5ox_GhEQ.png"></p>
+<p><img src="https://cdn-images-1.medium.com/max/1100/1*ZF-rXeZmto6Qfq7kubbw2g.png"></p>
+<p><img src="https://cdn-images-1.medium.com/max/1100/1*t53-Lx0pAOoZrRPBRXGXKQ.png"></p>
+]]></content>
+      <tags>
+        <tag>cookie</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Cookie 介紹(二) Client 端設計</title>
+    <url>/2022/07/24/2022-7-24-2-cookie-2/</url>
+    <content><![CDATA[<h2 id="在瀏覽器讀取與寫入cookie"><a href="#在瀏覽器讀取與寫入cookie" class="headerlink" title="在瀏覽器讀取與寫入cookie"></a>在瀏覽器讀取與寫入cookie</h2><h3 id="讀取所有cookie"><a href="#讀取所有cookie" class="headerlink" title="讀取所有cookie"></a>讀取所有cookie</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">cookie</span>    <span class="comment">// 讀取所有cookie</span></span><br></pre></td></tr></table></figure>
+
+<p>document.cookie會讀取瀏覽器裡所有cookie並組成同個字串如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;test1=Hello; SameSite=None;  //讀取結果</span><br></pre></td></tr></table></figure>
+
+<h3 id="讀取單一cookie"><a href="#讀取單一cookie" class="headerlink" title="讀取單一cookie"></a>讀取單一cookie</h3><p>如果要取出特定cookie的值，我們可以套用function，只要帶入cookie的name，就會返回cookie的值。以下提供一個範例:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getCookie</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> value = <span class="string">`; <span class="subst">$&#123;<span class="variable language_">document</span>.cookie&#125;</span>`</span>;</span><br><span class="line">  <span class="keyword">const</span> parts = value.<span class="title function_">split</span>(<span class="string">`; <span class="subst">$&#123;name&#125;</span>=`</span>);</span><br><span class="line">  <span class="keyword">if</span> (parts.<span class="property">length</span> === <span class="number">2</span>) <span class="keyword">return</span> parts.<span class="title function_">pop</span>().<span class="title function_">split</span>(<span class="string">&#x27;;&#x27;</span>).<span class="title function_">shift</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="寫入cookie"><a href="#寫入cookie" class="headerlink" title="寫入cookie"></a>寫入cookie</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">cookie</span> = <span class="string">&#x27;myName=bob&#x27;</span>   <span class="comment">// 寫入cookie</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="設定cookie-失效時間"><a href="#設定cookie-失效時間" class="headerlink" title="設定cookie 失效時間"></a>設定cookie 失效時間</h2><p><img src="https://cdn-images-1.medium.com/max/1100/1*ih5ywCh6YHGSf4ndllwkuA.png"></p>
+]]></content>
+      <tags>
+        <tag>cookie</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Cookie 介紹(三) Node.js Server 設計</title>
+    <url>/2022/07/24/2022-7-24-3-cookie-3/</url>
+    <content><![CDATA[<h2 id="載入cookieParser"><a href="#載入cookieParser" class="headerlink" title="載入cookieParser"></a>載入cookieParser</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install --save cookie-parser</span><br></pre></td></tr></table></figure>
+
+<p>先下載cookie-parser這個套件，才能讀取cookie。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cookieParser = <span class="built_in">require</span>(<span class="string">&#x27;cookie-parser&#x27;</span>);</span><br><span class="line">app.<span class="title function_">use</span>(cookieParser);</span><br></pre></td></tr></table></figure>
+
+<h2 id="讀取cookie"><a href="#讀取cookie" class="headerlink" title="讀取cookie"></a>讀取cookie</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">req.cookie  //讀取cookie</span><br></pre></td></tr></table></figure>
+
+<p>在後端的路由裡，可以用 req.cookies 讀取整包cookie物件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">cookie</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn-images-1.medium.com/max/1100/1*MGJQh6eKcOY12UDRUylx5A.png" alt="讀取結果"></p>
+<h2 id="傳送-cookie-到前端"><a href="#傳送-cookie-到前端" class="headerlink" title="傳送 cookie 到前端"></a>傳送 cookie 到前端</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">res.cookie(name, value [, options])</span><br></pre></td></tr></table></figure>
+
+<p>name: 設定cookie的名字<br>value: 設定其值，可能是字串或是轉成JSON格式的物件。<br>options: 選項參數是一個物件，所以，其屬性放在{}裡，以逗號分隔。</p>
+<p>可用options:</p>
+<ul>
+<li>expires (日期) cookie的到期日，超過此日期，即失效。</li>
+<li>httpOnly: (布林) 標記此cookie只能從web server　訪問，以避免不正確的進入來取得竄改。</li>
+<li>maxAge (數字) 設定此cookie的生存時間(毫秒為單位)，比方60000(10分鐘後到期，必須重新訪問)</li>
+<li>path (字串) 適用此cookie的路徑，預設： “&#x2F;”.</li>
+<li>secure (布林) 設定此cookie是否只在https使用。</li>
+<li>signed (布林) 此cookie是否要設簽章。(如果是true，必須使用cookie-parser設定簽章 )</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.<span class="title function_">cookie</span>(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;marry&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">httpOnly</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">maxAge</span>: <span class="number">10000</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>cookie</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Express實戰系列(2) 使用cookie傳送JWT token</title>
+    <url>/2022/07/24/2022-7-24-4-express-cookie-example/</url>
+    <content><![CDATA[<h2 id="註冊功能"><a href="#註冊功能" class="headerlink" title="註冊功能"></a>註冊功能</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">attatchCookieToResponse</span> = (<span class="params">&#123; res, user &#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> token = <span class="title function_">createJWT</span>(&#123; <span class="attr">payload</span>: user &#125;);</span><br><span class="line">  <span class="keyword">const</span> oneDay = <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>; <span class="comment">//one day in miliseconds</span></span><br><span class="line">  res.<span class="title function_">cookie</span>(<span class="string">&#x27;token&#x27;</span>, token, &#123;</span><br><span class="line">    <span class="attr">httpOnly</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">expires</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="title class_">Date</span>.<span class="title function_">now</span>() + oneDay),</span><br><span class="line">    <span class="attr">secure</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span>,</span><br><span class="line">    <span class="attr">signed</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用res.cookie 回傳 jwt 產生的token，</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">register</span> = <span class="keyword">async</span> (<span class="params">req, res</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; email, name, password &#125; = req.<span class="property">body</span>;</span><br><span class="line">  <span class="keyword">const</span> user = <span class="keyword">new</span> <span class="title class_">User</span>(&#123; email, password, name, role &#125;);</span><br><span class="line">  <span class="keyword">await</span> user.<span class="title function_">save</span>();</span><br><span class="line">  <span class="keyword">const</span> tokenUser = &#123; </span><br><span class="line">    <span class="attr">name</span>: user.<span class="property">name</span>, </span><br><span class="line">    <span class="attr">userId</span>: user.<span class="property">_id</span>, </span><br><span class="line">    <span class="attr">role</span>: user.<span class="property">role</span> </span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="title function_">attatchCookieToResponse</span>(&#123; res, <span class="attr">user</span>: tokenUser &#125;);</span><br><span class="line">  res.<span class="title function_">status</span>(<span class="title class_">StatusCodes</span>.<span class="property">CREATED</span>).<span class="title function_">json</span>(&#123; <span class="attr">user</span>: tokenUser &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>Express實戰系列</tag>
+        <tag>cookie</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Express框架(14) bcrypt 套件</title>
+    <url>/2022/07/26/2022-7-26-1-express-bcrypt/</url>
+    <content><![CDATA[<h2 id="什麼是-bcrypt"><a href="#什麼是-bcrypt" class="headerlink" title="什麼是 bcrypt"></a>什麼是 bcrypt</h2><p>在儲存密碼到後端資料庫時，要避免直接將密碼以字串方式存入，以防資料庫被害時密碼洩漏。所以應該再存入密碼前將密碼加密，也就是本文會介紹的 bcrypt套件 來加密。</p>
+<p>bcrypt 能夠將一個字串做雜湊加密，其中有個參數叫 saltRounds 是在密碼學中的加鹽(salt)，加鹽的意思是在要加密的字串中加特定的字符，打亂原始的字符串，使其生成的散列結果產生變化，其參數越高加鹽次數多越安全相對的加密時間就越長。</p>
+<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install bcrypt --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ul>
+<li>saltRounds: 整數型態，數值越高越安全。</li>
+<li>myPassword: 要加密的字串。</li>
+<li>testPassword: 測試驗證密碼的變數。</li>
+<li>myHash: myPassword加密後結果(給驗證用)</li>
+</ul>
+<p>以下為promises 非同步的加密與解密方法</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 加密</span></span><br><span class="line">bcrypt.<span class="title function_">hash</span>(myPassword, saltRounds).<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params">hash</span>) &#123;</span><br><span class="line">  <span class="comment">// Store hash in your password DB.</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(hash);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 驗證密碼</span></span><br><span class="line">bcrypt.<span class="title function_">compare</span>(myPassword, myHash).<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params">res</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(res); <span class="comment">// true</span></span><br><span class="line">&#125;);</span><br><span class="line">bcrypt.<span class="title function_">compare</span>(testPassword, myHash).<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params">res</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(res); <span class="comment">// false</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>也支援 async&#x2F;await 的寫法</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">checkUser</span>(<span class="params">username, password</span>) &#123;</span><br><span class="line">    <span class="comment">//... fetch user from a db etc.</span></span><br><span class="line">    <span class="keyword">const</span> match = <span class="keyword">await</span> bcrypt.<span class="title function_">compare</span>(password, user.<span class="property">passwordHash</span>);</span><br><span class="line">    <span class="keyword">if</span>(match) &#123;</span><br><span class="line">        <span class="comment">//login</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>Express</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Promise 的使用</title>
+    <url>/2022/07/28/2022-7-28-1-promise/</url>
+    <content><![CDATA[<h2 id="過去處理非同步方法"><a href="#過去處理非同步方法" class="headerlink" title="過去處理非同步方法"></a>過去處理非同步方法</h2><p>在以前，我們會用 callback function 去控制非同步事件發生的順序，如下圖，利用將 logB 帶入logA函式中，確保 logA 執行完後才執行 logB;</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*u2dx3XZLuYAXJ23Fybz73Q.png"></p>
+<h2 id="使用promise"><a href="#使用promise" class="headerlink" title="使用promise"></a>使用promise</h2><p><img src="https://cdn-images-1.medium.com/max/1320/1*dUI30vm_J711TulAMNkIbQ.png"></p>
+<p>而現在，我們有promise可以用，promise 主要用來解決非同步的問題，因為非同步事件我們無法確定什麼時候完成，所以會有一個 pending 未確認的狀態。</p>
+<p>等待未確認狀態完成後，才會進入 settled 已確認狀態，settled 已確認狀態，可分為兩部分:</p>
+<ol>
+<li>fulfilled : 已實現狀態，代表非同步事件完成。</li>
+</ol>
+<p>在完成狀態裡，promise會透過 resolve參數回傳一個結果，並透過then來 做接收。</p>
+<ol start="2">
+<li>rejected : 已拒絕狀態，代表非同步事件失敗。</li>
+</ol>
+<p>在失敗狀態裡，promise會透過 reject參數回傳一個結果，並透過catch來做接收。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">promiseFn</span>(<span class="params">num</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>);</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(num)&#123;</span><br><span class="line">            <span class="title function_">resolve</span>(<span class="string">&#x27;成功&#x27;</span>)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="title function_">reject</span>(<span class="string">&#x27;失敗&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,<span class="number">0</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">promiseFn</span>(<span class="number">0</span>)</span><br><span class="line">  .<span class="title function_">then</span>( <span class="function"><span class="params">res</span> =&gt;</span>&#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span><br><span class="line">  &#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;程式碼結束&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在上面範例中，利用一個 function 內new出 promise的實體，並用 resolve 和 reject 參數 分別帶出成功和失敗的結果。<br>在運行promiseFn 藉由 帶入的參數是真值，如 1  或假值 如 0，來決定 是用 then接收成功結果，或是用 catch 接收失敗結果。</p>
+<h2 id="Promise-鏈接"><a href="#Promise-鏈接" class="headerlink" title="Promise 鏈接"></a>Promise 鏈接</h2><p><img src="https://cdn-images-1.medium.com/max/1320/1*yvKI941jMsOCyIjW1R0pug.png"></p>
+<p>在上圖中，在第一個 then 接收成功資訊，並再 return 一個promisefn。此時因為帶入的是假值 0 ，直接跳到 .catch 進行失敗資訊接收。在catch裡，也可以再 做一次promiseFn(4) 此時帶入的是真值，故由底下的then來接收成功結果。</p>
+<h2 id="promise-all"><a href="#promise-all" class="headerlink" title="promise.all"></a>promise.all</h2><p><img src="https://cdn-images-1.medium.com/max/1320/1*t3Q8bc1-xu3sl2B0NLd2Jw.png"></p>
+<p>在使用 promise .all 時，可以在陣列裡一次帶入多個promise請求，並用.then  一次回傳成功的結果，要注意回傳的格式也是陣列，所以可以用res[0]的方式去取值。<br>另外只要有一個promise請求失敗，就會直接跳入.catch 接收失敗訊息，並不會執行其餘成功的結果。</p>
+<h2 id="promise-race"><a href="#promise-race" class="headerlink" title="promise.race"></a>promise.race</h2><p>promise .race 和 promise.all 一樣，可以同時用陣列的方式傳入多個promise請求，但 promise .race 只會回傳第一個完成的結果，若成功則進入.then，若是失敗則進入 .catch。<br>下圖範例中， promiseFn(0,300)會先執行完，然後因為是 0 是假值，直接進入.catch接收失敗結果。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1320/1*86cuLYtVeu-Aez8QI54cZg.png"></p>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>Promise</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mongoose (5) populate介紹</title>
+    <url>/2022/07/28/2022-7-28-2-mongoose-populate/</url>
+    <content><![CDATA[<h2 id="model-關聯屬性建立"><a href="#model-關聯屬性建立" class="headerlink" title="model 關聯屬性建立"></a>model 關聯屬性建立</h2><p>在 mongoose 的 modle 屬性裡，我們可以互相連結不同 model 的資料</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">ProductSchema</span> = <span class="keyword">new</span> mongoose.<span class="title class_">Schema</span>(</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">name</span>: &#123;</span><br><span class="line">      <span class="attr">type</span>: <span class="title class_">String</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">user</span>: &#123;</span><br><span class="line">      <span class="attr">type</span>: mongoose.<span class="property">Types</span>.<span class="property">ObjectId</span>,</span><br><span class="line">      <span class="attr">ref</span>: <span class="string">&#x27;User&#x27;</span>,</span><br><span class="line">      <span class="attr">required</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>例如上面的 product 的 schema 我連結了 user 的資料。</p>
+<h2 id="使用-populate-擴展資料"><a href="#使用-populate-擴展資料" class="headerlink" title="使用 populate 擴展資料"></a>使用 populate 擴展資料</h2><p>在沒有 populate前，當我們get product資料時，只會得到 user的 id。</p>
+<p>但我們可以使用 populate 來擴展 user 的完整資料</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">getAllProducts</span> = <span class="keyword">async</span> (<span class="params">req, res</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> products = <span class="keyword">await</span> <span class="title class_">Review</span>.<span class="title function_">find</span>(&#123;&#125;)</span><br><span class="line">  .<span class="title function_">populate</span>(&#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;user&#x27;</span>,</span><br><span class="line">    <span class="attr">select</span>: <span class="string">&#x27;name age gender&#x27;</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">  res.<span class="title function_">status</span>(<span class="title class_">StatusCodes</span>.<span class="property">OK</span>).<span class="title function_">json</span>(&#123; products &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>populate可用屬性</p>
+<ul>
+<li>path: 要擴展的屬性名稱</li>
+<li>select: 需要擴展的key</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Express</tag>
+        <tag>Mongoose</tag>
       </tags>
   </entry>
 </search>

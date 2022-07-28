@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tim8076.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="實作註冊登入功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Express實戰系列(1) 製作註冊登入功能">
+<meta property="og:url" content="https://tim8076.github.io/2022/07/20/2022-7-20-3-express-login/index.html">
+<meta property="og:site_name" content="Tim的前端日誌">
+<meta property="og:description" content="實作註冊登入功能">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-07-20T13:16:43.000Z">
+<meta property="article:modified_time" content="2022-07-28T13:35:04.012Z">
+<meta property="article:author" content="Tim Chou">
+<meta property="article:tag" content="Express實戰系列">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://tim8076.github.io/2022/07/20/2022-7-20-3-express-login/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://tim8076.github.io/2022/07/20/2022-7-20-3-express-login/","path":"2022/07/20/2022-7-20-3-express-login/","title":"Express實戰系列(1) 製作註冊登入功能"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Express實戰系列(1) 製作註冊登入功能 | Tim的前端日誌</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tim的前端日誌</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%92%B0%E5%A2%83%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">環境簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8BUser%E7%9A%84schema"><span class="nav-number">2.</span> <span class="nav-text">建立User的schema</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%BB%E5%86%8A%E8%B7%AF%E7%94%B1"><span class="nav-number">3.</span> <span class="nav-text">註冊路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E5%85%A5%E8%B7%AF%E7%94%B1"><span class="nav-number">4.</span> <span class="nav-text">登入路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E9%A9%97%E8%AD%89%E7%9A%84middleware"><span class="nav-number">5.</span> <span class="nav-text">新增驗證的middleware</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tim Chou</p>
+  <div class="site-description" itemprop="description">Zero to Hero</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/tim8076" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/07/20/2022-7-20-3-express-login/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Tim Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim的前端日誌">
+      <meta itemprop="description" content="Zero to Hero">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Express實戰系列(1) 製作註冊登入功能 | Tim的前端日誌">
+      <meta itemprop="description" content="實作註冊登入功能">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Express實戰系列(1) 製作註冊登入功能
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-07-20 21:16:43" itemprop="dateCreated datePublished" datetime="2022-07-20T21:16:43+08:00">2022-07-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-07-28 21:35:04" itemprop="dateModified" datetime="2022-07-28T21:35:04+08:00">2022-07-28</time>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">實作註冊登入功能</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="環境簡介"><a href="#環境簡介" class="headerlink" title="環境簡介"></a>環境簡介</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- controllers  </span><br><span class="line">  - auth.js</span><br><span class="line">- model</span><br><span class="line">  - User.js</span><br><span class="line">- route    </span><br><span class="line">  - auth.js</span><br><span class="line">- middleware</span><br><span class="line">  - authentication</span><br></pre></td></tr></table></figure>
+
+<p>這次要製作註冊登入功能，route 和 controllers 資料夾理會有 auth的 路由(route) 和 函式(controller)，另外有建立User的model。本次使用 express搭配 mongoDB製作。</p>
+<h2 id="建立User的schema"><a href="#建立User的schema" class="headerlink" title="建立User的schema"></a>建立User的schema</h2><p>首先在 model裡的 User.js建立user的 schema，也就是每筆使用者的資料格式，包括用戶姓名、email、password等等。會用到mongoose提供的驗證方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">UserSchema</span> = <span class="keyword">new</span> mongoose.<span class="title class_">Schema</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">String</span>,</span><br><span class="line">    <span class="attr">required</span>: [<span class="literal">true</span>, <span class="string">&#x27;Please provide name&#x27;</span>],</span><br><span class="line">    <span class="attr">maxlength</span>: <span class="number">50</span>,</span><br><span class="line">    <span class="attr">minlength</span>: <span class="number">3</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">email</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">String</span>,</span><br><span class="line">    <span class="attr">required</span>: [<span class="literal">true</span>, <span class="string">&#x27;Please provide email&#x27;</span>],</span><br><span class="line">    <span class="attr">match</span>: [</span><br><span class="line">      <span class="regexp">/^(([^&lt;&gt;()[\]\\.,;:\s@&quot;]+(\.[^&lt;&gt;()[\]\\.,;:\s@&quot;]+)*)|(&quot;.+&quot;))@((\[[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]&#123;2,&#125;))$/</span>,</span><br><span class="line">      <span class="string">&#x27;Please provide a valid email&#x27;</span>,</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">unique</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">password</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">String</span>,</span><br><span class="line">    <span class="attr">required</span>: [<span class="literal">true</span>, <span class="string">&#x27;Please provide password&#x27;</span>],</span><br><span class="line">    <span class="attr">minlength</span>: <span class="number">6</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在user的schema裡可以新增加密的方法，使用 bcrypt套件來對password加密，因為希望password加密後再存入資料庫。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">UserSchema</span>.<span class="title function_">pre</span>(<span class="string">&#x27;save&#x27;</span>, <span class="keyword">async</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> salt = <span class="keyword">await</span> bcrypt.<span class="title function_">genSalt</span>(<span class="number">10</span>)</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">password</span> = <span class="keyword">await</span> bcrypt.<span class="title function_">hash</span>(<span class="variable language_">this</span>.<span class="property">password</span>, salt)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="註冊路由"><a href="#註冊路由" class="headerlink" title="註冊路由"></a>註冊路由</h2><p>註冊使用者的 controller 函式如下: </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">User</span> = <span class="built_in">require</span>(<span class="string">&#x27;../models/User&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">StatusCodes</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;http-status-codes&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">BadRequestError</span>, <span class="title class_">UnauthenticatedError</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;../errors&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用者註冊</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">register</span> = <span class="keyword">async</span> (<span class="params">req, res</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> user = <span class="keyword">await</span> <span class="title class_">User</span>.<span class="title function_">create</span>(&#123; ...req.<span class="property">body</span> &#125;)</span><br><span class="line">  <span class="keyword">const</span> token = user.<span class="title function_">createJWT</span>()</span><br><span class="line">  res.<span class="title function_">status</span>(<span class="title class_">StatusCodes</span>.<span class="property">CREATED</span>).<span class="title function_">json</span>(&#123; <span class="attr">user</span>: &#123; <span class="attr">name</span>: user.<span class="property">name</span> &#125;, token &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>製作註冊功能時，使用者在前端會傳入 name 跟 password 的資料，資料會以物件方式存在 req.body裡</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;王曉明&#x27;</span>,</span><br><span class="line">  <span class="attr">password</span>: <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>當路由收到資料後，用 <code>.create()</code>建立新的使用者，此時如果使用少傳了name或password，會觸發 mongoose 的驗證機制，直接拋出錯誤。</p>
+<p>建立使用者後，用寫在<a href="https://tim8076.github.io/2022/07/17/2022-7-17-8-mongoose-model/?highlight=schema#schema-%E5%8A%A0%E4%B8%8A%E6%96%B9%E6%B3%95">User的schema上的方法</a>來產生 jwt的 token，最後這個token會回傳給前端做下次登入驗證用，詳細<a href="https://tim8076.github.io/2022/07/18/2022-7-18-1-jwt/?highlight=jwt#%E5%AF%A6%E6%88%B0%E5%8A%A0%E5%AF%86%E6%B5%81%E7%A8%8B">jwt用法看這裡</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">UserSchema</span>.<span class="property">methods</span>.<span class="property">createJWT</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> jwt.<span class="title function_">sign</span>(</span><br><span class="line">    &#123; <span class="attr">userId</span>: <span class="variable language_">this</span>.<span class="property">_id</span>, <span class="attr">name</span>: <span class="variable language_">this</span>.<span class="property">name</span> &#125;,</span><br><span class="line">    process.<span class="property">env</span>.<span class="property">JWT_SECRET</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">expiresIn</span>: process.<span class="property">env</span>.<span class="property">JWT_LIFETIME</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="登入路由"><a href="#登入路由" class="headerlink" title="登入路由"></a>登入路由</h2><p>當使用者成功註冊後，可以進行登入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">login</span> = <span class="keyword">async</span> (<span class="params">req, res</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; email, password &#125; = req.<span class="property">body</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!email || !password) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">BadRequestError</span>(<span class="string">&#x27;Please provide email and password&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> user = <span class="keyword">await</span> <span class="title class_">User</span>.<span class="title function_">findOne</span>(&#123; email &#125;)</span><br><span class="line">  <span class="keyword">if</span> (!user) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UnauthenticatedError</span>(<span class="string">&#x27;Invalid Credentials&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> isPasswordCorrect = <span class="keyword">await</span> user.<span class="title function_">comparePassword</span>(password)</span><br><span class="line">  <span class="keyword">if</span> (!isPasswordCorrect) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UnauthenticatedError</span>(<span class="string">&#x27;Invalid Credentials&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// compare password</span></span><br><span class="line">  <span class="keyword">const</span> token = user.<span class="title function_">createJWT</span>()</span><br><span class="line">  res.<span class="title function_">status</span>(<span class="title class_">StatusCodes</span>.<span class="property">OK</span>).<span class="title function_">json</span>(&#123; <span class="attr">user</span>: &#123; <span class="attr">name</span>: user.<span class="property">name</span> &#125;, token &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先從req.body裡可以取得前端傳來的 email和password資料</p>
+<ol>
+<li><p>先檢查 email 和 password 是否存在，不存在的話直接丟出錯誤。</p>
+</li>
+<li><p>確認有帳密資料後，用 email資料取得資料庫裡對應的user資料，如果找不到user則回傳錯誤。</p>
+</li>
+<li><p>再來比對使用者輸入的密碼是否一樣，使用 bcrypt套件裡的compare功能，比對的函式一樣放在UserSchema的methods裡。</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">UserSchema</span>.<span class="property">methods</span>.<span class="property">comparePassword</span> = <span class="keyword">async</span> <span class="keyword">function</span> (<span class="params">canditatePassword</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> isMatch = <span class="keyword">await</span> bcrypt.<span class="title function_">compare</span>(canditatePassword, <span class="variable language_">this</span>.<span class="property">password</span>)</span><br><span class="line">  <span class="keyword">return</span> isMatch</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>確認密碼一樣後，就可以新增 jwt token 並回傳端，登入成功。</p>
+<h2 id="新增驗證的middleware"><a href="#新增驗證的middleware" class="headerlink" title="新增驗證的middleware"></a>新增驗證的middleware</h2><p>使用者註冊和登入後，前端會獲得token，作為之後驗證使用。可以在middleware資料夾內新增 autentication的js檔。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">auth</span> = <span class="keyword">async</span> (<span class="params">req, res, next</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> authHeader = req.<span class="property">headers</span>.<span class="property">authorization</span>;</span><br><span class="line">  <span class="keyword">if</span> (!authHeader || !authHeader.<span class="title function_">startsWith</span>(<span class="string">&#x27;Bearer&#x27;</span>)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UnauthenticatedError</span>(<span class="string">&#x27;Authentication invalid&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> token = authHeader.<span class="title function_">split</span>(<span class="string">&#x27; &#x27;</span>)[<span class="number">1</span>];</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> payload = jwt.<span class="title function_">verify</span>(token, process.<span class="property">env</span>.<span class="property">JWT_SECRET</span>);</span><br><span class="line">    req.<span class="property">user</span> = &#123; <span class="attr">userId</span>: payload.<span class="property">userId</span>, <span class="attr">name</span>: payload.<span class="property">name</span> &#125;;</span><br><span class="line">    <span class="title function_">next</span>();</span><br><span class="line">  &#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UnauthenticatedError</span>(<span class="string">&#x27;Authentication invalid&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在驗證邏輯中，前端會將token放在headers.authorization裡，所以先判斷 req 裡有沒有 authorization 的資料，沒有則回報錯誤。<br>若有則將token字串取出，之後用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jwt.verify(token, token金鑰)</span><br></pre></td></tr></table></figure>
+
+<p>將token資料解析回當初加密前的物件格式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;user&#x27;</span>,</span><br><span class="line">  <span class="attr">userId</span>: <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>取得物件後，就將資訊存在 req.user裡，方便之後再路由裡取得user資訊。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Express%E5%AF%A6%E6%88%B0%E7%B3%BB%E5%88%97/" rel="tag"># Express實戰系列</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/20/2022-7-20-2-error-handle/" rel="prev" title="Express框架(12) 錯誤處理範例">
+                  <i class="fa fa-chevron-left"></i> Express框架(12) 錯誤處理範例
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/07/22/2022-7-22-1-express-safe-plugins/" rel="next" title="Express框架(13) 安全處理套件">
+                  Express框架(13) 安全處理套件 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tim Chou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"shosetim","count":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
