@@ -1,5 +1,5 @@
 ---
-title: Mongoose (5) virtual介紹
+title: Mongoose (6) 
 date: 2022-07-29 21:02:42
 tags:
 - Mongoose
