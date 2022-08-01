@@ -1,5 +1,5 @@
 ---
-title: Mongoose (6) 
+title: Mongoose (6) virtual
 date: 2022-07-29 21:02:42
 tags:
 - Mongoose
