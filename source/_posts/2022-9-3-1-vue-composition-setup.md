@@ -3,6 +3,7 @@ title: Composition api (一) setup取代option
 date: 2022-09-03 15:07:47
 categories: Vue
 tags: Composition api
+description: '使用composition api 取代 option api'
 ---
 
 ![](https://cdn-images-1.medium.com/max/1100/1*g_Xxrt6tkYtSxDIui2irAw.png)
