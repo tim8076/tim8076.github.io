@@ -1,5 +1,5 @@
 ---
-title: vue-router (6) Redirect and Alias
+title: vue-router (7) Redirect and Alias
 date: 2022-09-22 14:26:27
 categories: Vue
 tags: vue-router
