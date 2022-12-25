@@ -3671,6 +3671,13 @@
 
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">div.<span class="property">style</span>.<span class="property">color</span> = <span class="string">&#x27;red&#x27;</span>;</span><br><span class="line">div.<span class="property">style</span>.<span class="property">backgroundColor</span> = <span class="string">&#x27;black&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
+<h2 id="節點-node-與元素-element-的區分"><a href="#節點-node-與元素-element-的區分" class="headerlink" title="節點(node)與元素(element)的區分"></a>節點(node)與元素(element)的區分</h2><p>基本上 html 裡的節點包含所有的html標籤、換行、文字，而元素只包含的html標籤。<br>當我們在js裡用不同的選取dom方法時，依照方法不同會回傳 HTML Collection 或 Nodelist。</p>
+<ul>
+<li>HTML Collection: 當元素增減時，會自動更新。</li>
+<li>Nodelist: 依照選取方法不同，有的會自動更新，有的不會。</li>
+</ul>
+<p>這邊推薦使用會回傳 Nodelist 的選取方法，如 querySelectorAll。因為元素如果會自動更新，出錯時很難維護。</p>
+<p><a href="https://www.youtube.com/watch?v=rhvec8cXLlo&ab_channel=WebDevSimplified">影片教學</a></p>
 <h2 id="新增文字"><a href="#新增文字" class="headerlink" title="新增文字"></a>新增文字</h2><p>新增文字有兩種方法 textContent 、 innerText</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">div.<span class="property">innerText</span> = <span class="string">&#x27;Hello World&#x27;</span>;</span><br><span class="line">div.<span class="property">textContent</span> = <span class="string">&#x27;Hello World&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
