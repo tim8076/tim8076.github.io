@@ -29,7 +29,7 @@
 <meta property="og:description" content="了解CORS產生的原因">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-07-05T08:28:40.000Z">
-<meta property="article:modified_time" content="2022-07-05T13:44:19.036Z">
+<meta property="article:modified_time" content="2022-09-21T12:17:20.490Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="Javascript">
 <meta property="article:tag" content="cors">
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cross-Origin-Resource-Sharing"><span class="nav-number">1.</span> <span class="nav-text">Cross-Origin Resource Sharing</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cross-Origin-Resource-Sharing"><span class="nav-number">1.</span> <span class="nav-text">Cross-Origin Resource Sharing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%BA%90%E5%AE%9A%E7%BE%A9"><span class="nav-number">1.1.</span> <span class="nav-text">同源定義</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%A8%E4%BE%86%E6%BA%90%E5%BC%95%E5%85%A5"><span class="nav-number">1.2.</span> <span class="nav-text">跨來源引入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CORS"><span class="nav-number">2.</span> <span class="nav-text">CORS</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -158,7 +158,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">119</span>
+          <span class="site-state-item-count">142</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -169,7 +169,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -242,9 +242,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
-      
 
-      <time title="創建時間：2022-07-05 16:28:40 / 修改時間：21:44:19" itemprop="dateCreated datePublished" datetime="2022-07-05T16:28:40+08:00">2022-07-05</time>
+      <time title="創建時間：2022-07-05 16:28:40" itemprop="dateCreated datePublished" datetime="2022-07-05T16:28:40+08:00">2022-07-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-21 20:17:20" itemprop="dateModified" datetime="2022-09-21T20:17:20+08:00">2022-09-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -268,7 +274,20 @@
     
     <div class="post-body" itemprop="articleBody">
         <h2 id="Cross-Origin-Resource-Sharing"><a href="#Cross-Origin-Resource-Sharing" class="headerlink" title="Cross-Origin Resource Sharing"></a>Cross-Origin Resource Sharing</h2><p>當我們使用 XMLHttpRequest 或 fecth等方式向伺服器發送請求時，都必須遵守都遵守同源政策（same-origin policy），只能請求與應用程式相同網域的 HTTP 資源。</p>
-<p>跨來源資源共用（CORS），則是一種使用額外 HTTP 標頭令目前瀏覽網站的使用者代理取得存取其他來源（網域）伺服器特定資源權限的機制。</p>
+<h3 id="同源定義"><a href="#同源定義" class="headerlink" title="同源定義"></a>同源定義</h3><p>所謂同源是指兩份網頁具備相同協定、埠號 (如果有指定) 以及主機位置，下表提供了一些例子展示那些來源和 <a target="_blank" rel="noopener" href="http://store.company.com/dir/page.html">http://store.company.com/dir/page.html</a> 屬於同源:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">URL	Outcome	Reason</span><br><span class="line">http://store.company.com/dir2/other.html	同源	</span><br><span class="line">http://store.company.com/dir/inner/another.html	同源	</span><br><span class="line">https://store.company.com/secure.html	不同源	協定不同</span><br><span class="line">http://store.company.com:81/dir/etc.html	不同源	埠號不同</span><br><span class="line">http://news.company.com/dir/other.html	不同源	主機位置不同</span><br></pre></td></tr></table></figure>
+
+<h3 id="跨來源引入"><a href="#跨來源引入" class="headerlink" title="跨來源引入"></a>跨來源引入</h3><p>在某些情況下跨來源是被允許的，不受同源策略限制</p>
+<ol>
+<li>跨來源嵌入通常被允許 (embed)</li>
+</ol>
+<script src=”…”></script>、<link rel=”stylesheet” href=”…”>、<iframe>、圖片 <img>、<video>、或是 @font-face <object> 、 <embed>.等等都是跨來源嵌入。這些標籤可以拿到的資源是有限制的。再者，這些取得回來的資源，沒辦法用程式去讀取它，所以開放嵌入。
+
+<ol start="2">
+<li>跨來源寫入通常被允許 (writes)</li>
+</ol>
+<p>可以在藉由<form>在domain-a.com 發 request 給 domain-b.com，當然透過連結 links 或直接 redirect 到別的網站也是被允許的。</p>
+<h2 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h2><p>跨來源資源共用（CORS），則是一種使用額外 HTTP 標頭令目前瀏覽網站的使用者代理取得存取其他來源（網域）伺服器特定資源權限的機制。</p>
 <p>當對方開啟 CORS，就能存取跨網域的資源。</p>
 <p>使用 api 前可以到，<a target="_blank" rel="noopener" href="https://test-cors.org/">test-cors.org</a> 網站測試 api</p>
 <p>結果 200 代表可串接<br>結果 0 代表不能跨網域串接</p>
