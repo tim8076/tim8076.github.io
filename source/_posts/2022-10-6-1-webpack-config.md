@@ -13,7 +13,7 @@ package.json
 package-lock.json
 ```
 
-現在可以來設定 ‵webpack.config.js`。
+再來在跟目錄上新增 ‵webpack.config.js`。
 
 ## Mode
 

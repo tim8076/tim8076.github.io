@@ -33,6 +33,14 @@ module.exports = {
 }
 ```
 
+在 output 選項可以將 assetModuleFilename 設為 'images/[name][ext]' ， 確保輸出的圖片名稱和src的來源相同，並且輸出到images的資料夾內。
+
+``` js
+output: {
+  assetModuleFilename: 'images/[name][ext]',
+}
+```
+
 最後在執行 npm run build 就可以成功打包圖片囉。
 
 

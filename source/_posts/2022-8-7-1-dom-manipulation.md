@@ -130,6 +130,18 @@ div.style.color = 'red';
 div.style.backgroundColor = 'black';
 ```
 
+## 節點(node)與元素(element)的區分
+
+基本上 html 裡的節點包含所有的html標籤、換行、文字，而元素只包含的html標籤。
+當我們在js裡用不同的選取dom方法時，依照方法不同會回傳 HTML Collection 或 Nodelist。
+
+- HTML Collection: 當元素增減時，會自動更新。
+- Nodelist: 依照選取方法不同，有的會自動更新，有的不會。
+
+這邊推薦使用會回傳 Nodelist 的選取方法，如 querySelectorAll。因為元素如果會自動更新，出錯時很難維護。
+
+[影片教學](https://www.youtube.com/watch?v=rhvec8cXLlo&ab_channel=WebDevSimplified)
+
 ## 新增文字
 
 新增文字有兩種方法 textContent 、 innerText

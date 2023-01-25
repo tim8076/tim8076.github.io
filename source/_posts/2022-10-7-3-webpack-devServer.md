@@ -21,18 +21,17 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   devServer: {
-    publicPath: '.',
-    contentBase: path.resolve(__dirname, './dist'),
+    static: {
+      directory: path.resolve(__dirname, './dist'),
+    },
     port: 3000,
     open: true,
     hot: true,
     compress: true,
-    historyApiFallback: true,
   },
 }
 ```
 
-- contentBase: 是要打開模擬伺服器的檔案路徑。
 - port: 選擇開啟網頁的 port
 - compress: 將我們所有的檔案壓縮變成 .gzip 的檔案，這樣子在我開啟瀏覽器時的速度就會比較快
 - open: 你執行模擬伺服器時是否要自動開啟瀏覽器的意思
