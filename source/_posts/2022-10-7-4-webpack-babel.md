@@ -29,7 +29,11 @@ module: {
         loader: 'babel-loader',
         options: {
           presets: [
-            ['@babel/preset-env', { targets: "defaults" }]
+            ['@babel/preset-env', {
+              useBuiltIns: 'usage',
+              modules: false,
+              corejs: 3.6,
+            }]
           ]
         }
       }

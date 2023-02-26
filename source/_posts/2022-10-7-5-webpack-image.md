@@ -26,6 +26,7 @@ module.exports = {
       {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
         type: 'asset/resource',
+        assetModuleFilename: 'images/[hash][ext]', // 輸出到 dist/images 資料夾
       },
     ],
   },
