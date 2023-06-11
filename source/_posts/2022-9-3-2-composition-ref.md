@@ -42,6 +42,15 @@ num.value  // 用.value 來讀取或修改 ref 的值。
 
 和reactive不同，我們可以用.value = 新物件 的方式，來將原本的物件替換掉，也依然保有雙向綁定的功能。
 
+
+在template 可以直接使用 ref 的值，不需要加上 .value
+
+``` html
+<button @click="count++">
+  {{ count }}
+</button>
+```
+
 ## reactive與 ref 如何選擇
 
 ![](https://cdn-images-1.medium.com/max/1100/1*rb-oWwlZ-Q8IWAJgPniDCA.png)
