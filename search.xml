@@ -156,7 +156,7 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -D babel-loader @babel/core @babel/preset-env webpack</span><br></pre></td></tr></table></figure>
 
 <p>安裝好 loader 後，在 config 檔裡設定新的 rule</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="attr">module</span>: &#123;</span><br><span class="line">  <span class="attr">rules</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">test</span>: <span class="regexp">/\.m?js$/</span>,</span><br><span class="line">      <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>,</span><br><span class="line">      <span class="attr">use</span>: &#123;</span><br><span class="line">        <span class="attr">loader</span>: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">        <span class="attr">options</span>: &#123;</span><br><span class="line">          <span class="attr">presets</span>: [</span><br><span class="line">            [<span class="string">&#x27;@babel/preset-env&#x27;</span>, &#123; <span class="attr">targets</span>: <span class="string">&quot;defaults&quot;</span> &#125;]</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="attr">module</span>: &#123;</span><br><span class="line">  <span class="attr">rules</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">test</span>: <span class="regexp">/\.m?js$/</span>,</span><br><span class="line">      <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>,</span><br><span class="line">      <span class="attr">use</span>: &#123;</span><br><span class="line">        <span class="attr">loader</span>: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">        <span class="attr">options</span>: &#123;</span><br><span class="line">          <span class="attr">presets</span>: [</span><br><span class="line">            [<span class="string">&#x27;@babel/preset-env&#x27;</span>, &#123;</span><br><span class="line">              <span class="attr">useBuiltIns</span>: <span class="string">&#x27;usage&#x27;</span>,</span><br><span class="line">              <span class="attr">modules</span>: <span class="literal">false</span>,</span><br><span class="line">              <span class="attr">corejs</span>: <span class="number">3.6</span>,</span><br><span class="line">            &#125;]</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>為了測試用，在 src&#x2F;index.js 新增一些新的 js 語法</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Create a class property without a constructor</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Game</span> &#123;</span><br><span class="line">  name = <span class="string">&#x27;Violin Charades&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> myGame = <span class="keyword">new</span> <span class="title class_">Game</span>()</span><br><span class="line"><span class="comment">// Create paragraph node</span></span><br><span class="line"><span class="keyword">const</span> p = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;p&#x27;</span>)</span><br></pre></td></tr></table></figure>
@@ -175,7 +175,7 @@
 
 <p>然後執行 npm run build 會發現錯誤發生。</p>
 <p>為了解析圖片，webpack 有內建的 asset modules 可以用在靜態資源上。我們會使用 asset&#x2F;resource 在圖片類型上。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">/* ... */</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// Images</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.(?:ico|gif|png|jpg|jpeg)$/i</span>,</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;asset/resource&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">/* ... */</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// Images</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.(?:ico|gif|png|jpg|jpeg)$/i</span>,</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;asset/resource&#x27;</span>,</span><br><span class="line">        <span class="attr">assetModuleFilename</span>: <span class="string">&#x27;images/[hash][ext]&#x27;</span>, <span class="comment">// 輸出到 dist/images 資料夾</span></span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在 output 選項可以將 assetModuleFilename 設為 ‘images&#x2F;[name][ext]’ ， 確保輸出的圖片名稱和src的來源相同，並且輸出到images的資料夾內。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="attr">output</span>: &#123;</span><br><span class="line">  <span class="attr">assetModuleFilename</span>: <span class="string">&#x27;images/[name][ext]&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -3257,6 +3257,16 @@
 <li>直接呼叫class名稱，而不是透過 new關鍵字來呼叫，會出現錯誤。</li>
 <li>class的區塊內所有程式碼，預設會進入嚴格模式。</li>
 </ol>
+<h2 id="getter-與-setter"><a href="#getter-與-setter" class="headerlink" title="getter 與 setter"></a>getter 與 setter</h2><p>在 Class 在取屬性值或設定屬性值時，可以直接這樣做:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Pizza</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">pizzaType</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">type</span> = pizzaType;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> myPizza = <span class="keyword">new</span> <span class="title class_">Pizza</span>(<span class="string">&#x27;tomato&#x27;</span>);</span><br><span class="line">myPizza.<span class="property">type</span> = <span class="string">&#x27;supreme&#x27;</span>; <span class="comment">// 直接設定新的值</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(myPizza.<span class="property">type</span>);</span><br></pre></td></tr></table></figure>
+
+<p>但如果有比較複雜的運用時，可以使用 Getter 和 Setter。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Pizza</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">pizzaType</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">type</span> = pizzaType;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">pizzaType</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">type</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">set</span> <span class="title function_">pizzaType</span>(<span class="params">pizzaType</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">type</span> = pizzaType;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> myPizza = <span class="keyword">new</span> <span class="title class_">Pizza</span>(<span class="string">&#x27;tomato&#x27;</span>);</span><br><span class="line">  myPizza.<span class="property">pizzaType</span> = <span class="string">&#x27;sausage&#x27;</span>; <span class="comment">// 透過 setter 來設定值</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(myPizza.<span class="property">pizzaType</span>); <span class="comment">// 透過 getter 來取得值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>getter 與 setter 的寫法也可以簡化成一個函式</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Pizza</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">pizzaType</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">type</span> = pizzaType;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">getPizzaType</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">type</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">setPizzaType</span>(<span class="params">pizzaType</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">type</span> = pizzaType;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> myPizza = <span class="keyword">new</span> <span class="title class_">Pizza</span>(<span class="string">&#x27;tomato&#x27;</span>);</span><br><span class="line">myPizza.<span class="title function_">setPizzaType</span>(<span class="string">&#x27;sausage&#x27;</span>);</span><br><span class="line">myPizza.<span class="title function_">getPizzaType</span>();</span><br></pre></td></tr></table></figure>
+
+
 <h2 id="class-的靜態方法"><a href="#class-的靜態方法" class="headerlink" title="class 的靜態方法"></a>class 的靜態方法</h2><p>class 裡面可以宣告靜態方法 (static method)，其效果等同於直接定義一個方法在class的屬性上，不用new出新物件就可調用方法：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Article</span> &#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">compare</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> a.<span class="property">date</span> &lt; b.<span class="property">date</span> ? -<span class="number">1</span> : <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">articles.<span class="title function_">sort</span>(<span class="title class_">Article</span>.<span class="property">compare</span>);</span><br></pre></td></tr></table></figure>
 
@@ -4165,6 +4175,9 @@
 
 <p><img src="https://cdn-images-1.medium.com/max/1100/1*MRGXPNfkIAtWOoL-ISIZZA.png"></p>
 <p>和reactive不同，我們可以用.value &#x3D; 新物件 的方式，來將原本的物件替換掉，也依然保有雙向綁定的功能。</p>
+<p>在template 可以直接使用 ref 的值，不需要加上 .value</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;count++&quot;</span>&gt;</span></span><br><span class="line">  &#123;&#123; count &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="reactive與-ref-如何選擇"><a href="#reactive與-ref-如何選擇" class="headerlink" title="reactive與 ref 如何選擇"></a>reactive與 ref 如何選擇</h2><p><img src="https://cdn-images-1.medium.com/max/1100/1*rb-oWwlZ-Q8IWAJgPniDCA.png"></p>
 <p>用reactive建構的資料本身就是proxy物件，本身會有一個Handler來監控target也就是資料，當target有變動時，Handler就會介入來進行畫面的渲染</p>
 <p><img src="https://cdn-images-1.medium.com/max/1100/1*GDB2jgjjgJb1PvmuSxWZqg.png"></p>
@@ -4421,5 +4434,433 @@
       <categories>
         <category>Javascript</category>
       </categories>
+  </entry>
+  <entry>
+    <title>JS-正則表達式</title>
+    <url>/2022/10/14/2022-10-14-1-Regular-Expression/</url>
+    <content><![CDATA[<h2 id="什麼是正則表達式"><a href="#什麼是正則表達式" class="headerlink" title="什麼是正則表達式"></a>什麼是正則表達式</h2><p>正則表達式(RegExp , regular expression) 用於確認字串是否符合所定義的規則。在 JavaScript 中，正規表達式也是物件，這些模式在 RegExp 的 exec 和 test  方法中，以及 String 的 match、replace、search 、split 等方法中被運用。</p>
+<h2 id="建立正規表達式"><a href="#建立正規表達式" class="headerlink" title="建立正規表達式"></a>建立正規表達式</h2><p>可透過下列兩種方法去建立一條正規表達式：</p>
+<p>正規表達式字面值: 使用斜槓表示開始及結束。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> re = <span class="regexp">/ab+c/</span>;</span><br></pre></td></tr></table></figure>
+
+<p>或呼叫 RegExp 物件的建構函式，如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> re = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&#x27;ab+c&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在進入規則語法之前，先介紹正則表達式的一個簡單的測試方法 test( )。test ( ) 方法用以表示參數字串是否符合正則表達式的字串格式。</p>
+<h2 id="撰寫正規表達模式"><a href="#撰寫正規表達模式" class="headerlink" title="撰寫正規表達模式"></a>撰寫正規表達模式</h2><ul>
+<li>使用簡易模式</li>
+</ul>
+<p>直接匹配 &#x2F; &#x2F; 內的字符，比如：&#x2F;abc&#x2F; ，會符合僅僅字符 ‘abc’ 同時出現並按照這個順序的情形。</p>
+<ul>
+<li>使用特殊字元</li>
+</ul>
+<p>如果需要更多條件的匹配，比如搜尋一或多個 ‘b’，或者搜尋空格，會需要特殊字元的字符。</p>
+<h3 id="符合格式"><a href="#符合格式" class="headerlink" title="符合格式"></a>符合格式</h3><ul>
+<li>^ : 字串開頭須符合字串格式</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> exp = <span class="regexp">/^ab/</span>; </span><br><span class="line"></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;abc&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;cab&#x27;</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>$ : 字串結尾須符合字串格式</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> exp = <span class="regexp">/ab$/</span>; </span><br><span class="line"></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;abc&#x27;</span>) <span class="comment">// false</span></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;cab&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>\d : 代表任意數字，也等同於 [0<del>9] 反之，\D 代表除了數字以外的字元，也等同於 [^0</del>9]</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> exp = <span class="regexp">/\d/</span>; </span><br><span class="line"></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;abc&#x27;</span>) <span class="comment">// false</span></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;a23&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>\w : 代表所有字母、數字及底線，也等同於 [A-Za-z0-9_] ；\W 代表除了所有字母、數字及底線以外的字元，也等同於 [^A-Za-z0-9_]</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> exp = <span class="regexp">/\w/</span>; </span><br><span class="line"></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;a23_&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;?&#x27;</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h3 id="符號"><a href="#符號" class="headerlink" title="符號"></a>符號</h3><ul>
+<li>| : 符合前後任一值即可</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> exp = <span class="regexp">/a|b/</span>; </span><br><span class="line"></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;aac&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;ddd&#x27;</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-: 連字符，代表連續的字符，如 數字 1 - 3 可以寫成 [1-3]，英文 a-z 寫成 [a-z];</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> exp = <span class="regexp">/[1-3]/</span>; </span><br><span class="line"></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;2&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;5&#x27;</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h3 id="修飾符"><a href="#修飾符" class="headerlink" title="修飾符"></a>修飾符</h3><ul>
+<li><p>g 修飾符：欲使比較對象爲字串全部時可以加上 g 修飾符，否則在一般狀況下可能只比較第一個符合的對象就停止了。</p>
+</li>
+<li><p>i 修飾符：表示比較條件不分大小寫</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> exp = <span class="regexp">/HELLO/i</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(exp.<span class="title function_">test</span>(<span class="string">&#x27;hello&#x27;</span>)); <span class="comment">// true </span></span><br></pre></td></tr></table></figure>
+
+<h3 id="出現次數"><a href="#出現次數" class="headerlink" title="出現次數"></a>出現次數</h3><ul>
+<li>{n} : 使用大括號指定次數，{n} 只有一個數字代表指定次數；{n,m} 兩個數字時，代表介於 n~m 次；省略其中一個數字代表只指定下限或上限，例如 {n,} 代表至少 n 次，{,m} 代表低於 m 次。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> exp = <span class="regexp">/a&#123;2&#125;/</span>; </span><br><span class="line"></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;aab&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;a&#x27;</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li>: 匹配前一字元 0 至多次。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> exp = <span class="regexp">/b*/</span>; <span class="comment">// 0個或多個b</span></span><br><span class="line"></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;bbb&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;ccc&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>? : 匹配前一字元 0 至 1 次。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> exp = <span class="regexp">/b?/</span>; <span class="comment">// 0 個或 1 個 b</span></span><br><span class="line"></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;bbb&#x27;</span>) <span class="comment">// false</span></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;ccc&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li>: 匹配前一字元 1 至多次。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> exp = <span class="regexp">/b+/</span>; <span class="comment">// 1個或多個b</span></span><br><span class="line"></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;bbb&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">exp.<span class="title function_">test</span>(<span class="string">&#x27;ccc&#x27;</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="字串方法"><a href="#字串方法" class="headerlink" title="字串方法"></a>字串方法</h2><ul>
+<li>match(): 回傳比對後符合的結果陣列，若無符合對象，回傳 null</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> string = <span class="string">&#x27;hello world&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> exp = <span class="regexp">/\w/g</span>;</span><br><span class="line"></span><br><span class="line">string.<span class="title function_">match</span>(exp); </span><br><span class="line"><span class="comment">//  [&#x27;h&#x27;, &#x27;e&#x27;, &#x27;l&#x27;, &#x27;l&#x27;, &#x27;o&#x27;, &#x27;w&#x27;, &#x27;o&#x27;, &#x27;r&#x27;, &#x27;l&#x27;, &#x27;d&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>search()：回傳搜尋第一個比對後符合結果的位置，如果沒有任何符合結果，就回傳 -1;</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> string = <span class="string">&#x27;hello world&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> exp = <span class="regexp">/h/</span>;</span><br><span class="line"><span class="keyword">const</span> exp2 =<span class="regexp">/\d/</span>;</span><br><span class="line"></span><br><span class="line">string.<span class="title function_">search</span>(exp);  <span class="comment">// 0</span></span><br><span class="line">string.<span class="title function_">search</span>(exp2); <span class="comment">// -1</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>replace(): 替換比對後符合的值。接收兩個參數，第一個參數爲正則表達式，第二個參數爲欲替換的值。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> string = <span class="string">&#x27;hello world&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> exp = <span class="regexp">/\d/</span>;</span><br><span class="line"><span class="keyword">const</span> exp2 =<span class="regexp">/\w/</span>;</span><br><span class="line"></span><br><span class="line">string.<span class="title function_">replace</span>(exp, <span class="string">&#x27;a&#x27;</span>); <span class="comment">// &#x27;hello world&#x27;</span></span><br><span class="line">string.<span class="title function_">replace</span>(exp2, <span class="string">&#x27;a&#x27;</span>); <span class="comment">// &#x27;aello world&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果要比對全部就加上 g </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> exp3 =<span class="regexp">/\w/g</span>;</span><br><span class="line">string.<span class="title function_">replace</span>(exp3, <span class="string">&#x27;a&#x27;</span>); <span class="comment">// &#x27;aaaaa aaaaa&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+]]></content>
+      <tags>
+        <tag>正則表達式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ChatGPT (1) 基礎教學</title>
+    <url>/2023/02/26/2023-02-26-chatgpt/</url>
+    <content><![CDATA[<h2 id="chatGPT-是什麼"><a href="#chatGPT-是什麼" class="headerlink" title="chatGPT 是什麼"></a>chatGPT 是什麼</h2><p>ChatGPT是一種大型自然語言處理模型，是由OpenAI訓練的。它基於GPT（Generative Pretrained Transformer）模型架構，具有數十億個參數，可以生成自然語言文本，並且可以進行各種自然語言處理任務，例如問答、文本摘要、翻譯等。</p>
+<h2 id="使用-chatGPT"><a href="#使用-chatGPT" class="headerlink" title="使用 chatGPT"></a>使用 chatGPT</h2><p>先到 <a href="https://openai.com/blog/chatgpt/">chatGPT 官網</a>註冊一個帳號。</p>
+<h3 id="使用chatGPT寫文章"><a href="#使用chatGPT寫文章" class="headerlink" title="使用chatGPT寫文章"></a>使用chatGPT寫文章</h3><ol>
+<li>讓 chatGPT 列舉文章標題</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/1100/1*FTMGjBe3GKoJXpY9kTZ5tA.png"></p>
+<ol start="2">
+<li>選擇一個滿意的標題，讓chatGPT進行創作</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/1100/1*C5UMiW4nOPhttJPsNRbvBA.png"></p>
+<ol start="3">
+<li>要進長篇創作的話，可以用標題讓chatGPT寫出文章大綱</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/1100/1*0p51kvnXq5drLZoMHl0HrA.png"></p>
+<p>再讓chatGPT針對大綱寫出內文</p>
+<p><img src="https://cdn-images-1.medium.com/max/1100/1*lae9k6MhFuU9j5uSdJpHKQ.png"></p>
+<h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><p><img src="https://cdn-images-1.medium.com/max/1100/1*V70mwdgb6piXKjqWNkXl5g.png"></p>
+]]></content>
+      <tags>
+        <tag>ChatGPT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Midjourney AI 繪圖</title>
+    <url>/2023/03/04/2023-03-04-chatgpt-draw/</url>
+    <content><![CDATA[<h2 id="註冊-Midjourney-帳號"><a href="#註冊-Midjourney-帳號" class="headerlink" title="註冊 Midjourney 帳號"></a>註冊 Midjourney 帳號</h2><p>首先來到 <a href="https://www.midjourney.com/home/?callbackUrl=/app/">Midjourney 官網</a> 註冊一個帳號，並先下載<br>discord 程式，因為繪圖主要是在 discord 裡進行。</p>
+<p>之後再 midjourney 官網點擊來使用discord加入discord群組。 <img src="https://cdn-images-1.medium.com/max/1100/1*sapDYz4NYUiXSqsSToLbSQ.png" alt="使用discord"> </p>
+<p>在discord 群組裡點進名稱為 newbies 的頻道來開始創作</p>
+<p><img src="https://cdn-images-1.medium.com/max/1100/1*qMNptQLH2Rs-mD_hM4dJ2A.png"></p>
+<h2 id="使用指令"><a href="#使用指令" class="headerlink" title="使用指令"></a>使用指令</h2><p>在 newbies 頻道裡輸入指令 <code>/imagine prompt</code> 後面接你指定的關鍵字如下:</p>
+<p><img src="https://cdn-images-1.medium.com/max/1100/1*7Q_fJgw-T4cxrIRnXcuSyw.png"></p>
+<p>上面這些關鍵字要用 , 分隔</p>
+<p><img src="https://cdn-images-1.medium.com/max/1100/1*RcQN-NcORTiS4-zFWqmEOA.png"></p>
+<p>關鍵字後面會加上 –的基礎指令，包含圖片比例，作畫模式等。</p>
+<h3 id="常用關鍵字"><a href="#常用關鍵字" class="headerlink" title="常用關鍵字"></a>常用關鍵字</h3><ul>
+<li>Octane Render: 3D創作</li>
+<li>highly details: 更細膩</li>
+<li>epic composition: 雄偉(建築類圖畫)</li>
+<li>cinematic lighting: 戲劇化光線</li>
+</ul>
+<h3 id="常用基礎指令"><a href="#常用基礎指令" class="headerlink" title="常用基礎指令"></a>常用基礎指令</h3><ul>
+<li>ar 1:3: 畫作的比例(aspect ratio)</li>
+<li>test : 官方測試指令(加了畫會比較細膩)</li>
+<li>creative: 官方測試指令(加了畫會比較細膩)</li>
+</ul>
+<h2 id="繪圖結果"><a href="#繪圖結果" class="headerlink" title="繪圖結果"></a>繪圖結果</h2><p>當送出指令並繪圖完成後，圖片底下會出現幾個指令。</p>
+<p><img src="blob:https://medium.com/ed7312e1-7828-448d-9c15-4ac2a00fc7a9"></p>
+<ul>
+<li>U1: 滿意匯出成果，但希望圖更細緻</li>
+<li>V1: 滿意結果，希望根據這張圖在做變化</li>
+</ul>
+<h2 id="系統預設指令"><a href="#系統預設指令" class="headerlink" title="系統預設指令"></a>系統預設指令</h2><p>輸入 &#x2F;settings 會出現機器人可以預設的指令</p>
+<p><img src="https://cdn-images-1.medium.com/max/1100/1*JQQXLA_5y00gYkJnvn9nqA.png"></p>
+<p>其中每一橫排是一組指令</p>
+<ul>
+<li>MJ mode: 預設作畫風格，可以自行嘗試</li>
+<li>style mode: 風格從保守(low)到狂野(high)可供選擇</li>
+</ul>
+<h2 id="日式動漫風格-nijijourney"><a href="#日式動漫風格-nijijourney" class="headerlink" title="日式動漫風格 nijijourney"></a>日式動漫風格 nijijourney</h2><p>如果想畫日本動漫風格，可以使用 nijijourney 這個discord 機器人，使用流程和 Midjourney 一樣先到<a href="https://discord.com/invite/nijijourney">官網</a>加入 discord 群組。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1100/1*RnjsIo8mbfwacn3oAzMPTw.png"></p>
+<p>指令整理網站：<a href="https://aitag.top/">https://aitag.top/</a><br>圖片敘述範例：<a href="https://www.ai4hub.com/">https://www.ai4hub.com/</a></p>
+]]></content>
+      <tags>
+        <tag>Midjourney</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>chatGPT (2) 實用外掛</title>
+    <url>/2023/03/05/2023-03-05-chatgpt-2/</url>
+    <content><![CDATA[<h2 id="chatGPT-for-google"><a href="#chatGPT-for-google" class="headerlink" title="chatGPT for google"></a>chatGPT for google</h2><p><img src="https://cdn-images-1.medium.com/max/1100/1*EQKmu6Zr35OgVomOEBzwaA.png"></p>
+<p>在<a href="https://chrome.google.com/webstore/category/extensions">google 擴充商店</a>裡安裝 chatGPT for google 外掛，就可以在google搜尋時，同步使用chatGPT。</p>
+<h2 id="AIPRM"><a href="#AIPRM" class="headerlink" title="AIPRM"></a>AIPRM</h2><p><img src="https://cdn-images-1.medium.com/max/1100/1*3WnGo-dcumUDknPKqP-KHQ.png"></p>
+<p>這個外掛提供多種 chatGPT 的指令腳本，可以在 topic 底下選擇主題。</p>
+<p>例如選擇 Generative Ai 這個主題，在選擇底下的 Midjourney prompt generator腳本，可以自動生成 Midjourney ai繪圖的指令。</p>
+<h2 id="ChatGPT-Writer"><a href="#ChatGPT-Writer" class="headerlink" title="ChatGPT Writer"></a>ChatGPT Writer</h2><p><img src="https://cdn-images-1.medium.com/max/1100/1*lHN5MVVX9AW613IL27k4uQ.png"></p>
+<p>填入信件內文後，自動根據內文回覆信件。</p>
+<h2 id="ChatGPT-Prompt-Genius"><a href="#ChatGPT-Prompt-Genius" class="headerlink" title="ChatGPT Prompt Genius"></a>ChatGPT Prompt Genius</h2><p><img src="https://cdn-images-1.medium.com/max/1100/1*lHN5MVVX9AW613IL27k4uQ.png"></p>
+<p>這個插建可以讓我們將 chatGPT的對話下載成圖檔或做成網頁連結分享給別人。</p>
+]]></content>
+      <tags>
+        <tag>ChatGPT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>canvas fingting game (1) 創建遊戲主角與敵人</title>
+    <url>/2023/04/29/2023-04-29-1-canvas-fighting-game-1/</url>
+    <content><![CDATA[<h2 id="專案建立"><a href="#專案建立" class="headerlink" title="專案建立"></a>專案建立</h2><p>建立一個新資料夾，並建立index.html 與 index.js檔案。在 index.html裡，加入canvas元素，並在index.js中選取它設定相關的值。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">canvas</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;index.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 設定 canvas 的畫布大小，並繪製到畫面上</span></span><br><span class="line"><span class="keyword">const</span> canvas = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;canvas&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> c = canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line"></span><br><span class="line">canvas.<span class="property">width</span> = <span class="number">1024</span>;</span><br><span class="line">canvas.<span class="property">height</span> = <span class="number">576</span>;</span><br><span class="line"></span><br><span class="line">c.<span class="title function_">fillRect</span>(<span class="number">0</span>, <span class="number">0</span>, canvas.<span class="property">width</span>, canvas.<span class="property">height</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="創建主角與敵人物件藍圖-class"><a href="#創建主角與敵人物件藍圖-class" class="headerlink" title="創建主角與敵人物件藍圖(class)"></a>創建主角與敵人物件藍圖(class)</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> gravity = <span class="number">.2</span>;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Sprite</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">&#123; position, velocity &#125;</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">position</span> = position;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">velocity</span> = velocity;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">height</span> = <span class="number">150</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">width</span> = <span class="number">50</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">draw</span>(<span class="params"></span>) &#123;</span><br><span class="line">    c.<span class="property">fillStyle</span> = <span class="string">&#x27;red&#x27;</span>;</span><br><span class="line">    c.<span class="title function_">fillRect</span>(<span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">x</span>, <span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">y</span>, <span class="variable language_">this</span>.<span class="property">width</span>, <span class="variable language_">this</span>.<span class="property">height</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">update</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">draw</span>();</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">y</span> += <span class="variable language_">this</span>.<span class="property">velocity</span>.<span class="property">y</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 當物件的底部碰到畫布的底部時，停止移動。</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">y</span> + <span class="variable language_">this</span>.<span class="property">height</span> + <span class="variable language_">this</span>.<span class="property">velocity</span>.<span class="property">y</span> &gt;= canvas.<span class="property">height</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">velocity</span>.<span class="property">y</span> = <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">velocity</span>.<span class="property">y</span> += gravity;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先建立一個 class 叫做 sprite ，我們會用這個 sprite class 分別來生成主角與敵人的物件。<br>在 sprite 裡會傳入一個物件當作參數，物件裡包含 position 和 velocity 物件。</p>
+<ul>
+<li>posotion : 包含x和y值，用來決定物件的位置。</li>
+<li>velocity:  包含x和y值，用來決定物件的移動值。</li>
+</ul>
+<p>sprite 裡也包含兩個函式:</p>
+<ul>
+<li>draw: 繪製物件。</li>
+<li>update: 更新物件的值。</li>
+</ul>
+<h2 id="建立實體"><a href="#建立實體" class="headerlink" title="建立實體"></a>建立實體</h2><p>有了 sprite class後，我們可以依據class建立主角和敵人實體。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> player = <span class="keyword">new</span> <span class="title class_">Sprite</span>(&#123;</span><br><span class="line">  <span class="attr">position</span>: &#123;</span><br><span class="line">    <span class="attr">x</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attr">y</span>: <span class="number">0</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">velocity</span>: &#123;</span><br><span class="line">    <span class="attr">x</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attr">y</span>: <span class="number">10</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> enemy = <span class="keyword">new</span> <span class="title class_">Sprite</span>(&#123;</span><br><span class="line">  <span class="attr">position</span>: &#123;</span><br><span class="line">    <span class="attr">x</span>: <span class="number">400</span>,</span><br><span class="line">    <span class="attr">y</span>: <span class="number">100</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">velocity</span>: &#123;</span><br><span class="line">    <span class="attr">x</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attr">y</span>: <span class="number">0</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="持續更新畫面"><a href="#持續更新畫面" class="headerlink" title="持續更新畫面"></a>持續更新畫面</h2><p>為了持續更新畫面，我們需要一個 loop function，在函式裡我們用到 <code>requestAnimationFrame</code> 來持續更新畫面。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">animate</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(animate);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 重設畫布</span></span><br><span class="line">  c.<span class="property">fillStyle</span> = <span class="string">&#x27;black&#x27;</span>;</span><br><span class="line">  c.<span class="title function_">fillRect</span>(<span class="number">0</span>, <span class="number">0</span>, canvas.<span class="property">width</span>, canvas.<span class="property">height</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 更新並繪製人物</span></span><br><span class="line">  player.<span class="title function_">update</span>();</span><br><span class="line">  enemy.<span class="title function_">update</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">animate</span>();</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>canvas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>canvas fingting game (2) 移動角色</title>
+    <url>/2023/04/30/2023-04-30-1-canvas-fighting-game-2/</url>
+    <content><![CDATA[<p><a href="https://github.com/tim8076/canvas-fighting-game/tree/2-move-character">原始碼參考</a></p>
+<h2 id="建立鍵盤事件監聽"><a href="#建立鍵盤事件監聽" class="headerlink" title="建立鍵盤事件監聽"></a>建立鍵盤事件監聽</h2><p>為了移動角色，需要監聽鍵盤的 keydown 事件，當玩家按下鍵盤後移動角色；並同時監聽 keyup事件，當玩家放開鍵盤後停止角色移動。</p>
+<p>另外我們會另外建立一個 keys 的物件，用來記錄按鍵是否為按下的狀態，再來利用這些狀態，在animate函式中操作人物的移動。因為直接在 window.addEventListener中操作角色移動會不夠靈敏，在animate函式操作更為靈活。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> keys = &#123;</span><br><span class="line">  <span class="attr">a</span>: &#123;</span><br><span class="line">    <span class="attr">pressd</span>: <span class="literal">false</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">d</span>: &#123;</span><br><span class="line">    <span class="attr">pressd</span>: <span class="literal">false</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">w</span>: &#123;</span><br><span class="line">    <span class="attr">pressd</span>: <span class="literal">false</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title class_">ArrowRight</span>: &#123;</span><br><span class="line">    <span class="attr">pressd</span>: <span class="literal">false</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title class_">ArrowLeft</span>: &#123;</span><br><span class="line">    <span class="attr">pressd</span>: <span class="literal">false</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">switch</span>(e.<span class="property">key</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;d&#x27;</span>:</span><br><span class="line">      keys.<span class="property">d</span>.<span class="property">pressd</span> = <span class="literal">true</span>;</span><br><span class="line">      player.<span class="property">lastKey</span> = <span class="string">&#x27;d&#x27;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;a&#x27;</span>:</span><br><span class="line">      keys.<span class="property">a</span>.<span class="property">pressd</span> = <span class="literal">true</span>;</span><br><span class="line">      player.<span class="property">lastKey</span> = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;w&#x27;</span>:</span><br><span class="line">      player.<span class="property">velocity</span>.<span class="property">y</span> = -<span class="number">20</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ArrowRight&#x27;</span>:</span><br><span class="line">      keys.<span class="property">ArrowRight</span>.<span class="property">pressd</span> = <span class="literal">true</span>;</span><br><span class="line">      enemy.<span class="property">lastKey</span> = <span class="string">&#x27;ArrowRight&#x27;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ArrowLeft&#x27;</span>:</span><br><span class="line">      keys.<span class="property">ArrowLeft</span>.<span class="property">pressd</span> = <span class="literal">true</span>;</span><br><span class="line">      enemy.<span class="property">lastKey</span> = <span class="string">&#x27;ArrowLeft&#x27;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ArrowUp&#x27;</span>:</span><br><span class="line">      enemy.<span class="property">velocity</span>.<span class="property">y</span> = -<span class="number">20</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keyup&#x27;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">switch</span> (e.<span class="property">key</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;d&#x27;</span>:</span><br><span class="line">      keys.<span class="property">d</span>.<span class="property">pressd</span> = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;a&#x27;</span>:</span><br><span class="line">      keys.<span class="property">a</span>.<span class="property">pressd</span> = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// enemy keys</span></span><br><span class="line">  <span class="keyword">switch</span> (e.<span class="property">key</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ArrowRight&#x27;</span>:</span><br><span class="line">      keys.<span class="property">ArrowRight</span>.<span class="property">pressd</span> = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ArrowLeft&#x27;</span>:</span><br><span class="line">      keys.<span class="property">ArrowLeft</span>.<span class="property">pressd</span> = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="移動角色"><a href="#移動角色" class="headerlink" title="移動角色"></a>移動角色</h2><p>有了 keys 的物件，用來記錄按鍵是否為按下的狀態，可以利用這些狀態，在animate函式中操作人物的移動。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">animate</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">requestAnimationFrame</span>(animate);</span><br><span class="line">  c.<span class="property">fillStyle</span> = <span class="string">&#x27;black&#x27;</span>;</span><br><span class="line">  c.<span class="title function_">fillRect</span>(<span class="number">0</span>, <span class="number">0</span>, canvas.<span class="property">width</span>, canvas.<span class="property">height</span>);</span><br><span class="line">  player.<span class="title function_">update</span>();</span><br><span class="line">  enemy.<span class="title function_">update</span>();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 每次移動前都先停止角色，防止角色無限移動</span></span><br><span class="line">  player.<span class="property">velocity</span>.<span class="property">x</span> = <span class="number">0</span>;</span><br><span class="line">  enemy.<span class="property">velocity</span>.<span class="property">x</span> = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// player movement</span></span><br><span class="line">  <span class="keyword">if</span> (keys.<span class="property">a</span>.<span class="property">pressd</span> &amp;&amp; player.<span class="property">lastKey</span> === <span class="string">&#x27;a&#x27;</span>) &#123;</span><br><span class="line">    player.<span class="property">velocity</span>.<span class="property">x</span> = -<span class="number">5</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (keys.<span class="property">d</span>.<span class="property">pressd</span> &amp;&amp; player.<span class="property">lastKey</span> === <span class="string">&#x27;d&#x27;</span>) &#123;</span><br><span class="line">    player.<span class="property">velocity</span>.<span class="property">x</span> = <span class="number">5</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// enemy movement</span></span><br><span class="line">  <span class="keyword">if</span> (keys.<span class="property">ArrowLeft</span>.<span class="property">pressd</span> &amp;&amp; enemy.<span class="property">lastKey</span> === <span class="string">&#x27;ArrowLeft&#x27;</span>) &#123;</span><br><span class="line">    enemy.<span class="property">velocity</span>.<span class="property">x</span> = -<span class="number">5</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (keys.<span class="property">ArrowRight</span>.<span class="property">pressd</span> &amp;&amp; enemy.<span class="property">lastKey</span> === <span class="string">&#x27;ArrowRight&#x27;</span>) &#123;</span><br><span class="line">    enemy.<span class="property">velocity</span>.<span class="property">x</span> = <span class="number">5</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>canvas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Js裡物件的拷貝</title>
+    <url>/2023/04/30/2023-04-30-2-object-clone/</url>
+    <content><![CDATA[<h2 id="複製物件"><a href="#複製物件" class="headerlink" title="複製物件"></a>複製物件</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">food</span>: <span class="string">&#x27;rice&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj2 = obj1;</span><br><span class="line"></span><br><span class="line">obj1.<span class="property">food</span> = <span class="string">&#x27;noodle&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">food</span>) <span class="comment">// &#x27;noodle&#x27;;</span></span><br></pre></td></tr></table></figure>
+
+<p>在js裡若複製的資料型態是物件時，我們複製的其實是改物件的記憶體位置，如上例，obj2 和 obj1都指向同一個記憶體位置，所以當改變obj1裡的值時，obj2同時會被改變。</p>
+<h2 id="淺拷貝"><a href="#淺拷貝" class="headerlink" title="淺拷貝"></a>淺拷貝</h2><p>為了避免這個問題，我們可以用淺拷貝的方式，也就是新建立一個物件，將原本資料全部的屬性都複製進去。</p>
+<h3 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign()"></a>Object.assign()</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">food</span>: <span class="string">&#x27;rice&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj2 = <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;, obj1);</span><br><span class="line">obj1.<span class="property">food</span> = <span class="string">&#x27;noodle&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">food</span>) <span class="comment">// &#x27;rice&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>或是利用es6的展開運算子寫法</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">food</span>: <span class="string">&#x27;rice&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj2 = &#123; ...obj1 &#125;;</span><br><span class="line">obj1.<span class="property">food</span> = <span class="string">&#x27;noodle&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">food</span>) <span class="comment">// &#x27;rice&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>利用這個方法，可以拷貝物件裡第一層的屬性，但如果物件中屬性的值也是物件，就無法拷貝。</p>
+<h2 id="深拷貝"><a href="#深拷貝" class="headerlink" title="深拷貝"></a>深拷貝</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">food</span>: <span class="string">&#x27;rice&#x27;</span>,</span><br><span class="line">  <span class="attr">flavor</span>: [<span class="string">&#x27;spicy&#x27;</span>, <span class="string">&#x27;sweet&#x27;</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj2 = <span class="title class_">Json</span>.<span class="title function_">parse</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(obj1));</span><br><span class="line">obj1.<span class="property">food</span> = <span class="string">&#x27;noodle&#x27;</span>;</span><br><span class="line">obj1.<span class="property">flavor</span>[<span class="number">0</span>] = <span class="string">&#x27;sour&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">food</span>) <span class="comment">// &#x27;rice&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">flavor</span>) <span class="comment">// [&#x27;spicy&#x27;, &#x27;sweet&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<p>若要連物件內的物件也拷貝，可以使用深拷貝的方法，就是將物件依序經過 JSON.stringify 及 JSON.parse 兩個方法，建立全新的物件。</p>
+<p>上例中可以發現 obj2經過深拷貝後，就算改動 obj1內陣列的值，obj2也不會被影響。</p>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>canvas fingting game (3) 角色的攻擊</title>
+    <url>/2023/05/07/2023-05-07-01-canvas-fight-3/</url>
+    <content><![CDATA[<p><img src="https://lh3.googleusercontent.com/pw/AJFCJaVrH9s7_ipjTUieLi-RodR-ulm4NGUwp2I5igeF7WT1XBa-_bFvPk0MtKx-eVtMsPbcbkQ9DDW4mrd4qqW8uIFxF1YOBlfHiKFkZpyTfCu-8BSUm37YzOOFYt7zgBuTUT1s-fAHxg3a2bkfQPIrjnVphyZzEdy3KggNmk1cbwh9PGoSWOvKZ45jAlnorMAB3pf6D-shnwo9fvS3JoqtacsI9W5NCQjULPzwCLjxZ1F27x8uHcgN9qVHbLW77DdymUK_pMZ-zsYHQAL5QKwM0WLmZnC2d4WpChpLhXTuXKTzSKCuIWxeOMmcZxivnR7G7NJ9rZ6xbezhST9L-SRniBW2ZJPwZiOYvDXbLEJiCD2md7FUoak1FaTG-FKuunXAGEK9onwDSjxsDsGQe-SBQF016VZposy83M-QwT23CHk70yXHxKAf5vdaaXGvgHiD7Sj1HyrF6lQm-H8FtKIEue1Qg6BHoHDi-BCQouNXnKRH72B7NdD82f5bQFO89GS0KmngCzwT3RSQm1R0I0uA0TQxQ3zMqTQL-I4t9Rc5uh32-RZkXyonMKNoIWAmVVp-jTJrUvKjd35nC3_asjK0iztI0d7-O1aA79sLoYYLdl5xesETKbyq_2G7yEdr25M5DpgTAbv9cylVVhkC31K6wwGGMNREG7aeYzr95fM9HlMhV9dpa9V8Ml8ojzmC1rBOB8T00h-UOJe4uKoRAEEDK_m-TvsgKcfXcmIX7hvFmkbY-ZJtjXjmEqHYp6Mghq_ukh0t_dQPM504Hlh6oP-cp1ENd5rRbyluA1fe6X63Ky4Z2452kC-miFG12wsqx5uhpJR2pMJ08N7XMDhqMSBo0qrtlDaJ_QIkLq3Ud-AfUXTT7wbtuQR0tOh_sEjoOBa2UhujTyzrRrl5-iCB-6XhrLcmVzHrigFybArW-aZj38a3NtM55KYwzf9LJ8M=w407-h197-s-no?authuser=0"></p>
+<h2 id="角色攻擊"><a href="#角色攻擊" class="headerlink" title="角色攻擊"></a>角色攻擊</h2><p>為了使角色能攻擊，我們需要在 class 加上 attack box 的值，來決定攻擊敵人的範圍。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Sprite</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">&#123; position, velocity, color = <span class="string">&#x27;red&#x27;</span>, offset &#125;</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">position</span> = position;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">velocity</span> = velocity;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">height</span> = <span class="number">150</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">width</span> = <span class="number">50</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">lastKey</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">attackBox</span> = &#123;</span><br><span class="line">      <span class="attr">position</span>: &#123;</span><br><span class="line">        <span class="attr">x</span>: <span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">x</span>,</span><br><span class="line">        <span class="attr">y</span>: <span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">y</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">width</span>: <span class="number">100</span>,</span><br><span class="line">      <span class="attr">height</span>: <span class="number">50</span>,</span><br><span class="line">      offset</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">color</span> = color;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isAttacking</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">attack</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isAttacking</span> = <span class="literal">true</span>;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">isAttacking</span> = <span class="literal">false</span>;</span><br><span class="line">    &#125;, <span class="number">100</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上，我們在 sprite 裡加上 attackbox ，並設定 position 跟 寬高。 isAttacking 則用來決定角色是否處於攻擊狀態，在attack()函式中，會先設定 isAttacking 為true，再用setTimeout 於 100 ms後 設訂為 false;</p>
+<h2 id="確認攻擊範圍"><a href="#確認攻擊範圍" class="headerlink" title="確認攻擊範圍"></a>確認攻擊範圍</h2><p>為了確認攻擊是否擊中敵人，可以建立一個確認物體碰撞的函式，來確認 attackbox是否在敵人身上。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">rectangularCollision</span>(<span class="params">&#123; rectangle1, rectangle2 &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    rectangle1.<span class="property">attackBox</span>.<span class="property">position</span>.<span class="property">x</span> + rectangle1.<span class="property">attackBox</span>.<span class="property">width</span> &gt;= rectangle2.<span class="property">position</span>.<span class="property">x</span> &amp;&amp;</span><br><span class="line">    rectangle1.<span class="property">attackBox</span>.<span class="property">position</span>.<span class="property">x</span> &lt;= rectangle2.<span class="property">position</span>.<span class="property">x</span> + rectangle2.<span class="property">width</span> &amp;&amp;</span><br><span class="line">    rectangle1.<span class="property">attackBox</span>.<span class="property">position</span>.<span class="property">y</span> + rectangle1.<span class="property">attackBox</span>.<span class="property">height</span> &gt;= rectangle2.<span class="property">position</span>.<span class="property">y</span> &amp;&amp;</span><br><span class="line">    rectangle1.<span class="property">attackBox</span>.<span class="property">position</span>.<span class="property">y</span> &lt;= rectangle2.<span class="property">position</span>.<span class="property">y</span> + rectangle2.<span class="property">height</span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 animate 的函式中，就可來確認是否攻擊成功</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 確認攻擊範圍是在敵人身上</span></span><br><span class="line"><span class="keyword">if</span> (</span><br><span class="line">    <span class="title function_">rectangularCollision</span>(&#123;</span><br><span class="line">      <span class="attr">rectangle1</span>: player,</span><br><span class="line">      <span class="attr">rectangle2</span>: enemy,</span><br><span class="line">    &#125;) &amp;&amp;</span><br><span class="line">    player.<span class="property">isAttacking</span></span><br><span class="line">  ) &#123;</span><br><span class="line">  player.<span class="property">isAttacking</span> = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="事件偵聽"><a href="#事件偵聽" class="headerlink" title="事件偵聽"></a>事件偵聽</h2><p>最後就是將 攻擊的動作加入鍵盤事件偵聽， player 我們設為空白鑑攻擊， enemy 則設為↓ 攻擊。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">switch</span>(e.<span class="property">key</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;d&#x27;</span>:</span><br><span class="line">      keys.<span class="property">d</span>.<span class="property">pressd</span> = <span class="literal">true</span>;</span><br><span class="line">      player.<span class="property">lastKey</span> = <span class="string">&#x27;d&#x27;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;a&#x27;</span>:</span><br><span class="line">      keys.<span class="property">a</span>.<span class="property">pressd</span> = <span class="literal">true</span>;</span><br><span class="line">      player.<span class="property">lastKey</span> = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;w&#x27;</span>:</span><br><span class="line">      player.<span class="property">velocity</span>.<span class="property">y</span> = -<span class="number">20</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27; &#x27;</span>:</span><br><span class="line">      player.<span class="title function_">attack</span>();</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ArrowRight&#x27;</span>:</span><br><span class="line">      keys.<span class="property">ArrowRight</span>.<span class="property">pressd</span> = <span class="literal">true</span>;</span><br><span class="line">      enemy.<span class="property">lastKey</span> = <span class="string">&#x27;ArrowRight&#x27;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ArrowLeft&#x27;</span>:</span><br><span class="line">      keys.<span class="property">ArrowLeft</span>.<span class="property">pressd</span> = <span class="literal">true</span>;</span><br><span class="line">      enemy.<span class="property">lastKey</span> = <span class="string">&#x27;ArrowLeft&#x27;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ArrowUp&#x27;</span>:</span><br><span class="line">      enemy.<span class="property">velocity</span>.<span class="property">y</span> = -<span class="number">20</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ArrowDown&#x27;</span>:</span><br><span class="line">      enemy.<span class="title function_">attack</span>();</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>canvas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 js 中 的 Intl api</title>
+    <url>/2023/05/21/2023-05-21-intl/</url>
+    <content><![CDATA[<h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><p>在 JS 中，如果我們需要調整不同語言間的資料格式，或將資料調整的更加容易閱讀，可以使用 Intl 這個 API。</p>
+<h2 id="DateTimeFormat-調整時間格式"><a href="#DateTimeFormat-調整時間格式" class="headerlink" title="DateTimeFormat 調整時間格式"></a>DateTimeFormat 調整時間格式</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> formatter = <span class="keyword">new</span> <span class="title class_">Intl</span>.<span class="title class_">DateTimeFormat</span>(<span class="string">&#x27;en-US&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(formatter.<span class="title function_">format</span>());  <span class="comment">// 5/21/2023</span></span><br></pre></td></tr></table></figure>
+
+<p>要使用 Intl api ，要先 new 出一個實體，並調用裡面 DateTimeFormat 這個方法。<br>DateTimeFormat 方法裡可以傳入要格式化的地區，如上我傳入 en-US 地區。</p>
+<p>如果不確定格式化的地區，可以傳入 undefined，程式會根據使用者上網的地區自行帶入時間格式。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> options = &#123;</span><br><span class="line">  <span class="attr">weekday</span>: <span class="string">&quot;long&quot;</span>,</span><br><span class="line">  <span class="attr">year</span>: <span class="string">&quot;numeric&quot;</span>,</span><br><span class="line">  <span class="attr">month</span>: <span class="string">&quot;long&quot;</span>,</span><br><span class="line">  <span class="attr">day</span>: <span class="string">&quot;numeric&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> formatter = <span class="keyword">new</span> <span class="title class_">Intl</span>.<span class="title class_">DateTimeFormat</span>(<span class="literal">undefined</span>, options);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(formatter.<span class="title function_">format</span>()); <span class="comment">// 2023年5月21日 星期日</span></span><br></pre></td></tr></table></figure>
+
+<p>在第二個參數可以傳入一個 options的 obj，用來指定格式是要用數字或是文字表達。</p>
+<h2 id="NumberFormat-調整數字格式"><a href="#NumberFormat-調整數字格式" class="headerlink" title="NumberFormat 調整數字格式"></a>NumberFormat 調整數字格式</h2><p>基礎用法可以將數字加上使用者地區的格式</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> number = <span class="number">3500</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">new</span> <span class="title class_">Intl</span>.<span class="title class_">NumberFormat</span>().<span class="title function_">format</span>(number));</span><br><span class="line"><span class="comment">// &#x27;3,500&#x27; if in US English locale</span></span><br></pre></td></tr></table></figure>
+
+<p>NumberFormat 可以將數字加上幣值符號。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> number = <span class="number">123456.789</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">new</span> <span class="title class_">Intl</span>.<span class="title class_">NumberFormat</span>(<span class="string">&#x27;de-DE&#x27;</span>, &#123; <span class="attr">style</span>: <span class="string">&#x27;currency&#x27;</span>, <span class="attr">currency</span>: <span class="string">&#x27;EUR&#x27;</span> &#125;).<span class="title function_">format</span>(number));</span><br><span class="line"><span class="comment">// Expected output: &quot;123.456,79 €&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// The Japanese yen doesn&#x27;t use a minor unit</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">new</span> <span class="title class_">Intl</span>.<span class="title class_">NumberFormat</span>(<span class="string">&#x27;ja-JP&#x27;</span>, &#123; <span class="attr">style</span>: <span class="string">&#x27;currency&#x27;</span>, <span class="attr">currency</span>: <span class="string">&#x27;JPY&#x27;</span> &#125;).<span class="title function_">format</span>(number));</span><br><span class="line"><span class="comment">// Expected output: &quot;￥123,457&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以加上不同的單位</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Formatting with units</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">Intl</span>.<span class="title class_">NumberFormat</span>(<span class="string">&quot;pt-PT&quot;</span>, &#123;</span><br><span class="line">    <span class="attr">style</span>: <span class="string">&quot;unit&quot;</span>,</span><br><span class="line">    <span class="attr">unit</span>: <span class="string">&quot;kilometer-per-hour&quot;</span>,</span><br><span class="line">  &#125;).<span class="title function_">format</span>(<span class="number">50</span>),</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 50 km/h</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>vue (1) 宣告式模板渲染</title>
+    <url>/2023/06/10/2023-06-10-vue-1-template/</url>
+    <content><![CDATA[<h2 id="宣告式與命令式"><a href="#宣告式與命令式" class="headerlink" title="宣告式與命令式"></a>宣告式與命令式</h2><p>在純js裡，我們是用命令式的方式來寫程式。</p>
+<ul>
+<li>命令式: 我們寫的每一行程式來命令電腦執行。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;bitton&#x27;</span>);</span><br><span class="line">btn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, clickHandler);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 先命令電腦找出btn元素，再命令將btn綁上事件監聽</span></span><br></pre></td></tr></table></figure>
+
+<p>在vue裡，直接在模板上宣告想要的功能，vue會幫我們完成後面的動作。</p>
+<ul>
+<li>宣告式: 直接在模板上宣告要使用的功能</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;clickHandler&quot;</span>&gt;</span></span><br><span class="line">    開始</span><br><span class="line">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 直接在模板上綁定功能 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Virtual-Dom"><a href="#Virtual-Dom" class="headerlink" title="Virtual Dom"></a>Virtual Dom</h2><p><a href="https://youtu.be/DTJspLLm8Rs?list=PLEfh-m_KG4dbjf0YCJ7i0FFGK3FtQpanL&t=1800">教學連結</a></p>
+<p>在vue裡面，我們會先撰寫template，之後 vue 會將 template 轉為 JS 的物件，也就是vurtual dom，最後在將 vurtual dom<br>轉為真正的dom。</p>
+<p>至於為什麼要先轉成 vurtual dom 是因為 vue 會拿這個 vurtual dom 去和舊的 vurtual dom 比較，看哪邊不一樣，<br>並只更新不一樣的地方，不會像 innerHtml 是整個 dom 重新渲染，從而提升網頁效能。</p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pinia (1) 基礎安裝與介紹</title>
+    <url>/2023/06/11/2023-06-11-1-pinia/</url>
+    <content><![CDATA[<h2 id="什麼是-pinia"><a href="#什麼是-pinia" class="headerlink" title="什麼是 pinia"></a>什麼是 pinia</h2><p><img src="https://cdn-images-1.medium.com/max/1000/1*uQjLk5Ic585g7JwwNQ12Mg.png"></p>
+<p>pinia 是 vue 的集中式資料管理工具，當有資料需要在多個元件被使用時，可以將資料存在 store 裡再取用。<br>在每個元件裡，則可以使用 action 去改變 store裡的 state 資料狀態。</p>
+<h2 id="安裝pinia"><a href="#安裝pinia" class="headerlink" title="安裝pinia"></a>安裝pinia</h2><p>在vue的專案裡，可以先下載 pinia</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">npm install pinia</span><br></pre></td></tr></table></figure>
+
+<p>然後在進入點 main.js 裡 引入</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; createPinia &#125; <span class="keyword">from</span> <span class="string">&#x27;pinia&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> pinia = <span class="title function_">createPinia</span>()</span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">createApp</span>(<span class="title class_">App</span>)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(pinia)</span><br><span class="line">app.<span class="title function_">mount</span>(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>pinia</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pinia (2)  建立 store</title>
+    <url>/2023/06/11/2023-06-11-2-pinia/</url>
+    <content><![CDATA[<h2 id="建立-store"><a href="#建立-store" class="headerlink" title="建立 store"></a>建立 store</h2><p>在專案根目錄建立 store.js 作為 pinia 的資料儲存中心。<br>我們使用 defineStore方法來建立 store，第一個參數是這個store的名字，第二個參數則傳入物件，<br>裡面包含</p>
+<ul>
+<li>stste: 資料</li>
+<li>getters: 資料產生的資料</li>
+<li>actions: 方法</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// store.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; defineStore &#125; <span class="keyword">from</span> <span class="string">&#x27;pinia&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> useCounterStore = <span class="title function_">defineStore</span>(<span class="string">&#x27;counter&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">state</span>: <span class="function">() =&gt;</span> (&#123; <span class="attr">count</span>: <span class="number">0</span>, <span class="attr">name</span>: <span class="string">&#x27;Eduardo&#x27;</span> &#125;),</span><br><span class="line">  <span class="attr">getters</span>: &#123;</span><br><span class="line">    <span class="attr">doubleCount</span>: <span class="function">(<span class="params">state</span>) =&gt;</span> state.<span class="property">count</span> * <span class="number">2</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">actions</span>: &#123;</span><br><span class="line">    <span class="title function_">increment</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">count</span>++</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-store"><a href="#使用-store" class="headerlink" title="使用 store"></a>使用 store</h2><p>store 建立好後可以在不同元件內使用</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> &#123; useCounterStore &#125; <span class="keyword">from</span> <span class="string">&#x27;@/stores/counter&#x27;</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="comment">// access the `store` variable anywhere in the component ✨</span></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">const</span> store = <span class="title function_">useCounterStore</span>()</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>pinia</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pinia (3) getter 建立</title>
+    <url>/2023/06/11/2023-6-11-4-pinia/</url>
+    <content><![CDATA[<h2 id="什麼是-getter"><a href="#什麼是-getter" class="headerlink" title="什麼是 getter"></a>什麼是 getter</h2><p>getter 就和 vue 裡的 computed 一樣，會根據state的資料，產生一筆新的資料。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> useCounterStore = <span class="title function_">defineStore</span>(<span class="string">&#x27;counter&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">state</span>: <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">    <span class="attr">count</span>: <span class="number">0</span>,</span><br><span class="line">  &#125;),</span><br><span class="line">  <span class="attr">getters</span>: &#123;</span><br><span class="line">    <span class="attr">doubleCount</span>: <span class="function">(<span class="params">state</span>) =&gt;</span> state.<span class="property">count</span> * <span class="number">2</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如上， doubleCount 依據 state.count 回傳2倍數值的資料。</p>
+<h2 id="依賴其他-getter"><a href="#依賴其他-getter" class="headerlink" title="依賴其他 getter"></a>依賴其他 getter</h2><p>當要根據其他 getter 來產生資料時，可以使用 this 來指向整個物件。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> useCounterStore = <span class="title function_">defineStore</span>(<span class="string">&#x27;counter&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">state</span>: <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">    <span class="attr">count</span>: <span class="number">0</span>,</span><br><span class="line">  &#125;),</span><br><span class="line">  <span class="attr">getters</span>: &#123;</span><br><span class="line">    <span class="comment">// automatically infers the return type as a number</span></span><br><span class="line">    <span class="title function_">doubleCount</span>(<span class="params">state</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> state.<span class="property">count</span> * <span class="number">2</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// the return type **must** be explicitly set</span></span><br><span class="line">    <span class="title function_">doublePlusOne</span>(): number &#123;</span><br><span class="line">      <span class="comment">// autocompletion and typings for the whole store ✨</span></span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">doubleCount</span> + <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <tags>
+        <tag>pinia</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pinia (3) state資料建立</title>
+    <url>/2023/06/11/2023-06-11-3-pinia/</url>
+    <content><![CDATA[<h2 id="建立-state"><a href="#建立-state" class="headerlink" title="建立 state"></a>建立 state</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineStore &#125; <span class="keyword">from</span> <span class="string">&#x27;pinia&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> useStore = <span class="title function_">defineStore</span>(<span class="string">&#x27;storeId&#x27;</span>, &#123;</span><br><span class="line">  <span class="comment">// arrow function recommended for full type inference</span></span><br><span class="line">  <span class="attr">state</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">// all these properties will have their type inferred automatically</span></span><br><span class="line">      <span class="attr">count</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;Eduardo&#x27;</span>,</span><br><span class="line">      <span class="attr">isAdmin</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">items</span>: [],</span><br><span class="line">      <span class="attr">hasChanged</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在 store 裡建立state，使用的是箭頭函式來回傳一包物件資料。</p>
+<h2 id="取得-store-資料"><a href="#取得-store-資料" class="headerlink" title="取得 store 資料"></a>取得 store 資料</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="title function_">useStore</span>()</span><br><span class="line"></span><br><span class="line">store.<span class="property">count</span>++</span><br></pre></td></tr></table></figure>
+
+<p>在元件裡可以用 useStore() 來取得state資料。</p>
+<h2 id="重設-state"><a href="#重設-state" class="headerlink" title="重設 state"></a>重設 state</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="title function_">useStore</span>()</span><br><span class="line"></span><br><span class="line">store.$reset()</span><br></pre></td></tr></table></figure>
+
+<p>如果想重設state回原始狀態，可以使用 $reset() 方法</p>
+]]></content>
+      <tags>
+        <tag>pinia</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pinia (3) 建立 actions</title>
+    <url>/2023/06/11/2023-06-11-5-pinia/</url>
+    <content><![CDATA[<h2 id="建立-actions"><a href="#建立-actions" class="headerlink" title="建立 actions"></a>建立 actions</h2><p>我們可以建立 actions 來更新 state 裡的資料。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> useCounterStore = <span class="title function_">defineStore</span>(<span class="string">&#x27;counter&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">state</span>: <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">    <span class="attr">count</span>: <span class="number">0</span>,</span><br><span class="line">  &#125;),</span><br><span class="line">  <span class="attr">actions</span>: &#123;</span><br><span class="line">    <span class="comment">// since we rely on `this`, we cannot use an arrow function</span></span><br><span class="line">    <span class="title function_">increment</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">count</span>++</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">randomizeCounter</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">count</span> = <span class="title class_">Math</span>.<span class="title function_">round</span>(<span class="number">100</span> * <span class="title class_">Math</span>.<span class="title function_">random</span>())</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在元件裡使用 actions</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">const</span> store = <span class="title function_">useCounterStore</span>()</span></span><br><span class="line"><span class="language-javascript"><span class="comment">// call the action as a method of the store</span></span></span><br><span class="line"><span class="language-javascript">store.<span class="title function_">randomizeCounter</span>()</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- Even on the template --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;store.randomizeCounter()&quot;</span>&gt;</span>Randomize<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="非同步使用"><a href="#非同步使用" class="headerlink" title="非同步使用"></a>非同步使用</h2><p>actions 裡也可執行非同步執行程式，如打api或取資料後再更新state。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mande &#125; <span class="keyword">from</span> <span class="string">&#x27;mande&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> api = <span class="title function_">mande</span>(<span class="string">&#x27;/api/users&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> useUsers = <span class="title function_">defineStore</span>(<span class="string">&#x27;users&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">state</span>: <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">    <span class="attr">userData</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;),</span><br><span class="line"></span><br><span class="line">  <span class="attr">actions</span>: &#123;</span><br><span class="line">    <span class="keyword">async</span> <span class="title function_">registerUser</span>(<span class="params">login, password</span>) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">userData</span> = <span class="keyword">await</span> api.<span class="title function_">post</span>(&#123; login, password &#125;)</span><br><span class="line">        <span class="title function_">showTooltip</span>(<span class="string">`Welcome back <span class="subst">$&#123;<span class="variable language_">this</span>.userData.name&#125;</span>!`</span>)</span><br><span class="line">      &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="title function_">showTooltip</span>(error)</span><br><span class="line">        <span class="comment">// let the form component display the error</span></span><br><span class="line">        <span class="keyword">return</span> error</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>pinia</tag>
+      </tags>
   </entry>
 </search>

@@ -29,7 +29,7 @@
 <meta property="og:description" content="在 webpack 裡 打包圖片">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-10-07T09:25:35.000Z">
-<meta property="article:modified_time" content="2022-11-07T06:23:12.729Z">
+<meta property="article:modified_time" content="2023-02-26T12:11:27.207Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="Webpack">
 <meta name="twitter:card" content="summary">
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-count">158</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -168,7 +168,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -249,7 +249,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-11-07 14:23:12" itemprop="dateModified" datetime="2022-11-07T14:23:12+08:00">2022-11-07</time>
+      <time title="修改時間：2023-02-26 20:11:27" itemprop="dateModified" datetime="2023-02-26T20:11:27+08:00">2023-02-26</time>
     </span>
 
   
@@ -268,7 +268,7 @@
 
 <p>然後執行 npm run build 會發現錯誤發生。</p>
 <p>為了解析圖片，webpack 有內建的 asset modules 可以用在靜態資源上。我們會使用 asset&#x2F;resource 在圖片類型上。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">/* ... */</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// Images</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.(?:ico|gif|png|jpg|jpeg)$/i</span>,</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;asset/resource&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">/* ... */</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// Images</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.(?:ico|gif|png|jpg|jpeg)$/i</span>,</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;asset/resource&#x27;</span>,</span><br><span class="line">        <span class="attr">assetModuleFilename</span>: <span class="string">&#x27;images/[hash][ext]&#x27;</span>, <span class="comment">// 輸出到 dist/images 資料夾</span></span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在 output 選項可以將 assetModuleFilename 設為 ‘images&#x2F;[name][ext]’ ， 確保輸出的圖片名稱和src的來源相同，並且輸出到images的資料夾內。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">output</span>: &#123;</span><br><span class="line">  <span class="attr">assetModuleFilename</span>: <span class="string">&#x27;images/[name][ext]&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -295,8 +295,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/10/29/2022-10-29-vite-intro/" rel="next" title="2022-10-29-vite-intro">
-                  2022-10-29-vite-intro <i class="fa fa-chevron-right"></i>
+                <a href="/2022/10/14/2022-10-14-1-Regular-Expression/" rel="next" title="JS-正則表達式">
+                  JS-正則表達式 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
