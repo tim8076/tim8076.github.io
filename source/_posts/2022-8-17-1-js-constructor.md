@@ -13,6 +13,30 @@ description: '使用建構函式產生物件'
 
 ![](https://miro.medium.com/max/1400/1*NKTq194Iry-MevyisZwzVw.png)
 
+``` js
+function Person() {
+  this.age = 12;
+}
+
+const me = new Person();
+
+console.log(me.age) // 12
+
+Person.prototype.age  // undefined
+```
+
+另外建構函式裡的 this 的值，只會綁定在 new 出來的物件實體中，並不在建構函式本身的property裡面。
+所以我們會將每個物件不同的屬性用 this 來綁定，而每個物件共用的方法，則用 Prototype 的方式建立如下
+
+``` js
+function Person(name) {
+  this.name = name;
+}
+
+Person.propotype.run = function () {}
+Person.propotype.talk = function () {}
+```
+
 ## 在藍圖上新增方法
 
 在 Dog 這個函式物件中，我們可以找到特有的屬性 Prototype，透過Prototype所建立的屬性，就會變成原型上的方法。
