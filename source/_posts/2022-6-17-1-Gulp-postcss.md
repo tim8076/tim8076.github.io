@@ -20,7 +20,7 @@ PostCSS 是一個使用JavaScript 轉換CSS 的工具。
 先安裝套件
 
 ```
-npm install postcss gulp-postcss autoprfixer --save
+npm install postcss gulp-postcss autoprefixer --save
 ```
 
 然後在 `gulpfile.js` 中載入套件

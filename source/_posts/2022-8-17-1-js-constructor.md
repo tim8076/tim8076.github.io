@@ -9,9 +9,20 @@ description: '使用建構函式產生物件'
 
 在 JS 中可以用一個函式建構式作為原型的藍圖，並利用this的方式，將函式的參數綁定在自己身上。以上圖為例，this.name 就是在 Dog() 裡面新增 name 屬性，而他的值就是 new Dog 傳進的 ‘比比’
 
-若要將藍圖轉為實體，必須透過 new 這個運算子，創造一個新的空白物件，並連結回原本的函式建構式，再將新產生物件的this 綁定在函式之上。
+若要將藍圖轉為實體，必須透過 new 這個運算子:
 
-![](https://miro.medium.com/max/1400/1*NKTq194Iry-MevyisZwzVw.png)
+``` js
+function Dog(name) {
+  // const this = {}
+  this.name = name;
+  // return this
+}
+
+const dog = new Dog('mimi');
+```
+
+當使用 new 運算子建立物件時，實際上會先建立一個 this 的空物件，綁定屬性到 this物件上後，再回傳this物件。
+
 
 ``` js
 function Person() {
@@ -62,4 +73,22 @@ Person.propotype.talk = function () {}
 ![](https://miro.medium.com/max/1068/1*DWkNiANU1gO6prqXYOKQIA.png)
 
 
+## prototype
+
+``` js
+function Person(name) {
+  this.name = name;
+}
+const me = new Person('Sina');
+
+me.prototype // undefined
+Person.prototype // { contructor: f }
+```
+用建構式製造的物件實體，並沒有 prototype，  prototype 屬性是在原本的建構函式上。
+
+``` js
+me.__proto__ === Person.prototype // true;
+```
+
+物件實體有的是 __proto__ 屬性，和建構函式的 prototype 是一樣的。
 

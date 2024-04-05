@@ -38,6 +38,65 @@ description: '使用箭頭函式取代傳統函式'
 
 ![](https://miro.medium.com/max/1106/1*JQNWRCFVt4ScYCqNoFSHlw.png)
 
+## 不要用 arrow function 的情形
+
+### 物件裡的 function
+
+``` js
+const me = {
+  name: 'Tim',
+  talk: function() {
+    return this; // me 物件
+  },
+  arrowTalk: () => {
+    return this; // Window
+  }
+}
+```
+
+箭頭函式因為沒有自己的this，所以在物件裡調用時，this 不會指向物件本身，而是指向 window。
+
+### 建構函式的 funciton
+
+``` js
+const Person = () => {} 
+
+const me = new Person(); // 會跳錯誤
+```
+建構函式無法使用 箭頭函式來撰寫。
+
+### 建構函式的 prototype function
+
+``` js
+function Person(name) {
+  this.name = name;
+} 
+
+Person.prototype.talk = function() {
+  return this;  // 回傳 Person 物件
+}
+
+Person.prototype.arrowTalk = () => {
+  return this; // 回傳 Window
+}
+```
+
+箭頭函式因為沒有自己的this，所以在prototype裡調用時，this 不會指向物件本身，而是指向 window。
+
+### addEventsLister 裡的 function
+
+``` js
+document.body.addEventsLister('click', function() {
+  console.log(this);  // body
+})
+
+document.body.addEventsLister('click', () => {
+  console.log(this);  // window
+})
+```
+addEventsLister 裡使用 箭頭函式的話，this會指向 window 而不是被綁定的 dom
+
+
 ## 常見問題
 
 ### 無法回傳 物件實字
