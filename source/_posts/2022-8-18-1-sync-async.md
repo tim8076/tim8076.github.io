@@ -34,4 +34,14 @@ JS在執行程式碼時，是依照同步的概念，也就是依序執行。
 其中 漂亮阿姨回電 是非同步事件 setTimeout ，所以會先放在事件儲列中，
 等所有程式跑完，最後在執行。
 
+``` js
+for(let i=0; i<3; i++) {
+  setTimeout(function() {
+    console.log(i);
+  }, 0)
+}
+```
+
+上面 for 迴圈的程式屬於同步程式，setTimeout 屬於非同步。所以 for 迴圈先執行三次後，才會執行事件儲列裡的 setTimeout，此時
+i 已經是 3了。
 
