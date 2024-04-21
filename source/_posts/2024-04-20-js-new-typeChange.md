@@ -1,5 +1,5 @@
 ---
-title: JS 基礎篇 (3) 自動轉型
+title: JS 基礎篇 (4) 自動轉型
 date: 2024-04-20 21:23:44
 categories: JS 基礎篇
 tags: JS 基礎篇
