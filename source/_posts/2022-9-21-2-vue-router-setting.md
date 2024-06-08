@@ -42,6 +42,38 @@ const User = {
 { username: 'eduardo', postId: '123' }  $route.params
 ```
 
+## 動態路由搭配 props
+
+除了直接在網址取得路由的參數以外，也可以透過props傳遞參數
+
+``` js
+// 路由表
+{
+  path: 'dynamicRouterProp/:id',
+  component: () => import('../views/DynimicCompoProp.vue'),
+  props: (route) => ({ id: route.params.id }),
+},
+```
+
+在路由表透過 props 取得 route 裡的參數
+
+``` js
+import axios from 'axios';
+
+export default {
+  props: ['id'],
+  created() {
+    const seed = this.id;
+    axios.get(`https://randomuser.me/api/?seed=${seed}`)
+      .then((res) => {
+      });
+  },
+};
+```
+
+在元件內透過 porps 取得參數。
+
+
 ## 參數改變時的回應
 
 當使用者從 /users/johnny 轉到 /users/jolyne 頁面時， User 元件會被重複使用，因為兩個路由指向的是同一個元件。但這也代表 User 的生命週期並不會被重複觸發。

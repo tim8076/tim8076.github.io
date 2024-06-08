@@ -22,3 +22,27 @@ description: '用watch 監測資料'
 
 ![](https://cdn-images-1.medium.com/max/1100/1*9Y_o_Bf5qLPp6iboKar4Sg.png)
 
+## 深層監聽
+
+``` js
+  watch(product, (newValue, oldValue) => {
+    console.log(newValue, oldValue);
+  }, { deep: true });
+```
+
+當監聽的是整包物件時，要加上  { deep: true } ，來進行深層監聽。
+
+## 多項目監聽
+
+``` js
+  watch([productName, product], ([productNameVal, productVal], [productNamePre, productPre]) => {
+    console.log('純值', productNameVal, productNamePre);
+    console.log('物件', productVal, productPre);
+  }, { deep: true })
+```
+
+當同時監聽多個項目時，用陣列帶入參數。
+
+
+
+

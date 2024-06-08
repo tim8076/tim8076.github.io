@@ -65,6 +65,28 @@ console.log(b);
 
 雖然 new Function 提供了動態建立函式的能力，但應該小心使用它，因為它的使用可能會讓程式碼難以閱讀和維護。通常情況下，函式聲明、函式表達式更加直觀和易於理解。
 
+## arguments 物件
+
+Function被呼叫時會產生 arguments 物件，用來記錄傳入的參數。 arguments不是陣列，只是具有索引特性的物件，內建.length屬性。
+
+``` js
+function sum() {
+  var total = 0;
+  for (var i = 0; i < arguments.length; i++) {
+    total += arguments[i];
+  }
+  return total;
+}
+console.log(sum(1, 2, 3)); // 输出：6
+console.log(sum(5, 10, 20, 30)); // 输出：65
+```
+
+要注意的是箭頭函式沒有 arguments 物件，而是改用其餘參數的方式取得
+
+`const func = (...args) => console.log(args)`;
+
+
+
 
 
 

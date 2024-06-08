@@ -38,14 +38,26 @@ let person = {
 person.name // 'Lin'
 ```
 
-或使用 [] 來存取
+或使用 [ ] 來存取
 
 ```js
 let person = {
   name: 'Lin',
   job: 'teacher',
+  1: '1',
+  '$-小名家': '$-小名家 string',
 }
 person['name'] // 'Lin'
+
+// 也可以帶入變數取值
+let a = 'name';
+person[a] // 'Lin'
+
+// 可以帶入數字取值
+person[1] // '1'
+
+// 可以帶入字串取值
+person['$-小名家'] // '$-小名家 string'
 ```
 
 ### 屬性新增
@@ -57,6 +69,7 @@ let person = {
   name: 'Lin',
 }
 person.job = 'teacher';
+person['age'] = 18;
 ```
 
 ### 屬性刪除
@@ -66,9 +79,12 @@ person.job = 'teacher';
 ```js
 let person = {
   name: 'Lin',
+  age: 18,
 }
 delete person.name;
+delete person['age'];
 person.name // undefined
+person['age'] // undefined
 ```
 
 ### 判斷屬性是否存在
@@ -77,7 +93,7 @@ person.name // undefined
 
 ``` js
 const obj = {};
-console.log(obj,name) // undefined
+console.log(obj.name) // undefined
 ```
 
 或者用 hasOwnProperty() 或 in 來檢查
@@ -94,6 +110,38 @@ console.log('value' in obj) // false
 // hasOwnProperty()
 obj.hasOwnProperty('name') // true
 obj.hasOwnProperty('value') // false
+```
+
+### 未定義的物件屬性預設值
+
+物件中無法在不存在的屬性上新增值
+
+``` js
+let obj = {
+  name: 'nike'
+}
+obj.ming.name = '小名' // cannot set property of undefiend
+```
+
+解決方法是新增一個 空物件再去設值
+
+``` js
+let obj = {
+  name: 'nike',
+  ming: {}
+}
+obj.ming.name = '小名'
+```
+
+另一種是無法一開始就確定結構時，直接指定屬性為物件。
+
+``` js
+let obj = {
+  name: 'nike',
+}
+obj.ming = {
+  name: '小名'
+}
 ```
 
 ## 陣列

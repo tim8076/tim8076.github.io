@@ -1,8 +1,9 @@
 ---
-title: DOM Node 的建立、刪除與修改
+title: JS 基礎篇 (9) DOM Node 的建立、刪除與修改
 date: 2022-08-07 16:33:55
-categories: Javascript
-description: '介紹常用的 dom 新增與刪除方式'
+categories: JS 基礎篇
+tags: JS 基礎篇
+description: '介紹 DOM Node 的操作方法'
 ---
 
 ## 新增節點

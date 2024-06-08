@@ -103,6 +103,26 @@ undefined 代表 此變數還沒有給值，所以不知道是什麼。
 
 null 代表的是以前可能有或沒有值，但現在沒有值， 代表是一個空值。
 
+## 變數與刪除
+
+js 中變數是無法被刪除的，屬性才可以
+
+``` js
+var a = 1;
+b = 2;
+
+delete a; 
+delete b;
+
+console.log(a); // 1
+console.log(b); // b is not defined
+```
+
+上面程式中，a 是宣告的變數，無法由 delete 刪除。
+b沒有透過變數宣告，會直接變成全域物件window下的屬性。所以delete b就相當於 delete window.b。
+
+
+
 
 
 

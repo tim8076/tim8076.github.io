@@ -1,5 +1,5 @@
 ---
-title: vue-router (7) Redirect and Alias
+title: vue-router (7) 重新導向與404頁面
 date: 2022-09-22 14:26:27
 categories: Vue
 tags: vue-router
@@ -49,5 +49,19 @@ const routes = [
 ``` js
 const routes = [{ path: '/', component: Homepage, alias: '/home' }]
 ```
+
+## 404 頁面
+
+當使用者輸入錯誤網址時，可以導向404頁面
+
+``` js
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('../views/NotFound.vue'),
+  },
+```
+
+如上將使用者導向 NotFound.vue 元件。
+
 
 

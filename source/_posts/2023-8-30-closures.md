@@ -9,6 +9,9 @@ description: '閉包介紹'
 
 當一個函式 return 另一個函式出來時，就是閉包的概念。
 
+當我們在呼叫函式以前，範圍鍊就已經建立。被 return 出來的函式，可以取得函式內部的變數。
+
+
 ``` js
 function count() {
   let count = 0;

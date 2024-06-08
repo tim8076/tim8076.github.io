@@ -1,5 +1,5 @@
 ---
-title: JS 核心篇 (7) 優先性與相依性
+title: JS 核心篇 (8) 優先性與相依性
 date: 2024-04-19 13:48:44
 categories: JS 核心篇
 tags: JS 核心篇

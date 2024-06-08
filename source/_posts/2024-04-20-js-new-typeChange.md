@@ -30,6 +30,10 @@ var myObject = {
 
 // 將物件與基本型別進行比較
 console.log(myObject == 5); // 輸出: true
+console.log([10] == 10) // true
+console.log(['a'] == 'a') //true
+console.log({ 'A': A } == 'A'); // false {'A': A } 被轉換為字符串 "[object Object]"
+
 ```
 
 ## 數值的大於 > 與 小於 <

@@ -39,6 +39,21 @@ const router = createRouter({
 })
 ```
 
+- 指定頁面滾動
+
+``` js
+const router = createRouter({
+  scrollBehavior(to, from, savedPosition) {
+    if (to.fullPath.match('newPage')) {
+      return {
+        top: 0
+      }
+    }
+    return {}
+  },
+})
+```
+
 - 依照指定元素位置設定
 
 ``` js

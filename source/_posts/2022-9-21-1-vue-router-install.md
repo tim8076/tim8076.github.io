@@ -57,7 +57,7 @@ const routes = [
 
 // 3. 建立路由實體，並將路由表加入。
 const router = VueRouter.createRouter({
-  // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
+  // 網址路徑模式: 使用網址hash的形式
   history: VueRouter.createWebHashHistory(),
   routes, // short for `routes: routes`
 })
