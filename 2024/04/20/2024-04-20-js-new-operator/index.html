@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tim8076.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="介紹 JS 的運算式與運算子">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 基礎篇 (3) 運算式與運算子">
+<meta property="og:url" content="https://tim8076.github.io/2024/04/20/2024-04-20-js-new-operator/index.html">
+<meta property="og:site_name" content="Tim的前端日誌">
+<meta property="og:description" content="介紹 JS 的運算式與運算子">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:580/format:webp/1*yv2Fb7hdT8YopTeai5YueA.png">
+<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:640/format:webp/1*PX68pOqL44vQdON240yuHQ.png">
+<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:828/format:webp/1*SrySdeJUtmSIy5nTuM9Yxw.png">
+<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:606/format:webp/1*-IH0mAnn_q74Ge2drneqMw.png">
+<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:640/format:webp/1*_cF6n5xRjjuo_Y1wwlW1DA.png">
+<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:640/format:webp/1*ZTtVdAcmmn3adiU_X58UQA.png">
+<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:640/format:webp/1*5n-6VcbFWf0lBlroT8O8jw.png">
+<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:616/format:webp/1*qPiJH4-U4b-vDt0EwU5VRw.png">
+<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:640/format:webp/1*oTTmoNXHKKamjTNyrBuAZg.png">
+<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:828/format:webp/1*i1OT9EqwLLC1prlADlh71A.png">
+<meta property="article:published_time" content="2024-04-20T08:39:26.000Z">
+<meta property="article:modified_time" content="2024-04-21T07:59:36.598Z">
+<meta property="article:author" content="Tim Chou">
+<meta property="article:tag" content="JS 基礎篇">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://miro.medium.com/v2/resize:fit:580/format:webp/1*yv2Fb7hdT8YopTeai5YueA.png">
+
+
+<link rel="canonical" href="https://tim8076.github.io/2024/04/20/2024-04-20-js-new-operator/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://tim8076.github.io/2024/04/20/2024-04-20-js-new-operator/","path":"2024/04/20/2024-04-20-js-new-operator/","title":"JS 基礎篇 (3) 運算式與運算子"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JS 基礎篇 (3) 運算式與運算子 | Tim的前端日誌</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tim的前端日誌</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E8%A1%93%E9%81%8B%E7%AE%97%E5%AD%90"><span class="nav-number">1.</span> <span class="nav-text">算術運算子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%99%9F"><span class="nav-number">1.1.</span> <span class="nav-text">加號 (+)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%9B%E8%99%9F"><span class="nav-number">1.2.</span> <span class="nav-text">減號 (-)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%98%E8%99%9F"><span class="nav-number">1.3.</span> <span class="nav-text">乘號 (*)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%A4%E8%99%9F-x2F"><span class="nav-number">1.4.</span> <span class="nav-text">除號 (&#x2F;)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E9%A4%98%E6%95%B8"><span class="nav-number">1.5.</span> <span class="nav-text">取餘數 (%)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%9E%E5%A2%9E-%E9%81%9E%E6%B8%9B-%E2%80%93"><span class="nav-number">2.</span> <span class="nav-text">遞增 ++ 遞減 –</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E7%AD%89%EF%BC%9D%EF%BC%9D-%E8%88%87%E5%85%A8%E7%AD%89-%EF%BC%9D%EF%BC%9D%EF%BC%9D"><span class="nav-number">3.</span> <span class="nav-text">相等＝＝ 與全等 ＝＝＝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E7%AD%89%E6%96%BC%EF%BC%81%EF%BC%9D-%E8%88%87-%EF%BC%81%EF%BC%9D%EF%BC%9D"><span class="nav-number">4.</span> <span class="nav-text">不等於！＝ 與 ！＝＝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E6%B4%BE%E9%81%8B%E7%AE%97%E5%AD%90"><span class="nav-number">5.</span> <span class="nav-text">指派運算子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%97%E8%99%9F%E9%81%8B%E7%AE%97%E5%AD%90"><span class="nav-number">6.</span> <span class="nav-text">逗號運算子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%AD%90-Logical-Operator"><span class="nav-number">7.</span> <span class="nav-text">邏輯運算子 (Logical Operator)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Truthy-%E8%88%87-Falsy"><span class="nav-number">8.</span> <span class="nav-text">Truthy 與 Falsy</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tim Chou</p>
+  <div class="site-description" itemprop="description">Zero to Hero</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/tim8076" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2024/04/20/2024-04-20-js-new-operator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Tim Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim的前端日誌">
+      <meta itemprop="description" content="Zero to Hero">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JS 基礎篇 (3) 運算式與運算子 | Tim的前端日誌">
+      <meta itemprop="description" content="介紹 JS 的運算式與運算子">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JS 基礎篇 (3) 運算式與運算子
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2024-04-20 16:39:26" itemprop="dateCreated datePublished" datetime="2024-04-20T16:39:26+08:00">2024-04-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-04-21 15:59:36" itemprop="dateModified" datetime="2024-04-21T15:59:36+08:00">2024-04-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JS-%E5%9F%BA%E7%A4%8E%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">JS 基礎篇</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">介紹 JS 的運算式與運算子</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>JavaScript 的語法基本上可以分為兩大類，「敘述句 (Statement)」 與 「運算式 (Expression)」。</p>
+<ul>
+<li><p>敘述句 (Statement)：<br>簡單來說，敘述句就是執行某個動作。 像是變數的宣告、賦值，迴圈和 if 判斷式等等都可以被歸類於此。</p>
+</li>
+<li><p>運算式 (Expression)：<br>而運算式最大的特性，就是它會產生一個「值」。<br>像是我們在呼叫 function 時的參數 (arguments)，或者透過 &#x3D; 賦值時，在 &#x3D; 「右側」的部分都屬於運算式的部分。</p>
+</li>
+</ul>
+<h2 id="算術運算子"><a href="#算術運算子" class="headerlink" title="算術運算子"></a>算術運算子</h2><p>JavaScript 各種運算子當中，最常見的就屬「算術運算子」了。簡單來說，算術運算子包括了大家所熟知的數學四則運算「加、減、乘、除」等。</p>
+<h3 id="加號"><a href="#加號" class="headerlink" title="加號 (+)"></a>加號 (+)</h3><p>加號 + 的使用非常簡單，如果你想要表示 1 + 2 這個算式的話，可以這樣寫：</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:580/format:webp/1*yv2Fb7hdT8YopTeai5YueA.png"></p>
+<p>到目前為止還只是單純數字的狀況。 那麼，假設加號 + 兩側的其中一方，不是數字而是「字串」呢？</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*PX68pOqL44vQdON240yuHQ.png"></p>
+<p>當加號 + 兩側的其中一方是字串的情況下，加號 + 會將兩者都視為「字串」連接在一起。也就是說，其中一方是字串，另一端會被「自動轉型」為字串後，連接在一起。</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*SrySdeJUtmSIy5nTuM9Yxw.png"></p>
+<h3 id="減號"><a href="#減號" class="headerlink" title="減號 (-)"></a>減號 (-)</h3><p>再來是減號 -。 如同前面的加法一樣，如果只是單純的數字算式：</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:606/format:webp/1*-IH0mAnn_q74Ge2drneqMw.png"></p>
+<p>基本型別 (如 string 、 boolean 、 undefined 與 null)在做減法運算時，若其中一方屬於基本型別且不是數字的情況，那麼 JavaScript 會在先在背後透過 Number() 嘗試將數值轉為「數字」，再進行運算。</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*_cF6n5xRjjuo_Y1wwlW1DA.png"></p>
+<h3 id="乘號"><a href="#乘號" class="headerlink" title="乘號 (*)"></a>乘號 (*)</h3><p>相較前面的加法、減法的規則，乘法運算子就單純許多。乘法運算子由一個「星號」 * 來代表，用來計算前後兩個數值的乘積。</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*ZTtVdAcmmn3adiU_X58UQA.png"></p>
+<p>如果有其中一個不是數字的話，那麼 JavaScript 就會先在背後以 Nubmer() 作轉換後再進行計算，如：</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*5n-6VcbFWf0lBlroT8O8jw.png"></p>
+<h3 id="除號-x2F"><a href="#除號-x2F" class="headerlink" title="除號 (&#x2F;)"></a>除號 (&#x2F;)</h3><p>除法與乘法的規則類似。 除號在 JavaScript 用一個「斜線」&#x2F; 來表示。</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:616/format:webp/1*qPiJH4-U4b-vDt0EwU5VRw.png"></p>
+<p>如果有其中一個不是數字的話，那麼 JavaScript 就會先在背後以 Nubmer() 作轉換後再進行計算。</p>
+<h3 id="取餘數"><a href="#取餘數" class="headerlink" title="取餘數 (%)"></a>取餘數 (%)</h3><p>除了基本的四則運算之外，JavaScript 也有取餘數的運算子，以「百分比符號」 % 來表示。使用方式與除號類似，但得到的值是除法運算後的「餘數」：</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*oTTmoNXHKKamjTNyrBuAZg.png"></p>
+<p>與除法一樣的是，如果有其中一個不是數字的話，那麼 JavaScript 就會先在背後以 Nubmer() 作轉換後再進行計算。</p>
+<h2 id="遞增-遞減-–"><a href="#遞增-遞減-–" class="headerlink" title="遞增 ++ 遞減 –"></a>遞增 ++ 遞減 –</h2><p>當變數遇到了++ 就會+1 如 a++</p>
+<p>a &#x3D; a+1</p>
+<p>當變數遇到了 – 就會 -1 如 a–</p>
+<p>a &#x3D; a-1</p>
+<h2 id="相等＝＝-與全等-＝＝＝"><a href="#相等＝＝-與全等-＝＝＝" class="headerlink" title="相等＝＝ 與全等 ＝＝＝"></a>相等＝＝ 與全等 ＝＝＝</h2><p>在２個等號＝＝的情形下，數值會自動轉型，如下：</p>
+<p>＂１０＂ ＝＝ １０ &#x2F;&#x2F; true</p>
+<p>字串的１０被自動轉型成數字，所以兩邊相等。</p>
+<p>三個等號不會自動轉型，所以</p>
+<p>＂１０＂ ＝＝＝ １０ &#x2F;&#x2F; false</p>
+<p>只會在雙方的數值與型態都相同的情況下回傳 true。</p>
+<p>所以盡量用 ＝＝＝ 取代 ＝＝</p>
+<h2 id="不等於！＝-與-！＝＝"><a href="#不等於！＝-與-！＝＝" class="headerlink" title="不等於！＝ 與 ！＝＝"></a>不等於！＝ 與 ！＝＝</h2><p>！＝ 會自動轉型</p>
+<p>！＝＝不會自動轉型</p>
+<h2 id="指派運算子"><a href="#指派運算子" class="headerlink" title="指派運算子"></a>指派運算子</h2><p>在 JavaScript 中，指派運算子用於將值賦給變數。除了簡單的賦值 &#x3D; 之外，還有一些複合指派運算子，如 +&#x3D;、-&#x3D;、*&#x3D; 等等。這些運算子允許您對變數的值進行運算並將結果賦給同一個變數。</p>
+<p>以下是 JavaScript 中常見的指派運算子：</p>
+<ol>
+<li>賦值運算子 (&#x3D;)：將右側的值賦給左側的變數。<br><code>var x = 10;</code></li>
+<li>複合指派運算子：將運算結果賦給左側的變數。</li>
+</ol>
+<ul>
+<li>+&#x3D;：加法指派<br><code>x += 5; // 相當於 x = x + 5;</code></li>
+<li>-&#x3D;：減法指派<br><code>x -= 5; // 相當於 x = x - 5;</code></li>
+<li>*&#x3D;：乘法指派<br><code>x *= 2; // 相當於 x = x * 2;</code></li>
+<li>&#x2F;&#x3D;：除法指派<br><code>x /= 2; // 相當於 x = x / 2;</code></li>
+<li>%&#x3D;：取餘指派<br><code>x %= 3; // 相當於 x = x % 3;</code></li>
+</ul>
+<h2 id="逗號運算子"><a href="#逗號運算子" class="headerlink" title="逗號運算子"></a>逗號運算子</h2><p>在 JavaScript 中，逗號運算子（,）用於將多個表達式連接在一起，並按照從左到右的順序依次求值。</p>
+<p>以下是逗號運算子的用法和示例：</p>
+<ol>
+<li>在變數聲明中使用：在聲明變數的同時，可以使用逗號運算子定義多個變數。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>, b = <span class="number">2</span>, c = <span class="number">3</span>;</span><br></pre></td></tr></table></figure></li>
+<li>在函數調用中使用：可以在函數調用時使用逗號運算子傳遞多個參數。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">myFunction</span>(param1, param2, param3);</span><br></pre></td></tr></table></figure></li>
+<li>在表達式中使用：可以在表達式中使用逗號運算子串聯多個表達式，並返回最後一個表達式的結果。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = (<span class="number">1</span> + <span class="number">2</span>, <span class="number">3</span> + <span class="number">4</span>); <span class="comment">// x 等於 7，先計算 (1 + 2)，然後計算 3 + 4，返回 7</span></span><br></pre></td></tr></table></figure></li>
+<li>在迴圈中使用：可以在迴圈中使用逗號運算子來執行多個操作。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, j = <span class="number">10</span>; i &lt; j; i++, j--) &#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="邏輯運算子-Logical-Operator"><a href="#邏輯運算子-Logical-Operator" class="headerlink" title="邏輯運算子 (Logical Operator)"></a>邏輯運算子 (Logical Operator)</h2><ul>
+<li><p>「&amp;&amp;」：<br>當 &amp;&amp; 左右兩側的值同時為 true 時，則會得到 true 的結果。 若其中一方是 false 的情況下，則得到 false 。</p>
+</li>
+<li><p>「||」：<br>當 || 左右兩側的值只要有一方為 true，則結果為 true。 只有在兩側皆為 false 的情況下才會得到 false 。</p>
+</li>
+<li><p>「!」：以一個 ! 驚嘆號來表示，原本是 true 的結果經過 ! 轉換後會得到 false，而 false 會變成 true。 所以你可能會看到很多人用 !!xxx 來取代 Boolean(xxx)，透過兩次的「NOT」操作，即可判斷某數值 Boolean 轉換後的結果。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="literal">true</span> &amp;&amp; <span class="literal">false</span>; <span class="comment">// result 為 false</span></span><br><span class="line"><span class="keyword">var</span> result = <span class="literal">true</span> || <span class="literal">false</span>; <span class="comment">// result 為 true</span></span><br><span class="line"><span class="keyword">var</span> result = !<span class="literal">true</span>; <span class="comment">// result 為 false</span></span><br></pre></td></tr></table></figure>
+
+<p>&amp;&amp; 和 || 所回傳的值不一定是布林值，而是兩者其中之一。<br>&amp;&amp; 和 || 再做判斷時，會先對左邊的值檢查:</p>
+<ol>
+<li>如果是 Boolean 類型就再作後續判斷，若不是就會透過 ToBoolean 判斷是 falsy 或 truthy 來轉換成對應的 true 或 false。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">expr1 &amp;&amp; expr2 : 如果expr1 為假值，就回傳 expr1，否則回傳 expr2</span><br><span class="line"></span><br><span class="line">expr1 || expr2 : 如果expr1 為真值，就回傳 expr1，否則回傳 expr2</span><br></pre></td></tr></table></figure>
+<p><img src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*i1OT9EqwLLC1prlADlh71A.png"></p>
+<h2 id="Truthy-與-Falsy"><a href="#Truthy-與-Falsy" class="headerlink" title="Truthy 與 Falsy"></a>Truthy 與 Falsy</h2><p>邏輯判斷中，為 false 的並非真的為 false 這個值；而被判定為 true 的也並非為這個值，因此我們給他 Falsy(假值) 與 Truthy(真值)</p>
+<p>Falsy 有 null、undefined、0、NaN、””(空值) 以及 false。</p>
+<p>這裡只要記住 Falsy 有哪些就好了，其他都為 Truthy。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JS-%E5%9F%BA%E7%A4%8E%E7%AF%87/" rel="tag"># JS 基礎篇</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/20/2024-04-20-js-new-object/" rel="prev" title="JS 基礎篇 (2) 物件、陣列及型別的判斷">
+                  <i class="fa fa-chevron-left"></i> JS 基礎篇 (2) 物件、陣列及型別的判斷
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/04/20/2024-04-20-js-new-typeChange/" rel="next" title="JS 基礎篇 (4) 自動轉型">
+                  JS 基礎篇 (4) 自動轉型 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tim Chou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"shosetim","count":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

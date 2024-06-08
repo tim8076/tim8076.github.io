@@ -29,7 +29,7 @@
 <meta property="og:description" content="vue-router 動態路由">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-09-21T06:36:04.000Z">
-<meta property="article:modified_time" content="2022-09-22T12:21:53.663Z">
+<meta property="article:modified_time" content="2024-06-08T05:54:19.527Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="vue-router">
 <meta name="twitter:card" content="summary">
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8B%95%E6%85%8B%E8%B7%AF%E7%94%B1"><span class="nav-number">1.</span> <span class="nav-text">動態路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E6%95%B8%E6%94%B9%E8%AE%8A%E6%99%82%E7%9A%84%E5%9B%9E%E6%87%89"><span class="nav-number">2.</span> <span class="nav-text">參數改變時的回應</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8B%95%E6%85%8B%E8%B7%AF%E7%94%B1"><span class="nav-number">1.</span> <span class="nav-text">動態路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8B%95%E6%85%8B%E8%B7%AF%E7%94%B1%E6%90%AD%E9%85%8D-props"><span class="nav-number">2.</span> <span class="nav-text">動態路由搭配 props</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E6%95%B8%E6%94%B9%E8%AE%8A%E6%99%82%E7%9A%84%E5%9B%9E%E6%87%89"><span class="nav-number">3.</span> <span class="nav-text">參數改變時的回應</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -157,18 +157,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">158</span>
+          <span class="site-state-item-count">242</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -249,7 +249,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-09-22 20:21:53" itemprop="dateModified" datetime="2022-09-22T20:21:53+08:00">2022-09-22</time>
+      <time title="修改時間：2024-06-08 13:54:19" itemprop="dateModified" datetime="2024-06-08T13:54:19+08:00">2024-06-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -283,6 +283,13 @@
 <p>若有路由有多個參數，則分別在 $route.params 以不同的key來讀取。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/users/:username/posts/:postId   路由</span><br><span class="line"></span><br><span class="line">&#123; username: &#x27;eduardo&#x27;, postId: &#x27;123&#x27; &#125;  $route.params</span><br></pre></td></tr></table></figure>
 
+<h2 id="動態路由搭配-props"><a href="#動態路由搭配-props" class="headerlink" title="動態路由搭配 props"></a>動態路由搭配 props</h2><p>除了直接在網址取得路由的參數以外，也可以透過props傳遞參數</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 路由表</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">path</span>: <span class="string">&#x27;dynamicRouterProp/:id&#x27;</span>,</span><br><span class="line">  <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="title function_">import</span>(<span class="string">&#x27;../views/DynimicCompoProp.vue&#x27;</span>),</span><br><span class="line">  <span class="attr">props</span>: <span class="function">(<span class="params">route</span>) =&gt;</span> (&#123; <span class="attr">id</span>: route.<span class="property">params</span>.<span class="property">id</span> &#125;),</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>在路由表透過 props 取得 route 裡的參數</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">props</span>: [<span class="string">&#x27;id&#x27;</span>],</span><br><span class="line">  <span class="title function_">created</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> seed = <span class="variable language_">this</span>.<span class="property">id</span>;</span><br><span class="line">    axios.<span class="title function_">get</span>(<span class="string">`https://randomuser.me/api/?seed=<span class="subst">$&#123;seed&#125;</span>`</span>)</span><br><span class="line">      .<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在元件內透過 porps 取得參數。</p>
 <h2 id="參數改變時的回應"><a href="#參數改變時的回應" class="headerlink" title="參數改變時的回應"></a>參數改變時的回應</h2><p>當使用者從 &#x2F;users&#x2F;johnny 轉到 &#x2F;users&#x2F;jolyne 頁面時， User 元件會被重複使用，因為兩個路由指向的是同一個元件。但這也代表 User 的生命週期並不會被重複觸發。</p>
 <p>要在參數改變時做出回應時，可以用 watch 來監聽 <code>$route.params</code>。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">User</span> = &#123;</span><br><span class="line">  <span class="attr">template</span>: <span class="string">&#x27;...&#x27;</span>,</span><br><span class="line">  <span class="title function_">created</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.$watch(</span><br><span class="line">      <span class="function">() =&gt;</span> <span class="variable language_">this</span>.<span class="property">$route</span>.<span class="property">params</span>,</span><br><span class="line">      <span class="function">(<span class="params">toParams, previousParams</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// react to route changes...</span></span><br><span class="line">      &#125;</span><br><span class="line">    )</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -347,7 +354,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -29,13 +29,12 @@
 <meta property="og:description" content="使用建構函式產生物件">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://miro.medium.com/max/1330/1*plHyXH3Pw_nJME6HKoZCBw.png">
-<meta property="og:image" content="https://miro.medium.com/max/1400/1*NKTq194Iry-MevyisZwzVw.png">
 <meta property="og:image" content="https://miro.medium.com/max/904/1*JPXBzFA0j9XfE2fFVSXMHg.png">
 <meta property="og:image" content="https://miro.medium.com/max/824/1*_ZWf6dKEo9HFxRP2b8n38w.png">
 <meta property="og:image" content="https://miro.medium.com/max/546/1*G766dfSEg775Y4pmHy_jTg.png">
 <meta property="og:image" content="https://miro.medium.com/max/1068/1*DWkNiANU1gO6prqXYOKQIA.png">
 <meta property="article:published_time" content="2022-08-17T06:06:48.000Z">
-<meta property="article:modified_time" content="2022-08-17T13:20:40.658Z">
+<meta property="article:modified_time" content="2024-04-20T07:54:40.745Z">
 <meta property="article:author" content="Tim Chou">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://miro.medium.com/max/1330/1*plHyXH3Pw_nJME6HKoZCBw.png">
@@ -150,7 +149,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E8%97%8D%E5%9C%96%E4%B8%8A%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">在藍圖上新增方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%94%E5%80%BC%E7%9A%84%E5%8C%85%E8%A3%B9%E7%89%A9%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">純值的包裹物件</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E8%97%8D%E5%9C%96%E4%B8%8A%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">在藍圖上新增方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%94%E5%80%BC%E7%9A%84%E5%8C%85%E8%A3%B9%E7%89%A9%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">純值的包裹物件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prototype"><span class="nav-number">3.</span> <span class="nav-text">prototype</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -163,18 +162,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">158</span>
+          <span class="site-state-item-count">242</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -247,9 +246,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
-      
 
-      <time title="創建時間：2022-08-17 14:06:48 / 修改時間：21:20:40" itemprop="dateCreated datePublished" datetime="2022-08-17T14:06:48+08:00">2022-08-17</time>
+      <time title="創建時間：2022-08-17 14:06:48" itemprop="dateCreated datePublished" datetime="2022-08-17T14:06:48+08:00">2022-08-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -274,8 +279,15 @@
     <div class="post-body" itemprop="articleBody">
         <p><img src="https://miro.medium.com/max/1330/1*plHyXH3Pw_nJME6HKoZCBw.png"></p>
 <p>在 JS 中可以用一個函式建構式作為原型的藍圖，並利用this的方式，將函式的參數綁定在自己身上。以上圖為例，this.name 就是在 Dog() 裡面新增 name 屬性，而他的值就是 new Dog 傳進的 ‘比比’</p>
-<p>若要將藍圖轉為實體，必須透過 new 這個運算子，創造一個新的空白物件，並連結回原本的函式建構式，再將新產生物件的this 綁定在函式之上。</p>
-<p><img src="https://miro.medium.com/max/1400/1*NKTq194Iry-MevyisZwzVw.png"></p>
+<p>若要將藍圖轉為實體，必須透過 new 這個運算子:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Dog</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="comment">// const this = &#123;&#125;</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">  <span class="comment">// return this</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dog = <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="string">&#x27;mimi&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>當使用 new 運算子建立物件時，實際上會先建立一個 this 的空物件，綁定屬性到 this物件上後，再回傳this物件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">age</span> = <span class="number">12</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> me = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(me.<span class="property">age</span>) <span class="comment">// 12</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">age</span>  <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>另外建構函式裡的 this 的值，只會綁定在 new 出來的物件實體中，並不在建構函式本身的property裡面。<br>所以我們會將每個物件不同的屬性用 this 來綁定，而每個物件共用的方法，則用 Prototype 的方式建立如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.<span class="property">propotype</span>.<span class="property">run</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line"><span class="title class_">Person</span>.<span class="property">propotype</span>.<span class="property">talk</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="在藍圖上新增方法"><a href="#在藍圖上新增方法" class="headerlink" title="在藍圖上新增方法"></a>在藍圖上新增方法</h2><p>在 Dog 這個函式物件中，我們可以找到特有的屬性 Prototype，透過Prototype所建立的屬性，就會變成原型上的方法。</p>
 <p>以下我們在 Dog這個藍圖中，利用 Prototype 建立 bark()這個方法。</p>
 <p><img src="https://miro.medium.com/max/904/1*JPXBzFA0j9XfE2fFVSXMHg.png"></p>
@@ -286,6 +298,11 @@
 <p><img src="https://miro.medium.com/max/546/1*G766dfSEg775Y4pmHy_jTg.png"></p>
 <p>也可以在包裹物件中，新增自定義 prototype 方法</p>
 <p><img src="https://miro.medium.com/max/1068/1*DWkNiANU1gO6prqXYOKQIA.png"></p>
+<h2 id="prototype"><a href="#prototype" class="headerlink" title="prototype"></a>prototype</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> me = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&#x27;Sina&#x27;</span>);</span><br><span class="line"></span><br><span class="line">me.<span class="property"><span class="keyword">prototype</span></span> <span class="comment">// undefined</span></span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> <span class="comment">// &#123; contructor: f &#125;</span></span><br></pre></td></tr></table></figure>
+<p>用建構式製造的物件實體，並沒有 prototype，  prototype 屬性是在原本的建構函式上。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">me.<span class="property">__proto__</span> === <span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> <span class="comment">// true;</span></span><br></pre></td></tr></table></figure>
+
+<p>物件實體有的是 <strong>proto</strong> 屬性，和建構函式的 prototype 是一樣的。</p>
 
     </div>
 
@@ -332,7 +349,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

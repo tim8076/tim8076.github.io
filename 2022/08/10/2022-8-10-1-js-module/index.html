@@ -35,9 +35,9 @@
 <meta property="og:image" content="https://miro.medium.com/max/1214/1*ye59ehCBuMP9-Bvht6HriQ.png">
 <meta property="og:image" content="https://miro.medium.com/max/1054/1*A9xErPA2Zxl5aLuCAAzQrA.png">
 <meta property="article:published_time" content="2022-08-10T07:56:42.000Z">
-<meta property="article:modified_time" content="2022-08-17T13:20:35.084Z">
+<meta property="article:modified_time" content="2024-04-20T07:54:40.743Z">
 <meta property="article:author" content="Tim Chou">
-<meta property="article:tag" content="ES6">
+<meta property="article:tag" content="ES-module">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://miro.medium.com/max/1296/1*AQKVEXAedLM5vVq0bO5hxA.png">
 
@@ -151,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#module-%E6%A8%A1%E7%B5%84%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">module 模組化</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#module-%E6%A8%A1%E7%B5%84%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">module 模組化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A0%90%E8%A8%AD%E5%8C%AF%E5%87%BA"><span class="nav-number">2.</span> <span class="nav-text">預設匯出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A0%90%E8%A8%AD%E5%8C%AF%E5%85%A5"><span class="nav-number">3.</span> <span class="nav-text">預設匯入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E5%90%8D%E5%8C%AF%E5%87%BA"><span class="nav-number">4.</span> <span class="nav-text">具名匯出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E5%90%8D%E5%8C%AF%E5%85%A5-%E5%96%AE%E4%B8%80%E5%8C%AF%E5%85%A5"><span class="nav-number">5.</span> <span class="nav-text">具名匯入(單一匯入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E5%90%8D%E5%8C%AF%E5%85%A5-%E5%85%A8%E9%83%A8%E5%8C%AF%E5%85%A5"><span class="nav-number">6.</span> <span class="nav-text">具名匯入(全部匯入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#module-%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">7.</span> <span class="nav-text">module 的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%AF%E5%85%A5-esm-%E5%A5%97%E4%BB%B6"><span class="nav-number">8.</span> <span class="nav-text">匯入 esm 套件</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -164,18 +164,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">158</span>
+          <span class="site-state-item-count">242</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -256,7 +256,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-08-17 21:20:35" itemprop="dateModified" datetime="2022-08-17T21:20:35+08:00">2022-08-17</time>
+      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
     </span>
 
   
@@ -271,7 +271,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <h2 id="module-模組化"><a href="#module-模組化" class="headerlink" title="module 模組化"></a>module 模組化</h2><p>ES-module 就是js的模組化，可以將檔案進行拆分，進行匯出與匯入。原本這中模組化都要靠工具來進行，不過近幾年瀏覽器也開始支援原生的模組化功能。</p>
-<p>進行 module 拆分前，要先將標籤定義 <script type=”module”>，有以上定義才能進行模組匯入匯出。</p>
+<p>進行 module 拆分前，要先將標籤定義 <code>&lt;script type=”module”&gt;</code>，有以上定義才能進行模組匯入匯出。</p>
 <p><img src="https://miro.medium.com/max/1296/1*AQKVEXAedLM5vVq0bO5hxA.png" alt="module 流程圖"></p>
 <h2 id="預設匯出"><a href="#預設匯出" class="headerlink" title="預設匯出"></a>預設匯出</h2><p>每個js檔案只能有一個預設匯出，使用export default，通常用於匯出物件，在 Vue 開發中可用來匯出元件。</p>
 <p><img src="https://miro.medium.com/max/1184/1*_efyAPp16hBz7m2RiNiRNg.png"></p>
@@ -283,6 +283,16 @@
 <p><img src="https://miro.medium.com/max/1214/1*ye59ehCBuMP9-Bvht6HriQ.png"></p>
 <h2 id="具名匯入-全部匯入"><a href="#具名匯入-全部匯入" class="headerlink" title="具名匯入(全部匯入)"></a>具名匯入(全部匯入)</h2><p><img src="https://miro.medium.com/max/1054/1*A9xErPA2Zxl5aLuCAAzQrA.png"></p>
 <p>使用 * 代表全部模組，全部模組如果全部匯出可能會造成名稱的衝突，所以會將* 賦予到一個 物件上。匯入後就可以用這個物件來調用匯入的變數或方法。</p>
+<h2 id="module-的作用域"><a href="#module-的作用域" class="headerlink" title="module 的作用域"></a>module 的作用域</h2><p>每個 module 間的作用域都是獨立的，如下 a 是 undedined。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;module&quot;</span>&gt;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a) <span class="comment">// undefined</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="匯入-esm-套件"><a href="#匯入-esm-套件" class="headerlink" title="匯入 esm 套件"></a>匯入 esm 套件</h2><p>網路上有些套件有是出 ES module 的版本可以載入，方法如下: </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&#x27;https://cdnjs.cloudflare.com/ajax/libs/vue/3.1.4/vue.esm-browser.min.js&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 
     </div>
 
@@ -292,15 +302,15 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/ES6/" rel="tag"># ES6</a>
+              <a href="/tags/ES-module/" rel="tag"># ES-module</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/08/09/2022-8-9-1-js-dom-trace/" rel="prev" title="透過 DOM API 查找節點">
-                  <i class="fa fa-chevron-left"></i> 透過 DOM API 查找節點
+                <a href="/2022/08/07/2022-8-7-1-dom-manipulation/" rel="prev" title="JS 基礎篇 (9) DOM Node 的建立、刪除與修改">
+                  <i class="fa fa-chevron-left"></i> JS 基礎篇 (9) DOM Node 的建立、刪除與修改
                 </a>
             </div>
             <div class="post-nav-item">
@@ -332,7 +342,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

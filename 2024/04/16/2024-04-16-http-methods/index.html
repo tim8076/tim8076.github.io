@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tim8076.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="http-methods 介紹">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP Networking(7) http methods">
+<meta property="og:url" content="https://tim8076.github.io/2024/04/16/2024-04-16-http-methods/index.html">
+<meta property="og:site_name" content="Tim的前端日誌">
+<meta property="og:description" content="http-methods 介紹">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1000/1*lceTqptlcG5bO41b1KHZyg.png">
+<meta property="article:published_time" content="2024-04-16T03:14:10.000Z">
+<meta property="article:modified_time" content="2024-04-20T07:54:40.782Z">
+<meta property="article:author" content="Tim Chou">
+<meta property="article:tag" content="HTTP Networking系列">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn-images-1.medium.com/max/1000/1*lceTqptlcG5bO41b1KHZyg.png">
+
+
+<link rel="canonical" href="https://tim8076.github.io/2024/04/16/2024-04-16-http-methods/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://tim8076.github.io/2024/04/16/2024-04-16-http-methods/","path":"2024/04/16/2024-04-16-http-methods/","title":"HTTP Networking(7) http methods"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>HTTP Networking(7) http methods | Tim的前端日誌</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tim的前端日誌</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#http-methods"><span class="nav-number">1.</span> <span class="nav-text">http methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Status-code"><span class="nav-number">2.</span> <span class="nav-text">Status code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET-methods"><span class="nav-number">3.</span> <span class="nav-text">GET methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POST-methods"><span class="nav-number">4.</span> <span class="nav-text">POST methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PUT-methods"><span class="nav-number">5.</span> <span class="nav-text">PUT methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PATCH-method"><span class="nav-number">6.</span> <span class="nav-text">PATCH method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DELETE-method"><span class="nav-number">7.</span> <span class="nav-text">DELETE method</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tim Chou</p>
+  <div class="site-description" itemprop="description">Zero to Hero</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/tim8076" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2024/04/16/2024-04-16-http-methods/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Tim Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim的前端日誌">
+      <meta itemprop="description" content="Zero to Hero">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="HTTP Networking(7) http methods | Tim的前端日誌">
+      <meta itemprop="description" content="http-methods 介紹">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTTP Networking(7) http methods
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2024-04-16 11:14:10" itemprop="dateCreated datePublished" datetime="2024-04-16T11:14:10+08:00">2024-04-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/HTTP-Networking/" itemprop="url" rel="index"><span itemprop="name">HTTP Networking</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">http-methods 介紹</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="http-methods"><a href="#http-methods" class="headerlink" title="http methods"></a>http methods</h2><p>HTTP methods 是用來告訴伺服器，現在我們想對資料庫進行哪種操作，包含了 GET, POST, PUT, or DELETE 等方法。<br>這些方法會對應到 CRUD 四種不同的動作。</p>
+<ul>
+<li>Create: POST 方法</li>
+<li>Read: GET 方法</li>
+<li>Update: PUT 方法</li>
+<li>Delete: DELETE 方法</li>
+</ul>
+<p>就像使用者操作社群平台貼文一樣，他們會 新增、修改、刪除、讀取貼文，而那正是 CRUD 對資料庫做的事。</p>
+<h2 id="Status-code"><a href="#Status-code" class="headerlink" title="Status code"></a>Status code</h2><p><img src="https://cdn-images-1.medium.com/max/1000/1*lceTqptlcG5bO41b1KHZyg.png"></p>
+<ul>
+<li>Errors: 當client端向server發出 http request 出錯時，會出現 error。<br>    例如: url 錯誤、網路斷線。</li>
+<li>Status code: 當http request成功送到伺服器，但伺服器端有錯誤時，會在 response 中用 status code 回應。<br>         例如: 沒有權限取得資料，伺服器掛掉。</li>
+</ul>
+<p>以下是常見的 Status code</p>
+<ol>
+<li>200: OK 一切正常</li>
+<li>201: Created. 資源成功建立，通常用在 POST request</li>
+<li>301: Moved permanently. 請求的資源已經移到別處，例如網址更改。</li>
+<li>400: Bad request. 前端http request 發生錯誤</li>
+<li>401: Unauthorized. 請求權限不足，例如少了 api key。</li>
+<li>404: Not found. 請求的資源不存在</li>
+<li>500: Internal server error. 伺服器錯誤。</li>
+</ol>
+<h2 id="GET-methods"><a href="#GET-methods" class="headerlink" title="GET methods"></a>GET methods</h2><p>http get 方法可從 server 取回特定資料的 copy，並不是真的將資料從 server 拿出，而僅是該資料當下狀態的 copy 而已。<br>通常認為 get 是安全的，因為並不會更改或刪除資料庫裡的資料。</p>
+<p>以下為使用 fetch() api ，送出 get request</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> <span class="title function_">fetch</span>(url, &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;cors&#x27;</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;sec-ch-ua-platform&#x27;</span>: <span class="string">&#x27;macOS&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>fetch() api，第二個參數可傳入物件，以下為物件可能的值。</p>
+<ul>
+<li>method: The HTTP method of the request, like GET.</li>
+<li>headers: The headers to send.</li>
+<li>mode: Used for security, we’ll talk about this in future courses.</li>
+<li>body: The body of the request. Often encoded as JSON.</li>
+</ul>
+<h2 id="POST-methods"><a href="#POST-methods" class="headerlink" title="POST methods"></a>POST methods</h2><p>post 方法會傳資料給 sever，通常會在資料庫中新增一筆新的資料。<br>在 fetch() api中，會將資料放在body後傳送給後端。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> <span class="title function_">fetch</span>(url, &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;cors&#x27;</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="PUT-methods"><a href="#PUT-methods" class="headerlink" title="PUT methods"></a>PUT methods</h2><p>送出 PUT 方法後，有兩種情況</p>
+<ol>
+<li>若後端已經有此筆資料，就更新該筆資料</li>
+<li>若後端沒有這筆資料，建立該筆資料</li>
+</ol>
+<p>POST 和 PUT 的差別是，POST只建立資料， PUT 則是更新或建立資料。<br>另一個差異是，PUT 對後端是沒有重複影響的，當我送第一次PUT給後端時，後端更新該筆資料，當我送同樣的PUT到後端時，沒有影響。<br>POST 則是你送幾次請求，就在後端建立幾個新的資料。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> <span class="title function_">fetch</span>(url, &#123;</span><br><span class="line">   <span class="attr">method</span>: <span class="string">&#x27;PUT&#x27;</span>,</span><br><span class="line">   <span class="attr">mode</span>: <span class="string">&#x27;cors&#x27;</span>,</span><br><span class="line">   <span class="attr">headers</span>: &#123;</span><br><span class="line">   <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="PATCH-method"><a href="#PATCH-method" class="headerlink" title="PATCH method"></a>PATCH method</h2><p>Patch 和 put 不同的是， put 是更新整筆資料， Patch 則是更新部分資料。<br>Patch 沒有 PUT 那麼常用，很多後端 server 選擇使用 put 即使你只要更新部分資料。</p>
+<h2 id="DELETE-method"><a href="#DELETE-method" class="headerlink" title="DELETE method"></a>DELETE method</h2><p>DELETE 方法用來刪除指定的資料</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">&#x27;https://api.boot.dev/v1/courses_rest_api/learn-http/locations/52fdfc07-2182-454f-963f-5f0f9a621d72&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">await</span> <span class="title function_">fetch</span>(url, &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;DELETE&#x27;</span>,</span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;cors&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/HTTP-Networking%E7%B3%BB%E5%88%97/" rel="tag"># HTTP Networking系列</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/14/2024-04-14-html-5/" rel="prev" title="HTTP Networking(6) JSON">
+                  <i class="fa fa-chevron-left"></i> HTTP Networking(6) JSON
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/04/16/2024-04-16-js-core-running/" rel="next" title="JS 核心篇 (1) JS 是如何運行的">
+                  JS 核心篇 (1) JS 是如何運行的 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tim Chou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"shosetim","count":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

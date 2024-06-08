@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*fsA5wPsJ6uV7huO-wDTtxg.png">
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*-WBrRoNeTd_dXzeMJnWa1A.png">
 <meta property="article:published_time" content="2022-08-18T02:56:42.000Z">
-<meta property="article:modified_time" content="2022-09-21T12:17:20.490Z">
+<meta property="article:modified_time" content="2024-04-20T07:54:40.745Z">
 <meta property="article:author" content="Tim Chou">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn-images-1.medium.com/max/1200/1*fsA5wPsJ6uV7huO-wDTtxg.png">
@@ -159,18 +159,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">158</span>
+          <span class="site-state-item-count">242</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -251,7 +251,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-09-21 20:17:20" itemprop="dateModified" datetime="2022-09-21T20:17:20+08:00">2022-09-21</time>
+      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -282,6 +282,9 @@
 <p>JS在執行程式碼時，是依照同步的概念，也就是依序執行。<br>如果遇到非同步的任務，如 setTimeout() 等會延遲執行的程式。<br>會先將非同步任務放到事件儲列，等所有程式跑完後，再執行事件儲列裡的任務。</p>
 <p><img src="https://cdn-images-1.medium.com/max/1200/1*-WBrRoNeTd_dXzeMJnWa1A.png"></p>
 <p>如上圖， 依序執行 吃早餐 &gt; 打給漂亮阿姨 &gt; 洗餐盤 &gt; 漂亮阿姨回電<br>其中 漂亮阿姨回電 是非同步事件 setTimeout ，所以會先放在事件儲列中，<br>等所有程式跑完，最後在執行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">3</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">  &#125;, <span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面 for 迴圈的程式屬於同步程式，setTimeout 屬於非同步。所以 for 迴圈先執行三次後，才會執行事件儲列裡的 setTimeout，此時<br>i 已經是 3了。</p>
 
     </div>
 
@@ -328,7 +331,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
