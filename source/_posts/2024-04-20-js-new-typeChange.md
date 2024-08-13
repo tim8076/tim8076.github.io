@@ -20,6 +20,12 @@ JS 在運算與比較的過程中，常會為兩側的數值做自動轉型。
 // 字串與數字做比較時，將字串透過Number()轉型為數字後比較
 1 == '1' // true
 
+// null undefined 不會被轉為數字比較
+null == 0 // false
+undefined == 0 // false
+null == undefined // true
+
+
 // 其中一方為物件時，另一方為基本型別時，會透過物件的 valueof 取得對應的基本型別的值後比較
 // 定義一個自定義的物件
 var myObject = {

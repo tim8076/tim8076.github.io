@@ -1,6 +1,6 @@
 ---
-title: CSS @font-face 本地託管字型教學
-date: 2024-04-04 11:20:54
+title: (0-1) CSS基礎篇 自行hosting google font
+date: 2022-06-20 11:21:54
 tags: 
 - CSS基礎篇
 categories: CSS
@@ -51,8 +51,6 @@ body {
   font-weight: 900;
 }
 ```
-
-## Google Fonts 線上外部字型載入
 
 
 

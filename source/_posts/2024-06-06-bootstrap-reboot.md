@@ -2,24 +2,40 @@
 title: Bootstrap (6) reboot 基礎樣式
 date: 2024-06-06 15:13:54
 categories: Bootstrap
-tags: 
-- Bootstrap
-description: 'Bootstrap 使用的基礎樣式'
+tags:
+  - Bootstrap
+description: "Bootstrap 使用的基礎樣式"
 ---
 
 ## Reboot
 
-bootstrap 是使用 normalize css 為基底來寫全站樣式。
+bootstrap 是使用 normalize css 為基底來寫全站樣式，會給網站預設樣式， Normalize 並未將所有 HTML 標籤的預設樣式清除，像是文字標籤下方都保有留白，<ol>、<ul> 留有編號和圓點樣式。
 
-- 使用 rems 取代 ems 
+- 使用 rems 取代 ems
 - 取消元素 margin-top
 - 文字設定相關設定，盡量使用 inherit。
+
+- 針對 HTML 標籤自定義樣式
+
+Bootstrap 已經有寫入以下樣式，不用另外撰寫
+修改盒模型計算方式
+
+```css
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+img {
+  vertical-align: middle;
+}
+```
 
 ### body 設定
 
 以下是 bootstrap 對 body 的基本設定，可用變數的部分放在 `_root.scss`
 
-``` css
+```css
 // ._reboot.scss
 body {
   margin: 0;
@@ -34,7 +50,7 @@ body {
 
 ### 頁面設定
 
-1. border-box: 設定 *, *::before, *::after 全部元素為border-box。
+1. border-box: 設定 _, _::before, \*::after 全部元素為 border-box。
 2. body 上設定 文字大小 1rem。
 3. 背景色彩預設為 #fff 白色。
 
@@ -42,26 +58,21 @@ body {
 
 使用 system ui 字體，讓字體在每個裝置都能很好呈現。
 
-``` scss
+```scss
 $font-family-sans-serif:
   // Cross-platform generic font family (default user interface font)
   system-ui,
   // Safari for macOS and iOS (San Francisco)
-  -apple-system,
-  // Windows
+  -apple-system, // Windows
   "Segoe UI",
   // Android
-  Roboto,
-  // older macOS and iOS
+  Roboto, // older macOS and iOS
   "Helvetica Neue",
   // Linux
-  "Noto Sans",
-  "Liberation Sans",
-  // Basic web fallback
+  "Noto Sans", "Liberation Sans", // Basic web fallback
   Arial,
   // Sans serif fallback
-  sans-serif,
-  // Emoji fonts
+  sans-serif, // Emoji fonts
   "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 ```
 
@@ -87,7 +98,3 @@ $font-family-sans-serif:
 若要在元素上加入 cursor-pointer，加上 `role="button" `即可。
 
 `<span role="button" tabindex="0">Non-button element button</span>`
-
-
-
-

@@ -30,6 +30,28 @@ v-bind 指令的簡寫為 `:`
 ``` html
 <p :id="customId">123</p> 
 ```
+
+當 data 內的資料為 null 或 undefined 時，屬性會從標籤移除。
+
+## Boolean 值綁定
+
+v-bind 綁定的值如果是 boolean 時，當值為  truthy value 或是空字串時，屬性都會被渲染
+
+``` html
+<button :disabled="isButtonDisabled">Button</button>
+```
+
+## 動態指令
+
+可以用 [] 動態帶入指令的名稱。
+
+``` html
+<a v-on:[eventName]="doSomething"> ... </a>
+
+<!-- shorthand -->
+<a @[eventName]="doSomething"> ... </a>
+```
+
 ## v-model 表單綁定
 
 常見的表單元素如 `<select> <input>` 等，可以透過 v-model 來做資料的雙向綁定，v-model 會根據不同表單類別來更新元素內容。
@@ -52,6 +74,14 @@ v-bind 指令的簡寫為 `:`
   });
   vm.mount('#app');
 </script>
+```
+
+v-model 其實就是語法糖，做的就是監聽 input 的 value，當value更改時觸發input事件
+
+``` html
+<input
+  :value="text"
+  @input="event => text = event.target.value">
 ```
 
 

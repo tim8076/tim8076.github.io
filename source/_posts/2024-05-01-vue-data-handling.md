@@ -74,6 +74,15 @@ description: '使用 computed 與 methods 處理資料'
 </script>
 ```
 
+## computed 注意事項
+
+當在 computed 裡使用會改變原本陣列的方法時，如 reverse() and sort()，應該先將原始陣列解構後再使用
+
+``` js
+- return numbers.reverse() // 錯誤
++ return [...numbers].reverse() // 正確
+```
+
 ## computed setter
 
 一般來說，computed預設只能讀取資料，也就是只有getter功能，將資料讀取後運算完return新的資料。

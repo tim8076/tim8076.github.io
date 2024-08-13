@@ -100,6 +100,34 @@ npm create vue@latest
 </script>
 ```
 
+`{{ }}` 內可以帶入表達式進行運算
+
+``` html
+{{ number + 1 }}
+
+{{ ok ? 'YES' : 'NO' }}
+
+{{ message.split('').reverse().join('') }}
+
+<div :id="`list-${id}`"></div>
+```
+
+非表達式不能被帶入 `{{ }}`
+
+``` html
+<!-- this is a statement, not an expression: -->
+{{ var a = 1 }}
+
+<!-- flow control won't work either, use ternary expressions -->
+{{ if (ok) { return message } }}
+```
+
+## 模板可使用的window方法
+
+只有特定的 window 方法，可以在template 內使用，如 Math、Date
+可用方法參考[這裡](https://github.com/vuejs/core/blob/main/packages/shared/src/globalsAllowList.ts#L3)
+
+ 
 ## 共用data的汙染問題
 
 當有多個 vue 實體想共用同樣的 data 格式時，會將 data 在實體外定義。此時 vue 物件內的 data 應該 return 解構後的 { ...dataObj }，避免兩個vue實體都修改到同一個物件。

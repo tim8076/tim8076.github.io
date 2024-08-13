@@ -60,6 +60,23 @@ width、height、margin: auto 跟top 、bottom等一起用，可以控制元素�
 [範例](https://codepen.io/tim-chou/pen/NWbvMQL)
 
 
+## z-index
+
+z-index 用來設定物件的前後層級，最常見的要素是必須要有「position」屬性，且 position 的值不可為 static。z-index 設定數值越大越前面，能蓋住其他物件。若數值一樣大，則原始碼後方物件會蓋過前方物件。
+
+![](../images/css/z-index.png)
+
+### 顯示物件在父層後方
+
+若想讓物件顯示在父層後方，就不能在父層將「z-index」設為 auto 以外的值。只要父層的z-index 是數值，子層z-index會被限定在父層之中，無法落於父層後。
+
+[範例參考](https://codepen.io/jskrtivy-the-animator/pen/WNBadYp)
+
+
+
+
+
+
 
 
 

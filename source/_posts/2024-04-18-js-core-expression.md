@@ -19,6 +19,14 @@ description: '介紹 JS 陳述式與表達式'
 - 迴圈（for、for…in）
 - 其它（import, export）
 
+函式陳述式又稱具名函式，因為不會回傳結果，為陳述式。
+
+``` js
+function callName() {
+  console.log('name');
+}
+```
+
 ## 表達式
 
 表達式的重點是會回傳一個結果，因此是否能夠回傳結果就能判斷該語句或詞是否為表達式。
@@ -31,3 +39,11 @@ description: '介紹 JS 陳述式與表達式'
 - 變數：var y = x * 2;
 - 函式呼叫：Math.max(10, 20)
 - 陣列索引：arr[0]
+
+函式表達式又稱匿名函式，因為會回傳結果，為表達式。
+
+``` js
+const callName = function() {
+  console.log('call name');
+}
+```

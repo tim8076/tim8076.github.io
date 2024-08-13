@@ -1,6 +1,6 @@
 ---
-title: CSS font-family 教學
-date: 2024-04-04 11:20:54
+title: (0) CSS基礎篇 font-family 教學
+date: 2022-06-20 11:20:54
 tags: 
 - CSS基礎篇
 categories: CSS
@@ -9,18 +9,24 @@ description: '使用 system-ui 字型'
 
 ## system-ui 字型的好處
 
+![各系統預設字體](../images/css/font-family.png)
+
 一般建立網頁時，常用 google font 的 CDN 來載入字型，但會讓網頁速度變慢。
 使用電腦、手機內建的 system-ui 可以避免這個問題。
 
+字體設定懶人包:
+
 ``` css
 body {
-   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", Roboto,  "Helvetica Neue", Arial, sans-serif;
 }
 ```
 
 - `-apple-system, BlinkMacSystemFont` : Apple 系統字型。
-- `Segoe UI`: Window 系統字型。
-- `Roboto`: Unix 系統字型。
+- `Segoe UI`: Window 系統英文預設字型。
+- `Microsoft JhengHei`: Window 系統中文預設字型。
+- `Roboto`: Android, Unix 系統字型。
+- `"Helvetica Neue"`: ios 字體
  
 當這樣設定時，系統會從最前面的 system-ui 字型開始套用，如果找不到，就往後尋找直到最後的 sans-serif 為止。通常撰寫字型的時候會在最後將通用字型（像是：sans-serif 無襯線字體）寫上，確保各個裝置都能正確瀏覽。
 
@@ -32,6 +38,18 @@ body {
 ```
 
 使用 system-ui 的另一個好處是，從 100-900的字體粗細都有。不像 google-font 還要下載指定的字體粗細。
+
+## 設計稿指定字型
+
+如果設計稿有指定的中文或英文字型，可以加在通用設定前面。
+英文字型放在中文前面，因為英文字型只會套用到英文字上，
+中文字型則會同時套用到中英文上，為了讓英文能先吃到設定所以放前面。
+
+``` css
+body {
+  font-family: "指定英文字型", "指定中文字型", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", Roboto,  "Helvetica Neue", Arial, sans-serif;
+}
+```
 
 ## Google Fonts 線上外部字型載入
 

@@ -32,3 +32,14 @@ description: '介紹Bootstrap中與圖片大小的相關設定'
 ``` html
 <img src="..." class="w-100" alt="...">
 ```
+
+## 圖片區
+
+``` html
+<figure class="figure">
+  <img src="..." class="figure-img img-fluid rounded" alt="...">
+  <figcaption class="figure-caption">A caption for the above image.</figcaption>
+</figure>
+```
+
+當想要加上圖片的說明文字時，可以在 img 下用 figcaption 包住 說明文字，外層則用 figure

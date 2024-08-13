@@ -122,6 +122,42 @@ console.log(b); // b is not defined
 b沒有透過變數宣告，會直接變成全域物件window下的屬性。所以delete b就相當於 delete window.b。
 
 
+## 動態型別
+
+js 中變數本身不具有型別，型別是由值賦予的。
+
+``` js
+const myName = '小明';
+console.log(typeof myName); // string
+console.log(typeof '小明'); // string
+```
+
+上面可以看出值本身具有型別 string，而變數的型別是由值賦予的。
+
+``` js
+let num = 1;
+console.log(typeof num); // number
+num = '文字';
+console.log(typeof num); // string
+```
+
+因為 js 是動態型別，所以變數型別會因為被賦予值的不同而更換。
+
+### 型別隱性轉換
+
+變數型別除了直接被賦值的顯性轉換以外，也有隱性轉換的情形:
+
+``` js
+let num = 1;
+console.log(typeof num); // number
+num = num + '';
+console.log(typeof num); // string
+```
+如上因為 數字與字串型別相加，會變成字串型別。
+
+
+
+
 
 
 

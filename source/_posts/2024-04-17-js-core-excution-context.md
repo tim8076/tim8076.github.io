@@ -20,7 +20,7 @@ description: '介紹 JS 的執行環境'
 - 瀏覽器: 產生 window 變數，還有一個 this(等於 window)。
 - nodeJS: 產生 global 變數， 還有一個 this(等於 global)。
 
-## 執行堆疊
+## 執行堆疊 (call stack)
 
 ![](https://cdn-images-1.medium.com/max/1000/1*MN5_XRqtujvxGd8odbvZ7g.png)
 
@@ -31,6 +31,15 @@ description: '介紹 JS 的執行環境'
 當函式跑完後則依序離開
 
 sayHi 環境離開 => dosomething 環境離開 => 回到全域執行環境
+
+### blowing the stack
+ 
+ 當我們寫了一個遞回函式時，也就是 function 不斷呼叫function 本身，瀏覽器會產生 maximum call 錯誤。
+
+ ![](../images/js/call-stack-1.png)
+
+ ![](../images/js/call-stack-2.png)
+
 
 
 

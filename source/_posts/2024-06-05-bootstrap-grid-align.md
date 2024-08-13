@@ -226,7 +226,9 @@ order 值越小的會往前排。
 
 ## gutter
 
-gutter 是指每欄 col 間的間距，預設值是 1.5rem (24px)
+![](../images/bootstrap/bootstrap-col-7.png)
+
+gutter 是指每欄 col 間的間距，是由每欄左右兩邊的padding形成，預設值是 1.5rem (24px)。
 
 ### 水平 gutter
 
@@ -234,7 +236,7 @@ gutter 是指每欄 col 間的間距，預設值是 1.5rem (24px)
 
 ``` html
 <div class="container px-4 text-center">
-  <div class="row gx-5">
+  <div class="row flex-row-reverse gx-5">
     <div class="col">
      <div class="p-3">Custom column padding</div>
     </div>

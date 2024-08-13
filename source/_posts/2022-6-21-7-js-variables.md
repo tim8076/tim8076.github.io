@@ -67,19 +67,14 @@ console.log(a); // 3
 
 如上面程式，我們在第 2 行宣告了 a 變數等於3，但在第一行就讀取a變數，此時並不會報錯，因為 a 已經有記憶體位置了，只是還沒給予值，所以會是 undefined。 在第3行讀取a變數就可以正確讀到 3 的值。
 
-let 跟 const 沒有向上提升， 必須先宣告、後使用。
+
+用 let 和 const 宣告的變數一樣會有 hosting，在創造階段被存入記憶體，在執行階段被賦值。但若執行階段前就要去讀取變數的話，會出現暫時性死區的錯誤。
 
 ``` js
-console.log(b);  // b is not defined
-let b = 3;
-console.log(b);  // 3
+// 創造
+let Ming;
+
+console.log(Ming) // cannot access Ming before initialization
+// 執行
+const Ming = '小明';
 ```
-
-
-
-
-
-
-
-
-

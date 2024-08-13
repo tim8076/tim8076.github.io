@@ -12,20 +12,20 @@ description: '使用 vue 元件的生命週期'
 
 Vue 的實體物件從建立、掛載、更新、銷毀的一連串過程稱為生命週期。在這個過程中，vue 提供了開發者在這些週期階段做對應處理的「鉤子函式」，介紹如下
 
-- beforeCreated:
+- [beforeCreated](https://vuejs.org/api/options-lifecycle.html):
   Vue實體被建立，狀態和事件尚未初始化。
-- created:
+- [created](https://vuejs.org/api/options-lifecycle.html#created):
   Vue實體被建立，狀態和事件初始化完成(可使用 data、props、computed等屬性)
-- beforeMounted:
+- [beforeMounted]:
   Vue實體尚未與模板(Dom節點)綁定，但模板已編譯完成
-- mounted:
+- [mounted](https://vuejs.org/api/options-lifecycle.html#mounted):
   Vue實體與模板(Dom節點)掛載完成
-- beforeUpdated:
+- [beforeUpdated](https://vuejs.org/api/options-lifecycle.html#beforeupdate):
   狀態被更動，畫面更新前
-- updated:
+- [updated](https://vuejs.org/api/options-lifecycle.html#updated):
   狀態被更動，畫面也更新完成
 - beforeUnmounted: 元件銷毀前，還能取得data資料
-- unmounted: 元件已銷毀，還能取得data資料
+- unmounted: 元件已銷毀，不能取得data資料
 
 使用方式為，在vue實體加入生命週期鉤子函式，這樣vue在進入不同週期時，會觸發對應函式:
 

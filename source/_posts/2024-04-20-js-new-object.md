@@ -87,6 +87,21 @@ person.name // undefined
 person['age'] // undefined
 ```
 
+另外要提到一點， js裡變數無法被刪除，屬性才可以
+
+``` js
+var a = 1;
+b = 2;
+
+delete a; // false
+delete b; // true
+
+console.log(a) // 1
+console.log(b) // b is not defined
+```
+
+上面 a 是經過 var 宣告的變數，不可被刪除。b 沒有經過變數宣告，會直接成為全域物件 window 內的屬性，可以被刪除。
+
 ### 判斷屬性是否存在
 
 當要判斷物件中存不存在某個屬性時，可檢查該屬性是否為 undefined。
@@ -114,12 +129,13 @@ obj.hasOwnProperty('value') // false
 
 ### 未定義的物件屬性預設值
 
-物件中無法在不存在的屬性上新增值
+當查找一個物件中不存在的屬性時，會回傳 undefined，並且物件中無法在不存在的屬性上新增值
 
 ``` js
 let obj = {
   name: 'nike'
 }
+obj.ming // undefined
 obj.ming.name = '小名' // cannot set property of undefiend
 ```
 

@@ -36,6 +36,7 @@ async function a(){
   });
   .....       // 上方的 promise 完成後才會執行
 }
+
 a();
 a().then(()=>{
   .....       // 等 a() 完成後接著執行
@@ -44,3 +45,49 @@ a().then(()=>{
 
 [範例參考:](https://codepen.io/tim-chou/pen/ZEyBzpb?editors=1012)
 
+
+另一個串接範例
+
+``` js
+const asyncFn = async(num) {
+  try {
+    const res = await promiseFn(1);
+    return res;
+  } catch(err) {
+    throw new Error('失敗');
+  }
+}
+// async function 本身就會回傳 promise 可以用 .then .catch 串接。
+asyncFn(0)
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log('錯誤', err);
+  })
+```
+
+## 節省 try catch 的作法
+
+``` js
+const catchError = (asFn) => {
+  return (n) => {
+    return asFn(n).catch((err) => {
+      console.log('catch', err);
+    })
+  }
+}
+
+const asyncFn = (n) => {
+  const res = await promiseFn(n);
+}
+
+const catchFn = catchError(asyncFn);
+catchFn(1);
+catchFn(2);
+
+// 若不想寫那麼多也可以直接執行
+catchError(asyncFn)(1);
+```
+
+如果想要節省在 async function 裡處理錯誤的 try catch 語法，可以將 catch 的語法包裝在 catchError 裡。

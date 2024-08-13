@@ -58,6 +58,13 @@ description: '說明 vue 元件的概念與操作'
 
 全域註冊的元件可以在 Vue.createApp 後接上 .component 方法來註冊，並在 app.mount('#app'); 之前可以掛在多個全域元件，只要注意元件的名稱要不同。
 
+### [全域註冊優缺點](https://vuejs.org/guide/components/registration.html#local-registration)
+
+- 優點: 能在 app 內的全部元件內使用，比較方便。
+- 缺點: 
+  1. 若元件被註冊，但完全沒使用，仍會被打包到專案(也就是沒有tree shaking)。
+  2. 讓元件間彼此依賴的關係不清楚，大型專案會較難維護。
+
 ``` html
 // 模板上引入元件
 <alert></alert>
@@ -110,5 +117,24 @@ app.component('alert2', {
 });
 ```
 
+## 元件註冊名稱
+
+當使用 SFC(single file component)或 string template 時，建議使用 PascalCase 來註冊元件。
+
+``` js
+import { createApp } from 'vue'
+
+const app = createApp({})
+
+app.component(
+  // the registered name
+  'MyComponent',
+)
+```
+
+當元件以 PascalCase 註冊後，在 template 上可以使用
+
+1. <MyComponent> : PascalCase
+2. <my-component>:  kebab-case 
 
 

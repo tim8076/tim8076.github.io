@@ -2,9 +2,9 @@
 title: (3) Git 練功坊-紀錄修改與提交
 date: 2022-06-21 15:52:38
 categories: Git
-tags: 
-- Git
-description: '提交修改紀錄'
+tags:
+  - Git
+description: "提交修改紀錄"
 ---
 
 ![git流程](https://miro.medium.com/max/1400/0*adRfjDwIz9wuzSTb)
@@ -13,7 +13,7 @@ description: '提交修改紀錄'
 
 上一章節已經將專案的數據庫建立好了，那我們先在專案內新增一些資料，我先建立一個 「sample.txt」的文字檔案，並在裡面打一些內容。
 
-此時我們可以將新增的資料加入索引，加入索引的檔案之後才能被commit 提交，方法如下:
+此時我們可以將新增的資料加入索引，加入索引的檔案之後才能被 commit 提交，方法如下:
 
 ```
 git add .    // 將所有更新的檔案加入索引。
@@ -46,7 +46,7 @@ git commit -m "更新內容"
 ```
 
 我們使用 git commit 將本次的更新提交到數據庫，-m 可以輸入更新的內容重點。
-通常我們會在專案開發完某個功能後，做一次commit。例如完成首頁輪播功能，或切完首頁版型等等，方便之後做版本切換。
+通常我們會在專案開發完某個功能後，做一次 commit。例如完成首頁輪播功能，或切完首頁版型等等，方便之後做版本切換。
 
 ![commit](https://miro.medium.com/max/1400/1*rM-6FClWTQvcFPXmYmq8JQ.png)
 
@@ -58,8 +58,4 @@ git log  // 查詢過去commit 的紀錄
 
 ![git log](https://miro.medium.com/max/1400/1*qNvdGY6XePWNMA3h4a--LQ.png)
 
-
-
-
-
-
+若要退出，請鍵入小寫 q。

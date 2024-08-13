@@ -9,6 +9,14 @@ description: 'Bootstrap 格線系統解說'
 
 ## 格線基礎解說
 
+![](../images/bootstrap/bootstrap-col-6.png)
+
+Bootstrap 格線系統採用12欄的設計，因為12是最多數的公倍數。
+
+- total width: container 總寬度
+- column width: 每欄寬度
+- gutter width: 欄與欄間距。
+
 Bootstrap 格線系統是應用 flexbox 來排版，讓內部的 col 能夠水平排列。
 使用上最外層一定會有一個 container，再來是 row，再來是 col。
 
