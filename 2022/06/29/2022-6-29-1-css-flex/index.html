@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://miro.medium.com/max/1400/1*GN7XSfKQGUABUGAY-nIjSg.png">
 <meta property="og:image" content="https://css-tricks.com/wp-content/uploads/2018/10/align-self.svg">
 <meta property="article:published_time" content="2022-06-29T09:18:19.000Z">
-<meta property="article:modified_time" content="2024-04-20T07:54:40.712Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.353Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="CSS基礎篇">
 <meta name="twitter:card" content="summary">
@@ -158,7 +158,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-flex"><span class="nav-number">1.</span> <span class="nav-text">什麼是 flex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E5%AE%B9%E5%99%A8%E5%B1%AC%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">外容器屬性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#display"><span class="nav-number">2.1.</span> <span class="nav-text">display</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-direction"><span class="nav-number">2.2.</span> <span class="nav-text">flex-direction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#justfy-content"><span class="nav-number">2.3.</span> <span class="nav-text">justfy-content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-wrap"><span class="nav-number">2.4.</span> <span class="nav-text">flex-wrap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#align-items"><span class="nav-number">2.5.</span> <span class="nav-text">align-items</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#align-content"><span class="nav-number">2.6.</span> <span class="nav-text">align-content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-flow"><span class="nav-number">2.7.</span> <span class="nav-text">flex-flow</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A7%E5%85%83%E4%BB%B6%E5%B1%AC%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">內元件屬性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#order"><span class="nav-number">3.1.</span> <span class="nav-text">order</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-grow-%E4%BC%B8%E5%B1%95"><span class="nav-number">3.2.</span> <span class="nav-text">flex-grow 伸展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-shrink-%E6%94%B6%E7%B8%AE"><span class="nav-number">3.3.</span> <span class="nav-text">flex-shrink 收縮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-basis"><span class="nav-number">3.4.</span> <span class="nav-text">flex-basis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#align-self"><span class="nav-number">3.5.</span> <span class="nav-text">align-self</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-flex"><span class="nav-number">1.</span> <span class="nav-text">什麼是 flex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E5%AE%B9%E5%99%A8%E5%B1%AC%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">外容器屬性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#display"><span class="nav-number">2.1.</span> <span class="nav-text">display</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-direction"><span class="nav-number">2.2.</span> <span class="nav-text">flex-direction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#justfy-content"><span class="nav-number">2.3.</span> <span class="nav-text">justfy-content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-wrap"><span class="nav-number">2.4.</span> <span class="nav-text">flex-wrap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#align-items"><span class="nav-number">2.5.</span> <span class="nav-text">align-items</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#align-content"><span class="nav-number">2.6.</span> <span class="nav-text">align-content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-flow"><span class="nav-number">2.7.</span> <span class="nav-text">flex-flow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gap"><span class="nav-number">2.8.</span> <span class="nav-text">gap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#place-content"><span class="nav-number">2.9.</span> <span class="nav-text">place-content</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A7%E5%85%83%E4%BB%B6%E5%B1%AC%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">內元件屬性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#order"><span class="nav-number">3.1.</span> <span class="nav-text">order</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-grow-%E4%BC%B8%E5%B1%95"><span class="nav-number">3.2.</span> <span class="nav-text">flex-grow 伸展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-shrink-%E6%94%B6%E7%B8%AE"><span class="nav-number">3.3.</span> <span class="nav-text">flex-shrink 收縮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-basis"><span class="nav-number">3.4.</span> <span class="nav-text">flex-basis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#align-self"><span class="nav-number">3.5.</span> <span class="nav-text">align-self</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -171,18 +171,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -263,7 +263,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -293,6 +293,16 @@
 <p>在父層設定 display:flex 可以讓子層區塊並排<br><img src="https://miro.medium.com/max/972/1*cPIZHT7a0P0v5mljoBjdvg.png" alt="flex"></p>
 <p>當子層寬度超過父層時，flex也會依照比例自動做調整，不會跑版，並且當子層其中一個元素高度變高，其他元素也會自動等高。</p>
 <p><img src="https://miro.medium.com/max/1246/1*yO5cUEPDPz7of4-KZyoTCw.png" alt="自動等高"></p>
+<p>其餘特性包刮:</p>
+<ul>
+<li>元素自身轉變為類似「block」屬性的排版特性。</li>
+<li>元素自身寬度變成父層容器的 content-box 寬度。</li>
+<li>元素第一層子物件，變成 block 排版特性，並帶有等高、與彈性收縮特性。</li>
+<li>元素第一層子物件，預設不換列「nowrap」</li>
+<li>元素第一層子物件，以內容為預設寬度</li>
+<li>元素第一層子物件總寬度超過父層flex物件寬度時，會自動收縮，符合父層寬度。</li>
+<li>元素第一層子物件預設高度符合 flex 元素高度。</li>
+</ul>
 <h3 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h3><p>flex的主軸指的是資料的流向 ，預設是從左到右排版，可以設定的值如下:</p>
 <ul>
 <li><p>flex-direction: row; 從左到右</p>
@@ -319,11 +329,18 @@
 <h3 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h3><p>flex-flow 是 flex-direction 與 flex-wrap 的縮寫，所以只要在這前後帶上相對應的值即可。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.flex-container</span> &#123;</span><br><span class="line">  <span class="attribute">flex-flow</span>: &lt;<span class="string">&#x27;flex-direction&#x27;</span>&gt; || &lt;<span class="string">&#x27;flex-wrap&#x27;</span>&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="gap"><a href="#gap" class="headerlink" title="gap"></a>gap</h3><p>gap 用來設定子物件間的水平與垂直距離。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 一個值</span><br><span class="line"><span class="attribute">gap</span>: value;</span><br><span class="line"></span><br><span class="line">// 兩個值</span><br><span class="line"><span class="attribute">gap</span>: <span class="built_in">row-gap</span>(列與列) <span class="built_in">column-gap</span>(欄與欄);</span><br></pre></td></tr></table></figure>
+
+<h3 id="place-content"><a href="#place-content" class="headerlink" title="place-content"></a>place-content</h3><p>可以使用 place-content，一次設定 「justify-content」、「align-content」的值。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">place-<span class="attribute">content</span>: flex-start (align-content) space-around (justify-content);</span><br></pre></td></tr></table></figure>
+
 <h2 id="內元件屬性"><a href="#內元件屬性" class="headerlink" title="內元件屬性"></a>內元件屬性</h2><h3 id="order"><a href="#order" class="headerlink" title="order"></a>order</h3><p>用來指定子層物件的順序，order 預設都是 0。小於 0 的元件會往前排，大於 0 往後排。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box1</span> &#123;</span><br><span class="line">  <span class="attribute">order</span>: <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box2</span> &#123;</span><br><span class="line">  <span class="attribute">order</span> : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://miro.medium.com/max/818/1*s71cQM9RnsxFauhOIt6q6w.png" alt="order"></p>
 <h3 id="flex-grow-伸展"><a href="#flex-grow-伸展" class="headerlink" title="flex-grow 伸展"></a>flex-grow 伸展</h3><p>flex-grow 設定元件的伸展性，會把剩下的空間份配給子物件，並針對子物件去設定伸展的比例，預設值為 0不會縮放。<br>如下圖: 設定flex-grow: 2 的元素會有較大的位置。<br><img src="https://miro.medium.com/max/548/1*3qDfiEcjgxQvyup9ygcAww.png" alt="flex-grow"></p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/jskrtivy-the-animator/pen/PovaJGB">範例參考</a></p>
 <h3 id="flex-shrink-收縮"><a href="#flex-shrink-收縮" class="headerlink" title="flex-shrink 收縮"></a>flex-shrink 收縮</h3><p>flex-shrink: 元件的收縮性，是一個數值，當空間分配還不足時的當前元件的收縮性，預設值為 1 會收縮，如果設置為 0 則不會縮放。</p>
 <p><img src="https://miro.medium.com/max/1400/1*1kyY6pGhIUCz79CHJ74deQ.png" alt="flex-shrink"></p>
 <p>上圖當子層物件寬度超過父層時，如果將子層設定 flex-shrink: 0 ，代表不收縮，此時子層會超出父層寬度。</p>

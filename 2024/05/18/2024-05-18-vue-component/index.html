@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://miro.medium.com/v2/resize:fit:828/format:webp/1*kmzaHJCrVVVgrTwGexvSJA.png">
 <meta property="og:image" content="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*9pqERAQgRjIFVkW8Zqafzw.png">
 <meta property="article:published_time" content="2024-05-18T05:44:01.000Z">
-<meta property="article:modified_time" content="2024-06-08T05:54:19.559Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.368Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-%E5%85%83%E4%BB%B6%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">vue 元件概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Component-%E5%85%A8%E5%9F%9F%E8%A8%BB%E5%86%8A"><span class="nav-number">2.</span> <span class="nav-text">Component(全域註冊)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Component-%E5%8D%80%E5%9F%9F%E8%A8%BB%E5%86%8A"><span class="nav-number">3.</span> <span class="nav-text">Component(區域註冊)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E4%BB%B6%E6%A8%A3%E6%9D%BF%E5%8F%8A%E7%B6%81%E5%AE%9A%E6%96%B9%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">元件樣板及綁定方式</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-%E5%85%83%E4%BB%B6%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">vue 元件概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Component-%E5%85%A8%E5%9F%9F%E8%A8%BB%E5%86%8A"><span class="nav-number">2.</span> <span class="nav-text">Component(全域註冊)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%9F%9F%E8%A8%BB%E5%86%8A%E5%84%AA%E7%BC%BA%E9%BB%9E"><span class="nav-number">2.1.</span> <span class="nav-text">全域註冊優缺點</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Component-%E5%8D%80%E5%9F%9F%E8%A8%BB%E5%86%8A"><span class="nav-number">3.</span> <span class="nav-text">Component(區域註冊)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E4%BB%B6%E6%A8%A3%E6%9D%BF%E5%8F%8A%E7%B6%81%E5%AE%9A%E6%96%B9%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">元件樣板及綁定方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E4%BB%B6%E8%A8%BB%E5%86%8A%E5%90%8D%E7%A8%B1"><span class="nav-number">5.</span> <span class="nav-text">元件註冊名稱</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -160,18 +160,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -252,7 +252,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-06-08 13:54:19" itemprop="dateModified" datetime="2024-06-08T13:54:19+08:00">2024-06-08</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -287,6 +287,14 @@
 <li>元件另有 prop, emits 等資料傳遞及事件傳遞</li>
 </ul>
 <p>全域註冊的元件可以在 Vue.createApp 後接上 .component 方法來註冊，並在 app.mount(‘#app’); 之前可以掛在多個全域元件，只要注意元件的名稱要不同。</p>
+<h3 id="全域註冊優缺點"><a href="#全域註冊優缺點" class="headerlink" title="全域註冊優缺點"></a><a target="_blank" rel="noopener" href="https://vuejs.org/guide/components/registration.html#local-registration">全域註冊優缺點</a></h3><ul>
+<li>優點: 能在 app 內的全部元件內使用，比較方便。</li>
+<li>缺點: <ol>
+<li>若元件被註冊，但完全沒使用，仍會被打包到專案(也就是沒有tree shaking)。</li>
+<li>讓元件間彼此依賴的關係不清楚，大型專案會較難維護。</li>
+</ol>
+</li>
+</ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 模板上引入元件</span><br><span class="line"><span class="tag">&lt;<span class="name">alert</span>&gt;</span><span class="tag">&lt;/<span class="name">alert</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="Component-區域註冊"><a href="#Component-區域註冊" class="headerlink" title="Component(區域註冊)"></a>Component(區域註冊)</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> alert3 = &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">text</span>: <span class="string">&#x27;內部文字3&#x27;</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">template</span>: <span class="string">`&lt;div class=&quot;alert alert-primary&quot; role=&quot;alert&quot;&gt;</span></span><br><span class="line"><span class="string">    &#123;&#123; text &#125;&#125;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title class_">Vue</span>.<span class="title function_">createApp</span>(&#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">text</span>: <span class="string">&#x27;外部元件文字&#x27;</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">components</span>: &#123;</span><br><span class="line">    alert3</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
@@ -296,8 +304,14 @@
 <p>X-template建立模板:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/x-template&quot;</span> id=<span class="string">&quot;alert-template&quot;</span>&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;alert alert-primary&quot;</span> <span class="attr">role</span>=<span class="string">&quot;alert&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    x-template 所建立的元件</span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在元件內帶入 text/x-template</span></span><br><span class="line">app.<span class="title function_">component</span>(<span class="string">&#x27;alert2&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">template</span>: <span class="string">&#x27;#alert-template&#x27;</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
+<h2 id="元件註冊名稱"><a href="#元件註冊名稱" class="headerlink" title="元件註冊名稱"></a>元件註冊名稱</h2><p>當使用 SFC(single file component)或 string template 時，建議使用 PascalCase 來註冊元件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">createApp</span>(&#123;&#125;)</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">component</span>(</span><br><span class="line">  <span class="comment">// the registered name</span></span><br><span class="line">  <span class="string">&#x27;MyComponent&#x27;</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
-
+<p>當元件以 PascalCase 註冊後，在 template 上可以使用</p>
+<ol>
+<li><MyComponent> : PascalCase</li>
+<li><my-component>:  kebab-case</li>
+</ol>
 
     </div>
 

@@ -30,8 +30,9 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://miro.medium.com/max/826/1*ThNCveqMOYrXF4nVoTBWkw.png">
 <meta property="og:image" content="https://miro.medium.com/max/1400/1*PIKeD9RV4TGRvLhT3w5ylA.png">
+<meta property="og:image" content="https://tim8076.github.io/images/css/z-index.png">
 <meta property="article:published_time" content="2022-06-21T03:16:36.000Z">
-<meta property="article:modified_time" content="2024-04-20T07:54:40.706Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.348Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="CSS基礎篇">
 <meta name="twitter:card" content="summary">
@@ -147,7 +148,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Position-%E5%B1%AC%E6%80%A7%E4%BB%8B%E7%B4%B9"><span class="nav-number">1.</span> <span class="nav-text">Position 屬性介紹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-%E9%9D%9C%E6%85%8B%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.</span> <span class="nav-text">static 靜態定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#relative-%E7%9B%B8%E5%B0%8D%E5%AE%9A%E4%BD%8D"><span class="nav-number">3.</span> <span class="nav-text">relative 相對定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#abosulute-%E7%B5%95%E5%B0%8D%E5%AE%9A%E4%BD%8D"><span class="nav-number">4.</span> <span class="nav-text">abosulute 絕對定位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#absolute%E6%90%AD%E9%85%8D-width-height%E6%8A%80%E5%B7%A7"><span class="nav-number">4.1.</span> <span class="nav-text">absolute搭配 width height技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fixed-%E5%9B%BA%E5%AE%9A%E5%AE%9A%E4%BD%8D"><span class="nav-number">5.</span> <span class="nav-text">fixed 固定定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sticky-%E9%BB%8F%E8%91%97%E5%AE%9A%E4%BD%8D"><span class="nav-number">6.</span> <span class="nav-text">sticky 黏著定位</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Position-%E5%B1%AC%E6%80%A7%E4%BB%8B%E7%B4%B9"><span class="nav-number">1.</span> <span class="nav-text">Position 屬性介紹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-%E9%9D%9C%E6%85%8B%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.</span> <span class="nav-text">static 靜態定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#relative-%E7%9B%B8%E5%B0%8D%E5%AE%9A%E4%BD%8D"><span class="nav-number">3.</span> <span class="nav-text">relative 相對定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#abosulute-%E7%B5%95%E5%B0%8D%E5%AE%9A%E4%BD%8D"><span class="nav-number">4.</span> <span class="nav-text">abosulute 絕對定位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#absolute%E6%90%AD%E9%85%8D-width-height%E6%8A%80%E5%B7%A7"><span class="nav-number">4.1.</span> <span class="nav-text">absolute搭配 width height技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fixed-%E5%9B%BA%E5%AE%9A%E5%AE%9A%E4%BD%8D"><span class="nav-number">5.</span> <span class="nav-text">fixed 固定定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sticky-%E9%BB%8F%E8%91%97%E5%AE%9A%E4%BD%8D"><span class="nav-number">6.</span> <span class="nav-text">sticky 黏著定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#z-index"><span class="nav-number">7.</span> <span class="nav-text">z-index</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%AF%E7%A4%BA%E7%89%A9%E4%BB%B6%E5%9C%A8%E7%88%B6%E5%B1%A4%E5%BE%8C%E6%96%B9"><span class="nav-number">7.1.</span> <span class="nav-text">顯示物件在父層後方</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -160,18 +161,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -252,7 +253,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -291,6 +292,10 @@
 <p>固定定位元素不會保留它原本在頁面應有的空間，不會跟其他元素的配置互相干擾。</p>
 <h2 id="sticky-黏著定位"><a href="#sticky-黏著定位" class="headerlink" title="sticky 黏著定位"></a>sticky 黏著定位</h2><p>結合了 position : relative，跟 position: fixed，當使用者沒滑動卷軸時，就跟relative元素一樣，當使用者滑動卷軸時，則跟position: fixed 會固定在視窗上。</p>
 <p><a target="_blank" rel="noopener" href="https://codepen.io/tim-chou/pen/NWbvMQL">範例</a></p>
+<h2 id="z-index"><a href="#z-index" class="headerlink" title="z-index"></a>z-index</h2><p>z-index 用來設定物件的前後層級，最常見的要素是必須要有「position」屬性，且 position 的值不可為 static。z-index 設定數值越大越前面，能蓋住其他物件。若數值一樣大，則原始碼後方物件會蓋過前方物件。</p>
+<p><img src="/../images/css/z-index.png"></p>
+<h3 id="顯示物件在父層後方"><a href="#顯示物件在父層後方" class="headerlink" title="顯示物件在父層後方"></a>顯示物件在父層後方</h3><p>若想讓物件顯示在父層後方，就不能在父層將「z-index」設為 auto 以外的值。只要父層的z-index 是數值，子層z-index會被限定在父層之中，無法落於父層後。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/jskrtivy-the-animator/pen/WNBadYp">範例參考</a></p>
 
     </div>
 

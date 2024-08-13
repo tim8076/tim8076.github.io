@@ -30,8 +30,12 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*fsA5wPsJ6uV7huO-wDTtxg.png">
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*-WBrRoNeTd_dXzeMJnWa1A.png">
+<meta property="og:image" content="https://tim8076.github.io/images/js/call-stack-3.png">
+<meta property="og:image" content="https://tim8076.github.io/images/js/call-stack-4.png">
+<meta property="og:image" content="https://tim8076.github.io/images/js/call-stack-5.png">
+<meta property="og:image" content="https://tim8076.github.io/images/js/call-stack-7.png">
 <meta property="article:published_time" content="2022-08-18T02:56:42.000Z">
-<meta property="article:modified_time" content="2024-04-20T07:54:40.745Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.355Z">
 <meta property="article:author" content="Tim Chou">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn-images-1.medium.com/max/1200/1*fsA5wPsJ6uV7huO-wDTtxg.png">
@@ -146,7 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%96%AE%E5%9F%B7%E8%A1%8C%E7%B7%92"><span class="nav-number">1.</span> <span class="nav-text">單執行緒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5-Synchronous"><span class="nav-number">2.</span> <span class="nav-text">同步(Synchronous)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%90%8C%E6%AD%A5-Asynchronous"><span class="nav-number">3.</span> <span class="nav-text">非同步(Asynchronous)</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%96%AE%E5%9F%B7%E8%A1%8C%E7%B7%92"><span class="nav-number">1.</span> <span class="nav-text">單執行緒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5-Synchronous"><span class="nav-number">2.</span> <span class="nav-text">同步(Synchronous)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%90%8C%E6%AD%A5-Asynchronous"><span class="nav-number">3.</span> <span class="nav-text">非同步(Asynchronous)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E%EF%BC%88blocking%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">阻塞（blocking）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-loop"><span class="nav-number">5.</span> <span class="nav-text">Event loop</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -159,18 +163,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -251,7 +255,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -285,6 +289,50 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">3</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">  &#125;, <span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>上面 for 迴圈的程式屬於同步程式，setTimeout 屬於非同步。所以 for 迴圈先執行三次後，才會執行事件儲列裡的 setTimeout，此時<br>i 已經是 3了。</p>
+<h2 id="阻塞（blocking）"><a href="#阻塞（blocking）" class="headerlink" title="阻塞（blocking）"></a>阻塞（blocking）</h2><p>當執行程式碼片段需要等待很長一段時間，或好像「卡住」的這種現象，被稱作 阻塞（blocking），假設請求資料的 AJAX Request 變成同步（Synchronous）處理的話，那麼每 request 一次，因為必需等這個函式執行完畢從堆疊（stack）中跳離開後才能往下繼續走，進而導致阻塞的情形產生，以下面的 pseudo code 為例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pseudo code</span></span><br><span class="line"><span class="keyword">var</span> foo = $.<span class="title function_">getSync</span>(<span class="string">&#x27;//foo.com&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> bar = $.<span class="title function_">getSync</span>(<span class="string">&#x27;//bar.com&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> qux = $.<span class="title function_">getSync</span>(<span class="string">&#x27;//qux.com&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bar);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(qux);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Event-loop"><a href="#Event-loop" class="headerlink" title="Event loop"></a>Event loop</h2><p><img src="/../images/js/call-stack-3.png"></p>
+<p>對瀏覽器執行 js 的引擎而言(如 chrome 的 v8引擎)，JS是一個單執行緒的語言，一次只能執行一個任務。但瀏覽器除了js的執行引擎外，也提供了 Web API 給我們使用，讓我們能同時執行不同任務。</p>
+<p>以下面這段程式碼為例:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;我去上學&#x27;</span>);</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;打電話給老師&#x27;</span>);</span><br><span class="line">&#125;, <span class="number">5000</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;下課了&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>執行結果會是 ‘我去上學’ &#x3D;&gt; ‘下課了’ &#x3D;&gt; ‘打電話給老師’;</p>
+<p>流程如下: </p>
+<ol>
+<li><p>執行 console.log(‘我去上學’);</p>
+</li>
+<li><p>當執行到 setTimeout 時，因為 setTimeout 屬於 web api，會被移到 web api 去執行。</p>
+</li>
+<li><p>執行 console.log(‘下課了’);</p>
+</li>
+<li><p>當 setTimeout 的計時器到了後，將 callback function 移到 event queue 事件儲列做等待。</p>
+</li>
+<li><p>event loop 會一直觀察 callstack(執行環境) 是否為空，若為空則將 event queue 內等待的 callback function 移回 callstack 作執行。</p>
+</li>
+</ol>
+<p><img src="/../images/js/call-stack-4.png" alt="setTimeout 被移到 web api 執行"></p>
+<p><img src="/../images/js/call-stack-5.png" alt="callback function 移回 event queue 事件儲列做等待"></p>
+<p><img src="/../images/js/call-stack-7.png" alt="callback function 移回 callstack 作執行"></p>
+<!-- JavaScript 是單執行緒語言，這意味著它一次只能執行一個任務。然而，為了實現非同步行為，它依賴於事件循環。事件循環是一種機制，允許 JavaScript 在等待某些操作完成時（如 I/O 操作、計時器、網絡請求等）不阻塞主執行緒，從而可以繼續執行其他代碼。
+
+事件循環的工作流程:
+
+1. 執行棧（Call Stack）：JavaScript 執行同步代碼的地方。當函數被調用時，它會被添加到執行棧頂部，當函數執行完成後，會從棧中移除。
+
+2. Web API：當 JavaScript 執行非同步代碼時（如 setTimeout、fetch 等），這些調用會被發送到瀏覽器的 Web API，Web API 在後台處理這些請求。
+
+3. 事件儲列（Task Queue/Callback Queue）：當 Web API 完成非同步操作後，對應的回調函數會被放入事件隊列中，等待執行。
+
+4. 事件循環（Event Loop）：事件循環不斷地檢查執行棧是否為空。如果執行棧為空，事件循環會將事件隊列中的第一個回調函數移入執行棧，然後執行它。
+
+![教學網址](https://youtu.be/8aGhZQkoFbQ?t=1103) -->
+
+
+
+
+
+
 
     </div>
 

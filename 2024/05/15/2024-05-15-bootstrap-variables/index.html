@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/1000/1*GLy0I1Kvjl613M-R2tCFng.png">
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/1000/1*olXn8F_ZcW5yTtl4GCGdkA.png">
 <meta property="article:published_time" content="2024-05-15T03:30:14.000Z">
-<meta property="article:modified_time" content="2024-06-08T05:54:19.558Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.367Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="Bootstrap">
 <meta name="twitter:card" content="summary">
@@ -165,18 +165,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -257,7 +257,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-06-08 13:54:19" itemprop="dateModified" datetime="2024-06-08T13:54:19+08:00">2024-06-08</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -280,7 +280,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="基礎環境建立"><a href="#基礎環境建立" class="headerlink" title="基礎環境建立"></a>基礎環境建立</h2><p>首先開一個資料夾，裡面有 index.html，和一個 scss  資料夾，裏頭有三隻 scss 檔案，</p>
+        <h2 id="基礎環境建立"><a href="#基礎環境建立" class="headerlink" title="基礎環境建立"></a>基礎環境建立</h2><p>首先開一個資料夾，裡面有 index.html，和一個 scss 資料夾，裏頭有三隻 scss 檔案，</p>
 <p>scss 則透過 vscode 內建插件 live scsss complie 進行編譯。</p>
 <p><img src="https://cdn-images-1.medium.com/max/1000/1*ljXEd-fRUB83xzOT2jmdSA.png"></p>
 <h2 id="下載-Bootstrap"><a href="#下載-Bootstrap" class="headerlink" title="下載 Bootstrap"></a>下載 Bootstrap</h2><ol>
@@ -291,26 +291,30 @@
 <li><p>下載解壓縮後，在資料夾內找到 scss 資料夾，改名為 bootstrap 後，複製到一份自己的專案</p>
 </li>
 </ol>
-<p>  <img src="https://cdn-images-1.medium.com/max/1000/1*OZLwWy0IKndZz9MiusJDXw.png"></p>
-<p>  <img src="https://cdn-images-1.medium.com/max/1000/1*KQSWVUTCbvmLI0OI8Y43YA.png"></p>
+<p><img src="https://cdn-images-1.medium.com/max/1000/1*OZLwWy0IKndZz9MiusJDXw.png"></p>
+<p><img src="https://cdn-images-1.medium.com/max/1000/1*KQSWVUTCbvmLI0OI8Y43YA.png"></p>
 <ol start="3">
-<li>在 all.scss 中 import bootstrap  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// all.scss</span><br><span class="line">@import &#x27;./bootstrap/bootstrap.scss&#x27;;</span><br><span class="line">@import &#x27;./faq&#x27;;</span><br><span class="line">@import &#x27;./index&#x27;;</span><br></pre></td></tr></table></figure></li>
-<li>在 index.html 中 css 的連結要選擇加入bootstrap編譯後的檔案</li>
+<li>在 all.scss 中 import bootstrap</li>
 </ol>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;zh-Hant-TW&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./style/all.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span>&gt;</span>我是按鈕<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// all.scss</span><br><span class="line">@import &#x27;./bootstrap/bootstrap.scss&#x27;;</span><br><span class="line">@import &#x27;./faq&#x27;;</span><br><span class="line">@import &#x27;./index&#x27;;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>在 index.html 中 css 的連結要選擇加入 bootstrap 編譯後的檔案</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;zh-Hant-TW&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./style/all.css&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span>&gt;</span>我是按鈕<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.imgur.com/Ja5djoR.png"></p>
 <ol start="6">
-<li>到這邊就將bootstrap引入完成囉</li>
+<li>到這邊就將 bootstrap 引入完成囉</li>
 </ol>
 <p><img src="https://cdn-images-1.medium.com/max/1000/1*GLy0I1Kvjl613M-R2tCFng.png"></p>
 <h2 id="NPM-與-SCSS-下載方式"><a href="#NPM-與-SCSS-下載方式" class="headerlink" title="NPM 與 SCSS 下載方式"></a>NPM 與 SCSS 下載方式</h2><p>在專案中使用 npm 安裝 bootstrap</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install bootstrap@<span class="number">5.3</span><span class="number">.3</span></span><br></pre></td></tr></table></figure>
 
-<p>安裝完後我們的專案中node_modules資料夾會有 bootstrap</p>
+<p>安裝完後我們的專案中 node_modules 資料夾會有 bootstrap</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">your-project/</span><br><span class="line">├── scss/</span><br><span class="line">│   └── all.scss</span><br><span class="line">└── node_modules/</span><br><span class="line">│   └── bootstrap/</span><br><span class="line">│       ├── js/</span><br><span class="line">│       └── scss/</span><br><span class="line">└── index.html</span><br></pre></td></tr></table></figure>
 
-<p>在自己專案的 all.scss 中引入 </p>
+<p>在自己專案的 all.scss 中引入</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Custom.scss</span></span><br><span class="line"><span class="comment">// Option B: Include parts of Bootstrap</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../node_modules/bootstrap/scss/functions&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. Include any default variable overrides here</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 客製化用的 variables</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;./helpers/variables&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../node_modules/bootstrap/scss/variables&quot;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../node_modules/bootstrap/scss/variables-dark&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 5. Include remainder of required parts</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../node_modules/bootstrap/scss/maps&quot;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../node_modules/bootstrap/scss/mixins&quot;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../node_modules/bootstrap/scss/root&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 6. Optionally include any other parts as needed</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../node_modules/bootstrap/scss/utilities&quot;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../node_modules/bootstrap/scss/reboot&quot;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../node_modules/bootstrap/scss/type&quot;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../node_modules/bootstrap/scss/images&quot;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../node_modules/bootstrap/scss/containers&quot;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../node_modules/bootstrap/scss/grid&quot;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../node_modules/bootstrap/scss/helpers&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../node_modules/bootstrap/scss/utilities/api&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>在 scss 資料夾中新增 helpers 資料夾，將 node_modules 裡的 bootstrap&#x2F;scss&#x2F;variables 檔案複製一份放入。</p>

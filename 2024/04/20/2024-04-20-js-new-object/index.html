@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://miro.medium.com/v2/resize:fit:640/format:webp/1*14aphYWL3L9gmu7I_8bmCQ.png">
 <meta property="og:image" content="https://miro.medium.com/v2/resize:fit:828/format:webp/1*ifeD-029_JeQcCpCLJE7Dw.png">
 <meta property="article:published_time" content="2024-04-20T06:53:26.000Z">
-<meta property="article:modified_time" content="2024-06-08T05:54:19.534Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.361Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="JS 基礎篇">
 <meta name="twitter:card" content="summary">
@@ -164,18 +164,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -256,7 +256,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-06-08 13:54:19" itemprop="dateModified" datetime="2024-06-08T13:54:19+08:00">2024-06-08</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -297,14 +297,18 @@
 <h3 id="屬性刪除"><a href="#屬性刪除" class="headerlink" title="屬性刪除"></a>屬性刪除</h3><p>若要刪除屬性，則透過 delete 關鍵字刪除。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Lin&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">delete</span> person.<span class="property">name</span>;</span><br><span class="line"><span class="keyword">delete</span> person[<span class="string">&#x27;age&#x27;</span>];</span><br><span class="line">person.<span class="property">name</span> <span class="comment">// undefined</span></span><br><span class="line">person[<span class="string">&#x27;age&#x27;</span>] <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
 
+<p>另外要提到一點， js裡變數無法被刪除，屬性才可以</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">b = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> a; <span class="comment">// false</span></span><br><span class="line"><span class="keyword">delete</span> b; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a) <span class="comment">// 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b) <span class="comment">// b is not defined</span></span><br></pre></td></tr></table></figure>
+
+<p>上面 a 是經過 var 宣告的變數，不可被刪除。b 沒有經過變數宣告，會直接成為全域物件 window 內的屬性，可以被刪除。</p>
 <h3 id="判斷屬性是否存在"><a href="#判斷屬性是否存在" class="headerlink" title="判斷屬性是否存在"></a>判斷屬性是否存在</h3><p>當要判斷物件中存不存在某個屬性時，可檢查該屬性是否為 undefined。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">name</span>) <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
 
 <p>或者用 hasOwnProperty() 或 in 來檢查</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;nike&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用 in 檢查</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;name&#x27;</span> <span class="keyword">in</span> obj) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;value&#x27;</span> <span class="keyword">in</span> obj) <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// hasOwnProperty()</span></span><br><span class="line">obj.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;name&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">obj.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;value&#x27;</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="未定義的物件屬性預設值"><a href="#未定義的物件屬性預設值" class="headerlink" title="未定義的物件屬性預設值"></a>未定義的物件屬性預設值</h3><p>物件中無法在不存在的屬性上新增值</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;nike&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="property">ming</span>.<span class="property">name</span> = <span class="string">&#x27;小名&#x27;</span> <span class="comment">// cannot set property of undefiend</span></span><br></pre></td></tr></table></figure>
+<h3 id="未定義的物件屬性預設值"><a href="#未定義的物件屬性預設值" class="headerlink" title="未定義的物件屬性預設值"></a>未定義的物件屬性預設值</h3><p>當查找一個物件中不存在的屬性時，會回傳 undefined，並且物件中無法在不存在的屬性上新增值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;nike&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="property">ming</span> <span class="comment">// undefined</span></span><br><span class="line">obj.<span class="property">ming</span>.<span class="property">name</span> = <span class="string">&#x27;小名&#x27;</span> <span class="comment">// cannot set property of undefiend</span></span><br></pre></td></tr></table></figure>
 
 <p>解決方法是新增一個 空物件再去設值</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;nike&#x27;</span>,</span><br><span class="line">  <span class="attr">ming</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="property">ming</span>.<span class="property">name</span> = <span class="string">&#x27;小名&#x27;</span></span><br></pre></td></tr></table></figure>

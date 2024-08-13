@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://miro.medium.com/v2/resize:fit:720/format:webp/1*1l3mH9xqav2rtcKAPWObXw.png">
 <meta property="og:image" content="https://miro.medium.com/v2/resize:fit:786/format:webp/1*amT3cagKUgjYm4z4s0q7uw.png">
 <meta property="article:published_time" content="2024-05-17T08:28:01.000Z">
-<meta property="article:modified_time" content="2024-06-08T05:54:19.559Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.367Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
@@ -153,7 +153,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#watch-%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">watch 操作方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watch-%E7%AF%84%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">watch 範例:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watch-%E7%9B%A3%E6%B8%AC%E7%89%A9%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">watch 監測物件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watch-%E5%92%8C-computed-%E4%B8%8D%E5%90%8C"><span class="nav-number">4.</span> <span class="nav-text">watch 和 computed 不同</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#watch-%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">watch 操作方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watch-%E7%AF%84%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">watch 範例:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watch-%E7%9B%A3%E6%B8%AC%E7%89%A9%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">watch 監測物件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%8B%E5%88%BB%E5%9F%B7%E8%A1%8C-watch"><span class="nav-number">4.</span> <span class="nav-text">立刻執行 watch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watch-%E5%92%8C-computed-%E4%B8%8D%E5%90%8C"><span class="nav-number">5.</span> <span class="nav-text">watch 和 computed 不同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this-watch-%E6%96%B9%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">this.$watch() 方法</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -166,18 +166,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -258,7 +258,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-06-08 13:54:19" itemprop="dateModified" datetime="2024-06-08T13:54:19+08:00">2024-06-08</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -308,6 +308,9 @@
 </ol>
 <p><img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*1l3mH9xqav2rtcKAPWObXw.png"></p>
 <p><img src="https://miro.medium.com/v2/resize:fit:786/format:webp/1*amT3cagKUgjYm4z4s0q7uw.png"></p>
+<h2 id="立刻執行-watch"><a href="#立刻執行-watch" class="headerlink" title="立刻執行 watch"></a><a target="_blank" rel="noopener" href="https://vuejs.org/guide/essentials/watchers.html#eager-watchers">立刻執行 watch</a></h2><p>一般 watch 會等觀測的值變動時才會觸發裏頭的函式，如果想在元件載入就執行函式<br>可以加上 immediate</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">watch</span>: &#123;</span><br><span class="line">  <span class="attr">question</span>: &#123;</span><br><span class="line">    <span class="title function_">handler</span>(<span class="params">newQuestion</span>) &#123;</span><br><span class="line">      <span class="comment">// this will be run immediately on component creation.</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// force eager callback execution</span></span><br><span class="line">    <span class="attr">immediate</span>: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="watch-和-computed-不同"><a href="#watch-和-computed-不同" class="headerlink" title="watch 和 computed 不同"></a>watch 和 computed 不同</h2><ul>
 <li><p>Watch<br>監聽單一 “變數” 觸發事件，該函式可同時操作多個變數</p>
 </li>
@@ -317,6 +320,10 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子：監聽單一變數並更新多個變數</span></span><br><span class="line"><span class="attr">watch</span>: &#123;</span><br><span class="line">  <span class="title function_">productName</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">result3</span> = <span class="string">`媽媽買了 <span class="subst">$&#123;<span class="variable language_">this</span>.productName&#125;</span>，總共花費 <span class="subst">$&#123;<span class="variable language_">this</span>.productPrice&#125;</span> 元，另外這 <span class="subst">$&#123;<span class="variable language_">this</span>.productVegan ? <span class="string">&#x27;是&#x27;</span> : <span class="string">&#x27;不是&#x27;</span>&#125;</span> 素食的`</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">productPrice</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">result3</span> = <span class="string">`媽媽買了 <span class="subst">$&#123;<span class="variable language_">this</span>.productName&#125;</span>，總共花費 <span class="subst">$&#123;<span class="variable language_">this</span>.productPrice&#125;</span> 元，另外這 <span class="subst">$&#123;<span class="variable language_">this</span>.productVegan ? <span class="string">&#x27;是&#x27;</span> : <span class="string">&#x27;不是&#x27;</span>&#125;</span> 素食的`</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">productVegan</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">result3</span> = <span class="string">`媽媽買了 <span class="subst">$&#123;<span class="variable language_">this</span>.productName&#125;</span>，總共花費 <span class="subst">$&#123;<span class="variable language_">this</span>.productPrice&#125;</span> 元，另外這 <span class="subst">$&#123;<span class="variable language_">this</span>.productVegan ? <span class="string">&#x27;是&#x27;</span> : <span class="string">&#x27;不是&#x27;</span>&#125;</span> 素食的`</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 分別監聽 productName、productPrice、productVegan 來產生結果</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">computed</span>: &#123;</span><br><span class="line">  <span class="title function_">result2</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`媽媽買了 <span class="subst">$&#123;<span class="variable language_">this</span>.productName&#125;</span>，總共花費 <span class="subst">$&#123;<span class="variable language_">this</span>.productPrice&#125;</span> 元，另外這 <span class="subst">$&#123;<span class="variable language_">this</span>.productVegan ? <span class="string">&#x27;是&#x27;</span> : <span class="string">&#x27;不是&#x27;</span>&#125;</span> 素食的`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">// 同時監聽 productName、productPrice、productVegan 來產生結果</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="this-watch-方法"><a href="#this-watch-方法" class="headerlink" title="this.$watch() 方法"></a>this.$watch() 方法</h2><p>有些情況下，我們想依照需求決定是否建立wathcer時，可以用 this.$watch() 方式建立 watcher</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">created</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.$watch(<span class="string">&#x27;question&#x27;</span>, <span class="function">(<span class="params">newQuestion</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
 
 

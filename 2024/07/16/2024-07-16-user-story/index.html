@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tim8076.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="介紹網站設計，使用者故事(user-story)寫法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(1) 使用者故事(user-story)">
+<meta property="og:url" content="https://tim8076.github.io/2024/07/16/2024-07-16-user-story/index.html">
+<meta property="og:site_name" content="Tim的前端日誌">
+<meta property="og:description" content="介紹網站設計，使用者故事(user-story)寫法">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://tim8076.github.io/images/web-design/site-map.png">
+<meta property="og:image" content="https://tim8076.github.io/images/web-design/notion-19.png">
+<meta property="og:image" content="https://tim8076.github.io/images/web-design/notion-20.png">
+<meta property="og:image" content="https://tim8076.github.io/images/web-design/notion-21.png">
+<meta property="og:image" content="https://tim8076.github.io/images/web-design/notion-23.png">
+<meta property="og:image" content="https://tim8076.github.io/images/web-design/notion-22.png">
+<meta property="og:image" content="https://tim8076.github.io/images/web-design/notion-26.png">
+<meta property="og:image" content="https://tim8076.github.io/images/web-design/notion-27.png">
+<meta property="og:image" content="https://tim8076.github.io/images/web-design/notion-28.png">
+<meta property="og:image" content="https://tim8076.github.io/images/web-design/notion-29.png">
+<meta property="og:image" content="https://tim8076.github.io/images/web-design/notion-30.png">
+<meta property="og:image" content="https://tim8076.github.io/images/web-design/notion-31.png">
+<meta property="og:image" content="https://tim8076.github.io/images/web-design/notion-32.png">
+<meta property="og:image" content="https://tim8076.github.io/images/web-design/notion-24.png">
+<meta property="og:image" content="https://tim8076.github.io/images/web-design/notion-25.png">
+<meta property="article:published_time" content="2024-07-16T13:24:01.000Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.384Z">
+<meta property="article:author" content="Tim Chou">
+<meta property="article:tag" content="網頁設計">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tim8076.github.io/images/web-design/site-map.png">
+
+
+<link rel="canonical" href="https://tim8076.github.io/2024/07/16/2024-07-16-user-story/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://tim8076.github.io/2024/07/16/2024-07-16-user-story/","path":"2024/07/16/2024-07-16-user-story/","title":"(1) 使用者故事(user-story)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>(1) 使用者故事(user-story) | Tim的前端日誌</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tim的前端日誌</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B6%B2%E7%AB%99%E7%99%BC%E6%83%B3%E5%88%9D%E8%A1%B7"><span class="nav-number">1.</span> <span class="nav-text">網站發想初衷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E4%BD%BF%E7%94%A8%E8%80%85%E6%95%85%E4%BA%8B"><span class="nav-number">2.</span> <span class="nav-text">什麼是使用者故事</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85"><span class="nav-number">2.1.</span> <span class="nav-text">使用者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E8%80%85"><span class="nav-number">2.2.</span> <span class="nav-text">管理者</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#site-map-%E7%B6%B2%E7%AB%99%E5%9C%B0%E5%9C%96"><span class="nav-number">3.</span> <span class="nav-text">site map 網站地圖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Miro-%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%B4%B9"><span class="nav-number">4.</span> <span class="nav-text">Miro 工具介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-frame"><span class="nav-number">4.1.</span> <span class="nav-text">建立 frame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A4%87%E8%A3%BD-frame"><span class="nav-number">4.2.</span> <span class="nav-text">複製 frame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%8F%9B-frame"><span class="nav-number">4.3.</span> <span class="nav-text">切換 frame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%AD%97"><span class="nav-number">4.4.</span> <span class="nav-text">打字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sticky-note"><span class="nav-number">4.5.</span> <span class="nav-text">sticky note</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%A2%E7%8B%80%E5%B7%A5%E5%85%B7"><span class="nav-number">4.6.</span> <span class="nav-text">形狀工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#comment-%E5%8A%9F%E8%83%BD"><span class="nav-number">4.7.</span> <span class="nav-text">comment 功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wireframe-%E5%B7%A5%E5%85%B7%E5%88%97"><span class="nav-number">4.8.</span> <span class="nav-text">wireframe 工具列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%80%E8%AB%8B%E5%9C%98%E9%9A%8A%E6%88%90%E5%93%A1"><span class="nav-number">4.9.</span> <span class="nav-text">邀請團隊成員</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B6%B2%E7%AB%99%E5%90%8D%E7%A8%B1"><span class="nav-number">5.</span> <span class="nav-text">網站名稱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C"><span class="nav-number">6.</span> <span class="nav-text">常見問題</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tim Chou</p>
+  <div class="site-description" itemprop="description">Zero to Hero</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/tim8076" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2024/07/16/2024-07-16-user-story/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Tim Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim的前端日誌">
+      <meta itemprop="description" content="Zero to Hero">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="(1) 使用者故事(user-story) | Tim的前端日誌">
+      <meta itemprop="description" content="介紹網站設計，使用者故事(user-story)寫法">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          (1) 使用者故事(user-story)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2024-07-16 21:24:01" itemprop="dateCreated datePublished" datetime="2024-07-16T21:24:01+08:00">2024-07-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%B6%B2%E9%A0%81%E8%A8%AD%E8%A8%88/" itemprop="url" rel="index"><span itemprop="name">網頁設計</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">介紹網站設計，使用者故事(user-story)寫法</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="網站發想初衷"><a href="#網站發想初衷" class="headerlink" title="網站發想初衷"></a>網站發想初衷</h2><p>設計網站的初衷:</p>
+<ul>
+<li>例: 社會上常有人因為程式問題卡關，想設計一個 IT 論壇，幫助大家解決問題</li>
+</ul>
+<h2 id="什麼是使用者故事"><a href="#什麼是使用者故事" class="headerlink" title="什麼是使用者故事"></a>什麼是使用者故事</h2><p>使用者故事（User Story）是敏捷開發中常用的一種工具，用來描述特定使用者在特定情境下希望達成的目標。對於網站設計，使用者故事可以幫助團隊了解使用者需求，從而設計出更符合使用者期望的網站。</p>
+<p>以這個<a target="_blank" rel="noopener" href="https://cafenomad.tw/">咖啡廳評價網</a>為例</p>
+<h3 id="使用者"><a href="#使用者" class="headerlink" title="使用者"></a>使用者</h3><ul>
+<li>我可以 輸入我所在的地區，找到附近的店家</li>
+<li>我可以 設定篩選條件，例如口味、氛圍等，以便我可以找到符合我喜好的咖啡廳</li>
+<li>我可以 瀏覽店家列表，以便我可以看到符合我的篩選條件的咖啡廳</li>
+<li>我可以 查看店家詳細資訊，包括地址、營業時間、價格等</li>
+<li>我可以 註冊帳號並登入系統</li>
+<li>我可以 查看其他使用者對咖啡廳的評價，以便我可以參考其他人的經驗</li>
+<li>我可以 留下自己對咖啡廳的評價和評論，以便其他使用者可以參考我的經驗</li>
+<li>我可以 保存我喜歡的咖啡廳，以便下次可以快速找到。</li>
+<li>我可以 分享店家的詳細資訊和評價到社交媒體上，以便我可以分享我的經驗和意見</li>
+</ul>
+<h3 id="管理者"><a href="#管理者" class="headerlink" title="管理者"></a>管理者</h3><ul>
+<li>我可以 新增新的咖啡廳，包括店家名稱、地址、營業時間、價格範圍等，以便前台使用者可以搜尋到</li>
+<li>我可以 編輯現有咖啡廳資訊，以便更新店家的相關資訊，如地址、營業時間等</li>
+<li>我可以 刪除不再營業或不符合標準的咖啡廳資訊，以保持資料庫的整潔和準確性</li>
+<li>我可以 管理所有使用者的帳戶資訊，如重置密碼、解鎖帳戶等，以提供技術支援和維護帳戶安全</li>
+<li>我可以 查看評價，瀏覽所有使用者對咖啡廳的評價，確保內容合規並反映真實用戶體驗</li>
+<li>我可以 刪除評價，確保系統中的評價符合相關政策</li>
+</ul>
+<p>使用者故事每則最好只聚焦一個功能，初期來說最好條列 3-7 個使用者故事就好，因為每個使用者故事都會對應到好幾個網站頁面。</p>
+<h2 id="site-map-網站地圖"><a href="#site-map-網站地圖" class="headerlink" title="site map 網站地圖"></a>site map 網站地圖</h2><p>當使用者故事寫好後，可以用網站地圖的方式整理</p>
+<p><img src="/../images/web-design/site-map.png"></p>
+<p>繪製工具可以用 <a target="_blank" rel="noopener" href="https://whimsical.com/my-files-UmNkUvuq86GLk3d7wEeM6M">whimsical.com</a></p>
+<h2 id="Miro-工具介紹"><a href="#Miro-工具介紹" class="headerlink" title="Miro 工具介紹"></a>Miro 工具介紹</h2><p>首先來到 <a target="_blank" rel="noopener" href="https://miro.com/app/dashboard/">Miro 官網</a>註冊會員</p>
+<p>註冊好後，點選 New board 建立新工作區</p>
+<p><img src="/../images/web-design/notion-19.png"></p>
+<h3 id="建立-frame"><a href="#建立-frame" class="headerlink" title="建立 frame"></a>建立 frame</h3><p>進到工作區後可以點擊左側工具欄的 Frame 來建立一個頁面，因為是製作網站線搞圖，所以可以選擇 browser 樣板。</p>
+<p><img src="/../images/web-design/notion-20.png"></p>
+<h3 id="複製-frame"><a href="#複製-frame" class="headerlink" title="複製 frame"></a>複製 frame</h3><p>在 frame 上按 ctrl+c ctrl+v 可以複製新增頁面</p>
+<p><img src="/../images/web-design/notion-21.png"></p>
+<h3 id="切換-frame"><a href="#切換-frame" class="headerlink" title="切換 frame"></a>切換 frame</h3><p>按左下角 open frame 可以切換不同 frame</p>
+<p><img src="/../images/web-design/notion-23.png"></p>
+<h3 id="打字"><a href="#打字" class="headerlink" title="打字"></a>打字</h3><p>選擇左側文字工具可以新增文字</p>
+<p><img src="/../images/web-design/notion-22.png"></p>
+<h3 id="sticky-note"><a href="#sticky-note" class="headerlink" title="sticky note"></a>sticky note</h3><p>使用 sticky note 標示給設計師的提示</p>
+<p><img src="/../images/web-design/notion-26.png"></p>
+<p><img src="/../images/web-design/notion-27.png"></p>
+<h3 id="形狀工具"><a href="#形狀工具" class="headerlink" title="形狀工具"></a>形狀工具</h3><p>左側形狀工具可以加入不同形狀</p>
+<p><img src="/../images/web-design/notion-28.png"></p>
+<p>可以使用形狀工具繪製流程圖</p>
+<p><img src="/../images/web-design/notion-29.png"></p>
+<h3 id="comment-功能"><a href="#comment-功能" class="headerlink" title="comment 功能"></a>comment 功能</h3><p>comment 可以做為團隊間溝通使用</p>
+<p><img src="/../images/web-design/notion-30.png"></p>
+<p><img src="/../images/web-design/notion-31.png"></p>
+<h3 id="wireframe-工具列"><a href="#wireframe-工具列" class="headerlink" title="wireframe 工具列"></a>wireframe 工具列</h3><p>左側工具欄 搜尋 wireframe 可以找到 wireframe 工具列，可以用來繪製網站線稿圖</p>
+<p><img src="/../images/web-design/notion-32.png"></p>
+<h3 id="邀請團隊成員"><a href="#邀請團隊成員" class="headerlink" title="邀請團隊成員"></a>邀請團隊成員</h3><p>在左側選單選擇 users</p>
+<p><img src="/../images/web-design/notion-24.png"></p>
+<p>到團隊成員頁面後，點擊 invite new user 邀請新成員</p>
+<p><img src="/../images/web-design/notion-25.png"></p>
+<h2 id="網站名稱"><a href="#網站名稱" class="headerlink" title="網站名稱"></a>網站名稱</h2><ol>
+<li>PetCare-專業寵物保姆</li>
+<li>毛寶貝-專業寵物保姆</li>
+<li>毛孩福利社-專業寵物保姆</li>
+</ol>
+<h2 id="常見問題"><a href="#常見問題" class="headerlink" title="常見問題"></a>常見問題</h2><ul>
+<li><p>預定寵物保母費用?<br>安親寄宿：媒合費用＄ 300&#x2F;12H 起，會依據毛小孩體型調整。<br>到府保姆：＄ 300&#x2F;次起，單次半小時。超過半小時需加購。<br>遛狗服務：＄ 200&#x2F;次起，單次半小時。超過半小時需加購。<br>到府洗澡：＄ 450&#x2F;次起，費用會依據毛小孩種類與體型有所調整。</p>
+<p>所有服務費用皆含「寵物保險」及「服務品質保障」，服務不滿意全額退款。</p>
+</li>
+<li><p>寵物保母服務包括哪些內容？<br>我們的寵物保母服務包括餵食、散步、洗澡、遊戲和陪伴等。根據您的需求，我們也可以提供特定的服務，如藥物管理和訓練。</p>
+</li>
+<li><p>如何預訂寵物保母服務？<br>您可以通過我們的網站在線預訂，選擇合適的日期和時間，並提供您的寵物資料。我們會根據您的需求挑選合適的保母,供您選擇並預訂。</p>
+</li>
+<li><p>如果我的寵物有特殊需求怎麼辦？<br>在預訂時，請詳細告知我們您的寵物有何特殊需求，我們會根據需求選擇最合適的保母，確保您的寵物得到專業的照顧。</p>
+</li>
+<li><p>那些地區有提供寵物保母服務?<br>全台各地皆有寵物保姆服務。</p>
+</li>
+<li><p>我可以隨時聯絡寵物保母嗎？<br>是的，您可以通過我們的網站或 App 與保母進行溝通，了解您的寵物狀況。我們也會提供定期更新和照片，讓您隨時了解寵物的情況。</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%B6%B2%E9%A0%81%E8%A8%AD%E8%A8%88/" rel="tag"># 網頁設計</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/07/03/2024-07-03-html-table/" rel="prev" title="HTML-表格與表單設計技巧">
+                  <i class="fa fa-chevron-left"></i> HTML-表格與表單設計技巧
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/07/17/2024-07-17-wireframe/" rel="next" title="(2) wireframe 線稿圖">
+                  (2) wireframe 線稿圖 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tim Chou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"shosetim","count":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

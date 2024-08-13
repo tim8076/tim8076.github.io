@@ -28,11 +28,13 @@
 <meta property="og:site_name" content="Tim的前端日誌">
 <meta property="og:description" content="合併修改記錄">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://tim8076.github.io/images/git/git-1.png">
 <meta property="article:published_time" content="2022-06-23T02:51:11.000Z">
-<meta property="article:modified_time" content="2024-04-20T07:54:40.709Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.353Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tim8076.github.io/images/git/git-1.png">
 
 
 <link rel="canonical" href="https://tim8076.github.io/2022/06/23/2022-6-23-1-git-conflict/">
@@ -157,18 +159,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -249,7 +251,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -272,10 +274,18 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="合併與衝突"><a href="#合併與衝突" class="headerlink" title="合併與衝突"></a>合併與衝突</h2><p>上章節講過我們可以用 git pull 或 git fetch 來下載遠端更新的內容。<br>如果遠端數據庫和本地端數據庫的同一個地方都發生了修改的情況下（例：檔案中同一行的地方）。<br>這時，因為Git不能自動判斷要導入那一個修改內容於是就會發生錯誤。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是 Cat<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">=======</span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是 Dog<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; dog</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <h2 id="合併與衝突"><a href="#合併與衝突" class="headerlink" title="合併與衝突"></a>合併與衝突</h2><p>上章節講過我們可以用 git pull 或 git fetch 來下載遠端更新的內容。<br>如果遠端數據庫和本地端數據庫的同一個地方都發生了修改的情況下（例：檔案中同一行的地方）。<br>這時，因為 Git 不能自動判斷要導入那一個修改內容於是就會發生錯誤。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">  &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是 Cat<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  =======</span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是 Dog<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  &gt;&gt;&gt;&gt;&gt;&gt;&gt; dog</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>此時發生衝突的地方必須手動修改，如上例，VScode會提醒你產生衝突的地方，此時再決定要留 cat 還是 dog。</p>
+<p>此時發生衝突的地方必須手動修改，如上例，VScode 會提醒你產生衝突的地方，此時再決定要留 cat 還是 dog。假設你要留下 cat ，則改為</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是 Cat<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>當儲存後，你就可以輸入 git add . 將它重新加入索引後，你可以使用 git status 觀察狀態。</p>
+<p><img src="/../images/git/git-1.png"></p>
+<p>此時的回饋就會說，您目前沒有任何衝突了，可以使用 git commit 來提交。於是我們就輸入該指令後。就會彈跳編輯器顯示預設訊息。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Merge branch <span class="string">&#x27;dev&#x27;</span></span><br><span class="line"></span><br><span class="line"># Conflicts:</span><br><span class="line">#    <span class="keyword">all</span>.css</span><br><span class="line">#</span><br><span class="line"># It looks like you may <span class="keyword">be</span> committing <span class="keyword">a</span> merge.</span><br><span class="line"># If this <span class="keyword">is</span> not correct, please <span class="built_in">remove</span> the <span class="keyword">file</span></span><br><span class="line">#    .git/MERGE_HEAD</span><br><span class="line"># <span class="built_in">and</span> <span class="keyword">try</span> again.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Please enter the commit message <span class="keyword">for</span> your <span class="keyword">changes</span>. Lines starting</span><br><span class="line"># with <span class="string">&#x27;#&#x27;</span> will <span class="keyword">be</span> ignored, <span class="built_in">and</span> <span class="keyword">an</span> <span class="built_in">empty</span> message aborts the commit.</span><br><span class="line">#</span><br><span class="line"># On branch master</span><br><span class="line"># All conflicts fixed but you are still merging.</span><br><span class="line">#</span><br><span class="line"># Changes <span class="keyword">to</span> <span class="keyword">be</span> committed:</span><br><span class="line">#    modified:   <span class="built_in">index</span>.html</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+
+<p>Git 預設訊息裡，你也可以自己編輯相關內容，若是覺得沒問題就儲存關閉，本次合併就完成了！</p>
 
     </div>
 

@@ -29,7 +29,7 @@
 <meta property="og:description" content="介紹Bootstrap中與圖片大小的相關設定">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2024-06-06T09:03:00.000Z">
-<meta property="article:modified_time" content="2024-06-08T05:54:19.568Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.372Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="Bootstrap">
 <meta name="twitter:card" content="summary">
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9F%BF%E6%87%89%E5%BC%8F%E5%9C%96%E7%89%87"><span class="nav-number">1.</span> <span class="nav-text">響應式圖片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%8A%E6%A1%86%E5%9C%96%E7%89%87"><span class="nav-number">2.</span> <span class="nav-text">邊框圖片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#w-100"><span class="nav-number">3.</span> <span class="nav-text">w-100</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9F%BF%E6%87%89%E5%BC%8F%E5%9C%96%E7%89%87"><span class="nav-number">1.</span> <span class="nav-text">響應式圖片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%8A%E6%A1%86%E5%9C%96%E7%89%87"><span class="nav-number">2.</span> <span class="nav-text">邊框圖片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#w-100"><span class="nav-number">3.</span> <span class="nav-text">w-100</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%96%E7%89%87%E5%8D%80"><span class="nav-number">4.</span> <span class="nav-text">圖片區</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -157,18 +157,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -249,7 +249,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-06-08 13:54:19" itemprop="dateModified" datetime="2024-06-08T13:54:19+08:00">2024-06-08</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -282,6 +282,10 @@
 <h2 id="w-100"><a href="#w-100" class="headerlink" title="w-100"></a>w-100</h2><p>在 img 加上 <code>.w-100</code>， 會加上 <code>width: 100%;</code> 讓圖片填滿父層寬度</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;...&quot;</span> <span class="attr">class</span>=<span class="string">&quot;w-100&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;...&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="圖片區"><a href="#圖片區" class="headerlink" title="圖片區"></a>圖片區</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">figure</span> <span class="attr">class</span>=<span class="string">&quot;figure&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;...&quot;</span> <span class="attr">class</span>=<span class="string">&quot;figure-img img-fluid rounded&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;...&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">figcaption</span> <span class="attr">class</span>=<span class="string">&quot;figure-caption&quot;</span>&gt;</span>A caption for the above image.<span class="tag">&lt;/<span class="name">figcaption</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">figure</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>當想要加上圖片的說明文字時，可以在 img 下用 figcaption 包住 說明文字，外層則用 figure</p>
+
     </div>
 
     
@@ -302,6 +306,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2024/06/08/2024-06-08-css-box-sizing/" rel="next" title="(6) CSS基礎篇 盒模型">
+                  (6) CSS基礎篇 盒模型 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>

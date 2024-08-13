@@ -31,8 +31,21 @@
 <meta property="og:image" content="https://miro.medium.com/max/1336/1*hj-Xjk2RizivLb7zWblx3Q.png">
 <meta property="og:image" content="https://miro.medium.com/max/1374/1*yBOyNTlobUkGFw_qt1a4Yg.png">
 <meta property="og:image" content="https://miro.medium.com/max/1114/1*qsdu8QDqQ-SRelX0DySwLw.png">
+<meta property="og:image" content="https://tim8076.github.io/images/css/bg-repeat.png">
+<meta property="og:image" content="https://tim8076.github.io/images/css/bg-repeat-no.png">
+<meta property="og:image" content="https://tim8076.github.io/images/css/bg-repeat-x.png">
+<meta property="og:image" content="https://tim8076.github.io/images/css/bg-repeat-y.png">
+<meta property="og:image" content="https://tim8076.github.io/images/css/bg-repeat-space.png">
+<meta property="og:image" content="https://tim8076.github.io/images/css/bg-repeat-round.png">
+<meta property="og:image" content="https://tim8076.github.io/images/css/bg-repeat-x-y.png">
+<meta property="og:image" content="https://tim8076.github.io/images/css/bg-cover.png">
+<meta property="og:image" content="https://tim8076.github.io/images/css/bg-cotain.png">
+<meta property="og:image" content="https://tim8076.github.io/images/css/bg-origin.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/tinatyc/IThome-gif/master/Amos_gif/background-attachment02.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/tinatyc/IThome-gif/master/Amos_gif/background-attachment03.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/tinatyc/IThome-gif/master/Amos_gif/background-attachment04.gif">
 <meta property="article:published_time" content="2022-06-21T03:37:56.000Z">
-<meta property="article:modified_time" content="2024-04-20T07:54:40.706Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.349Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="CSS基礎篇">
 <meta name="twitter:card" content="summary">
@@ -148,7 +161,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#background-image"><span class="nav-number">1.</span> <span class="nav-text">background-image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#url-%E8%A8%AD%E5%AE%9A"><span class="nav-number">2.</span> <span class="nav-text">url() 設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E9%87%8D%E8%83%8C%E6%99%AF%E5%8A%9F%E8%83%BD"><span class="nav-number">3.</span> <span class="nav-text">多重背景功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%B8%E5%B1%A4%E8%83%8C%E6%99%AF%E8%A8%AD%E5%AE%9A"><span class="nav-number">4.</span> <span class="nav-text">漸層背景設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E9%87%8D%E8%A4%87%E8%A8%AD%E5%AE%9A"><span class="nav-number">5.</span> <span class="nav-text">背景重複設定</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#background-image"><span class="nav-number">1.</span> <span class="nav-text">background-image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#url-%E8%A8%AD%E5%AE%9A"><span class="nav-number">2.</span> <span class="nav-text">url() 設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E9%87%8D%E8%83%8C%E6%99%AF%E5%8A%9F%E8%83%BD"><span class="nav-number">3.</span> <span class="nav-text">多重背景功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%B8%E5%B1%A4%E8%83%8C%E6%99%AF%E8%A8%AD%E5%AE%9A"><span class="nav-number">4.</span> <span class="nav-text">漸層背景設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E9%87%8D%E8%A4%87%E8%A8%AD%E5%AE%9A"><span class="nav-number">5.</span> <span class="nav-text">背景重複設定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#x-y-%E8%BB%B8%E8%A8%AD%E5%AE%9A"><span class="nav-number">5.1.</span> <span class="nav-text">x, y 軸設定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E5%9C%96%E7%89%87%E4%BD%8D%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">背景圖片位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E5%9C%96%E7%89%87%E5%A4%A7%E5%B0%8F"><span class="nav-number">7.</span> <span class="nav-text">背景圖片大小</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BE%E5%88%86%E6%AF%94%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="nav-number">7.1.</span> <span class="nav-text">百分比的問題</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cover-%E5%92%8C-contain"><span class="nav-number">7.2.</span> <span class="nav-text">cover 和 contain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E5%9C%96%E7%AF%84%E5%9C%8D"><span class="nav-number">8.</span> <span class="nav-text">背景圖範圍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E5%9C%96%E5%9B%BA%E5%AE%9A%E6%96%B9%E5%BC%8F"><span class="nav-number">9.</span> <span class="nav-text">背景圖固定方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scroll-%E6%8D%B2%E5%8B%95%E8%83%8C%E6%99%AF"><span class="nav-number">9.1.</span> <span class="nav-text">scroll 捲動背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fixed-%E5%9B%BA%E5%AE%9A%E8%83%8C%E6%99%AF"><span class="nav-number">9.2.</span> <span class="nav-text">fixed 固定背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Local"><span class="nav-number">9.3.</span> <span class="nav-text">Local</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B0%A1%E6%98%93%E7%89%88%E8%A6%96%E5%B7%AE%E6%BB%BE%E5%8B%95"><span class="nav-number">9.4.</span> <span class="nav-text">簡易版視差滾動</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#background-%E7%B8%AE%E5%AF%AB"><span class="nav-number">10.</span> <span class="nav-text">background 縮寫</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#background-%E5%AF%AB%E6%B3%95%E6%B3%A8%E6%84%8F"><span class="nav-number">10.1.</span> <span class="nav-text">background 寫法注意</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -161,18 +174,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -253,7 +266,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -292,9 +305,9 @@
 </ul>
 <h2 id="url-設定"><a href="#url-設定" class="headerlink" title="url() 設定"></a>url() 設定</h2><p>url所要撰寫的是圖片檔案所在的位置，可使用</p>
 <ul>
-<li><p>相對路徑: (“..&#x2F;pic&#x2F;01.jpg”);</p>
+<li><p>相對路徑: (“..&#x2F;pic&#x2F;01.jpg”);<br>從該段 css background-image 所在位置前往圖片所在位置 </p>
 </li>
-<li><p>絕對路徑: (“<a target="_blank" rel="noopener" href="https://medium.com/&quot;">https://medium.com/&quot;</a>);</p>
+<li><p>絕對路徑: (“<a target="_blank" rel="noopener" href="https://medium.com/&quot;">https://medium.com/&quot;</a>);<br>完整的網址</p>
 </li>
 </ul>
 <h2 id="多重背景功能"><a href="#多重背景功能" class="headerlink" title="多重背景功能"></a>多重背景功能</h2><p><img src="https://miro.medium.com/max/1336/1*hj-Xjk2RizivLb7zWblx3Q.png" alt="多重背景"></p>
@@ -304,6 +317,9 @@
 <li>背景圖片設定不要重複(background-repeat: no-repeat;)</li>
 <li>背景圖片的位置設定要錯開(position)</li>
 </ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.bg</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">400px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">https://picsum.photos/200/100?random=1</span>),</span><br><span class="line">                    <span class="built_in">url</span>(<span class="string">https://picsum.photos/200/100?random=2</span>),</span><br><span class="line">                     <span class="built_in">url</span>(<span class="string">https://picsum.photos/200/100?random=3</span>);</span><br><span class="line">  <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">  <span class="attribute">background-position</span>: left top, right bottom, center center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://codepen.io/jskrtivy-the-animator/pen/eYaVwGQ">範例</a></p>
 <h2 id="漸層背景設定"><a href="#漸層背景設定" class="headerlink" title="漸層背景設定"></a>漸層背景設定</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-image: linear-gradient(起始色彩, 結束色彩);</span><br></pre></td></tr></table></figure>
 
 <p>指定方向漸層</p>
@@ -319,12 +335,97 @@
 <li>to bottom left (右上漸層到左下)</li>
 </ul>
 <p><img src="https://miro.medium.com/max/1114/1*qsdu8QDqQ-SRelX0DySwLw.png" alt="漸層設定"></p>
-<p>或直接寫(60deg,起始顏色，結束顏色)</p>
-<h2 id="背景重複設定"><a href="#背景重複設定" class="headerlink" title="背景重複設定"></a>背景重複設定</h2><ol>
-<li>background-repeat: no-repeat</li>
+<p>或使用角度設定 (60deg,起始顏色，結束顏色)</p>
+<p>常用角度如: </p>
+<ul>
+<li>0deg: 由下往上</li>
+<li>45deg: 左下往右上</li>
+<li>90deg: 由左向右</li>
+<li>135deg: 左上往右下</li>
+<li>180deg: 由上往下</li>
+<li>270deg: 由右往左</li>
+<li>360deg: 由下午往上</li>
+</ul>
+<p>用漸層背景做兩個顏色區塊拼接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background-image: linear-gradient(115deg, #f00 50%, #ff0 50%);</span><br><span class="line">                              角度, 起始色彩 開始漸層位置, 結束色彩 結束漸層位置 </span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://codepen.io/jskrtivy-the-animator/pen/PovQrQm">範例</a></p>
+<h2 id="背景重複設定"><a href="#背景重複設定" class="headerlink" title="背景重複設定"></a>背景重複設定</h2><p>background-repeat 用來設定背景圖是否重複，預設是 repeat(重複撲滿整個容器，會出現裁切現象)</p>
+<ol>
+<li>background-repeat: repeat (預設)</li>
+<li>background-repeat: no-repeat (不重複)</li>
 <li>background-repeat: repeat-x (水平方向位移)</li>
 <li>background-repeat: repeat-y(垂直方向位移)</li>
 </ol>
+<p><img src="/../images/css/bg-repeat.png" alt="repeat"><br><img src="/../images/css/bg-repeat-no.png" alt="no-repeat"><br><img src="/../images/css/bg-repeat-x.png" alt="repeat-x"><br><img src="/../images/css/bg-repeat-y.png" alt="repeat-y"></p>
+<ol start="5">
+<li>background-repeat: space<br>  在不裁切，不變形，不縮放的情況下重複背景圖片，有多餘空間會分布在圖片之間。</li>
+</ol>
+<p><img src="/../images/css/bg-repeat-space.png" alt="space"></p>
+<ol start="6">
+<li>background-repeat: round<br>  使用縮放或變形的方式，讓圖片在不裁切下重複填滿容器。</li>
+</ol>
+<p> <img src="/../images/css/bg-repeat-round.png" alt="round"></p>
+<h3 id="x-y-軸設定"><a href="#x-y-軸設定" class="headerlink" title="x, y 軸設定"></a>x, y 軸設定</h3><p>background-repeat，也可以寫成兩個值，分別代表 x軸，y軸。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">background-repeat</span>: no-repeat round;</span><br></pre></td></tr></table></figure>
+
+<p>可以達到 x 軸不重複，y軸則不裁切方式重複。</p>
+<p><img src="/../images/css/bg-repeat-x-y.png"></p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/jskrtivy-the-animator/pen/bGyvREg">codepen</a></p>
+<h2 id="背景圖片位置"><a href="#背景圖片位置" class="headerlink" title="背景圖片位置"></a>背景圖片位置</h2><p>可以用 background-position 來設定背景圖位置，可設定值或關鍵字。</p>
+<ul>
+<li>值: px、%、em</li>
+<li>關鍵字: (x軸, y軸)<br>  left top (左上)<br>  center center (正中)<br>  right bottom (右下)<br>  50px center (距離左側50px 垂直居中)<br>  center 50px (水平居中，距離上方50px)<br>  right 100px bottom 30px (距離右方 100px 距離下方 30px)</li>
+</ul>
+<h2 id="背景圖片大小"><a href="#背景圖片大小" class="headerlink" title="背景圖片大小"></a>背景圖片大小</h2><p>background-size 可以用來設定背景圖片大小，可設定的值有:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">background-size</span>: auto;</span><br><span class="line"><span class="attribute">background-size</span>: <span class="number">200px</span>;</span><br><span class="line"><span class="attribute">background-size</span>: <span class="number">200pt</span>;</span><br><span class="line"><span class="attribute">background-size</span>: <span class="number">2em</span>; </span><br><span class="line"><span class="attribute">background-size</span>: <span class="number">50%</span>; //百分比</span><br><span class="line"><span class="attribute">background-size</span>: cover;</span><br><span class="line"><span class="attribute">background-size</span>: contain;</span><br><span class="line"><span class="attribute">background-size</span>: initial;</span><br><span class="line"><span class="attribute">background-size</span>: inherit;</span><br></pre></td></tr></table></figure>
+
+<h3 id="百分比的問題"><a href="#百分比的問題" class="headerlink" title="百分比的問題"></a>百分比的問題</h3><p>當設定 background-size: 100% 100% 時，表示背景圖要跟容器一樣大，但當容器尺寸改變時，例如高度不變，寬度卻變窄，圖片會因為尺寸和容器的寬高比不同而變形。</p>
+<h3 id="cover-和-contain"><a href="#cover-和-contain" class="headerlink" title="cover 和 contain"></a>cover 和 contain</h3><ul>
+<li>cover: 讓圖片在「不變形」、「寬高等比例」、「必要時裁切」的方式填滿整個空間。</li>
+<li>cotain: 讓圖片在「不變形」、「寬高等比例」、「不裁切」的方式填滿整個空間。</li>
+</ul>
+<p><img src="/../images/css/bg-cover.png" alt="cover"><br><img src="/../images/css/bg-cotain.png" alt="contain"></p>
+<h2 id="背景圖範圍"><a href="#背景圖範圍" class="headerlink" title="背景圖範圍"></a>背景圖範圍</h2><p>預設背景圖範圍是在邊框線以內(border)，background-origin 可以設定背景原點，也就是圖片依容器中的卡個座標為起點。可設定的值有:</p>
+<ol>
+<li>content-box:<br>指 css 屬性 width、height 定出的範圍內，若沒指定 width、height 則會在padding內。</li>
+<li>padding-box<br>指 css 屬性 border 內(不含border範圍)</li>
+<li>border-box<br>指 css 屬性 border 內(含border範圍)</li>
+</ol>
+<p><img src="/../images/css/bg-origin.png"></p>
+<h2 id="背景圖固定方式"><a href="#背景圖固定方式" class="headerlink" title="背景圖固定方式"></a>背景圖固定方式</h2><p>background-attachment 用來設定背景圖是要依照「視窗可見範圍」的捲軸來滾動，或是依照容器區塊來滾動。</p>
+<p>可以設定的值包括:</p>
+<ol>
+<li>scroll: 捲動</li>
+<li>fixed: 固定</li>
+<li>local: 區域</li>
+</ol>
+<h3 id="scroll-捲動背景"><a href="#scroll-捲動背景" class="headerlink" title="scroll 捲動背景"></a>scroll 捲動背景</h3><p>scroll 會依照視窗的卷軸來捲動，當視窗卷軸捲動時，背景圖會被捲走，也是瀏覽器預設使用的值。要注意的是，當捲動的不是瀏覽器視窗，而是內部容器視窗時，內部容器的背景圖不會被捲走。</p>
+<p><img src="https://raw.githubusercontent.com/tinatyc/IThome-gif/master/Amos_gif/background-attachment02.gif"></p>
+<h3 id="fixed-固定背景"><a href="#fixed-固定背景" class="headerlink" title="fixed 固定背景"></a>fixed 固定背景</h3><p>background-attachment: fixed，會將視窗可見範圍當作定位空間，設定後圖片位置會跑到視窗左上角。</p>
+<p><img src="https://raw.githubusercontent.com/tinatyc/IThome-gif/master/Amos_gif/background-attachment03.gif"></p>
+<h3 id="Local"><a href="#Local" class="headerlink" title="Local"></a>Local</h3><p>背景圖片會「跟著所在空間的捲軸」捲走，所以可以看到內部的淺黃色區塊捲動捲軸時，該區塊的背景圖就會跟著被捲走。</p>
+<p><img src="https://raw.githubusercontent.com/tinatyc/IThome-gif/master/Amos_gif/background-attachment04.gif"></p>
+<h3 id="簡易版視差滾動"><a href="#簡易版視差滾動" class="headerlink" title="簡易版視差滾動"></a>簡易版視差滾動</h3><p>利用 background-attachment: fixed，將背景圖固定，可以做到簡易版視差滾動效果。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/jskrtivy-the-animator/pen/bGyvRKo">範例</a></p>
+<h2 id="background-縮寫"><a href="#background-縮寫" class="headerlink" title="background 縮寫"></a>background 縮寫</h2><p>background 也可以寫成縮寫語法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">background</span>: gray <span class="built_in">url</span>(<span class="string">&quot;amos.png&quot;</span>) scroll no-repeat <span class="number">50%</span> <span class="number">50%</span> / <span class="number">50%</span> <span class="number">50%</span>;</span><br></pre></td></tr></table></figure>
+
+<p>上面分別對應的值如下</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">background</span>: color image attachment repeat poition / size</span><br></pre></td></tr></table></figure>
+
+<p>最後面那段斜線用來區隔 position 和 size。</p>
+<h3 id="background-寫法注意"><a href="#background-寫法注意" class="headerlink" title="background 寫法注意"></a>background 寫法注意</h3><p>當  background-position &#x2F; background-size 這一組值，在僅有 background-position 時 可以省略 &#x2F; ，但要寫background-size 時，要與 background-position 一起寫。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 有效寫法</span><br><span class="line"><span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">&quot;amos.png&quot;</span>) no-repeat center</span><br><span class="line">background: <span class="built_in">url</span>(<span class="string">&quot;amos.png&quot;</span>) no-repeat center / <span class="number">50%</span> <span class="number">50%</span>;</span><br><span class="line"><span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">&quot;amos.png&quot;</span>) no-repeat center / cover;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 無效寫法</span><br><span class="line"><span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">&quot;amos.png&quot;</span>) no-repeat / <span class="number">50%</span> <span class="number">50%</span>;</span><br><span class="line"><span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">&quot;amos.png&quot;</span>) no-repeat / cover;</span><br><span class="line"><span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">&quot;amos.png&quot;</span>) no-repeat center cover;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
 
     </div>
 

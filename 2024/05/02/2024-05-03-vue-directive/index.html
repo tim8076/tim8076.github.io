@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://miro.medium.com/v2/resize:fit:828/format:webp/1*lQpSfwvelQSht2zk83u9xA.png">
 <meta property="og:image" content="https://miro.medium.com/v2/resize:fit:828/format:webp/1*MAV67_em8CmFY05vVDtnFQ.png">
 <meta property="article:published_time" content="2024-05-02T07:06:39.000Z">
-<meta property="article:modified_time" content="2024-06-08T05:54:19.552Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.365Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
@@ -159,7 +159,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-bind-%E5%B1%AC%E6%80%A7%E7%B6%81%E5%AE%9A"><span class="nav-number">2.</span> <span class="nav-text">v-bind 屬性綁定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-model-%E8%A1%A8%E5%96%AE%E7%B6%81%E5%AE%9A"><span class="nav-number">3.</span> <span class="nav-text">v-model 表單綁定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#input-%E6%96%87%E5%AD%97%E6%A1%86"><span class="nav-number">3.1.</span> <span class="nav-text">input 文字框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select%E6%93%8D%E4%BD%9C"><span class="nav-number">3.2.</span> <span class="nav-text">select操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select%E5%A4%9A%E9%81%B8%E6%96%B9%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">select多選方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#checkbox-%E5%96%AE%E9%81%B8%E6%A1%86"><span class="nav-number">3.4.</span> <span class="nav-text">checkbox 單選框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#checkbox-%E8%A4%87%E9%81%B8%E6%A1%86"><span class="nav-number">3.5.</span> <span class="nav-text">checkbox 複選框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#radio-%E5%96%AE%E9%81%B8%E6%A1%86"><span class="nav-number">3.6.</span> <span class="nav-text">radio 單選框</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-model%E4%BF%AE%E9%A3%BE%E7%AC%A6"><span class="nav-number">4.</span> <span class="nav-text">v-model修飾符</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-bind-%E5%B1%AC%E6%80%A7%E7%B6%81%E5%AE%9A"><span class="nav-number">2.</span> <span class="nav-text">v-bind 屬性綁定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Boolean-%E5%80%BC%E7%B6%81%E5%AE%9A"><span class="nav-number">3.</span> <span class="nav-text">Boolean 值綁定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8B%95%E6%85%8B%E6%8C%87%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">動態指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-model-%E8%A1%A8%E5%96%AE%E7%B6%81%E5%AE%9A"><span class="nav-number">5.</span> <span class="nav-text">v-model 表單綁定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#input-%E6%96%87%E5%AD%97%E6%A1%86"><span class="nav-number">5.1.</span> <span class="nav-text">input 文字框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select%E6%93%8D%E4%BD%9C"><span class="nav-number">5.2.</span> <span class="nav-text">select操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select%E5%A4%9A%E9%81%B8%E6%96%B9%E6%B3%95"><span class="nav-number">5.3.</span> <span class="nav-text">select多選方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#checkbox-%E5%96%AE%E9%81%B8%E6%A1%86"><span class="nav-number">5.4.</span> <span class="nav-text">checkbox 單選框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#checkbox-%E8%A4%87%E9%81%B8%E6%A1%86"><span class="nav-number">5.5.</span> <span class="nav-text">checkbox 複選框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#radio-%E5%96%AE%E9%81%B8%E6%A1%86"><span class="nav-number">5.6.</span> <span class="nav-text">radio 單選框</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-model%E4%BF%AE%E9%A3%BE%E7%AC%A6"><span class="nav-number">6.</span> <span class="nav-text">v-model修飾符</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -172,18 +172,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -264,7 +264,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-06-08 13:54:19" itemprop="dateModified" datetime="2024-06-08T13:54:19+08:00">2024-06-08</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -296,9 +296,20 @@
 
 <p>v-bind 指令的簡寫為 <code>:</code></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">:id</span>=<span class="string">&quot;customId&quot;</span>&gt;</span>123<span class="tag">&lt;/<span class="name">p</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>當 data 內的資料為 null 或 undefined 時，屬性會從標籤移除。</p>
+<h2 id="Boolean-值綁定"><a href="#Boolean-值綁定" class="headerlink" title="Boolean 值綁定"></a>Boolean 值綁定</h2><p>v-bind 綁定的值如果是 boolean 時，當值為  truthy value 或是空字串時，屬性都會被渲染</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">:disabled</span>=<span class="string">&quot;isButtonDisabled&quot;</span>&gt;</span>Button<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="動態指令"><a href="#動態指令" class="headerlink" title="動態指令"></a>動態指令</h2><p>可以用 [] 動態帶入指令的名稱。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:</span>[<span class="attr">eventName</span>]=<span class="string">&quot;doSomething&quot;</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- shorthand --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> @[<span class="attr">eventName</span>]=<span class="string">&quot;doSomething&quot;</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="v-model-表單綁定"><a href="#v-model-表單綁定" class="headerlink" title="v-model 表單綁定"></a>v-model 表單綁定</h2><p>常見的表單元素如 <code>&lt;select&gt; &lt;input&gt;</code> 等，可以透過 v-model 來做資料的雙向綁定，v-model 會根據不同表單類別來更新元素內容。</p>
 <h3 id="input-文字框"><a href="#input-文字框" class="headerlink" title="input 文字框"></a>input 文字框</h3><p>在常見的 input 加上 v-model 後，此時輸入框會自動綁定 input 事件。當輸入框的文字被更改，會自動更新data內資料。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">&quot;message&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;edit me&quot;</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// vue3 寫法</span></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> &#123; createApp &#125; = <span class="title class_">Vue</span>;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> vm = <span class="title function_">createApp</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">data</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">message</span>: <span class="string">&#x27;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">  &#125;);</span></span><br><span class="line"><span class="language-javascript">  vm.<span class="title function_">mount</span>(<span class="string">&#x27;#app&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>v-model 其實就是語法糖，做的就是監聽 input 的 value，當value更改時觸發input事件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">  <span class="attr">:value</span>=<span class="string">&quot;text&quot;</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">input</span>=<span class="string">&quot;event =&gt; text = event.target.value&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 
 <h3 id="select操作"><a href="#select操作" class="headerlink" title="select操作"></a>select操作</h3><p><img src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*xrOqe84wqQInvBRcpV_IEg.png"><br><img src="https://miro.medium.com/v2/resize:fit:604/format:webp/1*OpRPvvV7Bn3o_-w3jCA9xA.png"></p>

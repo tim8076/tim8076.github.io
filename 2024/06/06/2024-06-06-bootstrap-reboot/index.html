@@ -29,7 +29,7 @@
 <meta property="og:description" content="Bootstrap 使用的基礎樣式">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2024-06-06T07:13:54.000Z">
-<meta property="article:modified_time" content="2024-06-08T05:54:19.569Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.372Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="Bootstrap">
 <meta name="twitter:card" content="summary">
@@ -157,18 +157,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -249,7 +249,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-06-08 13:54:19" itemprop="dateModified" datetime="2024-06-08T13:54:19+08:00">2024-06-08</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -272,22 +272,30 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="Reboot"><a href="#Reboot" class="headerlink" title="Reboot"></a>Reboot</h2><p>bootstrap 是使用 normalize css 為基底來寫全站樣式。</p>
+        <h2 id="Reboot"><a href="#Reboot" class="headerlink" title="Reboot"></a>Reboot</h2><p>bootstrap 是使用 normalize css 為基底來寫全站樣式，會給網站預設樣式， Normalize 並未將所有 HTML 標籤的預設樣式清除，像是文字標籤下方都保有留白，<ol>、<ul> 留有編號和圓點樣式。</p>
 <ul>
-<li>使用 rems 取代 ems </li>
-<li>取消元素 margin-top</li>
-<li>文字設定相關設定，盡量使用 inherit。</li>
+<li><p>使用 rems 取代 ems</p>
+</li>
+<li><p>取消元素 margin-top</p>
+</li>
+<li><p>文字設定相關設定，盡量使用 inherit。</p>
+</li>
+<li><p>針對 HTML 標籤自定義樣式</p>
+</li>
 </ul>
+<p>Bootstrap 已經有寫入以下樣式，不用另外撰寫<br>修改盒模型計算方式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">*,</span><br><span class="line">*<span class="selector-pseudo">::before</span>,</span><br><span class="line">*<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">img</span> &#123;</span><br><span class="line">  <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="body-設定"><a href="#body-設定" class="headerlink" title="body 設定"></a>body 設定</h3><p>以下是 bootstrap 對 body 的基本設定，可用變數的部分放在 <code>_root.scss</code></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// ._reboot<span class="selector-class">.scss</span></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="built_in">var</span>(--bs-body-font-family);</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1rem</span>;</span><br><span class="line">  <span class="attribute">font-weight</span>: <span class="number">400</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">1.5</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#dee216</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">var</span>(--bs-body-bg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="頁面設定"><a href="#頁面設定" class="headerlink" title="頁面設定"></a>頁面設定</h3><ol>
-<li>border-box: 設定 *, *::before, *::after 全部元素為border-box。</li>
+<li>border-box: 設定 _, _::before, *::after 全部元素為 border-box。</li>
 <li>body 上設定 文字大小 1rem。</li>
 <li>背景色彩預設為 #fff 白色。</li>
 </ol>
 <h3 id="字體設定"><a href="#字體設定" class="headerlink" title="字體設定"></a>字體設定</h3><p>使用 system ui 字體，讓字體在每個裝置都能很好呈現。</p>
-<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$font-family-sans-serif</span>:</span><br><span class="line">  // Cross-platform generic font family (default user interface font)</span><br><span class="line">  system-ui,</span><br><span class="line">  // Safari for macOS and iOS (San Francisco)</span><br><span class="line">  -apple-system,</span><br><span class="line">  // Windows</span><br><span class="line">  <span class="string">&quot;Segoe UI&quot;</span>,</span><br><span class="line">  // Android</span><br><span class="line">  Roboto,</span><br><span class="line">  // older macOS and iOS</span><br><span class="line">  <span class="string">&quot;Helvetica Neue&quot;</span>,</span><br><span class="line">  // Linux</span><br><span class="line">  <span class="string">&quot;Noto Sans&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Liberation Sans&quot;</span>,</span><br><span class="line">  // Basic web fallback</span><br><span class="line">  Arial,</span><br><span class="line">  // Sans serif fallback</span><br><span class="line">  sans-serif,</span><br><span class="line">  // Emoji fonts</span><br><span class="line">  <span class="string">&quot;Apple Color Emoji&quot;</span>, <span class="string">&quot;Segoe UI Emoji&quot;</span>, <span class="string">&quot;Segoe UI Symbol&quot;</span>, <span class="string">&quot;Noto Color Emoji&quot;</span> !default;</span><br></pre></td></tr></table></figure>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$font-family-sans-serif</span>:</span><br><span class="line">  // Cross-platform generic font family (default user interface font)</span><br><span class="line">  system-ui,</span><br><span class="line">  // Safari for macOS and iOS (San Francisco)</span><br><span class="line">  -apple-system, // Windows</span><br><span class="line">  <span class="string">&quot;Segoe UI&quot;</span>,</span><br><span class="line">  // Android</span><br><span class="line">  Roboto, // older macOS and iOS</span><br><span class="line">  <span class="string">&quot;Helvetica Neue&quot;</span>,</span><br><span class="line">  // Linux</span><br><span class="line">  <span class="string">&quot;Noto Sans&quot;</span>, <span class="string">&quot;Liberation Sans&quot;</span>, // Basic web fallback</span><br><span class="line">  Arial,</span><br><span class="line">  // Sans serif fallback</span><br><span class="line">  sans-serif, // Emoji fonts</span><br><span class="line">  <span class="string">&quot;Apple Color Emoji&quot;</span>, <span class="string">&quot;Segoe UI Emoji&quot;</span>, <span class="string">&quot;Segoe UI Symbol&quot;</span>, <span class="string">&quot;Noto Color Emoji&quot;</span> !default;</span><br></pre></td></tr></table></figure>
 
 <h3 id="標題"><a href="#標題" class="headerlink" title="標題"></a>標題</h3><p><code>&lt;h1&gt;~&lt;h6&gt;</code> 標題取消 margin-top，並加上 <code>margin-bottom: .5rem</code>，<code>line-height: 1.2;</code></p>
 <h3 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h3><p><code>&lt;p&gt;&lt;/p&gt;</code> 段落取消 margin-top，並加上 <code>margin-bottom: 1rem</code></p>

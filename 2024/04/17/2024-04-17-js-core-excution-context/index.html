@@ -30,8 +30,10 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/1000/1*__mmZCynRMxNwsHfGStYYg.png">
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/1000/1*MN5_XRqtujvxGd8odbvZ7g.png">
+<meta property="og:image" content="https://tim8076.github.io/images/js/call-stack-1.png">
+<meta property="og:image" content="https://tim8076.github.io/images/js/call-stack-2.png">
 <meta property="article:published_time" content="2024-04-17T03:35:24.000Z">
-<meta property="article:modified_time" content="2024-04-20T07:54:40.784Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.359Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="JS 核心篇">
 <meta name="twitter:card" content="summary">
@@ -147,7 +149,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%B7%E8%A1%8C%E7%92%B0%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">執行環境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%9F%9F%E7%92%B0%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">全域環境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%B7%E8%A1%8C%E5%A0%86%E7%96%8A"><span class="nav-number">3.</span> <span class="nav-text">執行堆疊</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%B7%E8%A1%8C%E7%92%B0%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">執行環境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%9F%9F%E7%92%B0%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">全域環境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%B7%E8%A1%8C%E5%A0%86%E7%96%8A-call-stack"><span class="nav-number">3.</span> <span class="nav-text">執行堆疊 (call stack)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#blowing-the-stack"><span class="nav-number">3.1.</span> <span class="nav-text">blowing the stack</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -160,18 +162,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -252,7 +254,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -282,11 +284,14 @@
 <li>瀏覽器: 產生 window 變數，還有一個 this(等於 window)。</li>
 <li>nodeJS: 產生 global 變數， 還有一個 this(等於 global)。</li>
 </ul>
-<h2 id="執行堆疊"><a href="#執行堆疊" class="headerlink" title="執行堆疊"></a>執行堆疊</h2><p><img src="https://cdn-images-1.medium.com/max/1000/1*MN5_XRqtujvxGd8odbvZ7g.png"></p>
+<h2 id="執行堆疊-call-stack"><a href="#執行堆疊-call-stack" class="headerlink" title="執行堆疊 (call stack)"></a>執行堆疊 (call stack)</h2><p><img src="https://cdn-images-1.medium.com/max/1000/1*MN5_XRqtujvxGd8odbvZ7g.png"></p>
 <p>當多個函式被執行時，依照執行的順序，執行環境會往上堆疊。</p>
 <p>全域環境 &#x3D;&gt;  dosomething 環境 &#x3D;&gt; sayHi 環境</p>
 <p>當函式跑完後則依序離開</p>
 <p>sayHi 環境離開 &#x3D;&gt; dosomething 環境離開 &#x3D;&gt; 回到全域執行環境</p>
+<h3 id="blowing-the-stack"><a href="#blowing-the-stack" class="headerlink" title="blowing the stack"></a>blowing the stack</h3><p> 當我們寫了一個遞回函式時，也就是 function 不斷呼叫function 本身，瀏覽器會產生 maximum call 錯誤。</p>
+<p> <img src="/../images/js/call-stack-1.png"></p>
+<p> <img src="/../images/js/call-stack-2.png"></p>
 
     </div>
 

@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://miro.medium.com/max/1278/1*lpOInYC-ccAVD_dBcv5csg.png">
 <meta property="og:image" content="https://miro.medium.com/max/336/1*IP1XW0OtYFB_Am976yXjNA.png">
 <meta property="article:published_time" content="2022-06-21T13:01:42.000Z">
-<meta property="article:modified_time" content="2024-04-20T07:54:40.709Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.352Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="ES6">
 <meta name="twitter:card" content="summary">
@@ -164,18 +164,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -256,7 +256,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -302,18 +302,8 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> a =<span class="number">3</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
 
 <p>如上面程式，我們在第 2 行宣告了 a 變數等於3，但在第一行就讀取a變數，此時並不會報錯，因為 a 已經有記憶體位置了，只是還沒給予值，所以會是 undefined。 在第3行讀取a變數就可以正確讀到 3 的值。</p>
-<p>let 跟 const 沒有向上提升， 必須先宣告、後使用。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b);  <span class="comment">// b is not defined</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">3</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b);  <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
+<p>用 let 和 const 宣告的變數一樣會有 hosting，在創造階段被存入記憶體，在執行階段被賦值。但若執行階段前就要去讀取變數的話，會出現暫時性死區的錯誤。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 創造</span></span><br><span class="line"><span class="keyword">let</span> <span class="title class_">Ming</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Ming</span>) <span class="comment">// cannot access Ming before initialization</span></span><br><span class="line"><span class="comment">// 執行</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Ming</span> = <span class="string">&#x27;小明&#x27;</span>;</span><br></pre></td></tr></table></figure>
     </div>
 
     

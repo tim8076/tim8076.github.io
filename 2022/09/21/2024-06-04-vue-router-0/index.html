@@ -29,9 +29,10 @@
 <meta property="og:description" content="前端路由與後端路由介紹">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://static.coderbridge.com/img/techbridge/images/huli/split/server.png">
+<meta property="og:image" content="https://tim8076.github.io/images/js/vue/vue-1.png">
 <meta property="og:image" content="https://static.coderbridge.com/img/techbridge/images/huli/split/ele2.png">
 <meta property="article:published_time" content="2022-09-21T02:50:24.000Z">
-<meta property="article:modified_time" content="2024-06-08T05:54:19.566Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.370Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="vue-router">
 <meta name="twitter:card" content="summary">
@@ -160,18 +161,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -252,7 +253,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-06-08 13:54:19" itemprop="dateModified" datetime="2024-06-08T13:54:19+08:00">2024-06-08</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -277,15 +278,16 @@
     <div class="post-body" itemprop="articleBody">
         <h2 id="SSR-server-side-render-伺服器端渲染"><a href="#SSR-server-side-render-伺服器端渲染" class="headerlink" title="SSR (server side render) 伺服器端渲染"></a>SSR (server side render) 伺服器端渲染</h2><p><img src="https://static.coderbridge.com/img/techbridge/images/huli/split/server.png"></p>
 <p>SSR (Server-Side Rendering，伺服器端渲染) 表示伺服器收到前端的請求之後，伺服器會向 model(資料庫)要對應的資料，把資料帶給 view。view 再回傳一份完整的 HTML 檔案（這個動作就叫做 render），而瀏覽器拿到之後，只要顯示出來就好。</p>
-<h2 id="CSR-client-side-render-客戶端渲染"><a href="#CSR-client-side-render-客戶端渲染" class="headerlink" title="CSR (client side render) 客戶端渲染"></a>CSR (client side render) 客戶端渲染</h2><p>client side render 指的就是當前端拿到資料以後，才用 JavaScript 動態的把那些內容填到網頁上面。</p>
+<h2 id="CSR-client-side-render-客戶端渲染"><a href="#CSR-client-side-render-客戶端渲染" class="headerlink" title="CSR (client side render) 客戶端渲染"></a>CSR (client side render) 客戶端渲染</h2><p><img src="/../images/js/vue/vue-1.png"></p>
+<p>client side render 指的就是當前端拿到資料以後，才用 JavaScript 動態的把那些內容填到網頁上面。</p>
 <p>CSR 的 HTML 只需要一個簡單的根節點：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;root&quot;</span>&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 
 <p>至於節點內的資料，會由 JavaScript 打 api 去跟資料庫要資料後，渲染到畫面上。</p>
-<p>當在csr渲染的網站，我用右鍵 -&gt; 檢視原始碼，會發現幾乎是空的：</p>
+<p>當在 csr 渲染的網站，我用右鍵 -&gt; 檢視原始碼，會發現幾乎是空的：</p>
 <p><img src="https://static.coderbridge.com/img/techbridge/images/huli/split/ele2.png"></p>
 <p>因為我們是在執行期間「動態」去跟後端伺服器拿資料，再動態產生你看到的那些元素，而那些元素原本不存在 index.html 裡面。</p>
-<h3 id="前後端分離"><a href="#前後端分離" class="headerlink" title="前後端分離"></a>前後端分離</h3><p>使用csr渲染的情況下，後端只要專注於處理資料庫的資料和制定 API 文件，提供前端需要的資料就好。<br>前端工程師利用 ajax 從後端拿資料，並且在自己這邊用 JavaScript 動態產生內容。</p>
+<h3 id="前後端分離"><a href="#前後端分離" class="headerlink" title="前後端分離"></a>前後端分離</h3><p>使用 csr 渲染的情況下，後端只要專注於處理資料庫的資料和制定 API 文件，提供前端需要的資料就好。<br>前端工程師利用 ajax 從後端拿資料，並且在自己這邊用 JavaScript 動態產生內容。</p>
 <h2 id="後端路由"><a href="#後端路由" class="headerlink" title="後端路由"></a>後端路由</h2><p>網站的伺服器會依照網址的結構，跟資料庫撈資料後，回傳對應的內容給瀏覽器渲染，這樣的機制稱為「網站路由」，管理網站路由的程式稱為 router。</p>
 <h2 id="前端路由"><a href="#前端路由" class="headerlink" title="前端路由"></a>前端路由</h2><p>在使用 csr 渲染時，因為只有 index.html 檔案，就必須由前端進行路由管理。因為前端只有一個檔案，所以網址可能像是這樣：<a target="_blank" rel="noopener" href="https://example.com/index.html%E3%80%82%E4%BB%A5vue-router%E7%9A%84%E5%85%A9%E7%A8%AE%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F%E4%BE%86%E8%A7%A3%E8%AA%AA">https://example.com/index.html。以vue-router的兩種路由模式來解說</a>:</p>
 <h3 id="Hash-模式"><a href="#Hash-模式" class="headerlink" title="Hash 模式"></a>Hash 模式</h3><p>在 hash 模式中，URL 的路徑會包含一個 # 符號。例如：</p>
@@ -296,13 +298,13 @@
 
 <p>當瀏覽器開啟以上網址時，會自動捲動到 <code>&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</code> 錨點元素的位置。</p>
 <p>hash 模式利用 URL 的 hash（#）部分來模擬一個完整的 URL，當 hash 改變時，頁面不會重新加載，同時也會增加一筆紀錄到瀏覽歷史裡，我們可以透過「上一頁」、「下一頁」來切換不同錨點位置。這使得單頁應用（SPA）能夠在不重新加載頁面的情況下進行導航。</p>
-<p>優點: </p>
+<p>優點:</p>
 <ol>
 <li>簡單易用：不需要服務器配置，直接在 URL 中使用 # 符號即可，URL 變更不會發送請求到服務器。</li>
 <li>廣泛的瀏覽器支持：所有瀏覽器，包括舊版本的瀏覽器，都支持 hash 模式。</li>
 <li>方便開發和測試：由於不需要服務器配置，開發和測試環境下更簡單便捷。</li>
 </ol>
-<p>缺點: </p>
+<p>缺點:</p>
 <ol>
 <li>不美觀的 URL：URL 包含 # 符號，例 <a target="_blank" rel="noopener" href="http://example.com/#/about%EF%BC%8C%E4%B8%8D%E5%A4%A0%E6%B8%85%E6%99%B0%E5%92%8C%E5%B0%88%E6%A5%AD%E3%80%82">http://example.com/#/about，不夠清晰和專業。</a></li>
 <li>SEO 不友好：搜索引擎一般不會索引 # 之後的部分，對 SEO 不利。</li>
@@ -312,14 +314,14 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://example.com/about</span><br></pre></td></tr></table></figure>
 
 <p>History API 通過 pushState 和 replaceState 提供了一種無需刷新頁面即可改變 URL 和管理歷史記錄的方法。</p>
-<p>優點: </p>
+<p>優點:</p>
 <ol>
 <li>美觀的 URL：URL 不包含 # 符號，更清晰和專業，例如 <a target="_blank" rel="noopener" href="http://example.com/about%EF%BC%8C%E5%B0%8D">http://example.com/about，對</a> SEO 更友好。</li>
 <li>SEO 優化：搜索引擎可以抓取和索引這些 URL，有助於提高網站的搜索引擎排名。</li>
 </ol>
-<p>缺點: </p>
+<p>缺點:</p>
 <ol>
-<li><p>後端需相對應的配置: 沒有後端的配置，使用者直接輸入網址，就會被導到404 error頁面。因此在後端的配置必須加上「如果URL匹配不到靜態資源，就全都導到index頁面」的程式。</p>
+<li><p>後端需相對應的配置: 沒有後端的配置，使用者直接輸入網址，就會被導到 404 error 頁面。因此在後端的配置必須加上「如果 URL 匹配不到靜態資源，就全都導到 index 頁面」的程式。</p>
 </li>
 <li><p>不支援舊瀏覽器：對於不支援 HTML5 History API 的舊瀏覽器無法使用。</p>
 </li>

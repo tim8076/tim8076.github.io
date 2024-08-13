@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://miro.medium.com/max/1400/1*rM-6FClWTQvcFPXmYmq8JQ.png">
 <meta property="og:image" content="https://miro.medium.com/max/1400/1*qNvdGY6XePWNMA3h4a--LQ.png">
 <meta property="article:published_time" content="2022-06-21T07:52:38.000Z">
-<meta property="article:modified_time" content="2024-04-20T07:54:40.707Z">
+<meta property="article:modified_time" content="2024-08-13T03:20:30.351Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
@@ -162,18 +162,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -254,7 +254,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -279,7 +279,7 @@
     <div class="post-body" itemprop="articleBody">
         <p><img src="https://miro.medium.com/max/1400/0*adRfjDwIz9wuzSTb" alt="git流程"></p>
 <h2 id="新增資料並加入索引"><a href="#新增資料並加入索引" class="headerlink" title="新增資料並加入索引"></a>新增資料並加入索引</h2><p>上一章節已經將專案的數據庫建立好了，那我們先在專案內新增一些資料，我先建立一個 「sample.txt」的文字檔案，並在裡面打一些內容。</p>
-<p>此時我們可以將新增的資料加入索引，加入索引的檔案之後才能被commit 提交，方法如下:</p>
+<p>此時我們可以將新增的資料加入索引，加入索引的檔案之後才能被 commit 提交，方法如下:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .    // 將所有更新的檔案加入索引。</span><br><span class="line">git add 檔案名稱  // 將特定檔案加入索引。</span><br></pre></td></tr></table></figure>
 
 <h2 id="查詢檔案狀況"><a href="#查詢檔案狀況" class="headerlink" title="查詢檔案狀況"></a>查詢檔案狀況</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status  // 查詢目前檔案狀況</span><br></pre></td></tr></table></figure>
@@ -292,11 +292,12 @@
 <h2 id="提交檔案"><a href="#提交檔案" class="headerlink" title="提交檔案"></a>提交檔案</h2><p>若確認檔案都加入索引後，可以將索引內的檔案提交到數據庫</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;更新內容&quot;</span><br></pre></td></tr></table></figure>
 
-<p>我們使用 git commit 將本次的更新提交到數據庫，-m 可以輸入更新的內容重點。<br>通常我們會在專案開發完某個功能後，做一次commit。例如完成首頁輪播功能，或切完首頁版型等等，方便之後做版本切換。</p>
+<p>我們使用 git commit 將本次的更新提交到數據庫，-m 可以輸入更新的內容重點。<br>通常我們會在專案開發完某個功能後，做一次 commit。例如完成首頁輪播功能，或切完首頁版型等等，方便之後做版本切換。</p>
 <p><img src="https://miro.medium.com/max/1400/1*rM-6FClWTQvcFPXmYmq8JQ.png" alt="commit"></p>
 <h2 id="查詢紀錄"><a href="#查詢紀錄" class="headerlink" title="查詢紀錄"></a>查詢紀錄</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log  // 查詢過去commit 的紀錄</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://miro.medium.com/max/1400/1*qNvdGY6XePWNMA3h4a--LQ.png" alt="git log"></p>
+<p>若要退出，請鍵入小寫 q。</p>
 
     </div>
 
