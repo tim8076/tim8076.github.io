@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://miro.medium.com/v2/resize:fit:640/format:webp/1*oTTmoNXHKKamjTNyrBuAZg.png">
 <meta property="og:image" content="https://miro.medium.com/v2/resize:fit:828/format:webp/1*i1OT9EqwLLC1prlADlh71A.png">
 <meta property="article:published_time" content="2024-04-20T08:39:26.000Z">
-<meta property="article:modified_time" content="2024-04-21T07:59:36.598Z">
+<meta property="article:modified_time" content="2024-09-14T02:50:03.345Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="JS 基礎篇">
 <meta name="twitter:card" content="summary">
@@ -155,7 +155,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E8%A1%93%E9%81%8B%E7%AE%97%E5%AD%90"><span class="nav-number">1.</span> <span class="nav-text">算術運算子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%99%9F"><span class="nav-number">1.1.</span> <span class="nav-text">加號 (+)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%9B%E8%99%9F"><span class="nav-number">1.2.</span> <span class="nav-text">減號 (-)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%98%E8%99%9F"><span class="nav-number">1.3.</span> <span class="nav-text">乘號 (*)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%A4%E8%99%9F-x2F"><span class="nav-number">1.4.</span> <span class="nav-text">除號 (&#x2F;)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E9%A4%98%E6%95%B8"><span class="nav-number">1.5.</span> <span class="nav-text">取餘數 (%)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%9E%E5%A2%9E-%E9%81%9E%E6%B8%9B-%E2%80%93"><span class="nav-number">2.</span> <span class="nav-text">遞增 ++ 遞減 –</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E7%AD%89%EF%BC%9D%EF%BC%9D-%E8%88%87%E5%85%A8%E7%AD%89-%EF%BC%9D%EF%BC%9D%EF%BC%9D"><span class="nav-number">3.</span> <span class="nav-text">相等＝＝ 與全等 ＝＝＝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E7%AD%89%E6%96%BC%EF%BC%81%EF%BC%9D-%E8%88%87-%EF%BC%81%EF%BC%9D%EF%BC%9D"><span class="nav-number">4.</span> <span class="nav-text">不等於！＝ 與 ！＝＝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E6%B4%BE%E9%81%8B%E7%AE%97%E5%AD%90"><span class="nav-number">5.</span> <span class="nav-text">指派運算子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%97%E8%99%9F%E9%81%8B%E7%AE%97%E5%AD%90"><span class="nav-number">6.</span> <span class="nav-text">逗號運算子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%AD%90-Logical-Operator"><span class="nav-number">7.</span> <span class="nav-text">邏輯運算子 (Logical Operator)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Truthy-%E8%88%87-Falsy"><span class="nav-number">8.</span> <span class="nav-text">Truthy 與 Falsy</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E8%A1%93%E9%81%8B%E7%AE%97%E5%AD%90"><span class="nav-number">1.</span> <span class="nav-text">算術運算子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%99%9F"><span class="nav-number">1.1.</span> <span class="nav-text">加號 (+)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%9B%E8%99%9F"><span class="nav-number">1.2.</span> <span class="nav-text">減號 (-)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%98%E8%99%9F"><span class="nav-number">1.3.</span> <span class="nav-text">乘號 (*)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%A4%E8%99%9F-x2F"><span class="nav-number">1.4.</span> <span class="nav-text">除號 (&#x2F;)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E9%A4%98%E6%95%B8"><span class="nav-number">1.5.</span> <span class="nav-text">取餘數 (%)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%9E%E5%A2%9E-%E9%81%9E%E6%B8%9B"><span class="nav-number">2.</span> <span class="nav-text">遞增 ++ 遞減 - -</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E5%85%83%E9%81%8B%E7%AE%97%E5%AD%90"><span class="nav-number">3.</span> <span class="nav-text">一元運算子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E7%AD%89%EF%BC%9D%EF%BC%9D-%E8%88%87%E5%85%A8%E7%AD%89-%EF%BC%9D%EF%BC%9D%EF%BC%9D"><span class="nav-number">4.</span> <span class="nav-text">相等＝＝ 與全等 ＝＝＝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E7%AD%89%E6%96%BC%EF%BC%81%EF%BC%9D-%E8%88%87-%EF%BC%81%EF%BC%9D%EF%BC%9D"><span class="nav-number">5.</span> <span class="nav-text">不等於！＝ 與 ！＝＝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E6%B4%BE%E9%81%8B%E7%AE%97%E5%AD%90"><span class="nav-number">6.</span> <span class="nav-text">指派運算子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%97%E8%99%9F%E9%81%8B%E7%AE%97%E5%AD%90"><span class="nav-number">7.</span> <span class="nav-text">逗號運算子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%AD%90-Logical-Operator"><span class="nav-number">8.</span> <span class="nav-text">邏輯運算子 (Logical Operator)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Truthy-%E8%88%87-Falsy"><span class="nav-number">9.</span> <span class="nav-text">Truthy 與 Falsy</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -168,18 +168,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-count">343</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -260,7 +260,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-21 15:59:36" itemprop="dateModified" datetime="2024-04-21T15:59:36+08:00">2024-04-21</time>
+      <time title="修改時間：2024-09-14 10:50:03" itemprop="dateModified" datetime="2024-09-14T10:50:03+08:00">2024-09-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -311,10 +311,15 @@
 <h3 id="取餘數"><a href="#取餘數" class="headerlink" title="取餘數 (%)"></a>取餘數 (%)</h3><p>除了基本的四則運算之外，JavaScript 也有取餘數的運算子，以「百分比符號」 % 來表示。使用方式與除號類似，但得到的值是除法運算後的「餘數」：</p>
 <p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*oTTmoNXHKKamjTNyrBuAZg.png"></p>
 <p>與除法一樣的是，如果有其中一個不是數字的話，那麼 JavaScript 就會先在背後以 Nubmer() 作轉換後再進行計算。</p>
-<h2 id="遞增-遞減-–"><a href="#遞增-遞減-–" class="headerlink" title="遞增 ++ 遞減 –"></a>遞增 ++ 遞減 –</h2><p>當變數遇到了++ 就會+1 如 a++</p>
+<h2 id="遞增-遞減"><a href="#遞增-遞減" class="headerlink" title="遞增 ++ 遞減 - -"></a>遞增 ++ 遞減 - -</h2><p>當變數遇到了++ 就會+1 如 a++</p>
 <p>a &#x3D; a+1</p>
-<p>當變數遇到了 – 就會 -1 如 a–</p>
+<p>當變數遇到了 - - 就會 -1 如 a- -</p>
 <p>a &#x3D; a-1</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a++ 是先將值回傳，在進行累加</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a++); <span class="comment">// 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ++a 是先做計算，在賦值</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(++a); <span class="comment">// 2</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="一元運算子"><a href="#一元運算子" class="headerlink" title="一元運算子"></a>一元運算子</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+<span class="string">&quot;1&quot;</span> + <span class="comment">// 1</span></span><br><span class="line">  <span class="literal">true</span>; <span class="comment">// 1</span></span><br><span class="line">+<span class="string">&quot;50元&quot;</span>; <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<p>使用一元運算子時會將值嘗試轉型為數值(number)</p>
 <h2 id="相等＝＝-與全等-＝＝＝"><a href="#相等＝＝-與全等-＝＝＝" class="headerlink" title="相等＝＝ 與全等 ＝＝＝"></a>相等＝＝ 與全等 ＝＝＝</h2><p>在２個等號＝＝的情形下，數值會自動轉型，如下：</p>
 <p>＂１０＂ ＝＝ １０ &#x2F;&#x2F; true</p>
 <p>字串的１０被自動轉型成數字，所以兩邊相等。</p>
@@ -333,18 +338,32 @@
 <ul>
 <li>+&#x3D;：加法指派<br><code>x += 5; // 相當於 x = x + 5;</code></li>
 <li>-&#x3D;：減法指派<br><code>x -= 5; // 相當於 x = x - 5;</code></li>
-<li>*&#x3D;：乘法指派<br><code>x *= 2; // 相當於 x = x * 2;</code></li>
+<li>_&#x3D;：乘法指派<br><code>x _= 2; // 相當於 x = x \* 2;</code></li>
 <li>&#x2F;&#x3D;：除法指派<br><code>x /= 2; // 相當於 x = x / 2;</code></li>
 <li>%&#x3D;：取餘指派<br><code>x %= 3; // 相當於 x = x % 3;</code></li>
 </ul>
 <h2 id="逗號運算子"><a href="#逗號運算子" class="headerlink" title="逗號運算子"></a>逗號運算子</h2><p>在 JavaScript 中，逗號運算子（,）用於將多個表達式連接在一起，並按照從左到右的順序依次求值。</p>
 <p>以下是逗號運算子的用法和示例：</p>
 <ol>
-<li>在變數聲明中使用：在聲明變數的同時，可以使用逗號運算子定義多個變數。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>, b = <span class="number">2</span>, c = <span class="number">3</span>;</span><br></pre></td></tr></table></figure></li>
-<li>在函數調用中使用：可以在函數調用時使用逗號運算子傳遞多個參數。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">myFunction</span>(param1, param2, param3);</span><br></pre></td></tr></table></figure></li>
-<li>在表達式中使用：可以在表達式中使用逗號運算子串聯多個表達式，並返回最後一個表達式的結果。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = (<span class="number">1</span> + <span class="number">2</span>, <span class="number">3</span> + <span class="number">4</span>); <span class="comment">// x 等於 7，先計算 (1 + 2)，然後計算 3 + 4，返回 7</span></span><br></pre></td></tr></table></figure></li>
-<li>在迴圈中使用：可以在迴圈中使用逗號運算子來執行多個操作。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, j = <span class="number">10</span>; i &lt; j; i++, j--) &#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在變數聲明中使用：在聲明變數的同時，可以使用逗號運算子定義多個變數。</li>
 </ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>,</span><br><span class="line">  b = <span class="number">2</span>,</span><br><span class="line">  c = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在函數調用中使用：可以在函數調用時使用逗號運算子傳遞多個參數。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">myFunction</span>(param1, param2, param3);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在表達式中使用：可以在表達式中使用逗號運算子串聯多個表達式，並返回最後一個表達式的結果。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = (<span class="number">1</span> + <span class="number">2</span>, <span class="number">3</span> + <span class="number">4</span>); <span class="comment">// x 等於 7，先計算 (1 + 2)，然後計算 3 + 4，返回 7</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>在迴圈中使用：可以在迴圈中使用逗號運算子來執行多個操作。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, j = <span class="number">10</span>; i &lt; j; i++, j--) &#123;</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="邏輯運算子-Logical-Operator"><a href="#邏輯運算子-Logical-Operator" class="headerlink" title="邏輯運算子 (Logical Operator)"></a>邏輯運算子 (Logical Operator)</h2><ul>
 <li><p>「&amp;&amp;」：<br>當 &amp;&amp; 左右兩側的值同時為 true 時，則會得到 true 的結果。 若其中一方是 false 的情況下，則得到 false 。</p>
 </li>
@@ -360,6 +379,7 @@
 <li>如果是 Boolean 類型就再作後續判斷，若不是就會透過 ToBoolean 判斷是 falsy 或 truthy 來轉換成對應的 true 或 false。</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">expr1 &amp;&amp; expr2 : 如果expr1 為假值，就回傳 expr1，否則回傳 expr2</span><br><span class="line"></span><br><span class="line">expr1 || expr2 : 如果expr1 為真值，就回傳 expr1，否則回傳 expr2</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*i1OT9EqwLLC1prlADlh71A.png"></p>
 <h2 id="Truthy-與-Falsy"><a href="#Truthy-與-Falsy" class="headerlink" title="Truthy 與 Falsy"></a>Truthy 與 Falsy</h2><p>邏輯判斷中，為 false 的並非真的為 false 這個值；而被判定為 true 的也並非為這個值，因此我們給他 Falsy(假值) 與 Truthy(真值)</p>
 <p>Falsy 有 null、undefined、0、NaN、””(空值) 以及 false。</p>
@@ -413,7 +433,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

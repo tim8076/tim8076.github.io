@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tim8076.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="介紹 React 元件建立方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React (3) 元件建立">
+<meta property="og:url" content="https://tim8076.github.io/2024/09/03/2024-09-03-react-3/index.html">
+<meta property="og:site_name" content="Tim的前端日誌">
+<meta property="og:description" content="介紹 React 元件建立方法">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2024-09-03T05:06:32.000Z">
+<meta property="article:modified_time" content="2024-11-05T09:09:18.113Z">
+<meta property="article:author" content="Tim Chou">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://tim8076.github.io/2024/09/03/2024-09-03-react-3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://tim8076.github.io/2024/09/03/2024-09-03-react-3/","path":"2024/09/03/2024-09-03-react-3/","title":"React (3) 元件建立"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>React (3) 元件建立 | Tim的前端日誌</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tim的前端日誌</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E5%85%83%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">建立元件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%B6%E5%B1%A4%E5%82%B3%E5%85%A5%E8%B3%87%E6%96%99"><span class="nav-number">2.</span> <span class="nav-text">父層傳入資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-key-%E5%80%BC"><span class="nav-number">3.</span> <span class="nav-text">使用 key 值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%B4%E5%9C%88%E4%B8%80%E6%AC%A1%E5%B8%B6%E5%85%A5%E5%A4%9A%E5%80%8B-dom"><span class="nav-number">4.</span> <span class="nav-text">迴圈一次帶入多個 dom</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#props-%E9%A0%90%E8%A8%AD%E5%80%BC"><span class="nav-number">5.</span> <span class="nav-text">props 預設值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E8%A6%81%E5%9C%A8-state-%E4%B8%AD%E9%8F%A1%E5%83%8F%EF%BC%88mirror%EF%BC%89props"><span class="nav-number">6.</span> <span class="nav-text">不要在 state 中鏡像（mirror）props</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%8C%AF%E8%AA%A4%E7%AF%84%E4%BE%8B%EF%BC%9A"><span class="nav-number">6.1.</span> <span class="nav-text">錯誤範例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E7%A2%BA%E5%81%9A%E6%B3%95"><span class="nav-number">6.2.</span> <span class="nav-text">正確做法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A2%E7%8B%80%E5%85%83%E4%BB%B6"><span class="nav-number">7.</span> <span class="nav-text">巢狀元件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Children-props"><span class="nav-number">8.</span> <span class="nav-text">Children props</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pops-%E6%9B%B4%E6%96%B0%E6%99%82%EF%BC%8C%E8%87%AA%E5%8B%95%E6%9B%B4%E6%96%B0%E5%85%83%E4%BB%B6%E5%85%A7%E6%89%80%E6%9C%89%E7%8B%80%E6%85%8B"><span class="nav-number">9.</span> <span class="nav-text">pops 更新時，自動更新元件內所有狀態</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tim Chou</p>
+  <div class="site-description" itemprop="description">Zero to Hero</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">343</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/tim8076" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2024/09/03/2024-09-03-react-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Tim Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim的前端日誌">
+      <meta itemprop="description" content="Zero to Hero">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="React (3) 元件建立 | Tim的前端日誌">
+      <meta itemprop="description" content="介紹 React 元件建立方法">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          React (3) 元件建立
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2024-09-03 13:06:32" itemprop="dateCreated datePublished" datetime="2024-09-03T13:06:32+08:00">2024-09-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-11-05 17:09:18" itemprop="dateModified" datetime="2024-11-05T17:09:18+08:00">2024-11-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">介紹 React 元件建立方法</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="建立元件"><a href="#建立元件" class="headerlink" title="建立元件"></a>建立元件</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">Card</span> = (<span class="params">&#123; title, price, content, callToAction &#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;card mb-4&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;card-header&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h4</span> <span class="attr">className</span>=<span class="string">&quot;my-0&quot;</span>&gt;</span>&#123;title&#125;<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;card-body&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">className</span>=<span class="string">&quot;card-title&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          &#123; typeof price === &#x27;number&#x27; ? `$$&#123;price&#125;`: price &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;content&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">className</span>=<span class="string">&quot;btn btn-outline-primary&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          &#123;callToAction&#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面是一個卡片元件，React 元件必須以大寫開頭命名。卡片的內的資料可以透過 props 傳入，上面是透過解構的方式傳入 props 。如果不透過解構則會如下面方式取得資料。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">Card</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">  &#123; props.<span class="property">title</span> &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>return 原則</li>
+</ul>
+<ol>
+<li>結構只有一行時，可以直接 return</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://i.imgur.com/MK3eW3As.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;Katherine Johnson&quot;</span> /&gt;</span></span>;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>結構超過一行，必須加上 ()</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span>  (</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://i.imgur.com/MK3eW3As.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;Katherine Johnson&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="父層傳入資料"><a href="#父層傳入資料" class="headerlink" title="父層傳入資料"></a>父層傳入資料</h2><p>在父層可透過資料驅動的方式，將資料代入子層 Card 元件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> products = [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">id</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">title</span>: <span class="string">&#x27;基本版&#x27;</span>,</span><br><span class="line">      <span class="attr">price</span>: <span class="number">1000</span>,</span><br><span class="line">      <span class="attr">content</span>: <span class="string">&#x27;基本每週配給，包含高麗菜、空心菜，健康不馬乎&#x27;</span>,</span><br><span class="line">      <span class="attr">callToAction</span>: <span class="string">&#x27;免費試用&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">id</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">title</span>: <span class="string">&#x27;進階版&#x27;</span>,</span><br><span class="line">      <span class="attr">price</span>: <span class="number">6000</span>,</span><br><span class="line">      <span class="attr">content</span>: <span class="string">&#x27;奶蛋魚肉經營養師精確估計，適合三人小家庭使用，每週一、四配送&#x27;</span>,</span><br><span class="line">      <span class="attr">callToAction</span>: <span class="string">&#x27;永保健康&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">id</span>: <span class="number">3</span>,</span><br><span class="line">      <span class="attr">title</span>: <span class="string">&#x27;企業版&#x27;</span>,</span><br><span class="line">      <span class="attr">price</span>: <span class="string">&#x27;請洽客服&#x27;</span>,</span><br><span class="line">      <span class="attr">content</span>: <span class="string">&#x27;多少人數均可訂製，5 ~ 1000 人團體均適用&#x27;</span>,</span><br><span class="line">      <span class="attr">callToAction</span>: <span class="string">&#x27;大吃大喝方案&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  ];</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>月月送菜到你家<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>Lorem ipsum dolor sit amet<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;</span></span><br><span class="line"><span class="language-xml">        products.map((product) =&gt; &#123;</span></span><br><span class="line"><span class="language-xml">          return <span class="tag">&lt;<span class="name">Card</span> <span class="attr">key</span>=<span class="string">&#123;product.id&#125;</span> <span class="attr">title</span>=<span class="string">&#123;product.title&#125;</span> <span class="attr">price</span>=<span class="string">&#123;product.price&#125;</span> <span class="attr">content</span>=<span class="string">&#123;product.content&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">callToAction</span>=<span class="string">&#123;product.callToAction&#125;/</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        &#125;)</span></span><br><span class="line"><span class="language-xml">      &#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面將 products 陣列資料透過 map 的方式一一渲染到畫面，並將每筆 product 資料帶入 Card 元件內。</p>
+<h2 id="使用-key-值"><a href="#使用-key-值" class="headerlink" title="使用 key 值"></a>使用 key 值</h2><p>當渲染陣列資料時，要在每個元件代入 key 值，並且 key 值要是唯一值。</p>
+<ol>
+<li><p>提升渲染效能: 當你渲染一組列表時，key 幫助 React 快速判斷哪些元素需要更新、刪除或重新排序。這比每次重新渲染整個列表要高效得多。例如，如果你有一個包含多個項目的待辦事項列表（To-Do List），當你新增一個項目時，React 會利用 key 來只更新新增的部分，而不是重新渲染整個列表。</p>
+</li>
+<li><p>保持元件狀態的一致性: 唯一的 key 可以確保元件在更新時保持狀態的一致性。舉個例子，假設你有一個可以打勾完成的待辦事項列表，如果每個項目沒有唯一的 key，當你刪除其中一個項目時，React 可能會誤解為其他項目發生了變動，導致狀態錯亂。</p>
+</li>
+<li><p>避免潛在的錯誤: 如果沒有提供唯一的 key，或是 key 不是唯一的，React 會發出警告，提醒你可能會導致渲染問題或效能問題。這時候，你可能會遇到列表項目顯示不正確、狀態錯誤等問題。</p>
+</li>
+</ol>
+<h2 id="迴圈一次帶入多個-dom"><a href="#迴圈一次帶入多個-dom" class="headerlink" title="迴圈一次帶入多個 dom"></a>迴圈一次帶入多個 dom</h2><p>使用 map 將資料渲染到畫面時，若 dom 結構不只一個，可以用 <code>&lt;Fragment&gt;&lt;/Fragment&gt;</code> 包起來</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Fragment</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> listItems = people.<span class="title function_">map</span>(<span class="function"><span class="params">person</span> =&gt;</span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Fragment</span> <span class="attr">key</span>=<span class="string">&#123;person.id&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;person.name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;person.bio&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">Fragment</span>&gt;</span></span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="props-預設值"><a href="#props-預設值" class="headerlink" title="props 預設值"></a>props 預設值</h2><p>元件接收父層傳入的 props 時，也可設定預設值:</p>
+<ol>
+<li>當父層沒有傳入值，或是傳入的是 <code>size=&#123; undefined &#125;</code> 時使用預設值。</li>
+<li>傳入的是 <code>size=&#123;null&#125; or size=&#123;0&#125;</code>，不會使用預設值</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Avatar</span>(<span class="params">&#123; person, size = <span class="number">100</span> &#125;</span>) &#123;</span><br><span class="line">  <span class="comment">// size 沒有傳入時，使用預設值 100</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="不要在-state-中鏡像（mirror）props"><a href="#不要在-state-中鏡像（mirror）props" class="headerlink" title="不要在 state 中鏡像（mirror）props"></a>不要在 state 中鏡像（mirror）props</h2><p>初學者經常會將從 props 傳來的資料複製到 state 中，這樣看似可以讓組件本地化管理資料，但實際上這樣會導致資料不一致。</p>
+<h3 id="錯誤範例："><a href="#錯誤範例：" class="headerlink" title="錯誤範例："></a>錯誤範例：</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">UserProfile</span>(<span class="params">&#123; name &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [userName, setUserName] = <span class="title function_">useState</span>(name);</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">setUserName</span>(name);  <span class="comment">// 嘗試同步 state 與 props</span></span><br><span class="line">  &#125;, [name]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;userName&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>重複資料：name 是從 props 傳進來的，但它又被複製到了 state 中（userName）。這會導致兩個地方存放同樣的資料。</p>
+</li>
+<li><p>同步問題：當 props name 更新時，我們需要手動調用 setUserName(name) 來更新 state，這會增加開發負擔並且很容易出錯。如果忘記或未能正確更新 state，UI 可能顯示過時的資料。</p>
+</li>
+</ul>
+<h3 id="正確做法"><a href="#正確做法" class="headerlink" title="正確做法"></a>正確做法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">UserProfile</span>(<span class="params">&#123; name &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;  <span class="comment">// 直接使用 props</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>保持單一資料來源：name 是 props 傳進來的，React 會自動重新渲染組件，只要 name 發生變化，這樣可以確保 UI 與資料保持同步。</p>
+</li>
+<li><p>減少不必要的 state：這樣做簡化了邏輯，因為不需要再手動同步 props 與 state，減少了錯誤的風險。</p>
+</li>
+</ul>
+<h2 id="巢狀元件"><a href="#巢狀元件" class="headerlink" title="巢狀元件"></a>巢狀元件</h2><p>元件本身也可以帶入其他元件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">PrimaryButton</span> = (<span class="params">&#123; className, callToAction &#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">className</span>=<span class="string">&#123;</span>`<span class="attr">btn</span> $&#123;<span class="attr">className</span>&#125;`&#125;&gt;</span>&#123;callToAction&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Card</span> = (<span class="params">&#123;title, price, content, callToAction&#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;card mb-4&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;card-header&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h4</span> <span class="attr">className</span>=<span class="string">&quot;my-0&quot;</span>&gt;</span>&#123;title&#125;<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;card-body&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h1</span> <span class="attr">className</span>=<span class="string">&quot;card-title&quot;</span>&gt;</span>&#123;typeof price === &#x27;number&#x27; ? <span class="tag">&lt;&gt;</span> <span class="tag">&lt;<span class="name">small</span>&gt;</span>$&#123;price&#125; / 月<span class="tag">&lt;/<span class="name">small</span>&gt;</span> <span class="tag">&lt;/&gt;</span> : price &#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;content&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;</span></span><br><span class="line"><span class="language-xml">        title === &#x27;企業版&#x27; ?</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">PrimaryButton</span> <span class="attr">className</span>=<span class="string">&quot;btn-primary&quot;</span> <span class="attr">callToAction</span>=<span class="string">&#123;callToAction&#125;/</span>&gt;</span> : </span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">PrimaryButton</span> <span class="attr">className</span>=<span class="string">&quot;btn-outline-primary&quot;</span> <span class="attr">callToAction</span>=<span class="string">&#123;callToAction&#125;/</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  &lt;/div&gt;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面 Card 元件內帶入了 PrimaryButton 的元件。</p>
+<h2 id="Children-props"><a href="#Children-props" class="headerlink" title="Children props"></a>Children props</h2><p>除了用 props 將資料帶入元件，也可以用 children 將整個 html 結構代入</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">PrimaryButton</span> = (<span class="params">&#123; className, children &#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">className</span>=<span class="string">&#123;</span>`<span class="attr">btn</span> $&#123;<span class="attr">className</span>&#125;`&#125;&gt;</span></span></span><br><span class="line"><span class="language-xml">    &#123;children&#125;</span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Card</span> = (<span class="params">&#123;title, price, content, callToAction&#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;card mb-4&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;card-header&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h4</span> <span class="attr">className</span>=<span class="string">&quot;my-0&quot;</span>&gt;</span>&#123;title&#125;<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;card-body&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h1</span> <span class="attr">className</span>=<span class="string">&quot;card-title&quot;</span>&gt;</span>&#123;typeof price === &#x27;number&#x27; ? <span class="tag">&lt;&gt;</span> <span class="tag">&lt;<span class="name">small</span>&gt;</span>$&#123;price&#125; / 月<span class="tag">&lt;/<span class="name">small</span>&gt;</span> <span class="tag">&lt;/&gt;</span> : price &#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;content&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;</span></span><br><span class="line"><span class="language-xml">        title === &#x27;企業版&#x27; ?</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">PrimaryButton</span> <span class="attr">className</span>=<span class="string">&quot;btn-primary&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">i</span> <span class="attr">className</span>=<span class="string">&quot;bi bi-gem&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span> &#123; callToAction &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">PrimaryButton</span>&gt;</span>  : </span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">PrimaryButton</span> <span class="attr">className</span>=<span class="string">&quot;btn-outline-primary&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          &#123; callToAction &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">PrimaryButton</span>&gt;</span>  </span></span><br><span class="line"><span class="language-xml">      &#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  &lt;/div&gt;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 PrimaryButton 元件內加入 html  結構，並用 children 將結構代入元件內。</p>
+<h2 id="pops-更新時，自動更新元件內所有狀態"><a href="#pops-更新時，自動更新元件內所有狀態" class="headerlink" title="pops 更新時，自動更新元件內所有狀態"></a>pops 更新時，自動更新元件內所有狀態</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">ProfilePage</span>(<span class="params">&#123; userId &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Profile</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">userId</span>=<span class="string">&#123;userId&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">key</span>=<span class="string">&#123;userId&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    /&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Profile</span>(<span class="params">&#123; userId &#125;</span>) &#123;</span><br><span class="line">  <span class="comment">// ✅ This and any other state below will reset on key change automatically</span></span><br><span class="line">  <span class="keyword">const</span> [comment, setComment] = <span class="title function_">useState</span>(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 React 中，key 屬性用於識別哪些組件需要重新渲染或更新。它為每個組件實例提供了一個唯一的標識。當 userId 改變時，因為 key 也隨之改變，React 會重建 Profile 元件，從而重置元件內的所有狀態（如 comment）。</p>
+<p>如果不加 key，當 userId 改變時，會發生以下情況：</p>
+<p>React 會認為這是同一個 Profile 組件實例，因此不會重新創建該組件。結果是：</p>
+<ul>
+<li>狀態不會重置：組件內的狀態（如 useState 的 comment）將保持不變。</li>
+<li>副作用不會重新執行：如果有使用 useEffect 的副作用，也不會因為 userId 改變而重新執行，除非 useEffect 的依賴陣列包含 userId。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/08/22/2024-08-22-react-jsx/" rel="prev" title="React (2) JSX 解說">
+                  <i class="fa fa-chevron-left"></i> React (2) JSX 解說
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/04/2024-09-04-react-4/" rel="next" title="React Hooks (1) useState">
+                  React Hooks (1) useState <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tim Chou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"shosetim","count":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

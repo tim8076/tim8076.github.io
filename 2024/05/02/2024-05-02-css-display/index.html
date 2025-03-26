@@ -29,7 +29,7 @@
 <meta property="og:description" content="介紹區塊與行內元素">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2024-05-02T03:23:18.000Z">
-<meta property="article:modified_time" content="2024-06-08T05:54:19.550Z">
+<meta property="article:modified_time" content="2024-09-30T16:04:50.491Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="CSS基礎篇">
 <meta name="twitter:card" content="summary">
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AFdisplay-%E9%A1%AF%E7%A4%BA%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">什麼是display(顯示模式)?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Block-%E5%8D%80%E5%A1%8A%E5%85%83%E7%B4%A0"><span class="nav-number">2.</span> <span class="nav-text">Block 區塊元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inline-%E8%A1%8C%E5%85%A7%E5%85%83%E7%B4%A0"><span class="nav-number">3.</span> <span class="nav-text">Inline 行內元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inline-block"><span class="nav-number">4.</span> <span class="nav-text">inline-block</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-display-%E9%A1%AF%E7%A4%BA%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">什麼是 display(顯示模式)?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Block-%E5%8D%80%E5%A1%8A%E5%85%83%E7%B4%A0"><span class="nav-number">2.</span> <span class="nav-text">Block 區塊元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inline-%E8%A1%8C%E5%85%A7%E5%85%83%E7%B4%A0"><span class="nav-number">3.</span> <span class="nav-text">Inline 行內元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inline-block"><span class="nav-number">4.</span> <span class="nav-text">inline-block</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -157,18 +157,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-count">343</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -249,7 +249,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-06-08 13:54:19" itemprop="dateModified" datetime="2024-06-08T13:54:19+08:00">2024-06-08</time>
+      <time title="修改時間：2024-10-01 00:04:50" itemprop="dateModified" datetime="2024-10-01T00:04:50+08:00">2024-10-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -272,8 +272,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="什麼是display-顯示模式"><a href="#什麼是display-顯示模式" class="headerlink" title="什麼是display(顯示模式)?"></a>什麼是display(顯示模式)?</h2><p>CSS中的display屬性用於指定元素的渲染方式，即指定元素在網頁中如何顯示。這個屬性控制元素是以何種方式佔據空間，以及如何與其它元素相互作用。</p>
-<h2 id="Block-區塊元素"><a href="#Block-區塊元素" class="headerlink" title="Block 區塊元素"></a>Block 區塊元素</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+        <h2 id="什麼是-display-顯示模式"><a href="#什麼是-display-顯示模式" class="headerlink" title="什麼是 display(顯示模式)?"></a>什麼是 display(顯示模式)?</h2><p>CSS 中的 display 屬性用於指定元素的渲染方式，即指定元素在網頁中如何顯示。這個屬性控制元素是以何種方式佔據空間，以及如何與其它元素相互作用。</p>
+<h2 id="Block-區塊元素"><a href="#Block-區塊元素" class="headerlink" title="Block 區塊元素"></a>Block 區塊元素</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>block 區塊元素有以下特點</p>
 <ul>
@@ -283,7 +283,7 @@
 <li>可以設置 margin 和 padding 属性</li>
 </ul>
 <p>常見的預設為 block 元素標籤有: div、ul li、p、h1</p>
-<h2 id="Inline-行內元素"><a href="#Inline-行內元素" class="headerlink" title="Inline 行內元素"></a>Inline 行內元素</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.img</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h2 id="Inline-行內元素"><a href="#Inline-行內元素" class="headerlink" title="Inline 行內元素"></a>Inline 行內元素</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.img</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>inline 元素有以下特點</p>
 <ul>
@@ -349,7 +349,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

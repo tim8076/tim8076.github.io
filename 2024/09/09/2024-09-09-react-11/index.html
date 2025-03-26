@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tim8076.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="介紹 自訂 hook 方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Hooks (8) 自訂 hook">
+<meta property="og:url" content="https://tim8076.github.io/2024/09/09/2024-09-09-react-11/index.html">
+<meta property="og:site_name" content="Tim的前端日誌">
+<meta property="og:description" content="介紹 自訂 hook 方式">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2024-09-09T05:45:20.000Z">
+<meta property="article:modified_time" content="2025-01-10T14:43:47.928Z">
+<meta property="article:author" content="Tim Chou">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://tim8076.github.io/2024/09/09/2024-09-09-react-11/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://tim8076.github.io/2024/09/09/2024-09-09-react-11/","path":"2024/09/09/2024-09-09-react-11/","title":"React Hooks (8) 自訂 hook"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>React Hooks (8) 自訂 hook | Tim的前端日誌</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tim的前端日誌</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-hook-%E5%87%BD%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">建立 hook 函式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E4%BB%B6%E5%85%A7%E5%BC%95%E5%85%A5-hook"><span class="nav-number">2.</span> <span class="nav-text">元件內引入 hook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E8%A8%82-hook-%E5%91%BD%E5%90%8D"><span class="nav-number">3.</span> <span class="nav-text">自訂 hook 命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useAxios-hook"><span class="nav-number">4.</span> <span class="nav-text">useAxios hook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useToggle"><span class="nav-number">5.</span> <span class="nav-text">useToggle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useFormInput"><span class="nav-number">6.</span> <span class="nav-text">useFormInput</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useTimeout"><span class="nav-number">7.</span> <span class="nav-text">useTimeout</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tim Chou</p>
+  <div class="site-description" itemprop="description">Zero to Hero</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">343</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/tim8076" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2024/09/09/2024-09-09-react-11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Tim Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim的前端日誌">
+      <meta itemprop="description" content="Zero to Hero">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="React Hooks (8) 自訂 hook | Tim的前端日誌">
+      <meta itemprop="description" content="介紹 自訂 hook 方式">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          React Hooks (8) 自訂 hook
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2024-09-09 13:45:20" itemprop="dateCreated datePublished" datetime="2024-09-09T13:45:20+08:00">2024-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2025-01-10 22:43:47" itemprop="dateModified" datetime="2025-01-10T22:43:47+08:00">2025-01-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">介紹 自訂 hook 方式</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="建立-hook-函式"><a href="#建立-hook-函式" class="headerlink" title="建立 hook 函式"></a>建立 hook 函式</h2><p>自訂 hook 的第一步是建立 hook 函式，下面是追蹤滑鼠座標的一個 hook，函式會將值回傳出來</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">useMousePosition</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> [mouse, setMouse] = <span class="title function_">useState</span>(&#123;&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">getMouseEvent</span> = (<span class="params">e</span>) =&gt; &#123;</span><br><span class="line">      <span class="title function_">setMouse</span>(&#123;</span><br><span class="line">        <span class="attr">x</span>: e.<span class="property">clientX</span>,</span><br><span class="line">        <span class="attr">y</span>: e.<span class="property">clientY</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;mousemove&#x27;</span>, getMouseEvent);</span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> <span class="variable language_">window</span>.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;mousemove&#x27;</span>, getMouseEvent)</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> mouse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="元件內引入-hook"><a href="#元件內引入-hook" class="headerlink" title="元件內引入 hook"></a>元件內引入 hook</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> [text, setText] = <span class="title function_">useState</span>(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> mouse = <span class="title function_">useMousePosition</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">    &#123; mouse.x&#125; &#123; mouse.y &#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">onChange</span>=<span class="string">&#123;e</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-xml">      setText(e.target.value)</span></span><br><span class="line"><span class="language-xml">    &#125;&#125; /&gt;</span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/&gt;</span></span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在元件內即可使用自訂 hook</p>
+<h2 id="自訂-hook-命名"><a href="#自訂-hook-命名" class="headerlink" title="自訂 hook 命名"></a>自訂 hook 命名</h2><p>自訂 hook 必須以 use 開頭命名，但如果 function 裡面沒有用到 hook 的話，不用 use開頭</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 🔴 Avoid: A Hook that doesn&#x27;t use Hooks</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">useSorted</span>(<span class="params">items</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> items.<span class="title function_">slice</span>().<span class="title function_">sort</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ✅ Good: A regular function that doesn&#x27;t use Hooks</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getSorted</span>(<span class="params">items</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> items.<span class="title function_">slice</span>().<span class="title function_">sort</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ✅ Good: A Hook that uses other Hooks</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">useAuth</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">useContext</span>(<span class="title class_">Auth</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="useAxios-hook"><a href="#useAxios-hook" class="headerlink" title="useAxios hook"></a>useAxios hook</h2><p>前端專案常需要打 api 取回遠端資料，我們可以將發出網路請求的過程包成一個 custom hook 方便重複使用。這邊會以axios套件為範例。</p>
+<ul>
+<li>useAxios hook 範例</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// useAxios.jsx</span></span><br><span class="line"><span class="keyword">import</span> &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span>;</span><br><span class="line"></span><br><span class="line">axios.<span class="property">defaults</span>.<span class="property">baseURL</span> = <span class="string">&#x27;https://jsonplaceholder.typicode.com&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> fixed :</span></span><br><span class="line"><span class="comment">  - no need to JSON.stringify to then immediatly do a JSON.parse</span></span><br><span class="line"><span class="comment">  - don&#x27;t use export defaults, because default imports are hard to search for</span></span><br><span class="line"><span class="comment">  - axios already support generic request in one parameter, no need to call specialized ones</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">useAxios</span> = (<span class="params">axiosParams</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [response, setResponse] = <span class="title function_">useState</span>(<span class="literal">undefined</span>);</span><br><span class="line">    <span class="keyword">const</span> [error, setError] = <span class="title function_">useState</span>(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> [loading, setloading] = <span class="title function_">useState</span>(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">fetchData</span> = <span class="keyword">async</span> (<span class="params">params</span>) =&gt; &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">       <span class="keyword">const</span> result = <span class="keyword">await</span> axios.<span class="title function_">request</span>(params);</span><br><span class="line">       <span class="title function_">setResponse</span>(result.<span class="property">data</span>);</span><br><span class="line">       &#125; <span class="keyword">catch</span>( error ) &#123;</span><br><span class="line">         <span class="title function_">setError</span>(error);</span><br><span class="line">       &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">         <span class="title function_">setLoading</span>(<span class="literal">false</span>);</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">fetchData</span>(axiosParams);</span><br><span class="line">    &#125;, []); <span class="comment">// execute once only</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; response, error, loading &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>useAxiosHook 將取的遠端資料的邏輯包裝在 useAxios.jsx 元件中，並將取得資料後的狀態 return 出來 <code>response, error, loading</code>;</p>
+<ul>
+<li>使用 useAxios hook</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useAxios &#125; <span class="keyword">from</span> <span class="string">&#x27;axioshook&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; response, loading, error &#125; = <span class="title function_">useAxios</span>(&#123;</span><br><span class="line">        <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">        <span class="attr">url</span>: <span class="string">&#x27;/posts&#x27;</span>,</span><br><span class="line">        <span class="attr">headers</span>: &#123; <span class="comment">// no need to stringify</span></span><br><span class="line">          <span class="attr">accept</span>: <span class="string">&#x27;*/*&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">data</span>: &#123;  <span class="comment">// no need to stringify</span></span><br><span class="line">            <span class="attr">userId</span>: <span class="number">1</span>,</span><br><span class="line">            <span class="attr">id</span>: <span class="number">19392</span>,</span><br><span class="line">            <span class="attr">title</span>: <span class="string">&#x27;title&#x27;</span>,</span><br><span class="line">            <span class="attr">body</span>: <span class="string">&#x27;Sample text&#x27;</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&#x27;App&#x27;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Posts<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">            &#123;loading ? (</span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">p</span>&gt;</span>loading...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            ) : (</span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    &#123;error &amp;&amp; (</span></span><br><span class="line"><span class="language-xml">                        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                            <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;error.message&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    )&#125;</span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">div</span>&gt;</span> &#123;</span></span><br><span class="line"><span class="language-xml">                      // no need to use another state to store data, response is sufficient</span></span><br><span class="line"><span class="language-xml">                      response &amp;&amp; <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;response.id&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    &#125;</span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            )&#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="useToggle"><a href="#useToggle" class="headerlink" title="useToggle"></a>useToggle</h2><p>專案中也常用到要切換 true 和 false 的情形，可以把切換的邏輯包成 hook</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// useToggle.jsx</span></span><br><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">useToggle</span>(<span class="params">defaultValue</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [value, setValue] = <span class="title function_">useState</span>(defaultValue);</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">toggleValue</span>(<span class="params">value</span>) &#123;</span><br><span class="line">    <span class="title function_">setValue</span>(<span class="function"><span class="params">currentValue</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">&#x27;boolean&#x27;</span> ? value : !currentValue;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> [value, toggleValue];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在元件中使用，當 toggleValue 沒有傳入參數時，就切換 value，有傳入 true 或 false，就套用 true或 false。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> useToggle <span class="keyword">from</span> <span class="string">&quot;./useToggle&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">ToggleComponent</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [value, toggleValue] = <span class="title function_">useToggle</span>(<span class="literal">false</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;value.toString()&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;toggleValue&#125;</span>&gt;</span>Toggle<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> toggleValue(true)&#125;&gt;Make true<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> toggleValue(false)&#125;&gt;Make false<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="useFormInput"><a href="#useFormInput" class="headerlink" title="useFormInput"></a>useFormInput</h2><p>react 中表單操作的邏輯也可以包成 hook</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">useFormInput</span>(<span class="params">initialValue</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [value, setValue] = <span class="title function_">useState</span>(initialValue);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">handleChange</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="title function_">setValue</span>(e.<span class="property">target</span>.<span class="property">value</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> inputProps = &#123;</span><br><span class="line">    <span class="attr">value</span>: value,</span><br><span class="line">    <span class="attr">onChange</span>: handleChange</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> inputProps;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>實際使用</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Form</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> firstNameProps = <span class="title function_">useFormInput</span>(<span class="string">&#x27;Mary&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> lastNameProps = <span class="title function_">useFormInput</span>(<span class="string">&#x27;Poppins&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        First name:</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">input</span> &#123;<span class="attr">...firstNameProps</span>&#125; /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        Last name:</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">input</span> &#123;<span class="attr">...lastNameProps</span>&#125; /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">b</span>&gt;</span>Good morning, &#123;firstNameProps.value&#125; &#123;lastNameProps.value&#125;.<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="useTimeout"><a href="#useTimeout" class="headerlink" title="useTimeout"></a>useTimeout</h2><p><a target="_blank" rel="noopener" href="https://github.com/tim8076/react-custom-hooks/blob/main/src/hooks/useTimeout/useTimeout.jsx">useTimeoutHook</a></p>
+<p>這段代碼是一個自定義的 React Hook，稱為 useTimeout。它用來處理延遲執行的功能，並提供設置（set）、清除（clear）和重置（reset）計時器的能力。以下是代碼的邏輯分解：</p>
+<ol>
+<li>參數與變數初始化：</li>
+</ol>
+<ul>
+<li>useTimeout(callback, delay) 接收兩個參數：<ul>
+<li>callback：當計時器到達 delay 時要執行的函數。</li>
+<li>delay：設定延遲時間（毫秒）。</li>
+</ul>
+</li>
+<li>callbackRef 和 timeoutRef 是兩個 useRef 引用，用於保存 callback 函數和計時器的 ID，確保它們在 Hook 中保持一致。</li>
+</ul>
+<ol start="2">
+<li>設定計時器 (set)：</li>
+</ol>
+<ul>
+<li>set 是一個透過 useCallback 儲存的函數，用來設置計時器。</li>
+<li>當 set 被調用時，它會根據 delay 使用 setTimeout 來執行 callbackRef.current()。</li>
+<li>[delay] 為依賴項，當 delay 改變時重新生成 set。</li>
+</ul>
+<ol start="3">
+<li>清除計時器 (clear)：</li>
+</ol>
+<ul>
+<li>clear 也是用 useCallback 儲存的函數，用來清除計時器。</li>
+<li>它檢查 timeoutRef.current 是否存在，如果存在則使用 clearTimeout 來清除計時器。</li>
+</ul>
+<ol start="4">
+<li>自動執行 set 和清除計時器：</li>
+</ol>
+<ul>
+<li>在第二個 useEffect 中，執行 set 來啟動計時器，並返回 clear 作為清理函數，確保當 delay、set 或 clear 改變時可以自動清除計時器並重新設置。</li>
+<li>[delay, set, clear] 為依賴項，當這些值變化時會重新執行 useEffect。</li>
+</ul>
+<ol start="5">
+<li>重置計時器 (reset)：</li>
+</ol>
+<ul>
+<li>reset 是一個 useCallback 儲存的函數，先清除計時器，再重新設置計時器。</li>
+<li>[clear, set] 為依賴項，當 clear 或 set 改變時，重置函數也會重新生成。</li>
+</ul>
+<ol start="6">
+<li>回傳 reset 和 clear：</li>
+</ol>
+<p>最後，useTimeout 回傳 reset 和 clear 函數，以便在使用這個 Hook 的組件中可以調用這兩個函數來手動控制計時器。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/08/2024-09-08-react-10-1/" rel="prev" title="React Hooks (7) useCallback">
+                  <i class="fa fa-chevron-left"></i> React Hooks (7) useCallback
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/10/2024-09-10-react-12/" rel="next" title="React Hooks (9) useCotext">
+                  React Hooks (9) useCotext <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tim Chou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"shosetim","count":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

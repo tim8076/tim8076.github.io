@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://miro.medium.com/max/1354/1*IhyIKgVykoa64qi5s2Q4wQ.png">
 <meta property="og:image" content="https://miro.medium.com/max/1400/1*Duv1uiJyztP5av1hgMhwoA.png">
 <meta property="article:published_time" content="2022-08-07T08:33:55.000Z">
-<meta property="article:modified_time" content="2024-06-08T05:54:19.525Z">
+<meta property="article:modified_time" content="2024-12-07T03:34:04.933Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="JS 基礎篇">
 <meta name="twitter:card" content="summary">
@@ -148,7 +148,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E7%AF%80%E9%BB%9E"><span class="nav-number">1.</span> <span class="nav-text">新增節點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#createElement"><span class="nav-number">1.1.</span> <span class="nav-text">createElement</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#createDocumentFragment"><span class="nav-number">1.2.</span> <span class="nav-text">createDocumentFragment</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E7%AF%80%E9%BB%9E"><span class="nav-number">2.</span> <span class="nav-text">插入節點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#appendChild"><span class="nav-number">2.1.</span> <span class="nav-text">appendChild</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#append"><span class="nav-number">2.2.</span> <span class="nav-text">append</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%AA%E9%99%A4%E7%AF%80%E9%BB%9E"><span class="nav-number">3.</span> <span class="nav-text">刪除節點</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0%E7%9A%84%E5%B1%AC%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">操作元素的屬性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E5%BE%97%E5%B1%AC%E6%80%A7%E5%85%A7%E5%AE%B9"><span class="nav-number">4.1.</span> <span class="nav-text">取得屬性內容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A%E5%B1%AC%E6%80%A7%E5%85%A7%E5%AE%B9"><span class="nav-number">4.2.</span> <span class="nav-text">設定屬性內容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E5%B1%AC%E6%80%A7"><span class="nav-number">4.3.</span> <span class="nav-text">移除屬性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#data%E5%B1%AC%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="nav-number">4.4.</span> <span class="nav-text">data屬性操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0%E7%9A%84class"><span class="nav-number">5.</span> <span class="nav-text">操作元素的class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0%E7%9A%84css"><span class="nav-number">6.</span> <span class="nav-text">直接操作元素的css</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AF%80%E9%BB%9E-node-%E8%88%87%E5%85%83%E7%B4%A0-element-%E7%9A%84%E5%8D%80%E5%88%86"><span class="nav-number">7.</span> <span class="nav-text">節點(node)與元素(element)的區分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E6%96%87%E5%AD%97"><span class="nav-number">8.</span> <span class="nav-text">新增文字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E-html"><span class="nav-number">9.</span> <span class="nav-text">新增 html</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E7%AF%80%E9%BB%9E"><span class="nav-number">1.</span> <span class="nav-text">新增節點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#createElement"><span class="nav-number">1.1.</span> <span class="nav-text">createElement</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#createDocumentFragment"><span class="nav-number">1.2.</span> <span class="nav-text">createDocumentFragment</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E7%AF%80%E9%BB%9E"><span class="nav-number">2.</span> <span class="nav-text">插入節點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#appendChild"><span class="nav-number">2.1.</span> <span class="nav-text">appendChild</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#append"><span class="nav-number">2.2.</span> <span class="nav-text">append</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%AA%E9%99%A4%E7%AF%80%E9%BB%9E"><span class="nav-number">3.</span> <span class="nav-text">刪除節點</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0%E7%9A%84%E5%B1%AC%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">操作元素的屬性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E5%BE%97%E5%B1%AC%E6%80%A7%E5%85%A7%E5%AE%B9"><span class="nav-number">4.1.</span> <span class="nav-text">取得屬性內容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A%E5%B1%AC%E6%80%A7%E5%85%A7%E5%AE%B9"><span class="nav-number">4.2.</span> <span class="nav-text">設定屬性內容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E5%B1%AC%E6%80%A7"><span class="nav-number">4.3.</span> <span class="nav-text">移除屬性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#data%E5%B1%AC%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="nav-number">4.4.</span> <span class="nav-text">data屬性操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0%E7%9A%84class"><span class="nav-number">5.</span> <span class="nav-text">操作元素的class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0%E7%9A%84css"><span class="nav-number">6.</span> <span class="nav-text">直接操作元素的css</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AF%80%E9%BB%9E-node-%E8%88%87%E5%85%83%E7%B4%A0-element-%E7%9A%84%E5%8D%80%E5%88%86"><span class="nav-number">7.</span> <span class="nav-text">節點(node)與元素(element)的區分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%96%E5%BE%97%E8%88%87%E6%96%B0%E5%A2%9E%E6%96%87%E5%AD%97"><span class="nav-number">8.</span> <span class="nav-text">取得與新增文字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%96%E5%BE%97%E8%88%87%E6%96%B0%E5%A2%9E-html"><span class="nav-number">9.</span> <span class="nav-text">取得與新增 html</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -161,18 +161,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-count">343</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -253,7 +253,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-06-08 13:54:19" itemprop="dateModified" datetime="2024-06-08T13:54:19+08:00">2024-06-08</time>
+      <time title="修改時間：2024-12-07 11:34:04" itemprop="dateModified" datetime="2024-12-07T11:34:04+08:00">2024-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -296,10 +296,17 @@
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> child = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.child&#x27;</span>);</span><br><span class="line">div.<span class="title function_">removeChild</span>(child) <span class="comment">// 刪除子元素</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="操作元素的屬性"><a href="#操作元素的屬性" class="headerlink" title="操作元素的屬性"></a>操作元素的屬性</h2><h3 id="取得屬性內容"><a href="#取得屬性內容" class="headerlink" title="取得屬性內容"></a>取得屬性內容</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;hi&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">div.<span class="title function_">getAttribute</span>(<span class="string">&#x27;id&#x27;</span>) <span class="comment">//hi</span></span><br><span class="line">div.<span class="property">id</span> <span class="comment">// hi</span></span><br></pre></td></tr></table></figure>
+<h2 id="操作元素的屬性"><a href="#操作元素的屬性" class="headerlink" title="操作元素的屬性"></a>操作元素的屬性</h2><h3 id="取得屬性內容"><a href="#取得屬性內容" class="headerlink" title="取得屬性內容"></a>取得屬性內容</h3><p>使用 getAttribute 可以回傳一個元素上的指定屬性值，如果指定的屬性不存在，則會回傳 null。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">getAttribute</span>(<span class="string">&quot;屬性名稱&quot;</span>);</span><br></pre></td></tr></table></figure>
 
-<h3 id="設定屬性內容"><a href="#設定屬性內容" class="headerlink" title="設定屬性內容"></a>設定屬性內容</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;hi&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">div.<span class="title function_">getAttribute</span>(<span class="string">&#x27;id&#x27;</span>) <span class="comment">//hi</span></span><br><span class="line">div.<span class="title function_">getAttribute</span>(<span class="string">&#x27;src&#x27;</span>) <span class="comment">//null</span></span><br><span class="line">div.<span class="property">id</span> <span class="comment">// hi</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="設定屬性內容"><a href="#設定屬性內容" class="headerlink" title="設定屬性內容"></a>設定屬性內容</h3><p>可以使用 setAttribute 替指定元素設定屬性值，若該屬性存在則會替換值，語法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">setAttribute</span>(<span class="string">&quot;屬性名稱&quot;</span>, <span class="string">&quot;屬性值&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">div.<span class="title function_">setAttribute</span>(<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;hi&#x27;</span>); <span class="comment">// 將id屬性設為 hi</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="移除屬性"><a href="#移除屬性" class="headerlink" title="移除屬性"></a>移除屬性</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">title</span>=<span class="string">&quot;aa&quot;</span> <span class="attr">id</span>=<span class="string">&quot;bob&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br></pre></td></tr></table></figure>
@@ -324,15 +331,29 @@
 </ul>
 <p>這邊推薦使用會回傳 Nodelist 的選取方法，如 querySelectorAll。因為元素如果會自動更新，出錯時很難維護。</p>
 <p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=rhvec8cXLlo&ab_channel=WebDevSimplified">影片教學</a></p>
-<h2 id="新增文字"><a href="#新增文字" class="headerlink" title="新增文字"></a>新增文字</h2><p>新增文字有兩種方法 textContent 、 innerText</p>
+<h2 id="取得與新增文字"><a href="#取得與新增文字" class="headerlink" title="取得與新增文字"></a>取得與新增文字</h2><p>新增文字有兩種方法 textContent 、 innerText，原先的所有內容都會被清空（包含 HTML 標籤），新的內容將被瀏覽器解析成「純文字」，不會保留 HTML 標籤的特性。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">div.<span class="property">innerText</span> = <span class="string">&#x27;Hello World&#x27;</span>;</span><br><span class="line">div.<span class="property">textContent</span> = <span class="string">&#x27;Hello World&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
 
 <p>兩個方法都能加入文字，但innerText只顯示會出現螢幕上的文字，textContent則顯示全部文字。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>Hello<span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&quot;display:none&quot;</span>&gt;</span>Tim<span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(div.<span class="property">textContent</span>); <span class="comment">// Hello Tim</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(div.<span class="property">innerText</span>); <span class="comment">// Hello</span></span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>取得文字</li>
+</ul>
+<p>透過 textContent 可以取得 DOM 元素內的 「純文字內容」，HTML 會被忽略（請注意「純文字內容」有包含換行以及空格）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;targetClass&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>取得這個 p 標籤的純文字<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="新增-html"><a href="#新增-html" class="headerlink" title="新增 html"></a>新增 html</h2><p>innerHTML 可以在元素內加入 html 結構，並清除元素原有內容。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> targetClass = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.targetClass p&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(targetClass.<span class="property">textContent</span>); <span class="comment">// 取得這個 p 標籤的純文字</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="取得與新增-html"><a href="#取得與新增-html" class="headerlink" title="取得與新增 html"></a>取得與新增 html</h2><p>透過 innerHTML 可以取得 DOM 元素內的「HTML 內容」</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;targetClass&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--  註解、換行、空白也包含在內  --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>HTML 標籤的內容也被選取<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> targetClass = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.targetClass&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(targetClass.<span class="property">innerHTML</span>);</span><br></pre></td></tr></table></figure>
+
+<p>innerHTML 可以在元素內加入 html 結構，並清除元素原有內容。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.<span class="property">innerHTML</span> = <span class="string">&#x27;&lt;span&gt;Hello&lt;span&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
 
 
@@ -393,7 +414,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

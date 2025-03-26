@@ -29,7 +29,7 @@
 <meta property="og:description" content="物件的淺拷貝與深拷貝">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2023-04-30T07:17:15.000Z">
-<meta property="article:modified_time" content="2024-04-20T07:54:40.765Z">
+<meta property="article:modified_time" content="2024-09-17T06:19:08.227Z">
 <meta property="article:author" content="Tim Chou">
 <meta name="twitter:card" content="summary">
 
@@ -156,18 +156,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-count">343</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -248,7 +248,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+      <time title="修改時間：2024-09-17 14:19:08" itemprop="dateModified" datetime="2024-09-17T14:19:08+08:00">2024-09-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -271,19 +271,20 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="複製物件"><a href="#複製物件" class="headerlink" title="複製物件"></a>複製物件</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">food</span>: <span class="string">&#x27;rice&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj2 = obj1;</span><br><span class="line"></span><br><span class="line">obj1.<span class="property">food</span> = <span class="string">&#x27;noodle&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">food</span>) <span class="comment">// &#x27;noodle&#x27;;</span></span><br></pre></td></tr></table></figure>
+        <h2 id="複製物件"><a href="#複製物件" class="headerlink" title="複製物件"></a>複製物件</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">food</span>: <span class="string">&quot;rice&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> obj2 = obj1;</span><br><span class="line"></span><br><span class="line">obj1.<span class="property">food</span> = <span class="string">&quot;noodle&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">food</span>); <span class="comment">// &#x27;noodle&#x27;;</span></span><br></pre></td></tr></table></figure>
 
-<p>在js裡若複製的資料型態是物件時，我們複製的其實是改物件的記憶體位置，如上例，obj2 和 obj1都指向同一個記憶體位置，所以當改變obj1裡的值時，obj2同時會被改變。</p>
+<p>在 js 裡若複製的資料型態是物件時，我們複製的其實是改物件的記憶體位置，如上例，obj2 和 obj1 都指向同一個記憶體位置，所以當改變 obj1 裡的值時，obj2 同時會被改變。</p>
 <h2 id="淺拷貝"><a href="#淺拷貝" class="headerlink" title="淺拷貝"></a>淺拷貝</h2><p>為了避免這個問題，我們可以用淺拷貝的方式，也就是新建立一個物件，將原本資料全部的屬性都複製進去。</p>
-<h3 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign()"></a>Object.assign()</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">food</span>: <span class="string">&#x27;rice&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj2 = <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;, obj1);</span><br><span class="line">obj1.<span class="property">food</span> = <span class="string">&#x27;noodle&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">food</span>) <span class="comment">// &#x27;rice&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign()"></a>Object.assign()</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">food</span>: <span class="string">&quot;rice&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj2 = <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;, obj1);</span><br><span class="line">obj1.<span class="property">food</span> = <span class="string">&quot;noodle&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">food</span>); <span class="comment">// &#x27;rice&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<p>或是利用es6的展開運算子寫法</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">food</span>: <span class="string">&#x27;rice&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj2 = &#123; ...obj1 &#125;;</span><br><span class="line">obj1.<span class="property">food</span> = <span class="string">&#x27;noodle&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">food</span>) <span class="comment">// &#x27;rice&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>或是利用 es6 的展開運算子寫法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">food</span>: <span class="string">&quot;rice&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj2 = &#123; ...obj1 &#125;;</span><br><span class="line">obj1.<span class="property">food</span> = <span class="string">&quot;noodle&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">food</span>); <span class="comment">// &#x27;rice&#x27;</span></span><br></pre></td></tr></table></figure>
+
 <p>利用這個方法，可以拷貝物件裡第一層的屬性，但如果物件中屬性的值也是物件，就無法拷貝。</p>
-<h2 id="深拷貝"><a href="#深拷貝" class="headerlink" title="深拷貝"></a>深拷貝</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">food</span>: <span class="string">&#x27;rice&#x27;</span>,</span><br><span class="line">  <span class="attr">flavor</span>: [<span class="string">&#x27;spicy&#x27;</span>, <span class="string">&#x27;sweet&#x27;</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj2 = <span class="title class_">Json</span>.<span class="title function_">parse</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(obj1));</span><br><span class="line">obj1.<span class="property">food</span> = <span class="string">&#x27;noodle&#x27;</span>;</span><br><span class="line">obj1.<span class="property">flavor</span>[<span class="number">0</span>] = <span class="string">&#x27;sour&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">food</span>) <span class="comment">// &#x27;rice&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">flavor</span>) <span class="comment">// [&#x27;spicy&#x27;, &#x27;sweet&#x27;]</span></span><br></pre></td></tr></table></figure>
+<h2 id="深拷貝"><a href="#深拷貝" class="headerlink" title="深拷貝"></a>深拷貝</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">food</span>: <span class="string">&quot;rice&quot;</span>,</span><br><span class="line">  <span class="attr">flavor</span>: [<span class="string">&quot;spicy&quot;</span>, <span class="string">&quot;sweet&quot;</span>],</span><br><span class="line">  <span class="attr">fn</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj2 = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(obj1));</span><br><span class="line">obj1.<span class="property">food</span> = <span class="string">&quot;noodle&quot;</span>;</span><br><span class="line">obj1.<span class="property">flavor</span>[<span class="number">0</span>] = <span class="string">&quot;sour&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">food</span>); <span class="comment">// &#x27;rice&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">flavor</span>); <span class="comment">// [&#x27;spicy&#x27;, &#x27;sweet&#x27;]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2.<span class="property">fn</span>); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
 
 <p>若要連物件內的物件也拷貝，可以使用深拷貝的方法，就是將物件依序經過 JSON.stringify 及 JSON.parse 兩個方法，建立全新的物件。</p>
-<p>上例中可以發現 obj2經過深拷貝後，就算改動 obj1內陣列的值，obj2也不會被影響。</p>
+<p>上例中可以發現 obj2 經過深拷貝後，就算改動 obj1 內陣列的值，obj2 也不會被影響。<br>但函式無法用深層拷貝，所以 obj2.fn 是 undefined</p>
 
     </div>
 
@@ -330,7 +331,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

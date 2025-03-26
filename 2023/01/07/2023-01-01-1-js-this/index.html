@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://miro.medium.com/max/750/1*wNtijWCK_KPREHPKT-ULyw.webp">
 <meta property="og:image" content="https://miro.medium.com/max/720/1*G9i16krE_w0op-vUYlwGQg.webp">
 <meta property="article:published_time" content="2023-01-07T06:12:22.000Z">
-<meta property="article:modified_time" content="2024-08-13T03:20:30.356Z">
+<meta property="article:modified_time" content="2024-09-24T03:22:49.969Z">
 <meta property="article:author" content="Tim Chou">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://miro.medium.com/max/786/1*h2Km5Rhqry8i1burk6etZw.webp">
@@ -151,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B0%A1%E5%96%AE%E5%91%BC%E5%8F%AB-Simple-call"><span class="nav-number">1.</span> <span class="nav-text">簡單呼叫(Simple call)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dom-%E4%BA%8B%E4%BB%B6%E4%B8%AD%E7%9A%84-this"><span class="nav-number">2.</span> <span class="nav-text">Dom 事件中的 this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-%E4%B8%AD%E7%9A%84-this"><span class="nav-number">3.</span> <span class="nav-text">Object 中的 this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%B7%E5%88%B6%E6%8C%87%E5%AE%9A-this-%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">強制指定 this 的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bind"><span class="nav-number">4.1.</span> <span class="nav-text">.bind()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#call-%E8%88%87-apply"><span class="nav-number">4.2.</span> <span class="nav-text">.call() 與 .apply()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bind-%E3%80%81-call-%E3%80%81-apply-%E7%9A%84%E5%B7%AE%E7%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">.bind()、 .call() 、.apply()的差異</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%9F%9F%E4%B8%8B%E7%9A%84-this"><span class="nav-number">1.</span> <span class="nav-text">全域下的 this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B0%A1%E5%96%AE%E5%91%BC%E5%8F%AB-Simple-call"><span class="nav-number">2.</span> <span class="nav-text">簡單呼叫(Simple call)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B0%A1%E5%96%AE%E5%91%BC%E5%8F%AB%E4%B8%8D%E5%BB%BA%E8%AD%B0%E4%BD%BF%E7%94%A8"><span class="nav-number">2.1.</span> <span class="nav-text">簡單呼叫不建議使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dom-%E4%BA%8B%E4%BB%B6%E4%B8%AD%E7%9A%84-this"><span class="nav-number">3.</span> <span class="nav-text">Dom 事件中的 this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-%E4%B8%AD%E7%9A%84-this"><span class="nav-number">4.</span> <span class="nav-text">Object 中的 this</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%BF%E6%8F%9B-this-%E6%89%8B%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">替換 this 手法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%B7%E5%88%B6%E6%8C%87%E5%AE%9A-this-%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">強制指定 this 的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bind"><span class="nav-number">5.1.</span> <span class="nav-text">.bind()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#call-%E8%88%87-apply"><span class="nav-number">5.2.</span> <span class="nav-text">.call() 與 .apply()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bind-%E3%80%81-call-%E3%80%81-apply-%E7%9A%84%E5%B7%AE%E7%95%B0"><span class="nav-number">5.3.</span> <span class="nav-text">.bind()、 .call() 、.apply()的差異</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -164,18 +164,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-count">343</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -256,7 +256,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
+      <time title="修改時間：2024-09-24 11:22:49" itemprop="dateModified" datetime="2024-09-24T11:22:49+08:00">2024-09-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -279,13 +279,19 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>this 是 js 裡函式執行時時自動產生的物件，隨著 function 執行場合的不同，this 所指向的值，也會有所不同。在多數情況下，this會指向呼叫 function 的物件。以下介紹幾種this的指向。</p>
-<h2 id="簡單呼叫-Simple-call"><a href="#簡單呼叫-Simple-call" class="headerlink" title="簡單呼叫(Simple call)"></a>簡單呼叫(Simple call)</h2><p>當我們直接呼叫函式時，function 裡的 this 指的會是 window。所以當 window 底下有全域變數 father時，this.father 就會取到 小名這個值。</p>
+        <p>this 是 js 裡函式執行時時自動產生的物件，隨著 function 執行場合的不同，this 所指向的值，也會有所不同。在多數情況下，this 會指向呼叫 function 的物件。以下介紹幾種 this 的指向。</p>
+<h2 id="全域下的-this"><a href="#全域下的-this" class="headerlink" title="全域下的 this"></a>全域下的 this</h2><p>全域下的 this 會指向 window</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span> === <span class="variable language_">window</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="簡單呼叫-Simple-call"><a href="#簡單呼叫-Simple-call" class="headerlink" title="簡單呼叫(Simple call)"></a>簡單呼叫(Simple call)</h2><p>當我們直接呼叫函式時，function 裡的 this 指的會是 window。所以當 window 底下有全域變數 father 時，this.father 就會取到 小名這個值。</p>
 <p><img src="https://miro.medium.com/max/786/1*h2Km5Rhqry8i1burk6etZw.webp"></p>
 <p>下面我們將 function 中包著 function，但只要是直接呼叫，this 都是屬於全域</p>
 <p><img src="https://miro.medium.com/max/640/1*Yv7W__PfC7CEQtwZLjRc3g.webp"></p>
 <p>callback function 被呼叫也是屬於 simple call，會取到 window 下的 myName;</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myName = <span class="string">&#x27;小名&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">a.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">i</span>) &#123;</span><br><span class="line">  consol.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">myName</span>, i);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 小名&#x27; 1</span></span><br><span class="line"><span class="comment">// 小名&#x27; 2</span></span><br><span class="line"><span class="comment">// 小名&#x27; 3</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myName = <span class="string">&quot;小名&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">a.<span class="title function_">forEach</span>(<span class="keyword">function</span> (<span class="params">i</span>) &#123;</span><br><span class="line">  consol.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">myName</span>, i);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 小名&#x27; 1</span></span><br><span class="line"><span class="comment">// 小名&#x27; 2</span></span><br><span class="line"><span class="comment">// 小名&#x27; 3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="簡單呼叫不建議使用"><a href="#簡單呼叫不建議使用" class="headerlink" title="簡單呼叫不建議使用"></a>簡單呼叫不建議使用</h3><p>只要 this 會指向 window 的情形都不建議使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 嚴謹模式下this會指向 undefined，代表 js 根本不建議使用</span></span><br><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>); <span class="comment">// undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="Dom-事件中的-this"><a href="#Dom-事件中的-this" class="headerlink" title="Dom 事件中的 this"></a>Dom 事件中的 this</h2><p>DOM 搭配 addEventListener 時，此 this 所指向的則是該 DOM。</p>
 <p><img src="https://miro.medium.com/max/750/1*PCxrl_RtJBAsb12ke8P4bQ.webp"></p>
@@ -295,24 +301,27 @@
 <p><img src="https://miro.medium.com/max/1100/1*FJx6YqVd894ZH6fnuqtoWw.webp"></p>
 <p>但如果將物件內的函式賦予在一個純粹的變數上並調用它時，這個 this 將會指向全域。</p>
 <p><img src="https://miro.medium.com/max/750/1*wNtijWCK_KPREHPKT-ULyw.webp"></p>
-<h2 id="強制指定-this-的方式"><a href="#強制指定-this-的方式" class="headerlink" title="強制指定 this 的方式"></a>強制指定 this 的方式</h2><p>如果想強制綁定 this的指向，有以下方法: call() 、 apply() 以及 bind()。</p>
+<h3 id="替換-this-手法"><a href="#替換-this-手法" class="headerlink" title="替換 this 手法"></a>替換 this 手法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> component = &#123;</span><br><span class="line">  <span class="attr">text</span>: <span class="string">&quot;這是一段文字&quot;</span>,</span><br><span class="line">  <span class="title function_">getData</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> that = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      that.<span class="property">text</span> = <span class="string">&quot;這是替換後的文字&quot;</span>;</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">init</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">getData</span>();</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>setTimeout 因為是 callback function， this 會指向 window，如果要指向 component 物件，可以用 this &#x3D; this 傳參考的方式帶入。</p>
+<h2 id="強制指定-this-的方式"><a href="#強制指定-this-的方式" class="headerlink" title="強制指定 this 的方式"></a>強制指定 this 的方式</h2><p>如果想強制綁定 this 的指向，有以下方法: call() 、 apply() 以及 bind()。</p>
 <h3 id="bind"><a href="#bind" class="headerlink" title=".bind()"></a>.bind()</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fun.<span class="title function_">bind</span>(thisArg[, arg1[, arg2[, ...]]])</span><br></pre></td></tr></table></figure>
 
-<p>在函式後加上 .bind()，第一個參數為指定的 this對象，剩下的參數則為此函式的參數。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">x</span>: <span class="number">123</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> func = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">x</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">func</span>();            <span class="comment">// undefined</span></span><br><span class="line">func.<span class="title function_">bind</span>(obj)();  <span class="comment">// 123</span></span><br></pre></td></tr></table></figure>
+<p>在函式後加上 .bind()，第一個參數為指定的 this 對象，剩下的參數則為此函式的參數。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">x</span>: <span class="number">123</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> func = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">x</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">func</span>(); <span class="comment">// undefined</span></span><br><span class="line">func.<span class="title function_">bind</span>(obj)(); <span class="comment">// 123</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="call-與-apply"><a href="#call-與-apply" class="headerlink" title=".call() 與 .apply()"></a>.call() 與 .apply()</h3><p>基本上 .call() 或是 .apply() 都是去呼叫執行這個 function ，並將這個 function 的 context 替換成第一個參數帶入的物件。 換句話說，就是強制指定某個物件作為該 function 執行時的 this。</p>
 <p><img src="https://miro.medium.com/max/720/1*G9i16krE_w0op-vUYlwGQg.webp"></p>
 <p>可將 Ming 傳入並取代 this，後面帶上一個參數 2 則是函式的參數。因此</p>
 <ul>
 <li>.call() 前者為套用 this 的物件，後者以後都是函式的參數。</li>
-<li>.apply() 前者一樣套用this的物件，後者以陣列的方式傳入參數。</li>
+<li>.apply() 前者一樣套用 this 的物件，後者以陣列的方式傳入參數。</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fn.<span class="title function_">call</span>(<span class="number">1</span>, <span class="string">&#x27;小名&#x27;</span>, <span class="string">&#x27;杰倫&#x27;</span>)     <span class="comment">// this =&gt; &#123;1&#125;</span></span><br><span class="line">fn.<span class="title function_">call</span>(<span class="string">&#x27;文字&#x27;</span>, <span class="string">&#x27;小名&#x27;</span>, <span class="string">&#x27;杰倫&#x27;</span>) <span class="comment">// this =&gt; &#123;&#x27;文字&#x27;&#125;</span></span><br><span class="line">fn.<span class="title function_">call</span>(<span class="literal">undefined</span>, <span class="string">&#x27;小名&#x27;</span>, <span class="string">&#x27;杰倫&#x27;</span>) <span class="comment">// this =&gt; window</span></span><br><span class="line">fn.<span class="title function_">call</span>(<span class="literal">null</span>, <span class="string">&#x27;小名&#x27;</span>, <span class="string">&#x27;杰倫&#x27;</span>) <span class="comment">// this =&gt; window</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fn.<span class="title function_">call</span>(<span class="number">1</span>, <span class="string">&quot;小名&quot;</span>, <span class="string">&quot;杰倫&quot;</span>); <span class="comment">// this =&gt; &#123;1&#125;</span></span><br><span class="line">fn.<span class="title function_">call</span>(<span class="string">&quot;文字&quot;</span>, <span class="string">&quot;小名&quot;</span>, <span class="string">&quot;杰倫&quot;</span>); <span class="comment">// this =&gt; &#123;&#x27;文字&#x27;&#125;</span></span><br><span class="line">fn.<span class="title function_">call</span>(<span class="literal">undefined</span>, <span class="string">&quot;小名&quot;</span>, <span class="string">&quot;杰倫&quot;</span>); <span class="comment">// this =&gt; window</span></span><br><span class="line">fn.<span class="title function_">call</span>(<span class="literal">null</span>, <span class="string">&quot;小名&quot;</span>, <span class="string">&quot;杰倫&quot;</span>); <span class="comment">// this =&gt; window</span></span><br></pre></td></tr></table></figure>
 
 <p>當使用 call 傳入的第一個參數不是物件而是純值時，string、number、boolean 會被包裝成物件，undefined、null 則會被替換成 window。</p>
-<p>簡易呼叫時盡可能不要調用this，因為它的本質就是 undefined。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以下兩行實際上是一樣的。</span></span><br><span class="line"><span class="title function_">fn</span>(<span class="string">&#x27;小名&#x27;</span>, <span class="string">&#x27;杰倫&#x27;</span>)</span><br><span class="line">fn.<span class="title function_">call</span>(<span class="literal">undefined</span>, <span class="string">&#x27;小名&#x27;</span>, <span class="string">&#x27;杰倫&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>簡易呼叫時盡可能不要調用 this，因為它的本質就是 undefined。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以下兩行實際上是一樣的。</span></span><br><span class="line"><span class="title function_">fn</span>(<span class="string">&quot;小名&quot;</span>, <span class="string">&quot;杰倫&quot;</span>);</span><br><span class="line">fn.<span class="title function_">call</span>(<span class="literal">undefined</span>, <span class="string">&quot;小名&quot;</span>, <span class="string">&quot;杰倫&quot;</span>);</span><br></pre></td></tr></table></figure>
 
 <p>簡易呼叫其實就相當於執行 call 但傳入的值是 undefined，undefined 在一般模式會被替換成 window，而在嚴格模式則會維持 undedined。</p>
 <h3 id="bind-、-call-、-apply-的差異"><a href="#bind-、-call-、-apply-的差異" class="headerlink" title=".bind()、 .call() 、.apply()的差異"></a>.bind()、 .call() 、.apply()的差異</h3><p>bind() 讓這個 function 在呼叫前先綁定某個物件，使它不管怎麼被呼叫都能有固定的 this。</p>
@@ -364,7 +373,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

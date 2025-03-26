@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*QF0Pqw1z3lIZBTlKOwrd6A.png">
 <meta property="og:image" content="https://miro.medium.com/v2/resize:fit:640/format:webp/1*KGg1cezTRo22qhp0kkf4rA.png">
 <meta property="article:published_time" content="2024-04-18T06:18:48.000Z">
-<meta property="article:modified_time" content="2024-08-13T03:20:30.360Z">
+<meta property="article:modified_time" content="2024-09-06T12:33:50.460Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="JS 核心篇">
 <meta name="twitter:card" content="summary">
@@ -160,18 +160,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-count">343</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -252,7 +252,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
+      <time title="修改時間：2024-09-06 20:33:50" itemprop="dateModified" datetime="2024-09-06T20:33:50+08:00">2024-09-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -279,7 +279,7 @@
 <h2 id="陳述式"><a href="#陳述式" class="headerlink" title="陳述式:"></a>陳述式:</h2><p>舉凡流程判斷用，但不回傳結果的，稱為陳述式。</p>
 <p>陳述式有幾大分類，如：</p>
 <ul>
-<li>宣告（var、function）</li>
+<li>宣告（var、function) : var a &#x3D; 1; </li>
 <li>流程控制（block、if…else）</li>
 <li>迴圈（for、for…in）</li>
 <li>其它（import, export）</li>
@@ -291,14 +291,16 @@
 <p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*KGg1cezTRo22qhp0kkf4rA.png"></p>
 <p>例子：</p>
 <ul>
-<li>數字運算：5 + 3</li>
+<li>任何的純值或變數: 1、a</li>
+<li>搭配運算子：5 + 3 、 a &#x3D;&#x3D;&#x3D; 1</li>
+<li>執行函式: 因為函式都 return 值，你沒指定 return 的值就是 return undefined<br>function a() {}<br>a(); </li>
 <li>字串拼接：”Hello, “ + “world!”</li>
-<li>變數：var y &#x3D; x * 2;</li>
-<li>函式呼叫：Math.max(10, 20)</li>
 <li>陣列索引：arr[0]</li>
 </ul>
 <p>函式表達式又稱匿名函式，因為會回傳結果，為表達式。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> callName = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;call name&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -347,7 +349,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

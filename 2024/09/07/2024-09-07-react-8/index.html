@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tim8076.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="介紹 React Hook Form 表單操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Hooks (5) React Hook Form">
+<meta property="og:url" content="https://tim8076.github.io/2024/09/07/2024-09-07-react-8/index.html">
+<meta property="og:site_name" content="Tim的前端日誌">
+<meta property="og:description" content="介紹 React Hook Form 表單操作">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2024-09-07T02:42:35.000Z">
+<meta property="article:modified_time" content="2025-01-24T13:27:34.301Z">
+<meta property="article:author" content="Tim Chou">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://tim8076.github.io/2024/09/07/2024-09-07-react-8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://tim8076.github.io/2024/09/07/2024-09-07-react-8/","path":"2024/09/07/2024-09-07-react-8/","title":"React Hooks (5) React Hook Form"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>React Hooks (5) React Hook Form | Tim的前端日誌</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tim的前端日誌</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React-Hook-Form-%E5%9F%BA%E6%9C%AC%E8%BC%89%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">React Hook Form 基本載入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A%E9%A0%90%E8%A8%AD%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">設定預設值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watch-%E9%9A%A8%E6%99%82%E7%9B%A3%E8%81%BD"><span class="nav-number">3.</span> <span class="nav-text">watch 隨時監聽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watch-%E5%AF%AB%E5%85%A5%E5%80%BC"><span class="nav-number">4.</span> <span class="nav-text">watch 寫入值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%8C%AF%E8%AA%A4%E6%A8%A3%E5%BC%8F%E8%A8%AD%E5%AE%9A"><span class="nav-number">5.</span> <span class="nav-text">錯誤樣式設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%8C%AF%E8%AA%A4%E6%A8%A3%E5%BC%8F%E8%A8%AD%E5%AE%9A"><span class="nav-number">6.</span> <span class="nav-text">其他錯誤樣式設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%84%E8%A1%A8%E5%96%AE%E7%B6%81%E5%AE%9A%E6%96%B9%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">各表單綁定方法</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tim Chou</p>
+  <div class="site-description" itemprop="description">Zero to Hero</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">343</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/tim8076" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2024/09/07/2024-09-07-react-8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Tim Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim的前端日誌">
+      <meta itemprop="description" content="Zero to Hero">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="React Hooks (5) React Hook Form | Tim的前端日誌">
+      <meta itemprop="description" content="介紹 React Hook Form 表單操作">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          React Hooks (5) React Hook Form
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2024-09-07 10:42:35" itemprop="dateCreated datePublished" datetime="2024-09-07T10:42:35+08:00">2024-09-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2025-01-24 21:27:34" itemprop="dateModified" datetime="2025-01-24T21:27:34+08:00">2025-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">介紹 React Hook Form 表單操作</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="React-Hook-Form-基本載入"><a href="#React-Hook-Form-基本載入" class="headerlink" title="React Hook Form 基本載入"></a>React Hook Form 基本載入</h2><p>React 在操作表單時有些操作比較繁瑣，React Hook Form 這個套件就可以簡化表單操作。</p>
+<ol>
+<li>在專案中引入 cdn</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/react-hook-form@7.33.1/dist/index.umd.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在專案中，將 register、handleSubmit 從 useForm() 中解構出來</li>
+</ol>
+<ul>
+<li>register: 用來定義 input 資料</li>
+<li>handleSubmit: 偵聽表單送出事件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; useState, useEffect &#125; = <span class="title class_">React</span>;</span><br><span class="line"><span class="keyword">const</span> &#123; useForm &#125; = <span class="title class_">ReactHookForm</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;</span><br><span class="line">    register, <span class="comment">//state</span></span><br><span class="line">    handleSubmit,</span><br><span class="line">  &#125; = <span class="title function_">useForm</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">onSubmit</span> = (<span class="params">data</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data) <span class="comment">// data為 register註冊的資料</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>綁定功能</li>
+</ol>
+<ul>
+<li>register: 綁定到 input 欄位，帶入的是 表單送出欄位 <code>&#123; ...register(&#39;username&#39;) &#125;</code></li>
+<li>handleSubmit: 綁定到 form 元素上，送出時觸發</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">return</span> (</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&#x27;&#x27;</span> <span class="attr">onSubmit</span>=<span class="string">&#123;handleSubmit(onSubmit)&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&#x27;mb-3&#x27;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">htmlFor</span>=<span class="string">&#x27;username&#x27;</span> <span class="attr">className</span>=<span class="string">&#x27;form-label&#x27;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          使用者名稱</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">input</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">id</span>=<span class="string">&#x27;username&#x27;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">type</span>=<span class="string">&#x27;text&#x27;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">defaultValue</span>=<span class="string">&quot;卡斯伯&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          &#123; <span class="attr">...register</span>(&#x27;<span class="attr">username</span>&#x27;) &#125;</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">className</span>=<span class="string">&#x27;form-control&#x27;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&#x27;submit&#x27;</span> <span class="attr">className</span>=<span class="string">&#x27;btn btn-primary&#x27;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        註冊</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h2 id="設定預設值"><a href="#設定預設值" class="headerlink" title="設定預設值"></a>設定預設值</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;</span><br><span class="line">   register,</span><br><span class="line">   handleSubmit,</span><br><span class="line"> &#125; = <span class="title function_">useForm</span>(&#123;</span><br><span class="line">   <span class="attr">defaultValues</span>: &#123;</span><br><span class="line">     <span class="attr">username</span>: <span class="string">&#x27;卡斯柏&#x27;</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>一開始解構 useForm() 時就可帶入 register 的預設值。</p>
+<h2 id="watch-隨時監聽"><a href="#watch-隨時監聽" class="headerlink" title="watch 隨時監聽"></a>watch 隨時監聽</h2><p>handleSubmit 是在表單送出時觸發，若希望表單的值有異動時就隨時觸發，可用 watch 函式。</p>
+<p>從 useForm 解構出 watch 功能。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;</span><br><span class="line">    register,</span><br><span class="line">    handleSubmit,</span><br><span class="line">    watch,</span><br><span class="line">  &#125; = <span class="title function_">useForm</span>();</span><br></pre></td></tr></table></figure>
+
+<p>預設是監聽所有 input 欄位</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">watch</span>())</span><br></pre></td></tr></table></figure>
+
+<p>監聽單一欄位，可以帶入指定欄位</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">watch</span>(<span class="string">&#x27;username&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="watch-寫入值"><a href="#watch-寫入值" class="headerlink" title="watch 寫入值"></a>watch 寫入值</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;</span><br><span class="line">    register,</span><br><span class="line">    handleSubmit,</span><br><span class="line">    watch,</span><br><span class="line">    setValue,</span><br><span class="line">  &#125; = <span class="title function_">useForm</span>();</span><br><span class="line"></span><br><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> subscription = <span class="title function_">watch</span>(<span class="function">(<span class="params">value, &#123; name &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (name === <span class="string">&#x27;like&#x27;</span>) &#123;</span><br><span class="line">      <span class="title function_">setValue</span>(<span class="string">&#x27;username&#x27;</span>, <span class="string">&#x27;卡斯柏&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> <span class="function">() =&gt;</span> subscription.<span class="title function_">unsubscribe</span>()</span><br><span class="line">&#125;, [watch])</span><br></pre></td></tr></table></figure>
+
+<p>如果想在 watch 觸發時寫入值，可以在 useEffect 偵聽 watch，並當值更動時，用 watch 的 callback 函式帶出更動的值，用setValue 來寫入值。</p>
+<h2 id="錯誤樣式設定"><a href="#錯誤樣式設定" class="headerlink" title="錯誤樣式設定"></a>錯誤樣式設定</h2><ol>
+<li>input 的 register 可以設定 required 為 true</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">  id=<span class="string">&#x27;username&#x27;</span></span><br><span class="line">  type=<span class="string">&#x27;text&#x27;</span></span><br><span class="line">  &#123;...<span class="title function_">register</span>(<span class="string">&#x27;username&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">required</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;)&#125;</span><br><span class="line">  /&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>將 formState 物件從 useForm 解構出來，當 input 出錯時，會記錄到此 errors  物件</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;</span><br><span class="line">  register,</span><br><span class="line">  handleSubmit,</span><br><span class="line">  watch,</span><br><span class="line">  <span class="attr">formState</span>: &#123; errors &#125;</span><br><span class="line">&#125; = <span class="title function_">useForm</span>(&#123;</span><br><span class="line">  <span class="attr">defaultValues</span>: &#123;</span><br><span class="line">    <span class="attr">username</span>: <span class="string">&#x27;卡斯伯&#x27;</span>,</span><br><span class="line">    <span class="attr">like</span>: []</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>當 errors 物件有紀錄錯誤時，加入 <a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/5.3/forms/validation/#server-side">bootstrap 錯誤樣式</a> ‘is-invalid’</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">  id=<span class="string">&#x27;username&#x27;</span></span><br><span class="line">  type=<span class="string">&#x27;text&#x27;</span></span><br><span class="line">  &#123;...<span class="title function_">register</span>(<span class="string">&#x27;username&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">required</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;)&#125;</span><br><span class="line">  className=&#123;<span class="string">`form-control <span class="subst">$&#123;errors.username ? <span class="string">&#x27;is-invalid&#x27;</span> : <span class="string">&#x27;&#x27;</span>&#125;</span>`</span>&#125;</span><br><span class="line">  /&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>加入錯誤提示文字樣式 ‘invalid-feedback’</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">  id=<span class="string">&#x27;username&#x27;</span></span><br><span class="line">  type=<span class="string">&#x27;text&#x27;</span></span><br><span class="line">  &#123;...<span class="title function_">register</span>(<span class="string">&#x27;username&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">required</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;)&#125;</span><br><span class="line">  className=&#123;<span class="string">`form-control <span class="subst">$&#123;errors.username ? <span class="string">&#x27;is-invalid&#x27;</span> : <span class="string">&#x27;&#x27;</span>&#125;</span>`</span>&#125;</span><br><span class="line">  /&gt;</span><br><span class="line">&#123;</span><br><span class="line">  errors.<span class="property">username</span> &amp;&amp; <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;invalid-feedback&quot;</span>&gt;</span>User Name 為必填欄位<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他錯誤樣式設定"><a href="#其他錯誤樣式設定" class="headerlink" title="其他錯誤樣式設定"></a>其他錯誤樣式設定</h2><p>錯誤提示文字也可以在 register 設定如下，可參考<a target="_blank" rel="noopener" href="https://react-hook-form.com/docs/useform/register#registerRef">官網設定</a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">  id=<span class="string">&#x27;email&#x27;</span></span><br><span class="line">  type=<span class="string">&#x27;text&#x27;</span></span><br><span class="line">  &#123;...<span class="title function_">register</span>(<span class="string">&#x27;email&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">required</span>: &#123;</span><br><span class="line">      <span class="attr">value</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">message</span>: <span class="string">&#x27;Email 為必填&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">pattern</span>: &#123;</span><br><span class="line">      <span class="attr">value</span>: <span class="regexp">/^\S+@\S+$/i</span>,</span><br><span class="line">      <span class="attr">message</span>: <span class="string">&#x27;Email 格式錯誤&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)&#125;</span><br><span class="line">  className=&#123;<span class="string">`form-control <span class="subst">$&#123;errors.email &amp;&amp; <span class="string">&#x27;is-invalid&#x27;</span>&#125;</span>`</span>&#125;</span><br><span class="line">/&gt;</span><br><span class="line">&#123;errors.<span class="property">email</span> &amp;&amp; (</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&#x27;invalid-feedback&#x27;</span>&gt;</span>&#123;errors?.email?.message&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">)&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="各表單綁定方法"><a href="#各表單綁定方法" class="headerlink" title="各表單綁定方法"></a>各表單綁定方法</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="comment">/* 各種表單元素，基本套用方式 */</span>&#125;</span><br><span class="line">&lt;input &#123;...<span class="title function_">register</span>(<span class="string">&quot;email&quot;</span>)&#125; /&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">select</span> &#123;<span class="attr">...register</span>(&quot;<span class="attr">category</span>&quot;)&#125;&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span>&gt;</span>Select...<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;option1&quot;</span>&gt;</span>Option 1<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;option2&quot;</span>&gt;</span>Option 2<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span></span><br><span class="line">&#123;<span class="comment">/* 單選 Checkbox */</span>&#125;</span><br><span class="line">&lt;input type=<span class="string">&quot;checkbox&quot;</span> &#123;...<span class="title function_">register</span>(<span class="string">&quot;isChecked&quot;</span>)&#125; /&gt; <span class="title class_">Checkbox</span></span><br><span class="line">&#123;<span class="comment">/* 多選 Checkbox */</span>&#125;</span><br><span class="line">&lt;label&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> &#123;<span class="attr">...register</span>(&quot;<span class="attr">like</span>&quot;)&#125; <span class="attr">value</span>=<span class="string">&quot;鍋燒意麵&quot;</span> /&gt;</span></span> <span class="title class_">Option</span> <span class="number">1</span></span><br><span class="line">&lt;/label&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> &#123;<span class="attr">...register</span>(&quot;<span class="attr">like</span>&quot;)&#125; <span class="attr">value</span>=<span class="string">&quot;炒麵&quot;</span> /&gt;</span> Option 2</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> &#123;<span class="attr">...register</span>(&quot;<span class="attr">like</span>&quot;)&#125; <span class="attr">value</span>=<span class="string">&quot;漢堡&quot;</span> /&gt;</span> Option 3</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">&#123;<span class="comment">/* 單選 Radio */</span>&#125;</span><br><span class="line">&lt;input type=<span class="string">&quot;radio&quot;</span> &#123;...<span class="title function_">register</span>(<span class="string">&#x27;gender&#x27;</span>)&#125; value=<span class="string">&quot;男&quot;</span> /&gt; 男</span><br><span class="line">&lt;input type=<span class="string">&quot;radio&quot;</span> &#123;...<span class="title function_">register</span>(<span class="string">&#x27;gender&#x27;</span>)&#125; value=<span class="string">&quot;女&quot;</span> /&gt; 女</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/06/2024-09-06-react-7/" rel="prev" title="React Hooks (4) Form 表單操作">
+                  <i class="fa fa-chevron-left"></i> React Hooks (4) Form 表單操作
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/08/2024-09-08-react-9/" rel="next" title="React Hooks (6) useMemo 介紹">
+                  React Hooks (6) useMemo 介紹 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tim Chou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"shosetim","count":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

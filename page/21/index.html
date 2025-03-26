@@ -153,18 +153,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-count">343</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -208,7 +208,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/07/13/2022-7-13-4-body-parser/">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/10/06/2022-10-6-1-webpack-config/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -226,7 +226,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/13/2022-7-13-4-body-parser/" class="post-title-link" itemprop="url">Express框架(8) body-parser</a>
+          <a href="/2022/10/06/2022-10-6-1-webpack-config/" class="post-title-link" itemprop="url">從 0 開始的 webpack 5 專案(2) configuration</a>
         </h2>
 
         <div class="post-meta-container">
@@ -237,7 +237,189 @@
       </span>
       <span class="post-meta-item-text">發表於</span>
 
-      <time title="創建時間：2022-07-13 21:00:19" itemprop="dateCreated datePublished" datetime="2022-07-13T21:00:19+08:00">2022-07-13</time>
+      <time title="創建時間：2022-10-06 15:04:36" itemprop="dateCreated datePublished" datetime="2022-10-06T15:04:36+08:00">2022-10-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>上一篇安裝完好後，我們的專案目前是這樣</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">node_modules</span><br><span class="line">src</span><br><span class="line">package.json</span><br><span class="line">package-lock.json</span><br></pre></td></tr></table></figure>
+
+<p>再來在跟目錄上新增 ‵webpack.config.js&#96;。</p>
+<h2 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h2><p>通常我們在開發時，都會有開發模式、部署模式這兩種模式，在此就主要是透過 mode 屬性來設置。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> =  &#123;</span><br><span class="line">  <span class="comment">/* ... */</span></span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h2><p>第一步要設定的是 entry point，也就是 webpack 會以哪支檔案作為進入點來開始打包檔案。換句話說，所有要被編譯的檔案都要import到進入點。</p>
+<p>此範例中，我們將進入點設在 <code>src/index.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">entry</span>: &#123;</span><br><span class="line">    <span class="attr">main</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;./src/index.js&#x27;</span>),</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>Output 是打包後檔案輸出的位置，設定在 <code>/dist</code> 資料夾。這邊的 [name] 會自動帶入 entry 設定的 main。[contenthash] 則是會生成一組 hash 而這個生成邏輯會依據提取的內容來生成。</p>
+<p>為什麼會使用到 hash，最主要是避免瀏覽器的緩存問題，我們在開發時，通常會瘋狂的重新整理，而這過程就有可能導致緩存發生而無法確定我們修改的內容，那麼透過 hash 每一次存擋就重新生成不同的檔案名稱，這樣子瀏覽器就不會緩存內容了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">/* ... */</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;./dist&#x27;</span>),</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;[name].[contenthash].bundle.js&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最後在 package.json 中的 scripts 屬性增加一行啟動指令</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;build&quot;</span>: <span class="string">&quot;webpack&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>然後在終端機輸入 <code>npm run build</code> 就可以成功打包檔案。此時專案資料夾下會多出一個 dist 資料夾。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/10/06/2022-10-6-webpack-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Tim Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim的前端日誌">
+      <meta itemprop="description" content="Zero to Hero">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Tim的前端日誌">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/06/2022-10-6-webpack-5/" class="post-title-link" itemprop="url">從 0 開始的 webpack 5 專案(1) 起源</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-10-06 14:45:48" itemprop="dateCreated datePublished" datetime="2022-10-06T14:45:48+08:00">2022-10-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="什麼是-webpack"><a href="#什麼是-webpack" class="headerlink" title="什麼是 webpack ?"></a>什麼是 webpack ?</h2><p>在以前做網頁開發時，可能只需要處理html、css、js檔案就可以了。但現在前端開發工具越來越多，像css有scss的預處理器、html可以用pug來寫等等。此時就須要一個工具來將這些scss、pug檔案編譯成css跟html。</p>
+<p>webpack 就是主要負責幫我們整合並打包成瀏覽器看得懂的 CSS、HTML、JavaScript 以及 Image。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/welcomewebworld-4097b.appspot.com/o/blogImg%2FWebpack%2F%E6%88%AA%E5%9C%96%202021-02-28%2021.13.11.png?alt=media&token=9c4cb37f-a59f-48ec-ace6-14b16918d525"></p>
+<h2 id="專案安裝"><a href="#專案安裝" class="headerlink" title="專案安裝"></a>專案安裝</h2><p>首先先開啟一個新的專案資料夾，叫做 webpack-starter，並用 npm -y 來新增 package.json檔案。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir webpack-starter</span><br><span class="line">cd webpack-tutorial</span><br><span class="line">npm init -y # creates a default package.json</span><br></pre></td></tr></table></figure>
+
+<p>再來安裝 <code>webpack</code> 和 <code>webpack-cli</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D webpack webpack-cli</span><br></pre></td></tr></table></figure>
+
+<p>再來在專案下新增 src 資料夾，並在 src 裡新增 index.js檔案</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Interesting!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>到這邊就完成專案基本設定囉。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/09/24/2022-9-24-1-navigation-guard/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Tim Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim的前端日誌">
+      <meta itemprop="description" content="Zero to Hero">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Tim的前端日誌">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/24/2022-9-24-1-navigation-guard/" class="post-title-link" itemprop="url">vue-router (9) 導航守衛</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-09-24 11:18:21" itemprop="dateCreated datePublished" datetime="2022-09-24T11:18:21+08:00">2022-09-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -252,7 +434,7 @@
       </span>
       <span class="post-meta-item-text">分類於</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+          <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
         </span>
     </span>
 
@@ -266,10 +448,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>使用body-parser處理表單資料</p>
+          <p>使用導航守衛</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/07/13/2022-7-13-4-body-parser/">
+              <a class="btn" href="/2022/09/24/2022-9-24-1-navigation-guard/">
                 閱讀全文 &raquo;
               </a>
             </div>
@@ -300,7 +482,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/07/13/2022-7-13-3-postman/">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/09/22/2022-9-22-4-scroll-behavior/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -318,7 +500,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/13/2022-7-13-3-postman/" class="post-title-link" itemprop="url">Postman-API 管理工具</a>
+          <a href="/2022/09/22/2022-9-22-4-scroll-behavior/" class="post-title-link" itemprop="url">vue-router (8) 滾動行為</a>
         </h2>
 
         <div class="post-meta-container">
@@ -329,14 +511,14 @@
       </span>
       <span class="post-meta-item-text">發表於</span>
 
-      <time title="創建時間：2022-07-13 20:35:55" itemprop="dateCreated datePublished" datetime="2022-07-13T20:35:55+08:00">2022-07-13</time>
+      <time title="創建時間：2022-09-22 15:32:00" itemprop="dateCreated datePublished" datetime="2022-09-22T15:32:00+08:00">2022-09-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+      <time title="修改時間：2024-06-08 13:54:19" itemprop="dateModified" datetime="2024-06-08T13:54:19+08:00">2024-06-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -344,7 +526,7 @@
       </span>
       <span class="post-meta-item-text">分類於</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Postman/" itemprop="url" rel="index"><span itemprop="name">Postman</span></a>
+          <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
         </span>
     </span>
 
@@ -358,10 +540,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>使用Postman管理api</p>
+          <p>vue-router 滾動行為</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/07/13/2022-7-13-3-postman/">
+              <a class="btn" href="/2022/09/22/2022-9-22-4-scroll-behavior/">
                 閱讀全文 &raquo;
               </a>
             </div>
@@ -392,7 +574,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/07/13/2022-7-13-2-ejs-layout/">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/09/22/2022-9-22-3-vue-router-redirect/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -410,7 +592,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/13/2022-7-13-2-ejs-layout/" class="post-title-link" itemprop="url">Express框架(7) EJS Layout</a>
+          <a href="/2022/09/22/2022-9-22-3-vue-router-redirect/" class="post-title-link" itemprop="url">vue-router (7) 重新導向與404頁面</a>
         </h2>
 
         <div class="post-meta-container">
@@ -421,14 +603,14 @@
       </span>
       <span class="post-meta-item-text">發表於</span>
 
-      <time title="創建時間：2022-07-13 11:09:55" itemprop="dateCreated datePublished" datetime="2022-07-13T11:09:55+08:00">2022-07-13</time>
+      <time title="創建時間：2022-09-22 14:26:27" itemprop="dateCreated datePublished" datetime="2022-09-22T14:26:27+08:00">2022-09-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+      <time title="修改時間：2024-06-08 13:54:19" itemprop="dateModified" datetime="2024-06-08T13:54:19+08:00">2024-06-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -436,7 +618,7 @@
       </span>
       <span class="post-meta-item-text">分類於</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+          <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
         </span>
     </span>
 
@@ -450,10 +632,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>使用ejs layout</p>
+          <p>使用 redirect 重新導向</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/07/13/2022-7-13-2-ejs-layout/">
+              <a class="btn" href="/2022/09/22/2022-9-22-3-vue-router-redirect/">
                 閱讀全文 &raquo;
               </a>
             </div>
@@ -484,7 +666,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/07/13/2022-7-13-1-ejs-install/">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/09/22/2022-9-22-2-vue-router-named-view/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -502,7 +684,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/13/2022-7-13-1-ejs-install/" class="post-title-link" itemprop="url">Express框架(6) EJS樣板語言</a>
+          <a href="/2022/09/22/2022-9-22-2-vue-router-named-view/" class="post-title-link" itemprop="url">vue-router (6) 命名視圖</a>
         </h2>
 
         <div class="post-meta-container">
@@ -513,7 +695,7 @@
       </span>
       <span class="post-meta-item-text">發表於</span>
 
-      <time title="創建時間：2022-07-13 10:57:54" itemprop="dateCreated datePublished" datetime="2022-07-13T10:57:54+08:00">2022-07-13</time>
+      <time title="創建時間：2022-09-22 13:48:47" itemprop="dateCreated datePublished" datetime="2022-09-22T13:48:47+08:00">2022-09-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -528,7 +710,7 @@
       </span>
       <span class="post-meta-item-text">分類於</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+          <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
         </span>
     </span>
 
@@ -542,10 +724,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>介紹與安裝ejs樣板</p>
+          <p>在一個元件呈現多個視圖</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/07/13/2022-7-13-1-ejs-install/">
+              <a class="btn" href="/2022/09/22/2022-9-22-2-vue-router-named-view/">
                 閱讀全文 &raquo;
               </a>
             </div>
@@ -576,7 +758,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/07/12/2022-7-12-2-node-static/">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/09/22/2022-9-22-2-vue-router-navigation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -594,7 +776,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/12/2022-7-12-2-node-static/" class="post-title-link" itemprop="url">Express框架(5) 靜態檔案</a>
+          <a href="/2022/09/22/2022-9-22-2-vue-router-navigation/" class="post-title-link" itemprop="url">vue-router (5) 路由轉址</a>
         </h2>
 
         <div class="post-meta-container">
@@ -605,7 +787,7 @@
       </span>
       <span class="post-meta-item-text">發表於</span>
 
-      <time title="創建時間：2022-07-12 21:49:50" itemprop="dateCreated datePublished" datetime="2022-07-12T21:49:50+08:00">2022-07-12</time>
+      <time title="創建時間：2022-09-22 11:22:06" itemprop="dateCreated datePublished" datetime="2022-09-22T11:22:06+08:00">2022-09-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -620,7 +802,7 @@
       </span>
       <span class="post-meta-item-text">分類於</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+          <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
         </span>
     </span>
 
@@ -634,10 +816,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>設定靜態檔案</p>
+          <p>在程式裡進行路由轉址</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/07/12/2022-7-12-2-node-static/">
+              <a class="btn" href="/2022/09/22/2022-9-22-2-vue-router-navigation/">
                 閱讀全文 &raquo;
               </a>
             </div>
@@ -668,7 +850,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/07/12/2022-7-12-1-node-middleware/">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/09/22/2022-9-22-1-vue-nested-route/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -686,7 +868,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/12/2022-7-12-1-node-middleware/" class="post-title-link" itemprop="url">Express框架(4) Middleware</a>
+          <a href="/2022/09/22/2022-9-22-1-vue-nested-route/" class="post-title-link" itemprop="url">vue-router (4) 巢狀路由</a>
         </h2>
 
         <div class="post-meta-container">
@@ -697,7 +879,7 @@
       </span>
       <span class="post-meta-item-text">發表於</span>
 
-      <time title="創建時間：2022-07-12 16:10:32" itemprop="dateCreated datePublished" datetime="2022-07-12T16:10:32+08:00">2022-07-12</time>
+      <time title="創建時間：2022-09-22 10:29:03" itemprop="dateCreated datePublished" datetime="2022-09-22T10:29:03+08:00">2022-09-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -712,7 +894,7 @@
       </span>
       <span class="post-meta-item-text">分類於</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+          <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
         </span>
     </span>
 
@@ -726,10 +908,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>介紹其他Middleware運作</p>
+          <p>vue-router 巢狀路由介紹</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/07/12/2022-7-12-1-node-middleware/">
+              <a class="btn" href="/2022/09/22/2022-9-22-1-vue-nested-route/">
                 閱讀全文 &raquo;
               </a>
             </div>
@@ -760,7 +942,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/07/11/2022-7-11-8-node-route/">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/09/21/2022-9-21-3-vue-router-matching/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -778,7 +960,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/11/2022-7-11-8-node-route/" class="post-title-link" itemprop="url">Express框架(3) 路由設計</a>
+          <a href="/2022/09/21/2022-9-21-3-vue-router-matching/" class="post-title-link" itemprop="url">vue-router (3) 路由比對</a>
         </h2>
 
         <div class="post-meta-container">
@@ -789,7 +971,7 @@
       </span>
       <span class="post-meta-item-text">發表於</span>
 
-      <time title="創建時間：2022-07-11 16:49:43" itemprop="dateCreated datePublished" datetime="2022-07-11T16:49:43+08:00">2022-07-11</time>
+      <time title="創建時間：2022-09-21 15:22:15" itemprop="dateCreated datePublished" datetime="2022-09-21T15:22:15+08:00">2022-09-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -804,7 +986,7 @@
       </span>
       <span class="post-meta-item-text">分類於</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+          <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
         </span>
     </span>
 
@@ -818,10 +1000,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>設計應用程式路由</p>
+          <p>vue-router 路由比對</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/07/11/2022-7-11-8-node-route/">
+              <a class="btn" href="/2022/09/21/2022-9-21-3-vue-router-matching/">
                 閱讀全文 &raquo;
               </a>
             </div>
@@ -852,7 +1034,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/07/11/2022-7-11-7-node-network/">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/09/21/2022-9-21-2-vue-router-setting/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -870,7 +1052,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/11/2022-7-11-7-node-network/" class="post-title-link" itemprop="url">Express框架(2) 網址規則</a>
+          <a href="/2022/09/21/2022-9-21-2-vue-router-setting/" class="post-title-link" itemprop="url">vue-router (2) 動態路由</a>
         </h2>
 
         <div class="post-meta-container">
@@ -881,14 +1063,14 @@
       </span>
       <span class="post-meta-item-text">發表於</span>
 
-      <time title="創建時間：2022-07-11 16:39:19" itemprop="dateCreated datePublished" datetime="2022-07-11T16:39:19+08:00">2022-07-11</time>
+      <time title="創建時間：2022-09-21 14:36:04" itemprop="dateCreated datePublished" datetime="2022-09-21T14:36:04+08:00">2022-09-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+      <time title="修改時間：2024-06-08 13:54:19" itemprop="dateModified" datetime="2024-06-08T13:54:19+08:00">2024-06-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -896,7 +1078,7 @@
       </span>
       <span class="post-meta-item-text">分類於</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+          <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
         </span>
     </span>
 
@@ -910,194 +1092,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>講解網址規則</p>
+          <p>vue-router 動態路由</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/07/11/2022-7-11-7-node-network/">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/07/11/2022-7-11-6-node-express-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Tim Chou">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tim的前端日誌">
-      <meta itemprop="description" content="Zero to Hero">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Tim的前端日誌">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/11/2022-7-11-6-node-express-1/" class="post-title-link" itemprop="url">Express框架(1) 開啟web伺服器</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2022-07-11 16:13:59" itemprop="dateCreated datePublished" datetime="2022-07-11T16:13:59+08:00">2022-07-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>用express開啟伺服器</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/07/11/2022-7-11-6-node-express-1/">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2022/07/11/2022-7-11-5-node-module/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Tim Chou">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tim的前端日誌">
-      <meta itemprop="description" content="Zero to Hero">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Tim的前端日誌">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/11/2022-7-11-5-node-module/" class="post-title-link" itemprop="url">(6) Node.js 內建模組</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2022-07-11 14:37:26" itemprop="dateCreated datePublished" datetime="2022-07-11T14:37:26+08:00">2022-07-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>介紹其他Node.js內建模組</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/07/11/2022-7-11-5-node-module/">
+              <a class="btn" href="/2022/09/21/2022-9-21-2-vue-router-setting/">
                 閱讀全文 &raquo;
               </a>
             </div>
@@ -1121,7 +1119,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/22/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
+    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><a class="extend next" rel="next" href="/page/22/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
   </nav>
 
 </div>
@@ -1133,7 +1131,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

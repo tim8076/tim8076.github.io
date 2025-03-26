@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*VcWqnARGsPZYBhLouFqRQA.png">
 <meta property="og:image" content="https://miro.medium.com/max/1400/1*CDZGHAJV-RjQ62NohMnyAQ.png">
 <meta property="article:published_time" content="2022-08-02T06:19:12.000Z">
-<meta property="article:modified_time" content="2024-04-20T07:54:40.746Z">
+<meta property="article:modified_time" content="2024-12-07T03:36:46.793Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="Array">
 <meta name="twitter:card" content="summary">
@@ -171,18 +171,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-count">343</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -263,7 +263,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+      <time title="修改時間：2024-12-07 11:36:46" itemprop="dateModified" datetime="2024-12-07T11:36:46+08:00">2024-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -289,6 +289,12 @@
         <p><img src="https://miro.medium.com/max/1400/1*itebCZpmLKF37J-JvBZzlA.png"></p>
 <h2 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h2><p>針對原陣列跑迴圈，方法會將陣列內的每個元素，皆傳入並執行給定的函式一次。不會產生新的陣列。依照陣列的長度，決定執行的次數。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array1 = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"></span><br><span class="line">array1.<span class="title function_">forEach</span>(<span class="function"><span class="params">element</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(element));</span><br><span class="line"></span><br><span class="line"><span class="comment">// expected output: &quot;a&quot;</span></span><br><span class="line"><span class="comment">// expected output: &quot;b&quot;</span></span><br><span class="line"><span class="comment">// expected output: &quot;c&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>forEach() 內的函式常見會帶有三個參數，以下為用法示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 參數 item 代表陣列中目前正在被處理的那個元素</span></span><br><span class="line"><span class="comment">// 參數 index 代表陣列中目前正在被處理的那個元素的索引值</span></span><br><span class="line"><span class="comment">// 參數 array 代表被處理的陣列本身，在此為 data</span></span><br><span class="line">data.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">item, index, array</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item, index, array);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>這邊需要特別提醒，在 forEach() 函式內用 return 無法停止函式進行下一個 item。除非程式碼有誤，否則並沒有中止 forEach() 的辦法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>];</span><br><span class="line"></span><br><span class="line">data.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">item, index, array</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item, index, array);</span><br><span class="line">  <span class="comment">// 程式碼會忽略這個 return </span></span><br><span class="line">  <span class="keyword">return</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <h2 id="filter-陣列篩選"><a href="#filter-陣列篩選" class="headerlink" title="filter 陣列篩選"></a>filter 陣列篩選</h2><p>針對初始陣列跑迴圈，filter() 會一一將陣列中的每個元素帶入函式測試，如果函式的回傳值為 true，則會將當前的元素回傳至新陣列中，若為 false 則不保留。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> words = [<span class="string">&#x27;spray&#x27;</span>, <span class="string">&#x27;limit&#x27;</span>, <span class="string">&#x27;elite&#x27;</span>, <span class="string">&#x27;exuberant&#x27;</span>, <span class="string">&#x27;destruction&#x27;</span>, <span class="string">&#x27;present&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = words.<span class="title function_">filter</span>(<span class="function"><span class="params">word</span> =&gt;</span> word.<span class="property">length</span> &gt; <span class="number">6</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result);</span><br><span class="line"><span class="comment">// expected output: Array [&quot;exuberant&quot;, &quot;destruction&quot;, &quot;present&quot;]</span></span><br></pre></td></tr></table></figure>
@@ -379,7 +385,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

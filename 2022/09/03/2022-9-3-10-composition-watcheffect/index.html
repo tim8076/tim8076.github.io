@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/1100/1*agWzlPkJYOzzpwri7k5V0w.png">
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/1100/1*_WUhmapmM5hfvI-tnyvsMw.png">
 <meta property="article:published_time" content="2022-09-03T08:50:44.000Z">
-<meta property="article:modified_time" content="2024-04-20T07:54:40.753Z">
+<meta property="article:modified_time" content="2024-08-14T13:17:51.557Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="Composition api">
 <meta name="twitter:card" content="summary">
@@ -148,7 +148,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-watchEffect"><span class="nav-number">1.</span> <span class="nav-text">使用 watchEffect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watchEffect-%E5%8F%AF%E4%BB%A5%E8%A2%AB%E5%81%9C%E6%AD%A2"><span class="nav-number">2.</span> <span class="nav-text">watchEffect 可以被停止</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-watchEffect"><span class="nav-number">1.</span> <span class="nav-text">使用 watchEffect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E7%9B%A3%E8%81%BD"><span class="nav-number">2.</span> <span class="nav-text">停止監聽</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -161,18 +161,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-count">343</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -253,7 +253,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-04-20 15:54:40" itemprop="dateModified" datetime="2024-04-20T15:54:40+08:00">2024-04-20</time>
+      <time title="修改時間：2024-08-14 21:17:51" itemprop="dateModified" datetime="2024-08-14T21:17:51+08:00">2024-08-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -281,11 +281,11 @@
 <p>在這個範例中有兩筆資料，一個是純值，一個是物件</p>
 <p><img src="https://cdn-images-1.medium.com/max/1100/1*agWzlPkJYOzzpwri7k5V0w.png"></p>
 <p><img src="https://cdn-images-1.medium.com/max/1100/1*_WUhmapmM5hfvI-tnyvsMw.png"></p>
-<p>並有一個變數 watchText來接收watchEffect監聽的值。</p>
-<p>在 watchEffect 帶入一個 callback function，和watch不同的是，不需要指定監聽的變數是哪個，只要雙向綁定的資料有出現在 watchEffect函式裡就會被監聽。</p>
-<p>所以在上面範例中，將監聽的值寫回 watchText裡。</p>
-<h2 id="watchEffect-可以被停止"><a href="#watchEffect-可以被停止" class="headerlink" title="watchEffect 可以被停止"></a>watchEffect 可以被停止</h2><p>和watch不同，watchEffect是可以被停止的。</p>
-<p>首先將watchEffect 函式賦予到一個變數裡，在watchEffect裡 要停止時就呼叫這個變數本身，如上圖呼叫 stopWatch來停止。</p>
+<p>並有一個變數 watchText 來接收 watchEffect 監聽的值。</p>
+<p>在 watchEffect 帶入一個 callback function，和 watch 不同的是，不需要指定監聽的變數是哪個，只要雙向綁定的資料有出現在 watchEffect 函式裡就會被監聽。</p>
+<p>所以在上面範例中，將監聽的值寫回 watchText 裡。</p>
+<h2 id="停止監聽"><a href="#停止監聽" class="headerlink" title="停止監聽"></a>停止監聽</h2><p>要停止 watch 監聽，只要將 watch 賦予到變數，並呼叫即可</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> stopWatchEffect = <span class="title function_">watchEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;watchEffect run&quot;</span>, search.<span class="property">value</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="title function_">stopWatchEffect</span>();</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -335,7 +335,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

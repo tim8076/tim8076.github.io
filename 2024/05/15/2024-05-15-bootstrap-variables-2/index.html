@@ -29,7 +29,7 @@
 <meta property="og:description" content="更改SCSS以客製化 Bootstrap">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2024-05-15T04:39:26.000Z">
-<meta property="article:modified_time" content="2024-08-13T03:20:30.366Z">
+<meta property="article:modified_time" content="2024-08-18T03:44:03.072Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="Bootstrap">
 <meta name="twitter:card" content="summary">
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Variable-defaults"><span class="nav-number">1.</span> <span class="nav-text">Variable defaults</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B6%B2%E7%AB%99%E4%B8%BB%E8%89%B2%E6%9B%B4%E6%94%B9"><span class="nav-number">2.</span> <span class="nav-text">網站主色更改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#options-%E9%A0%90%E8%A8%AD%E6%A8%A3%E5%BC%8F%E6%9B%B4%E6%94%B9"><span class="nav-number">3.</span> <span class="nav-text">options 預設樣式更改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spacing-%E6%9B%B4%E6%94%B9%E9%96%93%E8%B7%9D"><span class="nav-number">4.</span> <span class="nav-text">Spacing 更改間距</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#body-%E6%9B%B4%E6%94%B9%E5%85%A8%E7%AB%99%E6%A8%A3%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">body 更改全站樣式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E5%AD%97%E5%A4%A7%E5%B0%8F%E8%A8%AD%E5%AE%9A"><span class="nav-number">6.</span> <span class="nav-text">文字大小設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%85%E9%99%A4%E6%96%87%E5%AD%97%E6%A8%99%E7%B1%A4%E4%B8%8B%E6%96%B9%E7%A9%BA%E9%96%93"><span class="nav-number">7.</span> <span class="nav-text">清除文字標籤下方空間</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#link-%E6%9B%B4%E6%94%B9%E9%80%A3%E7%B5%90%E6%A8%A3%E5%BC%8F"><span class="nav-number">8.</span> <span class="nav-text">link 更改連結樣式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%85%83%E4%BB%B6%E6%A8%A3%E5%BC%8F"><span class="nav-number">9.</span> <span class="nav-text">修改元件樣式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Button"><span class="nav-number">9.1.</span> <span class="nav-text">Button</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E5%96%AE"><span class="nav-number">9.2.</span> <span class="nav-text">表單</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Variable-defaults"><span class="nav-number">1.</span> <span class="nav-text">Variable defaults</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B6%B2%E7%AB%99%E4%B8%BB%E8%89%B2%E6%9B%B4%E6%94%B9"><span class="nav-number">2.</span> <span class="nav-text">網站主色更改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#options-%E9%A0%90%E8%A8%AD%E6%A8%A3%E5%BC%8F%E6%9B%B4%E6%94%B9"><span class="nav-number">3.</span> <span class="nav-text">options 預設樣式更改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spacing-%E6%9B%B4%E6%94%B9%E9%96%93%E8%B7%9D"><span class="nav-number">4.</span> <span class="nav-text">Spacing 更改間距</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#body-%E6%9B%B4%E6%94%B9%E5%85%A8%E7%AB%99%E6%A8%A3%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">body 更改全站樣式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E5%AD%97%E5%A4%A7%E5%B0%8F%E8%A8%AD%E5%AE%9A"><span class="nav-number">6.</span> <span class="nav-text">文字大小設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E9%A4%98%E6%96%87%E5%AD%97%E8%A8%AD%E5%AE%9A"><span class="nav-number">7.</span> <span class="nav-text">其餘文字設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#link-%E6%9B%B4%E6%94%B9%E9%80%A3%E7%B5%90%E6%A8%A3%E5%BC%8F"><span class="nav-number">8.</span> <span class="nav-text">link 更改連結樣式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%85%83%E4%BB%B6%E6%A8%A3%E5%BC%8F"><span class="nav-number">9.</span> <span class="nav-text">修改元件樣式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Button"><span class="nav-number">9.1.</span> <span class="nav-text">Button</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E5%96%AE"><span class="nav-number">9.2.</span> <span class="nav-text">表單</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -157,18 +157,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-count">343</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -249,7 +249,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
+      <time title="修改時間：2024-08-18 11:44:03" itemprop="dateModified" datetime="2024-08-18T11:44:03+08:00">2024-08-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -302,17 +302,25 @@
 
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$font-sizes</span>: (</span><br><span class="line">  <span class="number">1</span>: <span class="variable">$h1-font-size</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="variable">$h2-font-size</span>,</span><br><span class="line">  <span class="number">3</span>: <span class="variable">$h3-font-size</span>,</span><br><span class="line">  <span class="number">4</span>: <span class="variable">$h4-font-size</span>,</span><br><span class="line">  <span class="number">5</span>: <span class="variable">$h5-font-size</span>,</span><br><span class="line">  <span class="number">6</span>: <span class="variable">$h6-font-size</span>,</span><br><span class="line">) !default;</span><br></pre></td></tr></table></figure>
 
-<h2 id="清除文字標籤下方空間"><a href="#清除文字標籤下方空間" class="headerlink" title="清除文字標籤下方空間"></a>清除文字標籤下方空間</h2><ul>
+<h2 id="其餘文字設定"><a href="#其餘文字設定" class="headerlink" title="其餘文字設定"></a>其餘文字設定</h2><ul>
 <li><code>&lt;h1&gt;~&lt;h6&gt;</code> 標籤：<code>$headings-margin-bottom</code></li>
 <li><code>&lt;p&gt;</code>：<code>$paragraph-margin-bottom</code></li>
+<li>內文:<ul>
 <li>字重：<code>$font-weight-base</code></li>
 <li>行高：<code>$line-height-base</code></li>
+</ul>
+</li>
+<li>標題:<ul>
+<li>字重：<code>$headings-font-weight</code></li>
+<li>行高：<code>$headings-line-height</code></li>
+</ul>
+</li>
 </ul>
 <h2 id="link-更改連結樣式"><a href="#link-更改連結樣式" class="headerlink" title="link 更改連結樣式"></a>link 更改連結樣式</h2><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$link-color</span>: <span class="variable">$primary</span> !default; <span class="comment">//更改a連結顏色</span></span><br><span class="line"><span class="variable">$link-decoration</span>: underline !default; <span class="comment">// 更改a連結下底線</span></span><br><span class="line"><span class="variable">$link-shade-percentage</span>: <span class="number">20%</span> !default;</span><br><span class="line"><span class="variable">$link-hover-color</span>: shift-color(<span class="variable">$link-color</span>, <span class="variable">$link-shade-percentage</span>) !default;</span><br><span class="line"><span class="variable">$link-hover-decoration</span>: null !default;</span><br><span class="line"></span><br><span class="line"><span class="variable">$stretched-link-pseudo-element</span>: after !default;</span><br><span class="line"><span class="variable">$stretched-link-z-index</span>: <span class="number">1</span> !default;</span><br></pre></td></tr></table></figure>
 
 <h2 id="修改元件樣式"><a href="#修改元件樣式" class="headerlink" title="修改元件樣式"></a>修改元件樣式</h2><h3 id="Button"><a href="#Button" class="headerlink" title="Button"></a>Button</h3><ul>
 <li>字重：<code>$btn-font-weight</code></li>
-<li>間距：<code>$btn-padding-y</code>、<code>$btn-padding-x</code></li>
+<li>間距：<code>$btn-padding-y</code>、<code>$btn-padding-x</code> (調整為手機版尺寸，桌機再另外用通用類別調整)</li>
 <li>圓角：<code>$btn-border-radius</code></li>
 <li>disabled<ul>
 <li><code>$btn-disabled-opacity</code></li>
@@ -378,7 +386,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

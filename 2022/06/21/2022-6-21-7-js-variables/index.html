@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://miro.medium.com/max/1278/1*lpOInYC-ccAVD_dBcv5csg.png">
 <meta property="og:image" content="https://miro.medium.com/max/336/1*IP1XW0OtYFB_Am976yXjNA.png">
 <meta property="article:published_time" content="2022-06-21T13:01:42.000Z">
-<meta property="article:modified_time" content="2024-08-13T03:20:30.352Z">
+<meta property="article:modified_time" content="2024-08-28T03:38:59.771Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="ES6">
 <meta name="twitter:card" content="summary">
@@ -151,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%80%E5%A1%8A%E8%88%87%E5%87%BD%E5%BC%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.</span> <span class="nav-text">區塊與函式作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E8%A4%87%E5%AE%A3%E5%91%8A%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="nav-number">3.</span> <span class="nav-text">重複宣告的問題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E6%95%B8"><span class="nav-number">4.</span> <span class="nav-text">常數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hoisting-%E5%90%91%E4%B8%8A%E6%8F%90%E5%8D%87%E7%89%B9%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text">Hoisting 向上提升特性</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%80%E5%A1%8A%E8%88%87%E5%87%BD%E5%BC%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.</span> <span class="nav-text">區塊與函式作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E8%A4%87%E5%AE%A3%E5%91%8A%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="nav-number">3.</span> <span class="nav-text">重複宣告的問題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E6%95%B8"><span class="nav-number">4.</span> <span class="nav-text">常數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hoisting-%E5%90%91%E4%B8%8A%E6%8F%90%E5%8D%87%E7%89%B9%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text">Hoisting 向上提升特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var-%E8%88%87-%E4%B8%8D%E5%AE%A3%E5%91%8A"><span class="nav-number">6.</span> <span class="nav-text">var 與 不宣告</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -164,18 +164,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-count">343</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -256,7 +256,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-08-13 11:20:30" itemprop="dateModified" datetime="2024-08-13T11:20:30+08:00">2024-08-13</time>
+      <time title="修改時間：2024-08-28 11:38:59" itemprop="dateModified" datetime="2024-08-28T11:38:59+08:00">2024-08-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -304,6 +304,12 @@
 <p>如上面程式，我們在第 2 行宣告了 a 變數等於3，但在第一行就讀取a變數，此時並不會報錯，因為 a 已經有記憶體位置了，只是還沒給予值，所以會是 undefined。 在第3行讀取a變數就可以正確讀到 3 的值。</p>
 <p>用 let 和 const 宣告的變數一樣會有 hosting，在創造階段被存入記憶體，在執行階段被賦值。但若執行階段前就要去讀取變數的話，會出現暫時性死區的錯誤。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 創造</span></span><br><span class="line"><span class="keyword">let</span> <span class="title class_">Ming</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Ming</span>) <span class="comment">// cannot access Ming before initialization</span></span><br><span class="line"><span class="comment">// 執行</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Ming</span> = <span class="string">&#x27;小明&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="var-與-不宣告"><a href="#var-與-不宣告" class="headerlink" title="var 與 不宣告"></a>var 與 不宣告</h2><p>用 var 宣告的變數和不宣告的方式，都會出現在 window 物件的屬性裡</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">b = <span class="number">2</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">window</span>.<span class="property">a</span>); <span class="comment">// 1;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">window</span>.<span class="property">b</span>); <span class="comment">// 2; </span></span><br></pre></td></tr></table></figure>
+
+<p>差別在於，用 var 宣告的是變數不能被刪除，不宣告的話會是 window 物件的屬性，可以被刪除。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">b = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="variable language_">window</span>.<span class="property">a</span>;</span><br><span class="line"><span class="keyword">delete</span> <span class="variable language_">window</span>.<span class="property">b</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">window</span>.<span class="property">a</span>); <span class="comment">// 1;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">window</span>.<span class="property">b</span>); <span class="comment">// undefined;</span></span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -352,7 +358,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
