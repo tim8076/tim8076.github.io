@@ -2,21 +2,21 @@
 title: (5) CSS基礎篇 Block 與 Inline
 date: 2024-05-02 11:23:18
 categories: CSS
-tags: 
-- CSS基礎篇
-description: '介紹區塊與行內元素'
+tags:
+  - CSS基礎篇
+description: "介紹區塊與行內元素"
 ---
 
-## 什麼是display(顯示模式)?
+## 什麼是 display(顯示模式)?
 
-CSS中的display屬性用於指定元素的渲染方式，即指定元素在網頁中如何顯示。這個屬性控制元素是以何種方式佔據空間，以及如何與其它元素相互作用。
+CSS 中的 display 屬性用於指定元素的渲染方式，即指定元素在網頁中如何顯示。這個屬性控制元素是以何種方式佔據空間，以及如何與其它元素相互作用。
 
 ## Block 區塊元素
 
-``` css
+```css
 .box {
   display: block;
-} 
+}
 ```
 
 block 區塊元素有以下特點
@@ -28,13 +28,12 @@ block 區塊元素有以下特點
 
 常見的預設為 block 元素標籤有: div、ul li、p、h1
 
-
 ## Inline 行內元素
 
-``` css
+```css
 .img {
   display: inline;
-} 
+}
 ```
 
 inline 元素有以下特點
@@ -48,7 +47,7 @@ inline 元素有以下特點
 
 ## inline-block
 
-``` css
+```css
 .container {
   display: inline-block;
 }
@@ -59,6 +58,3 @@ inline-block 元素有以下特點
 - 可與其他元素並列
 - 可以設定高度和寬度
 - 可以設定 margin/padding
-
-
-

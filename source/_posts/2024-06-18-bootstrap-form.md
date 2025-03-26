@@ -9,6 +9,8 @@ description: '學習 Bootstrap 的Form 表單'
 
 ## 表單基礎觀念
 
+[線上範例](https://codepen.io/jskrtivy-the-animator/pen/KwPaQMM?editors=1010)
+
 確保在輸入框上使用正確的 type 屬性（例如，email 用於電子郵件地址或 number 用於數字信息），以利用較新的輸入控制，如電子郵件驗證、號碼選擇等。相關內容可參考 [連結](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)
 
 ``` html

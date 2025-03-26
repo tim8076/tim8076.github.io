@@ -78,3 +78,27 @@ console.log(Ming) // cannot access Ming before initialization
 // 執行
 const Ming = '小明';
 ```
+
+## var 與 不宣告
+
+用 var 宣告的變數和不宣告的方式，都會出現在 window 物件的屬性裡
+
+``` js
+var a = 1;
+b = 2;
+console.log(window.a); // 1;
+console.log(window.b); // 2; 
+```
+
+差別在於，用 var 宣告的是變數不能被刪除，不宣告的話會是 window 物件的屬性，可以被刪除。
+
+``` js
+var a = 1;
+b = 2;
+
+delete window.a;
+delete window.b;
+
+console.log(window.a); // 1;
+console.log(window.b); // undefined;
+```

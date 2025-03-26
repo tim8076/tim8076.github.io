@@ -70,6 +70,8 @@ querySelector 使用 css 選擇器來選取一個元素。
 ```
 ``` js
 const bob = document. querySelector('.card');
+const elementID = document.querySelector("#targetID");
+const elementClass = document.querySelector(".targetClass > p > span");
 ```
 
 ## querySelectorAll

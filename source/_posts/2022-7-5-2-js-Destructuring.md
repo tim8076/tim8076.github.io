@@ -57,6 +57,31 @@ description: '解構賦值是一個在ES6的新特性，用於提取(extract)陣
 
 將 GinyuTeam 用…拆出裡面的值，再放到新的 { }中，然後再將這個物件，賦予到 newTeam，此時 newTeam和GinyuTeam是兩個不同物件。
 
+## 解構加展開
+
+解構和展開也可以同時使用
+
+``` js
+const people = {
+  Ming: {
+    name: '小名',
+    age: 18
+  },
+  Jay: {
+    name: '杰倫',
+    age: 35,
+  },
+  Bob: {
+    name: '包柏',
+    age: 16
+  }
+}
+
+const { Ming, ...others } = people;
+```
+
+如上，Ming 會被單獨解構， Jay 跟 Bob 則會被一起解構到 others 物件。
+
 
 
 

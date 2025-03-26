@@ -140,12 +140,16 @@ $font-sizes: (
 ) !default;
 ```
 
-## 清除文字標籤下方空間
+## 其餘文字設定
 
 - `<h1>~<h6>` 標籤：`$headings-margin-bottom`
 - `<p>`：`$paragraph-margin-bottom`
-- 字重：`$font-weight-base`
-- 行高：`$line-height-base`
+- 內文:
+  - 字重：`$font-weight-base`
+  - 行高：`$line-height-base`
+- 標題:
+  - 字重：`$headings-font-weight`
+  - 行高：`$headings-line-height`
 
 ## link 更改連結樣式
 
@@ -165,7 +169,7 @@ $stretched-link-z-index: 1 !default;
 ### Button
 
 - 字重：`$btn-font-weight`
-- 間距：`$btn-padding-y`、`$btn-padding-x`
+- 間距：`$btn-padding-y`、`$btn-padding-x` (調整為手機版尺寸，桌機再另外用通用類別調整)
 - 圓角：`$btn-border-radius`
 - disabled
   - `$btn-disabled-opacity`

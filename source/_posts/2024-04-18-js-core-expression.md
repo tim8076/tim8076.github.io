@@ -14,7 +14,7 @@ description: '介紹 JS 陳述式與表達式'
 
 陳述式有幾大分類，如：
 
-- 宣告（var、function）
+- 宣告（var、function) : var a = 1; 
 - 流程控制（block、if…else）
 - 迴圈（for、for…in）
 - 其它（import, export）
@@ -34,10 +34,12 @@ function callName() {
 ![](https://miro.medium.com/v2/resize:fit:640/format:webp/1*KGg1cezTRo22qhp0kkf4rA.png)
 
 例子：
-- 數字運算：5 + 3
+- 任何的純值或變數: 1、a
+- 搭配運算子：5 + 3 、 a === 1
+- 執行函式: 因為函式都 return 值，你沒指定 return 的值就是 return undefined
+  function a() {}
+  a(); 
 - 字串拼接："Hello, " + "world!"
-- 變數：var y = x * 2;
-- 函式呼叫：Math.max(10, 20)
 - 陣列索引：arr[0]
 
 函式表達式又稱匿名函式，因為會回傳結果，為表達式。
@@ -47,3 +49,4 @@ const callName = function() {
   console.log('call name');
 }
 ```
+

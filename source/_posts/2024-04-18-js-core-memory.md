@@ -3,7 +3,7 @@ title: JS 核心篇 (6) JS 記憶體存放
 date: 2024-04-18 13:17:24
 categories: JS 核心篇
 tags: JS 核心篇
-description: '介紹 JS 的記憶體存放'
+description: "介紹 JS 的記憶體存放"
 ---
 
 ## 記憶體存放
@@ -15,18 +15,28 @@ description: '介紹 JS 的記憶體存放'
 
 - 當這個物件不被任何物件參考時，會被時為可回收的記憶體垃圾。
 
-範例: 
+範例:
 
-``` js
+```js
 function getData() {
   let demoData = [];
-  for(let i = 0; i < 1000; i++) {
+  for (let i = 0; i < 1000; i++) {
     demoData.push(randomText(5000));
   }
 }
 getData();
 ```
 
-上面韓式執行完後， demoData 因不被參考，而釋出記憶體空間。
+上面函式執行完後， demoData 因不被參考，而釋出記憶體空間。
 
+```js
+function fn() {
+  const demoData = [];
+  setTimeout(() => {
+    demoData;
+  }, 10000);
+}
+fn();
+```
 
+上面函式因為 demoData 有被參考，記憶體不會釋放。

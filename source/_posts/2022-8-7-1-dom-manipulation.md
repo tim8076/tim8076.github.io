@@ -68,16 +68,31 @@ div.removeChild(child) // 刪除子元素
 
 ### 取得屬性內容
 
-``` html
+使用 getAttribute 可以回傳一個元素上的指定屬性值，如果指定的屬性不存在，則會回傳 null。
+
+```js
+element.getAttribute("屬性名稱");
+```
+
+```html
 <div id="hi"></div> 
 ```
 ``` js
 const div = document.querySelector('div');
 div.getAttribute('id') //hi
+div.getAttribute('src') //null
 div.id // hi
 ```
 
+
 ### 設定屬性內容
+
+可以使用 setAttribute 替指定元素設定屬性值，若該屬性存在則會替換值，語法如下：
+
+```js
+element.setAttribute("屬性名稱", "屬性值");
+```
+
 ``` html
 <div></div> 
 ```
@@ -143,14 +158,15 @@ div.style.backgroundColor = 'black';
 
 [影片教學](https://www.youtube.com/watch?v=rhvec8cXLlo&ab_channel=WebDevSimplified)
 
-## 新增文字
+## 取得與新增文字
 
-新增文字有兩種方法 textContent 、 innerText
+新增文字有兩種方法 textContent 、 innerText，原先的所有內容都會被清空（包含 HTML 標籤），新的內容將被瀏覽器解析成「純文字」，不會保留 HTML 標籤的特性。
 
 ``` js
 div.innerText = 'Hello World';
 div.textContent = 'Hello World';
 ```
+
 
 兩個方法都能加入文字，但innerText只顯示會出現螢幕上的文字，textContent則顯示全部文字。
 
@@ -165,8 +181,38 @@ console.log(div.textContent); // Hello Tim
 console.log(div.innerText); // Hello
 ```
 
+- 取得文字
 
-## 新增 html
+透過 textContent 可以取得 DOM 元素內的 「純文字內容」，HTML 會被忽略（請注意「純文字內容」有包含換行以及空格）
+
+```html
+<div class="targetClass">
+  <p>取得這個 p 標籤的純文字</p>
+</div>
+```
+
+```js
+const targetClass = document.querySelector(".targetClass p");
+console.log(targetClass.textContent); // 取得這個 p 標籤的純文字
+```
+
+
+## 取得與新增 html
+
+透過 innerHTML 可以取得 DOM 元素內的「HTML 內容」
+
+```html
+<div class="targetClass">
+  <!--  註解、換行、空白也包含在內  -->
+  <p>HTML 標籤的內容也被選取</p>
+</div>
+```
+
+```js
+const targetClass = document.querySelector(".targetClass");
+console.log(targetClass.innerHTML);
+```
+
 innerHTML 可以在元素內加入 html 結構，並清除元素原有內容。
 
 ``` js
