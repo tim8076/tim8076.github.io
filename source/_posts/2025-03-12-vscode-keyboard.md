@@ -42,6 +42,39 @@ ctrl + w
 
 ctrl + d
 
+## 進入到下一行
+
+ctrl + enter
+
+## 進入到上一行
+
+ctrl + shift + enter
+
+## 刪除單行
+
+ctrl + x
+
+## 選取單行
+
+ctrl + l
+
+## 選取到行尾
+
+ctrl + end
+
+## 選取到行首
+
+ctrl + Home
+
+## 移動到最下方
+
+ctrl + end
+
+## 開啟 keyboard 設定
+
+ctrl + k + s
+
+
 
 
 
