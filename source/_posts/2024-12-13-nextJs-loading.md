@@ -21,7 +21,13 @@ export default function Loading() {
 }
 ```
 
-這樣當其他頁面花時間有載入資料的行為時，就會呈現此 loading 元件
+這樣當其他頁面花時間有載入資料的行為時，就會呈現此 loading 元件。並且只在「路由被切換時」顯示 loading，例如從 /home 切換到 /profile。
+
+![](../images/nextJs/next-22.png)
+
+Loading 元件會被加入 Suspense 元件內，並包住 Page 內容。 
+
+
 
 ## 搭配 suspense 元件
 
@@ -48,4 +54,5 @@ export default function Home() {
 ```
 
 如上，只有被 Suspense 包住的區塊會呈現 loading 元件 `<div>載入中...</div>`。
+傳統 SSR 渲染時，後端會等全部資料都取得並渲染到 HTML 後再回傳給瀏覽器，使用 Suspense 的話，會告訴瀏覽器可以先渲染 Suspense 以外的區塊，等  Suspense 的資料取完再渲染  Suspense 區塊即可，讓使用者不用等太久。
 

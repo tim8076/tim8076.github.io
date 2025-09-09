@@ -78,7 +78,7 @@ const catchError = (asFn) => {
   }
 }
 
-const asyncFn = (n) => {
+const asyncFn = async (n) => {
   const res = await promiseFn(n);
 }
 

@@ -42,4 +42,10 @@ description: '介紹常用的 Vscode 套件'
 
 ![](https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/logo.png)
 
+7. Error Lens
+
+提供錯誤提示
+
+![](../images/vscode/vs-code-1.png)
+
 

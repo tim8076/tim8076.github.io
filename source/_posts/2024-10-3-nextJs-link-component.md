@@ -12,6 +12,23 @@ description: "使用 Link Component 換頁"
 
 ![](../images/nextJs/next-17.png)
 
+可選屬性（部分）：
+
+- replace：使用 replaceState 而非 pushState
+- scroll：默認會滾動到頁首，設 false 可保留當前滾動位置
+- prefetch：可關閉預取
+- onNavigate：事件回調
+- legacyBehavior、passHref（針對自訂子元件
+
+在 Next.js 中都應該用 link 元件而非 a 連結，因為<Link>有預取功能。
+- 預取（Prefetching）：當使用 <Link> 並且該連結出現在畫面視窗或被 hover 時，Next.js 會提前載入對應路由所需資料，以提升點擊後的響應速度
+
+- 動態路由：對於像 /blog/[slug] 的動態路由，預設不會完整預取。如果有 loading.js，會只預取 shared layout 與 loading skeleton，以支援部分預取與串流加速。
+
+![](../images/nextJs/next-21.png)
+
+
+
 ## 動態路徑
 
 Link 元件的 href 也可以帶入變數
