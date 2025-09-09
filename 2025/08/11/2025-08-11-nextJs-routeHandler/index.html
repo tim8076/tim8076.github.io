@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tim8076.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Next 中使用 Route Handler">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NextJs (16) Route Handler">
+<meta property="og:url" content="https://tim8076.github.io/2025/08/11/2025-08-11-nextJs-routeHandler/index.html">
+<meta property="og:site_name" content="Tim的前端日誌">
+<meta property="og:description" content="Next 中使用 Route Handler">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://tim8076.github.io/images/nextJs/next-24.png">
+<meta property="article:published_time" content="2025-08-11T07:10:07.000Z">
+<meta property="article:modified_time" content="2025-08-13T06:19:37.737Z">
+<meta property="article:author" content="Tim Chou">
+<meta property="article:tag" content="NextJs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tim8076.github.io/images/nextJs/next-24.png">
+
+
+<link rel="canonical" href="https://tim8076.github.io/2025/08/11/2025-08-11-nextJs-routeHandler/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://tim8076.github.io/2025/08/11/2025-08-11-nextJs-routeHandler/","path":"2025/08/11/2025-08-11-nextJs-routeHandler/","title":"NextJs (16) Route Handler"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>NextJs (16) Route Handler | Tim的前端日誌</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tim的前端日誌</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%B5%E5%BB%BA-route-handler"><span class="nav-number">2.</span> <span class="nav-text">創建 route handler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET-Requests"><span class="nav-number">3.</span> <span class="nav-text">GET Requests</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POST-Requests"><span class="nav-number">4.</span> <span class="nav-text">POST Requests</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8B%95%E6%85%8B%E8%B7%AF%E7%94%B1"><span class="nav-number">5.</span> <span class="nav-text">動態路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PATCH-Requests"><span class="nav-number">6.</span> <span class="nav-text">PATCH Requests</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete-Requests"><span class="nav-number">7.</span> <span class="nav-text">Delete Requests</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Query-%E5%8F%83%E6%95%B8"><span class="nav-number">8.</span> <span class="nav-text">Query 參數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Headers"><span class="nav-number">9.</span> <span class="nav-text">Headers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%80%E5%8F%96%E8%AB%8B%E6%B1%82%E7%9A%84-Headers"><span class="nav-number">9.1.</span> <span class="nav-text">讀取請求的 Headers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A%E5%9B%9E%E6%87%89%E7%9A%84-Headers"><span class="nav-number">9.2.</span> <span class="nav-text">設定回應的 Headers</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookies"><span class="nav-number">10.</span> <span class="nav-text">Cookies</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%80%E5%8F%96-Cookie"><span class="nav-number">10.1.</span> <span class="nav-text">讀取 Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-Cookie"><span class="nav-number">10.2.</span> <span class="nav-text">設定 Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%AA%E9%99%A4-Cookie"><span class="nav-number">10.3.</span> <span class="nav-text">刪除 Cookie</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redirects"><span class="nav-number">11.</span> <span class="nav-text">Redirects</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Catching"><span class="nav-number">12.</span> <span class="nav-text">Catching</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tim Chou</p>
+  <div class="site-description" itemprop="description">Zero to Hero</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">362</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/tim8076" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tim8076.github.io/2025/08/11/2025-08-11-nextJs-routeHandler/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Tim Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim的前端日誌">
+      <meta itemprop="description" content="Zero to Hero">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="NextJs (16) Route Handler | Tim的前端日誌">
+      <meta itemprop="description" content="Next 中使用 Route Handler">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NextJs (16) Route Handler
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2025-08-11 15:10:07" itemprop="dateCreated datePublished" datetime="2025-08-11T15:10:07+08:00">2025-08-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2025-08-13 14:19:37" itemprop="dateModified" datetime="2025-08-13T14:19:37+08:00">2025-08-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/NextJs/" itemprop="url" rel="index"><span itemprop="name">NextJs</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">Next 中使用 Route Handler</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>Route Handler 顧名思義，我們可以將路由定義成 API endpoint，來處理 HTTP request 和 response。</p>
+<h2 id="創建-route-handler"><a href="#創建-route-handler" class="headerlink" title="創建 route handler"></a>創建 route handler</h2><p>我們只需要在 &#x2F;app 中的資料夾，建一個 route.ts&#x2F;js 即可，路由定義的模式跟 page.tsx 相同，也可以使用巢狀、動態路由。</p>
+<p>舉例來說，app&#x2F;api&#x2F;products&#x2F;route.js 即會對應 &#x2F;api&#x2F;products 這支 API；app&#x2F;new_api&#x2F;profile&#x2F;route.ts 即會對應 &#x2F;new_api&#x2F;profile 這支 API。</p>
+<p>Route handler 支援 GET、POST、PUT、PATCH、DELETE、HEAD、OPTIONS 七種 HTTP methods</p>
+<p>要使用哪個 method，就以該 method 當作 export function 的名稱。比方說：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* app/api/hello/route.ts */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Response</span>.<span class="title function_">json</span>(&#123; <span class="attr">message</span>: <span class="string">&#x27;Hello World!&#x27;</span> &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">POST</span>(<span class="params"></span>)&#123;</span><br><span class="line">…</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這時候打 <a target="_blank" rel="noopener" href="http://localhost:3000/api/hello">http://localhost:3000/api/hello</a> 這支 API ( GET )，就可以得到</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Hello World!&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="GET-Requests"><a href="#GET-Requests" class="headerlink" title="GET Requests"></a>GET Requests</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// data.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> comments = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">text</span>: <span class="string">&#x27;This is first comment&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">text</span>: <span class="string">&#x27;This is second comment&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">3</span>,</span><br><span class="line">    <span class="attr">text</span>: <span class="string">&#x27;This is third comment&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app/comments/route.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; comments &#125; <span class="keyword">from</span> <span class="string">&quot;./data&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Response</span>.<span class="title function_">json</span>(comments);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>api: <a target="_blank" rel="noopener" href="http://localhost:3000/comments">http://localhost:3000/comments</a></p>
+<p>上面範例中是 get 請求，使用 Response.json 回傳 comments 資料。</p>
+<h2 id="POST-Requests"><a href="#POST-Requests" class="headerlink" title="POST Requests"></a>POST Requests</h2><p>api: <a target="_blank" rel="noopener" href="http://localhost:3000/comments">http://localhost:3000/comments</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app/comments/route.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">POST</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> comment = <span class="keyword">await</span> request.<span class="title function_">json</span>();</span><br><span class="line">  <span class="keyword">const</span> newComment = &#123;</span><br><span class="line">    <span class="attr">id</span>: comments.<span class="property">length</span> + <span class="number">1</span>,</span><br><span class="line">    <span class="attr">text</span>: comment.<span class="property">text</span>,</span><br><span class="line">  &#125;</span><br><span class="line">  comments.<span class="title function_">push</span>(newComment);</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(newComment), &#123;</span><br><span class="line">    <span class="attr">headers</span>: &#123; <span class="string">&quot;Content-Types&quot;</span>: <span class="string">&quot;application/json&quot;</span> &#125;,</span><br><span class="line">    <span class="attr">status</span>: <span class="number">201</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面範例中先用 request.json() 解析傳入的 body 物件成 js 格式</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// body 物件</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span><span class="string">&quot;new comments&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>資料寫入資料庫後再用，new Response 回傳結果。</p>
+<h2 id="動態路由"><a href="#動態路由" class="headerlink" title="動態路由"></a>動態路由</h2><p>前面介紹的 api: <a target="_blank" rel="noopener" href="http://localhost:3000/comments">http://localhost:3000/comments</a> 是取得全部資料，若要取得單一資料的 api 為 <a target="_blank" rel="noopener" href="http://localhost:3000/comments/1">http://localhost:3000/comments/1</a></p>
+<p>如上可以取得 comments 裡 id 為 1 資料</p>
+<ul>
+<li>路由建立</li>
+</ul>
+<p><img src="/../images/nextJs/next-24.png"></p>
+<p>在 comments 資料夾內建立 [id] 資料夾，裡面再建立 route.js 就是動態路由建立方式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app/comments/[id]/route.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; comments &#125; <span class="keyword">from</span> <span class="string">&quot;../data&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params">_request, &#123; params &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; id &#125; = <span class="keyword">await</span> params;</span><br><span class="line">  <span class="keyword">const</span> comment = comments.<span class="title function_">find</span>(<span class="function"><span class="params">comment</span> =&gt;</span> comment.<span class="property">id</span> === <span class="built_in">parseInt</span>(id));</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Response</span>.<span class="title function_">json</span>(comment)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以從 GET function 中的第二個參數取得 id 的值。</p>
+<h2 id="PATCH-Requests"><a href="#PATCH-Requests" class="headerlink" title="PATCH Requests"></a>PATCH Requests</h2><p>api: <a target="_blank" rel="noopener" href="http://localhost:3000/comments/1">http://localhost:3000/comments/1</a></p>
+<p>PATCH 方法用來修改單一物件的值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">PATCH</span>(<span class="params">request, &#123; params &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; id &#125; = <span class="keyword">await</span> params;</span><br><span class="line">  <span class="keyword">const</span> body = <span class="keyword">await</span> request.<span class="title function_">json</span>();</span><br><span class="line">  <span class="keyword">const</span> &#123; text &#125; = body;</span><br><span class="line">  <span class="keyword">const</span> index = comments.<span class="title function_">findIndex</span>(<span class="function"><span class="params">comment</span> =&gt;</span> comment.<span class="property">id</span> === <span class="built_in">parseInt</span>(id));</span><br><span class="line">  comments[index - <span class="number">1</span>].<span class="property">text</span> = text;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Response</span>.<span class="title function_">json</span>(comments[index])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 PATCH 函式中 request 可以取得 body 的值，params 則可以取得路由參數。</p>
+<h2 id="Delete-Requests"><a href="#Delete-Requests" class="headerlink" title="Delete Requests"></a>Delete Requests</h2><p>api: <a target="_blank" rel="noopener" href="http://localhost:3000/comments/1">http://localhost:3000/comments/1</a></p>
+<p>PATCH 方法用來刪除單一資料</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">DELETE</span>(<span class="params">request, &#123; params &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; id &#125; = <span class="keyword">await</span> params;</span><br><span class="line">  <span class="keyword">const</span> index = comments.<span class="title function_">findIndex</span>(<span class="function"><span class="params">comment</span> =&gt;</span> comment.<span class="property">id</span> === <span class="built_in">parseInt</span>(id));</span><br><span class="line">  <span class="keyword">const</span> deleteComment = comments[index];</span><br><span class="line">  comments.<span class="title function_">splice</span>(index, <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Response</span>.<span class="title function_">json</span>(deleteComment)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 PATCH 函式中 params 則可以取得路由參數。</p>
+<h2 id="Query-參數"><a href="#Query-參數" class="headerlink" title="Query 參數"></a>Query 參數</h2><p>api: <a target="_blank" rel="noopener" href="http://localhost:3000/comments?query=first">http://localhost:3000/comments?query=first</a></p>
+<p>如果想在 api 中加入query 參數可以這樣做</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> searchParams = request.<span class="property">nextUrl</span>.<span class="property">searchParams</span>;</span><br><span class="line">  <span class="keyword">const</span> query = searchParams.<span class="title function_">get</span>(<span class="string">&#x27;query&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> filteredComments = query ? comments.<span class="title function_">filter</span>(<span class="function"><span class="params">comment</span> =&gt;</span> comment.<span class="property">text</span>.<span class="title function_">includes</span>(query)): comments;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Response</span>.<span class="title function_">json</span>(filteredComments);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 request.nextUrl 取得 searchParams，再用 searchParams.get() 取得 query 參數的值。<br>取得參數值之後再去過濾資料即可。</p>
+<h2 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h2><p>在 Next.js 13+ (App Router) 的 Route Handlers 裡，headers 是一個可以用來：</p>
+<ul>
+<li>讀取 Request Headers（請求頭）</li>
+<li>設定 Response Headers（回應頭）</li>
+</ul>
+<p>它對應到瀏覽器或 API 請求裡的 HTTP header，常用來傳遞像：</p>
+<ul>
+<li>認證資訊（Authorization）</li>
+<li>內容格式（Content-Type）</li>
+<li>語系（Accept-Language）</li>
+<li>Cache 控制（Cache-Control）</li>
+</ul>
+<h3 id="讀取請求的-Headers"><a href="#讀取請求的-Headers" class="headerlink" title="讀取請求的 Headers"></a>讀取請求的 Headers</h3><p>你可以在 Route Handler（例如 app&#x2F;api&#x2F;xxx&#x2F;route.js）裡這樣寫：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; headers &#125; <span class="keyword">from</span> <span class="string">&#x27;next/headers&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> requestHeaders = <span class="title function_">headers</span>();</span><br><span class="line">  <span class="keyword">const</span> token = requestHeaders.<span class="title function_">get</span>(<span class="string">&#x27;authorization&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123; token &#125;), &#123;</span><br><span class="line">    <span class="attr">headers</span>: &#123; <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span> &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>headers() 回傳一個 Headers 物件（類似 Fetch API 的 Headers）</li>
+<li>.get(‘header-name’) 可以讀取指定的 header 值（名稱不分大小寫)</li>
+</ul>
+<h3 id="設定回應的-Headers"><a href="#設定回應的-Headers" class="headerlink" title="設定回應的 Headers"></a>設定回應的 Headers</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="string">&#x27;Hello&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">headers</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;text/plain&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Cache-Control&#x27;</span>: <span class="string">&#x27;no-store&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣客戶端收到的 Response 就會帶上你設定的 HTTP headers。</p>
+<h2 id="Cookies"><a href="#Cookies" class="headerlink" title="Cookies"></a>Cookies</h2><p>在 Next.js App Router 中，你可以在 Route Handlers（例如 app&#x2F;api&#x2F;…&#x2F;route.js）裡使用 next&#x2F;headers 提供的 cookies() API 來 讀取 和 設定 Cookie。</p>
+<h3 id="讀取-Cookie"><a href="#讀取-Cookie" class="headerlink" title="讀取 Cookie"></a>讀取 Cookie</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; cookies &#125; <span class="keyword">from</span> <span class="string">&#x27;next/headers&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> cookieStore = <span class="title function_">cookies</span>();</span><br><span class="line">  <span class="keyword">const</span> token = cookieStore.<span class="title function_">get</span>(<span class="string">&#x27;token&#x27;</span>); <span class="comment">// 取得名為 &quot;token&quot; 的 cookie</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="string">`Token: <span class="subst">$&#123;token?.value || <span class="string">&#x27;無 token&#x27;</span>&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>cookies() 回傳一個 RequestCookies 物件</li>
+<li>.get(name) 會回傳 { name, value } 物件，如果沒有會是 undefined</li>
+<li>.getAll() 可以取得所有 Cookie</li>
+</ul>
+<h3 id="設定-Cookie"><a href="#設定-Cookie" class="headerlink" title="設定 Cookie"></a>設定 Cookie</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; cookies &#125; <span class="keyword">from</span> <span class="string">&#x27;next/headers&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> cookieStore = <span class="title function_">cookies</span>();</span><br><span class="line"></span><br><span class="line">  cookieStore.<span class="title function_">set</span>(<span class="string">&#x27;token&#x27;</span>, <span class="string">&#x27;abc123&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">httpOnly</span>: <span class="literal">true</span>, <span class="comment">// 防止 JS 讀取</span></span><br><span class="line">    <span class="attr">secure</span>: <span class="literal">true</span>,   <span class="comment">// 只在 HTTPS 下傳送</span></span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>,      <span class="comment">// Cookie 作用範圍</span></span><br><span class="line">    <span class="attr">maxAge</span>: <span class="number">60</span> * <span class="number">60</span> <span class="comment">// 秒數：1 小時</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="string">&#x27;Cookie 已設定&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>這個 .set() 只能在 Route Handler 或 Server Action 裡用</li>
+<li>直接在 Client Component 裡調用會報錯（因為它是 Server API）</li>
+</ul>
+<h3 id="刪除-Cookie"><a href="#刪除-Cookie" class="headerlink" title="刪除 Cookie"></a>刪除 Cookie</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; cookies &#125; <span class="keyword">from</span> <span class="string">&#x27;next/headers&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> cookieStore = <span class="title function_">cookies</span>();</span><br><span class="line">  cookieStore.<span class="title function_">delete</span>(<span class="string">&#x27;token&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="string">&#x27;Cookie 已刪除&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Redirects"><a href="#Redirects" class="headerlink" title="Redirects"></a>Redirects</h2><p>如果你要在 Route Handler（例如 app&#x2F;api&#x2F;…&#x2F;route.js）中進行導向（Redirect），可以使用 next&#x2F;navigation 提供的 redirect() 函式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; redirect &#125; <span class="keyword">from</span> <span class="string">&#x27;next/navigation&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; cookies &#125; <span class="keyword">from</span> <span class="string">&#x27;next/headers&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> cookieStore = <span class="title function_">cookies</span>();</span><br><span class="line">  <span class="keyword">const</span> token = cookieStore.<span class="title function_">get</span>(<span class="string">&#x27;token&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!token) &#123;</span><br><span class="line">    <span class="comment">// 沒有登入 token，導向到登入頁</span></span><br><span class="line">    <span class="title function_">redirect</span>(<span class="string">&#x27;/login&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="string">&#x27;已登入，可以看到的內容&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>redirect() 會直接結束函式並回傳一個 3xx 回應</li>
+<li>適合處理登入檢查、資源移動等情境</li>
+<li>只能在 Server Component、Route Handlers、或 Server Actions 裡用</li>
+<li>在 Route Handlers 中使用時，它是透過拋出一個特殊錯誤讓 Next.js 處理</li>
+</ul>
+<h2 id="Catching"><a href="#Catching" class="headerlink" title="Catching"></a>Catching</h2><p>在 route handler 中的 GET 方法取回的資料如果不會變動，可以採用 catching 模式，指的是 Next.js 會快取 fetch 的結果，之後請求會直接回傳快取的資料，不會重複執行 function</p>
+<ul>
+<li>有catching: 每次請求都拿到一樣快取的資料</li>
+<li>沒catching: 每次請求都重新執行 handler</li>
+</ul>
+<p>在 route.js 中加入 ‘force-static’，即可啟動快取功能</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app/api/products/route.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> dynamic = <span class="string">&#x27;force-static&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;https://api.example.com/products&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">cache</span>: <span class="string">&#x27;force-cache&#x27;</span> <span class="comment">// 也可以在 fetch 層級控制</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> res.<span class="title function_">json</span>()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Response</span>.<span class="title function_">json</span>(data)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/NextJs/" rel="tag"># NextJs</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/08/08/2025-08-08-react-native-darkmode/" rel="prev" title="React Native (5) Dark mode">
+                  <i class="fa fa-chevron-left"></i> React Native (5) Dark mode
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/08/13/2025-08-13-nextJs-form/" rel="next" title="NextJs (17) Form 元件">
+                  NextJs (17) Form 元件 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tim Chou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"shosetim","count":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

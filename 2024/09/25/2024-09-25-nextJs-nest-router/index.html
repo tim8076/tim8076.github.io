@@ -33,8 +33,9 @@
 <meta property="og:image" content="https://tim8076.github.io/images/nextJs/next-6.png">
 <meta property="og:image" content="https://tim8076.github.io/images/nextJs/next-7.png">
 <meta property="og:image" content="https://tim8076.github.io/images/nextJs/next-8.png">
+<meta property="og:image" content="https://tim8076.github.io/images/nextJs/next-20.png">
 <meta property="article:published_time" content="2024-09-25T05:10:29.000Z">
-<meta property="article:modified_time" content="2024-09-25T05:58:57.734Z">
+<meta property="article:modified_time" content="2025-08-15T03:20:09.444Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="NextJs">
 <meta name="twitter:card" content="summary">
@@ -150,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A2%E7%8B%80%E8%B7%AF%E7%94%B1"><span class="nav-number">1.</span> <span class="nav-text">巢狀路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8B%95%E6%85%8B%E8%B7%AF%E7%94%B1"><span class="nav-number">2.</span> <span class="nav-text">動態路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A2%E7%8B%80%E5%8B%95%E6%85%8B%E8%B7%AF%E7%94%B1"><span class="nav-number">3.</span> <span class="nav-text">巢狀動態路由</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A2%E7%8B%80%E8%B7%AF%E7%94%B1"><span class="nav-number">1.</span> <span class="nav-text">巢狀路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8B%95%E6%85%8B%E8%B7%AF%E7%94%B1"><span class="nav-number">2.</span> <span class="nav-text">動態路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A2%E7%8B%80%E5%8B%95%E6%85%8B%E8%B7%AF%E7%94%B1"><span class="nav-number">3.</span> <span class="nav-text">巢狀動態路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%81%E6%9C%89%E8%B3%87%E6%96%99%E5%A4%BE"><span class="nav-number">4.</span> <span class="nav-text">私有資料夾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%8F%83%E6%95%B8"><span class="nav-number">5.</span> <span class="nav-text">路由參數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#generateStaticParams"><span class="nav-number">6.</span> <span class="nav-text">generateStaticParams</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dynamicParams"><span class="nav-number">7.</span> <span class="nav-text">dynamicParams</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -163,13 +164,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">345</span>
+          <span class="site-state-item-count">362</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -247,9 +248,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
-      
 
-      <time title="創建時間：2024-09-25 13:10:29 / 修改時間：13:58:57" itemprop="dateCreated datePublished" datetime="2024-09-25T13:10:29+08:00">2024-09-25</time>
+      <time title="創建時間：2024-09-25 13:10:29" itemprop="dateCreated datePublished" datetime="2024-09-25T13:10:29+08:00">2024-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2025-08-15 11:20:09" itemprop="dateModified" datetime="2025-08-15T11:20:09+08:00">2025-08-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -278,14 +285,47 @@
 <h2 id="動態路由"><a href="#動態路由" class="headerlink" title="動態路由"></a>動態路由</h2><p><img src="/../images/nextJs/next-5.png"></p>
 <p>如果路由上的參數是動態帶入的，例如 product&#x2F;1 、product&#x2F;2 ，這個 1 、2 是動態帶入的值，可以在使用 [] 定義資料夾名稱。</p>
 <p><img src="/../images/nextJs/next-6.png"></p>
-<p>在元件中可以透過參數取得 路由的 params</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">ProductDetails</span>(<span class="params">&#123; params &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Products Details &#123;params.productId&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在元件中可以透過參數取得路由的 params，因為 params 是 promise 所以要 await 後取得。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">ProductPage</span>(<span class="params">&#123; params &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; id &#125; = <span class="keyword">await</span> params;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      這是 product &#123; id &#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="巢狀動態路由"><a href="#巢狀動態路由" class="headerlink" title="巢狀動態路由"></a>巢狀動態路由</h2><p><img src="/../images/nextJs/next-7.png"></p>
 <p>如果動態路由底下還有其他路由，例如 &#x2F;products&#x2F;1&#x2F;reviews&#x2F;2<br>可以在底下再開其他資料夾設定</p>
 <p><img src="/../images/nextJs/next-8.png"></p>
 <p>元件內路由參數一樣由 params 取得</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">ReviewDetails</span>(<span class="params">&#123; params &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        Review &#123;params.reviewId&#125; for &#123;params.productId&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="私有資料夾"><a href="#私有資料夾" class="headerlink" title="私有資料夾"></a>私有資料夾</h2><p>可以透過在資料夾名稱前加上底線（_）來建立私有資料夾，例如：_folderName。<br>這代表該資料夾以及它的所有子資料夾都會被排除在路由之外。</p>
+<p><img src="/../images/nextJs/next-20.png"></p>
+<h2 id="路由參數"><a href="#路由參數" class="headerlink" title="路由參數"></a>路由參數</h2><p>在 Next.js 中使用 search parameters（網址上的查詢參數，例如 ?page&#x3D;2&amp;sort&#x3D;asc）的方法。</p>
+<ol>
+<li>使用 useSearchParams（用於 Client Component)</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;use client&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useSearchParams &#125; <span class="keyword">from</span> <span class="string">&#x27;next/navigation&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">MyComponent</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> searchParams = <span class="title function_">useSearchParams</span>();</span><br><span class="line">  <span class="keyword">const</span> page = searchParams.<span class="title function_">get</span>(<span class="string">&#x27;page&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> sort = searchParams.<span class="title function_">get</span>(<span class="string">&#x27;sort&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>Page: &#123;page&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>Sort: &#123;sort&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在 Server Component 中讀取 searchParams</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Page</span>(<span class="params">&#123; searchParams &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> page = searchParams.<span class="property">page</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Page: &#123;page&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="generateStaticParams"><a href="#generateStaticParams" class="headerlink" title="generateStaticParams"></a>generateStaticParams</h2><p>因為 Next.js 中動態路由的頁面是使用訪問時才動態產生，如果希望預先產生頁面的話，可以使用 generateStaticParams。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app/posts/[id]/page.jsx</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">generateStaticParams</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 回傳一組陣列，每一項都是一個路由參數物件</span></span><br><span class="line">  <span class="keyword">return</span> [</span><br><span class="line">    &#123; <span class="attr">id</span>: <span class="string">&quot;1&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">id</span>: <span class="string">&quot;2&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">id</span>: <span class="string">&quot;3&quot;</span> &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Page</span>(<span class="params">&#123; params &#125;&#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Post ID: &#123;params.id&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面會在 build 的時候自動產生以下路由的 html 頁面：</p>
+<ul>
+<li>&#x2F;posts&#x2F;1</li>
+<li>&#x2F;posts&#x2F;2</li>
+<li>&#x2F;posts&#x2F;3</li>
+</ul>
+<p>適合使用在某幾個特別熱門的文章或產品頁面，讓 Next.js 預先產生頁面。</p>
+<h2 id="dynamicParams"><a href="#dynamicParams" class="headerlink" title="dynamicParams"></a>dynamicParams</h2><p>dynamicParams 是用來控制 動態路由（例如 [id]）在訪問時，如果該路由參數 沒有包含在 generateStaticParams() 回傳的列表中，Next.js 要不要「允許使用者動態訪問」它。</p>
+<p>放在 動態路由資料夾的 route.js | route.ts 中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app/posts/[id]/route.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> dynamicParams = <span class="literal">true</span> | <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>dynamicParams: true（預設）: 允許使用者訪問 generateStaticParams() 沒生成過的 params，Next.js 會動態產生頁面（通常搭配 ISR 或 fallback）</li>
+<li>dynamicParams: false: 不允許訪問不在 generateStaticParams() 裡的動態參數 → 直接回傳 404</li>
+</ul>
+<p>常見使用情境，假設今天我的部落格文章只有六篇，我不希望使用者訪問這六篇以外的頁面，可以設定 false，讓使用者訪問六篇以外的頁面時得到 404 頁面。</p>
 
     </div>
 

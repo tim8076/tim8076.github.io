@@ -28,8 +28,9 @@
 <meta property="og:description" content="使用 Link Component 換頁">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://tim8076.github.io/images/nextJs/next-17.png">
+<meta property="og:image" content="https://tim8076.github.io/images/nextJs/next-21.png">
 <meta property="article:published_time" content="2024-10-03T07:16:12.000Z">
-<meta property="article:modified_time" content="2024-10-03T08:21:41.763Z">
+<meta property="article:modified_time" content="2025-08-05T06:55:30.849Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="NextJs">
 <meta name="twitter:card" content="summary">
@@ -158,13 +159,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">345</span>
+          <span class="site-state-item-count">362</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -242,9 +243,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
-      
 
-      <time title="創建時間：2024-10-03 15:16:12 / 修改時間：16:21:41" itemprop="dateCreated datePublished" datetime="2024-10-03T15:16:12+08:00">2024-10-03</time>
+      <time title="創建時間：2024-10-03 15:16:12" itemprop="dateCreated datePublished" datetime="2024-10-03T15:16:12+08:00">2024-10-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2025-08-05 14:55:30" itemprop="dateModified" datetime="2025-08-05T14:55:30+08:00">2025-08-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -269,6 +276,22 @@
     <div class="post-body" itemprop="articleBody">
         <h2 id="使用-link-元件"><a href="#使用-link-元件" class="headerlink" title="使用 link 元件"></a>使用 link 元件</h2><p>在 nextJs 裡，可以 import Link 元件，作為換頁的連結</p>
 <p><img src="/../images/nextJs/next-17.png"></p>
+<p>可選屬性（部分）：</p>
+<ul>
+<li>replace：使用 replaceState 而非 pushState</li>
+<li>scroll：默認會滾動到頁首，設 false 可保留當前滾動位置</li>
+<li>prefetch：可關閉預取</li>
+<li>onNavigate：事件回調</li>
+<li>legacyBehavior、passHref（針對自訂子元件</li>
+</ul>
+<p>在 Next.js 中都應該用 link 元件而非 a 連結，因為<Link>有預取功能。</p>
+<ul>
+<li><p>預取（Prefetching）：當使用 <Link> 並且該連結出現在畫面視窗或被 hover 時，Next.js 會提前載入對應路由所需資料，以提升點擊後的響應速度</p>
+</li>
+<li><p>動態路由：對於像 &#x2F;blog&#x2F;[slug] 的動態路由，預設不會完整預取。如果有 loading.js，會只預取 shared layout 與 loading skeleton，以支援部分預取與串流加速。</p>
+</li>
+</ul>
+<p><img src="/../images/nextJs/next-21.png"></p>
 <h2 id="動態路徑"><a href="#動態路徑" class="headerlink" title="動態路徑"></a>動態路徑</h2><p>Link 元件的 href 也可以帶入變數</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Link</span> href=&#123;<span class="string">`products/<span class="subst">$&#123;productId&#125;</span>`</span>&#125;&gt;<span class="title class_">Product</span> &#123;productId&#125;&lt;/<span class="title class_">Link</span>&gt;</span><br></pre></td></tr></table></figure>
 

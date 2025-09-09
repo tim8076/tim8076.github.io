@@ -27,11 +27,13 @@
 <meta property="og:site_name" content="Tim的前端日誌">
 <meta property="og:description" content="製作 Loading">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://tim8076.github.io/images/nextJs/next-22.png">
 <meta property="article:published_time" content="2024-12-13T05:47:11.000Z">
-<meta property="article:modified_time" content="2024-12-13T05:55:00.615Z">
+<meta property="article:modified_time" content="2025-08-14T03:32:46.435Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="NextJs">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tim8076.github.io/images/nextJs/next-22.png">
 
 
 <link rel="canonical" href="https://tim8076.github.io/2024/12/13/2024-12-13-nextJs-loading/">
@@ -156,13 +158,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">345</span>
+          <span class="site-state-item-count">362</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -240,9 +242,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
-      
 
-      <time title="創建時間：2024-12-13 13:47:11 / 修改時間：13:55:00" itemprop="dateCreated datePublished" datetime="2024-12-13T13:47:11+08:00">2024-12-13</time>
+      <time title="創建時間：2024-12-13 13:47:11" itemprop="dateCreated datePublished" datetime="2024-12-13T13:47:11+08:00">2024-12-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2025-08-14 11:32:46" itemprop="dateModified" datetime="2025-08-14T11:32:46+08:00">2025-08-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -268,11 +276,13 @@
         <h2 id="製作-loading-元件"><a href="#製作-loading-元件" class="headerlink" title="製作 loading 元件"></a>製作 loading 元件</h2><p>可以在專案根目錄建立 <code>loading.jsx</code> 檔案，</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Loading</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">main</span> <span class="attr">className</span>=<span class="string">&quot;text-canter&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span> <span class="attr">className</span>=<span class="string">&quot;text-primary&quot;</span>&gt;</span>Loading...<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hopefully not too long<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>這樣當其他頁面花時間有載入資料的行為時，就會呈現此 loading 元件</p>
+<p>這樣當其他頁面花時間有載入資料的行為時，就會呈現此 loading 元件。並且只在「路由被切換時」顯示 loading，例如從 &#x2F;home 切換到 &#x2F;profile。</p>
+<p><img src="/../images/nextJs/next-22.png"></p>
+<p>Loading 元件會被加入 Suspense 元件內，並包住 Page 內容。 </p>
 <h2 id="搭配-suspense-元件"><a href="#搭配-suspense-元件" class="headerlink" title="搭配 suspense 元件"></a>搭配 suspense 元件</h2><p>當只希望頁面的部分區塊呈現 loading 效果時，可以搭配 suspense 元件</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">SlowComponent</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 模擬資料載入</span></span><br><span class="line">  <span class="keyword">const</span> data = <span class="title function_">fetchData</span>(); <span class="comment">// fetchData 是模擬的非同步函數</span></span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>資料載入完成：&#123;data&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Home</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>歡迎來到首頁<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Suspense</span> <span class="attr">fallback</span>=<span class="string">&#123;</span>&lt;<span class="attr">div</span>&gt;</span>載入中...<span class="tag">&lt;/<span class="name">div</span>&gt;</span>&#125;&gt;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">SlowComponent</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">Suspense</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>如上，只有被 Suspense 包住的區塊會呈現 loading 元件 <code>&lt;div&gt;載入中...&lt;/div&gt;</code>。</p>
+<p>如上，只有被 Suspense 包住的區塊會呈現 loading 元件 <code>&lt;div&gt;載入中...&lt;/div&gt;</code>。<br>傳統 SSR 渲染時，後端會等全部資料都取得並渲染到 HTML 後再回傳給瀏覽器，使用 Suspense 的話，會告訴瀏覽器可以先渲染 Suspense 以外的區塊，等  Suspense 的資料取完再渲染  Suspense 區塊即可，讓使用者不用等太久。</p>
 
     </div>
 
