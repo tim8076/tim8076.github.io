@@ -55,6 +55,14 @@ function addAllNumbers(items: number[]) {
   const total = items.reduce((sum, num) => sum + num, 0);
   return total;
 }
+
+// 有些情況應該明確指定回傳型別
+// 遞迴函式（Recursive Function）。
+// 函式會呼叫自己，這種情況 TypeScript 在某些情境下無法正常推論回傳型別，因此可能產生 any 的問題
+function fibonacci(n: number) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
 ```
 
 ## any 型別
@@ -183,6 +191,10 @@ let value: string | number;
 value = "Hello"; // ✅ 合法
 value = 123;     // ✅ 合法
 value = true;    // ❌ 錯誤，因為沒包含 boolean
+
+type UserRole = 'guest' | 'member' | 'admin';
+let userRole: UserRole = 'guest';
+// userRole 僅能是 'guest'、'member'、'admin' 其中之一
 ```
 
 函式參數中的 Union Types
@@ -229,6 +241,124 @@ data.push(3);        // ✅
 data.push("cherry"); // ✅
 data.push(true);     // ❌
 ```
+
+## Partial type
+
+Partial<T> 是 TypeScript 很常用的工具型別，意思一句話就夠：
+把一個型別的「所有屬性變成可選（optional）」
+
+```ts
+type User = {
+  id: number,
+  username: string,
+  role: UserRole,
+}
+type UpdateUser = Partial<User>;
+
+const updateUser = (id: any, update: UpdateUser) => {
+  const user = users.find(u => u.id === id);
+  if (!user) {
+    console.error('User not found');
+    return;
+  }
+  Object.assign(user, update);
+}
+
+// 不用每次傳整個 User
+updateUser(2, { role: 'admin' });
+updateUser(3, { username: 'charlie_updated' });
+```
+
+## Omit type
+
+Omit<T, K> 是 TypeScript 超常用的工具型別，從型別 T 中「移除指定的屬性 K」
+
+```ts
+type User = {
+  id: number
+  name: string
+  email: string
+}
+
+type UserWithoutId = Omit<User, 'id'>
+
+const addNewUser = (newUser: UserWithoutId): User => {
+  const user = { id: nextUserId++, ...newUser };
+  users.push(user);
+  return user;
+}
+// 可以不傳入 id
+addNewUser({ username: 'frank', role: 'member' });
+```
+
+## Generics 泛型
+
+<T> 代表 泛型型別參數（Type Parameter）
+T 不是固定型別（不是 string / number）
+T 會在「呼叫函式時」由 TypeScript 自動推斷
+
+```ts
+function getLastItem<T>(array: T[]): T {
+  return array[array.length - 1];
+}
+```
+
+表示： array 是一個陣列，陣列裡的每個元素型別都是 T，這個函式 一定回傳一個 T。
+
+```ts
+T = number  →  number[]
+T = string  →  string[]
+T = User    →  User[]
+```
+
+泛型不只可以用在 Function
+
+例如：
+```ts
+type ApiResponse<T> = {
+  data: T
+  isError: boolean
+}
+```
+
+這裡的 T 代表：API 回傳的 data 到底是什麼型別？
+假設 API 回傳 User：
+
+```ts
+type User = {
+  name: string
+  age: number
+}
+type UserResponse = ApiResponse<User>
+const response: UserResponse = {
+  data: {
+    name: "Tim",
+    age: 20
+  },
+  isError: false
+}
+```
+
+## dom 元素 TYPE
+
+```js
+const list = document.querySelector<HTMLUListElement>('#list');
+const input = document.querySelector<HTMLInputElement>('#new-task-title');
+```
+
+- querySelector<T>() 可以選擇任意 CSS 選擇器。
+- 若找不到元素，回傳 null。
+- TypeScript 會自動推斷型別為 T | null。
+
+```js
+const form = document.getElementById('#new-task-form') as HTMLFormElement | null;
+```
+getElementById 回傳 HTMLElement | null，所以要用斷言轉型
+
+
+
+
+
 
 
 

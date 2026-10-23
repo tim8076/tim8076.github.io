@@ -44,6 +44,7 @@ const color2 = getRandomColor();
 type User = {
   name: string,
   score: number,
+  age?: number, // 可選屬性
 }
 
 const userOne: User = {
