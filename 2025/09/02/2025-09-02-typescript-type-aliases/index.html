@@ -28,7 +28,7 @@
 <meta property="og:description" content="用 Aliases 替型別命名">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2025-09-02T07:23:52.000Z">
-<meta property="article:modified_time" content="2025-09-02T07:40:27.324Z">
+<meta property="article:modified_time" content="2026-01-08T07:46:37.113Z">
 <meta property="article:author" content="Tim Chou">
 <meta name="twitter:card" content="summary">
 
@@ -155,18 +155,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">362</span>
+          <span class="site-state-item-count">365</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">65</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -239,9 +239,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
-      
 
-      <time title="創建時間：2025-09-02 15:23:52 / 修改時間：15:40:27" itemprop="dateCreated datePublished" datetime="2025-09-02T15:23:52+08:00">2025-09-02</time>
+      <time title="創建時間：2025-09-02 15:23:52" itemprop="dateCreated datePublished" datetime="2025-09-02T15:23:52+08:00">2025-09-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2026-01-08 15:46:37" itemprop="dateModified" datetime="2026-01-08T15:46:37+08:00">2026-01-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -270,7 +276,7 @@
 <p>這裡的 ID 和 Username 只是 number 與 string 的別名，方便程式更具語意。</p>
 <h2 id="搭配陣列"><a href="#搭配陣列" class="headerlink" title="搭配陣列"></a>搭配陣列</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Rgb</span> = [<span class="built_in">number</span>, <span class="built_in">number</span>, <span class="built_in">number</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getRandomColor</span>(<span class="params"></span>): <span class="title class_">Rgb</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> r = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="number">255</span>);</span><br><span class="line">  <span class="keyword">const</span> g = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="number">255</span>);</span><br><span class="line">  <span class="keyword">const</span> b = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="number">255</span>);</span><br><span class="line">  <span class="keyword">return</span> [r, g, b];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> color1 = <span class="title function_">getRandomColor</span>();</span><br><span class="line"><span class="keyword">const</span> color2 = <span class="title function_">getRandomColor</span>();</span><br></pre></td></tr></table></figure>
 
-<h2 id="搭配物件"><a href="#搭配物件" class="headerlink" title="搭配物件"></a>搭配物件</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">User</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span>,</span><br><span class="line">  <span class="attr">score</span>: <span class="built_in">number</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">userOne</span>: <span class="title class_">User</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;mario&#x27;</span>,</span><br><span class="line">  <span class="attr">score</span>: <span class="number">72</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">formatUser</span>(<span class="params">user: User</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;user.name&#125;</span> has score <span class="subst">$&#123;user.score&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">formatUser</span>(userOne);</span><br></pre></td></tr></table></figure>
+<h2 id="搭配物件"><a href="#搭配物件" class="headerlink" title="搭配物件"></a>搭配物件</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">User</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span>,</span><br><span class="line">  <span class="attr">score</span>: <span class="built_in">number</span>,</span><br><span class="line">  age?: <span class="built_in">number</span>, <span class="comment">// 可選屬性</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">userOne</span>: <span class="title class_">User</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;mario&#x27;</span>,</span><br><span class="line">  <span class="attr">score</span>: <span class="number">72</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">formatUser</span>(<span class="params">user: User</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;user.name&#125;</span> has score <span class="subst">$&#123;user.score&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">formatUser</span>(userOne);</span><br></pre></td></tr></table></figure>
 
 
 
@@ -322,7 +328,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2025</span>
+  <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

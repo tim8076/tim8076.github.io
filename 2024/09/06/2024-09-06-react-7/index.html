@@ -28,7 +28,7 @@
 <meta property="og:description" content="介紹 React 表單操作">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2024-09-06T06:41:52.000Z">
-<meta property="article:modified_time" content="2025-01-21T07:42:50.518Z">
+<meta property="article:modified_time" content="2025-12-23T15:54:32.978Z">
 <meta property="article:author" content="Tim Chou">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#input-%E8%A1%A8%E5%96%AE"><span class="nav-number">1.</span> <span class="nav-text">input 表單</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select-%E9%81%B8%E5%96%AE"><span class="nav-number">2.</span> <span class="nav-text">select 選單</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select-%E5%A4%9A%E9%81%B8"><span class="nav-number">3.</span> <span class="nav-text">select 多選</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#radio-%E5%96%AE%E9%81%B8%E9%A1%8C"><span class="nav-number">4.</span> <span class="nav-text">radio 單選題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkbox-%E8%A4%87%E9%81%B8"><span class="nav-number">5.</span> <span class="nav-text">checkbox 複選</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%96%AE%E9%80%81%E5%87%BA"><span class="nav-number">6.</span> <span class="nav-text">表單送出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A6%8B%E8%A1%A8%E5%96%AE%E7%9B%A3%E8%81%BD%E6%96%B9%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">常見表單監聽方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AA%94%E6%A1%88%E4%B8%8A%E5%82%B3"><span class="nav-number">8.</span> <span class="nav-text">檔案上傳</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#input-%E8%A1%A8%E5%96%AE"><span class="nav-number">1.</span> <span class="nav-text">input 表單</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select-%E9%81%B8%E5%96%AE"><span class="nav-number">2.</span> <span class="nav-text">select 選單</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select-%E5%A4%9A%E9%81%B8"><span class="nav-number">3.</span> <span class="nav-text">select 多選</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#radio-%E5%96%AE%E9%81%B8%E9%A1%8C"><span class="nav-number">4.</span> <span class="nav-text">radio 單選題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkbox-%E5%96%AE%E9%81%B8"><span class="nav-number">5.</span> <span class="nav-text">checkbox 單選</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkbox-%E8%A4%87%E9%81%B8"><span class="nav-number">6.</span> <span class="nav-text">checkbox 複選</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%96%AE%E9%80%81%E5%87%BA"><span class="nav-number">7.</span> <span class="nav-text">表單送出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A6%8B%E8%A1%A8%E5%96%AE%E7%9B%A3%E8%81%BD%E6%96%B9%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">常見表單監聽方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AA%94%E6%A1%88%E4%B8%8A%E5%82%B3"><span class="nav-number">9.</span> <span class="nav-text">檔案上傳</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -156,18 +156,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">362</span>
+          <span class="site-state-item-count">365</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">65</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -248,7 +248,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2025-01-21 15:42:50" itemprop="dateModified" datetime="2025-01-21T15:42:50+08:00">2025-01-21</time>
+      <time title="修改時間：2025-12-23 23:54:32" itemprop="dateModified" datetime="2025-12-23T23:54:32+08:00">2025-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -296,6 +296,8 @@
 <h2 id="radio-單選題"><a href="#radio-單選題" class="headerlink" title="radio 單選題"></a>radio 單選題</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [check, setCheck] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">label</span> <span class="attr">htmlFor</span>=<span class="string">&quot;isCheck&quot;</span>&gt;</span>確認狀態 &#123;check.toString()&#125;<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;isCheck&quot;</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">  <span class="attr">onChange</span>=<span class="string">&#123;e</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-xml">    setCheck(e.target.checked);</span></span><br><span class="line"><span class="language-xml">  &#125;&#125;</span></span><br><span class="line"><span class="language-xml">  value=&#123;check&#125;/&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>radio 單選是用來了解用戶是否點擊，useState 預設可用 false。 用戶點擊後用 setCheck 將值寫入。</p>
+<h2 id="checkbox-單選"><a href="#checkbox-單選" class="headerlink" title="checkbox 單選"></a>checkbox 單選</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [isCheck, setIsCheck] = <span class="title function_">useState</span>(<span class="literal">false</span>)</span><br><span class="line">&lt;label htmlFor=<span class="string">&quot;isCheck&quot;</span>&gt;確認狀態 &#123;isCheck.<span class="title function_">toString</span>()&#125;&lt;/label&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;isCheck&quot;</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">  <span class="attr">value</span>=<span class="string">&#123;isCheck&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">  <span class="attr">onChange</span>=<span class="string">&#123;(e)</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-xml">    setIsCheck(e.target.checked)</span></span><br><span class="line"><span class="language-xml">  &#125;&#125;/&gt;</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="checkbox-複選"><a href="#checkbox-複選" class="headerlink" title="checkbox 複選"></a>checkbox 複選</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [checkList, setCheckList] = <span class="title function_">useState</span>([]);</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">hendleCheckList</span> = (<span class="params">e</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (e.<span class="property">target</span>.<span class="property">checked</span>) &#123;</span><br><span class="line">    <span class="title function_">setCheckList</span>([...checkList, e.<span class="property">target</span>.<span class="property">value</span>])</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="title function_">setCheckList</span>(checkList.<span class="title function_">filter</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> item !== e.<span class="property">target</span>.<span class="property">value</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;label htmlFor=<span class="string">&quot;checkList1&quot;</span>&gt;炒麵&lt;/label&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;checkList1&quot;</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;like&quot;</span> <span class="attr">onChange</span>=<span class="string">&#123;hendleCheckList&#125;</span> <span class="attr">value</span>=<span class="string">&#x27;炒麵&#x27;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">label</span> <span class="attr">htmlFor</span>=<span class="string">&quot;checkList2&quot;</span>&gt;</span>鍋燒意麵<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;checkList2&quot;</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;like&quot;</span> <span class="attr">onChange</span>=<span class="string">&#123;hendleCheckList&#125;</span> <span class="attr">value</span>=<span class="string">&#x27;鍋燒意麵&#x27;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">label</span> <span class="attr">htmlFor</span>=<span class="string">&quot;checkList3&quot;</span>&gt;</span>炸薯條<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;checkList3&quot;</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;like&quot;</span> <span class="attr">onChange</span>=<span class="string">&#123;hendleCheckList&#125;</span> <span class="attr">value</span>=<span class="string">&#x27;炸薯條&#x27;</span> /&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 <p>用 checkbox 複選時，一樣用陣列定義 state，onChange 偵聽的函式裡，要判斷此時用戶是勾選狀態嗎，是的話將 value 加入陣列，否的話則將 value 移除陣列。</p>
@@ -374,7 +376,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2025</span>
+  <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
